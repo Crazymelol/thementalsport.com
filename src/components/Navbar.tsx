@@ -62,6 +62,13 @@ export default function Navbar() {
                     >
                         About
                     </a>
+                    <Link
+                        href="/blog"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
+                            }`}
+                    >
+                        Articles
+                    </Link>
                     <button
                         onClick={() => {
                             // Scroll to footer
@@ -105,6 +112,12 @@ export default function Navbar() {
                         >
                             About
                         </a>
+                        <Link
+                            href="/blog"
+                            className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
+                        >
+                            Articles
+                        </Link>
                         <button
                             className="text-left text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
                             onClick={() => {
