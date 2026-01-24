@@ -29,11 +29,13 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
         setStatus('loading');
 
         try {
-            // TODO: Replace with actual API call to your email service
-            // Example: await fetch('/api/newsletter', { method: 'POST', body: JSON.stringify({ email }) })
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
 
-            // Simulating API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            if (!res.ok) throw new Error('Subscription failed');
 
             setStatus('success');
             setEmail('');
