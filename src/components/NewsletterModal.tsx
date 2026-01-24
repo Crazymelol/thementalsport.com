@@ -1,0 +1,125 @@
+'use client';
+
+import React, { useState } from 'react';
+import { X, Mail, CheckCircle2, AlertCircle } from 'lucide-react';
+
+interface NewsletterModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
+    const [email, setEmail] = useState('');
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const validateEmail = (email: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!validateEmail(email)) {
+            setStatus('error');
+            setErrorMessage('Please enter a valid email address');
+            return;
+        }
+
+        setStatus('loading');
+
+        try {
+            // TODO: Replace with actual API call to your email service
+            // Example: await fetch('/api/newsletter', { method: 'POST', body: JSON.stringify({ email }) })
+
+            // Simulating API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            setStatus('success');
+            setEmail('');
+
+            // Auto-close after success
+            setTimeout(() => {
+                onClose();
+                setStatus('idle');
+            }, 2000);
+        } catch (error) {
+            setStatus('error');
+            setErrorMessage('Something went wrong. Please try again.');
+        }
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-in zoom-in-95 duration-200">
+                {/* Close Button */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-4 right-4 text-stone-400 hover:text-stone-900 transition-colors">
+                    <X className="w-6 h-6" />
+                </button>
+
+                {status === 'success' ? (
+                    <div className="text-center py-8">
+                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <CheckCircle2 className="w-8 h-8 text-green-600" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-stone-900 mb-2">You&apos;re In!</h3>
+                        <p className="text-stone-600">
+                            Check your inbox for a confirmation email.
+                        </p>
+                    </div>
+                ) : (
+                    <>
+                        <div className="text-center mb-6">
+                            <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Mail className="w-8 h-8 text-amber-600" />
+                            </div>
+                            <h2 className="text-3xl font-bold text-stone-900 mb-2">Join The Newsletter</h2>
+                            <p className="text-stone-600">
+                                Get exclusive insights on peak performance, mental toughness, and new book releases.
+                            </p>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => {
+                                        setEmail(e.target.value);
+                                        setStatus('idle');
+                                        setErrorMessage('');
+                                    }}
+                                    placeholder="Enter your email"
+                                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
+                                    disabled={status === 'loading'}
+                                />
+                            </div>
+
+                            {status === 'error' && (
+                                <div className="flex items-center gap-2 text-red-600 text-sm">
+                                    <AlertCircle className="w-4 h-4" />
+                                    <span>{errorMessage}</span>
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={status === 'loading'}
+                                className="w-full px-8 py-4 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                                {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                            </button>
+
+                            <p className="text-xs text-stone-500 text-center">
+                                We respect your privacy. Unsubscribe at any time.
+                            </p>
+                        </form>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+}
