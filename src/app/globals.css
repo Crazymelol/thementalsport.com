@@ -5,15 +5,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #FAFAF9;
-  /* Warm Stone-50 */
-  --foreground: #1c1917;
-  /* Stone-900 */
-  --primary: #d97706;
-  /* Amber-600 */
-  --secondary: #44403c;
-  /* Stone-700 */
+  --background: #ffffff;
+  /* Cool White */
+  --foreground: #09090b;
+  /* Zinc-950 */
+  --primary: #18181b;
+  /* Zinc-900 */
+  --secondary: #52525b;
+  /* Zinc-600 */
   --font-serif: 'Playfair Display', serif;
+  /* Kept for specific accents only */
   --font-sans: 'Inter', sans-serif;
 }
 
@@ -29,12 +30,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
+  /* Changed to Sans for serious look */
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
 }
 
 @layer components {
   .btn-amazon {
-    @apply bg-[#FF9900] hover:bg-[#ffad33] text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg;
+    @apply bg-zinc-900 hover:bg-black text-white font-bold py-4 px-8 rounded-none shadow-sm hover:shadow-md transition-all flex items-center gap-2 text-lg uppercase tracking-widest;
   }
 
   /* Custom Sales Animations */

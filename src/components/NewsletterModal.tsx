@@ -44,6 +44,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                 setStatus('idle');
             }, 2000);
         } catch (error) {
+            console.error('Newsletter subscription error:', error);
             setStatus('error');
             setErrorMessage('Something went wrong. Please try again.');
         }
@@ -52,12 +53,12 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div className="bg-white rounded-none shadow-2xl max-w-md w-full p-8 relative animate-in zoom-in-95 duration-200 border border-zinc-200">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-stone-400 hover:text-stone-900 transition-colors">
+                    className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-900 transition-colors">
                     <X className="w-6 h-6" />
                 </button>
 
@@ -74,11 +75,11 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                 ) : (
                     <>
                         <div className="text-center mb-6">
-                            <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Mail className="w-8 h-8 text-amber-600" />
+                            <div className="w-16 h-16 bg-zinc-100 rounded-none flex items-center justify-center mx-auto mb-4">
+                                <Mail className="w-8 h-8 text-zinc-900" />
                             </div>
-                            <h2 className="text-3xl font-bold text-stone-900 mb-2">Join The Newsletter</h2>
-                            <p className="text-stone-600">
+                            <h2 id="modal-title" className="text-3xl font-black text-zinc-900 mb-2 uppercase tracking-tighter">Join The Newsletter</h2>
+                            <p className="text-zinc-600">
                                 Get exclusive insights on peak performance, mental toughness, and new book releases.
                             </p>
                         </div>
@@ -94,7 +95,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                                         setErrorMessage('');
                                     }}
                                     placeholder="Enter your email"
-                                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
+                                    className="w-full px-4 py-3 rounded-none border border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 outline-none transition-all"
                                     disabled={status === 'loading'}
                                 />
                             </div>
@@ -109,11 +110,11 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                             <button
                                 type="submit"
                                 disabled={status === 'loading'}
-                                className="w-full px-8 py-4 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                                className="w-full px-8 py-4 bg-zinc-900 text-white font-black rounded-none hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest border border-transparent hover:border-zinc-500">
                                 {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
                             </button>
 
-                            <p className="text-xs text-stone-500 text-center">
+                            <p className="text-xs text-zinc-400 text-center">
                                 We respect your privacy. Unsubscribe at any time.
                             </p>
                         </form>
