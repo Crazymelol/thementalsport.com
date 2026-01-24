@@ -103,7 +103,7 @@ export default async function BookPage({ params }: PageProps) {
     };
 
     return (
-        <main className="min-h-screen relative overflow-x-hidden selection:bg-amber-100 selection:text-amber-900 bg-[#FAFAF9]">
+        <main className="min-h-screen relative overflow-x-hidden selection:bg-zinc-900 selection:text-white bg-white">
             {/* Structured Data */}
             <script
                 type="application/ld+json"
@@ -116,14 +116,14 @@ export default async function BookPage({ params }: PageProps) {
 
                     {/* Left: Text */}
                     <div className="order-2 lg:order-1 space-y-8 animate-in slide-in-from-left duration-700">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold uppercase tracking-widest">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-100 text-zinc-900 text-xs font-black uppercase tracking-[0.2em] border border-zinc-200">
                             <Star className="w-3 h-3 fill-current" /> New Release 2025
                         </div>
-                        <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] text-stone-900">
+                        <h1 className="text-5xl lg:text-7xl font-black leading-[1.1] text-zinc-900 uppercase tracking-tighter">
                             {book.title} <br />
-                            <span className="text-amber-600 italic text-4xl lg:text-6xl">{book.subtitle}</span>
+                            <span className="text-zinc-500 text-4xl lg:text-5xl block mt-2">{book.subtitle}</span>
                         </h1>
-                        <p className="text-xl text-stone-600 leading-relaxed max-w-lg text-balance font-light">
+                        <p className="text-xl text-zinc-600 leading-relaxed max-w-lg text-balance font-medium">
                             {book.description}
                         </p>
 
@@ -131,7 +131,7 @@ export default async function BookPage({ params }: PageProps) {
                             <a href={AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="btn-amazon justify-center">
                                 <ShoppingCart className="w-5 h-5" /> Buy on Amazon
                             </a>
-                            <button className="px-8 py-4 rounded-lg border border-stone-300 text-stone-600 font-semibold hover:bg-stone-100 transition-colors flex items-center justify-center gap-2">
+                            <button className="px-8 py-4 border-2 border-zinc-200 text-zinc-900 font-black uppercase tracking-widest hover:border-zinc-900 transition-colors flex items-center justify-center gap-2 rounded-none">
                                 Read a Sample <ArrowRight className="w-4 h-4" />
                             </button>
                         </div>
@@ -143,7 +143,7 @@ export default async function BookPage({ params }: PageProps) {
                             <img
                                 src={book.coverImage}
                                 alt={`${book.title} cover`}
-                                className="w-[300px] h-[450px] object-contain rounded-lg shadow-[20px_20px_60px_rgba(0,0,0,0.3)]"
+                                className="w-[300px] h-[450px] object-contain shadow-[20px_20px_60px_rgba(0,0,0,0.3)] border border-zinc-100 bg-zinc-50"
                             />
                         </div>
                     </div>
@@ -154,25 +154,25 @@ export default async function BookPage({ params }: PageProps) {
             <section className="py-24 bg-white">
                 <div className="container mx-auto px-6 max-w-6xl">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-stone-900 mb-6">What Readers Are Saying</h2>
-                        <p className="text-stone-600 text-lg">Real reviews from people who've transformed their performance</p>
+                        <h2 className="text-4xl font-black text-zinc-900 mb-6 uppercase tracking-tighter">What Readers Are Saying</h2>
+                        <p className="text-zinc-500 text-lg font-bold uppercase tracking-widest">Real reviews from people who&apos;ve transformed their performance</p>
                     </div>
 
                     {/* Reviews Grid */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                         {book.reviews.map((review, i) => (
-                            <div key={i} className="bg-stone-50 p-8 rounded-2xl border border-stone-100 hover:shadow-lg transition-shadow">
-                                <Quote className="w-10 h-10 text-amber-200 mb-4" />
-                                <p className="text-stone-700 italic mb-6 leading-relaxed">
+                            <div key={i} className="bg-zinc-50 p-8 border border-zinc-200 hover:border-zinc-900 transition-colors">
+                                <Quote className="w-10 h-10 text-zinc-200 mb-4" />
+                                <p className="text-zinc-800 italic mb-6 leading-relaxed font-medium">
                                     &ldquo;{review.quote}&rdquo;
                                 </p>
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-sm font-bold text-amber-700">
+                                    <div className="w-10 h-10 bg-zinc-900 flex items-center justify-center text-sm font-bold text-white uppercase">
                                         {review.author.charAt(0)}
                                     </div>
                                     <div className="text-sm">
-                                        <div className="font-bold text-stone-900">{review.author}</div>
-                                        <div className="text-stone-500">{review.role}</div>
+                                        <div className="font-bold text-zinc-900 uppercase tracking-wide">{review.author}</div>
+                                        <div className="text-zinc-500 text-xs uppercase tracking-widest">{review.role}</div>
                                     </div>
                                 </div>
                             </div>
@@ -180,13 +180,13 @@ export default async function BookPage({ params }: PageProps) {
                     </div>
 
                     {/* Key Features */}
-                    <div className="bg-gradient-to-br from-stone-900 to-stone-800 rounded-3xl p-12 text-white">
-                        <h3 className="text-3xl font-bold mb-8 text-center">What You'll Learn</h3>
-                        <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-zinc-950 p-12 text-white">
+                        <h3 className="text-3xl font-black mb-12 text-center uppercase tracking-tighter">What You&apos;ll Learn</h3>
+                        <div className="grid md:grid-cols-2 gap-8">
                             {book.features.map((item, i) => (
-                                <div key={i} className="flex gap-4 items-start">
-                                    <CheckCircle2 className="w-6 h-6 text-amber-400 shrink-0 mt-1" />
-                                    <p className="text-lg text-stone-100">{item}</p>
+                                <div key={i} className="flex gap-4 items-start border-l-2 border-zinc-800 pl-4">
+                                    <CheckCircle2 className="w-5 h-5 text-white shrink-0 mt-1" />
+                                    <p className="text-lg text-zinc-300 font-medium">{item}</p>
                                 </div>
                             ))}
                         </div>
@@ -195,24 +195,24 @@ export default async function BookPage({ params }: PageProps) {
             </section>
 
             {/* 3. RELATED BOOKS */}
-            <section className="py-24 bg-stone-50">
+            <section className="py-24 bg-zinc-50 border-t border-zinc-200">
                 <div className="container mx-auto px-6">
-                    <h2 className="text-3xl font-bold text-stone-900 mb-12 text-center">You Might Also Like</h2>
+                    <h2 className="text-3xl font-black text-zinc-900 mb-12 text-center uppercase tracking-tighter">You Might Also Like</h2>
                     <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         {books.filter(b => b.id !== book.id).slice(0, 3).map((relatedBook) => (
-                            <a href={`/book/${relatedBook.id}`} key={relatedBook.id} className="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all">
-                                <div className="aspect-[3/4] bg-stone-200 relative overflow-hidden">
+                            <a href={`/book/${relatedBook.id}`} key={relatedBook.id} className="group block bg-white border border-zinc-200 hover:border-zinc-900 transition-all">
+                                <div className="aspect-[3/4] bg-zinc-100 relative overflow-hidden border-b border-zinc-100">
                                     <img
                                         src={relatedBook.coverImage}
                                         alt={`${relatedBook.title} cover`}
-                                        className="w-full h-full object-contain p-4"
+                                        className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
                                     />
                                 </div>
-                                <div className="p-6">
-                                    <h3 className="font-bold text-lg text-stone-900 group-hover:text-amber-600 transition-colors mb-2">
+                                <div className="p-8">
+                                    <h3 className="font-black text-lg text-zinc-900 group-hover:underline decoration-2 underline-offset-4 mb-2 uppercase tracking-tight">
                                         {relatedBook.title}
                                     </h3>
-                                    <p className="text-stone-600 text-sm line-clamp-2">{relatedBook.description}</p>
+                                    <p className="text-zinc-500 text-sm line-clamp-2">{relatedBook.description}</p>
                                 </div>
                             </a>
                         ))}
@@ -221,9 +221,9 @@ export default async function BookPage({ params }: PageProps) {
             </section>
 
             {/* STICKY BOTTOM BAR (Mobile) */}
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-stone-200 md:hidden z-50 flex items-center justify-between shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
-                <div className="font-serif font-bold text-stone-900 text-sm max-w-[200px] truncate">{book.title}</div>
-                <a href={AMAZON_LINK} target="_blank" className="bg-[#FF9900] text-white text-sm font-bold px-6 py-3 rounded-full shadow-md">
+            <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-zinc-200 md:hidden z-50 flex items-center justify-between">
+                <div className="font-black text-zinc-900 text-xs uppercase tracking-widest max-w-[200px] truncate">{book.title}</div>
+                <a href={AMAZON_LINK} target="_blank" className="bg-zinc-900 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
                     Buy
                 </a>
             </div>
