@@ -129,7 +129,7 @@ export default async function BookPage({ params }: PageProps) {
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
                             <a href={AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="btn-amazon justify-center">
-                                <ShoppingCart className="w-5 h-5" /> Buy on Amazon
+                                <ShoppingCart className="w-5 h-5" /> Buy on Amazon <span className="opacity-75 mx-1">|</span> {book.price}
                             </a>
                             <button className="px-8 py-4 border-2 border-zinc-200 text-zinc-900 font-black uppercase tracking-widest hover:border-zinc-900 transition-colors flex items-center justify-center gap-2 rounded-none">
                                 Read a Sample <ArrowRight className="w-4 h-4" />
@@ -224,7 +224,7 @@ export default async function BookPage({ params }: PageProps) {
             <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-zinc-200 md:hidden z-50 flex items-center justify-between">
                 <div className="font-black text-zinc-900 text-xs uppercase tracking-widest max-w-[200px] truncate">{book.title}</div>
                 <a href={AMAZON_LINK} target="_blank" className="bg-zinc-900 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
-                    Buy
+                    Buy {book.price}
                 </a>
             </div>
 

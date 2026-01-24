@@ -16,6 +16,7 @@ export interface Book {
         primary: string; // Main accent color
         secondary: string;
     };
+    price: string;
 }
 
 export const books: Book[] = [
@@ -53,7 +54,8 @@ export const books: Book[] = [
         palette: {
             primary: "#d97706", // Amber-600
             secondary: "#1c1917" // Stone-900
-        }
+        },
+        price: "$9.99"
     },
     {
         id: "unbreakable",
@@ -81,7 +83,8 @@ export const books: Book[] = [
                 role: "Elementary School Teacher"
             }
         ],
-        palette: { primary: "#0ea5e9", secondary: "#1c1917" }
+        palette: { primary: "#0ea5e9", secondary: "#1c1917" },
+        price: "$6.99"
     },
     {
         id: "confidence-building",
@@ -109,7 +112,8 @@ export const books: Book[] = [
                 role: "Marketing Professional"
             }
         ],
-        palette: { primary: "#22c55e", secondary: "#1c1917" }
+        palette: { primary: "#22c55e", secondary: "#1c1917" },
+        price: "$12.99"
     },
     {
         id: "resilient-confidence",
@@ -137,7 +141,8 @@ export const books: Book[] = [
                 role: "Sales Director"
             }
         ],
-        palette: { primary: "#eab308", secondary: "#1c1917" }
+        palette: { primary: "#eab308", secondary: "#1c1917" },
+        price: "$9.99"
     },
     {
         id: "nurturing-self-worth",
@@ -165,7 +170,8 @@ export const books: Book[] = [
                 role: "School Counselor"
             }
         ],
-        palette: { primary: "#ef4444", secondary: "#1c1917" }
+        palette: { primary: "#ef4444", secondary: "#1c1917" },
+        price: "$9.99"
     },
     {
         id: "physiological-performance",
@@ -193,7 +199,8 @@ export const books: Book[] = [
                 role: "Sports Physiologist"
             }
         ],
-        palette: { primary: "#8b5cf6", secondary: "#1c1917" }
+        palette: { primary: "#8b5cf6", secondary: "#1c1917" },
+        price: "$14.99"
     },
     {
         id: "adhd-athletes-edge",
@@ -221,6 +228,7 @@ export const books: Book[] = [
                 role: "Track & Field Competitor"
             }
         ],
-        palette: { primary: "#ec4899", secondary: "#1c1917" }
+        palette: { primary: "#ec4899", secondary: "#1c1917" },
+        price: "$14.99"
     }
 ];
