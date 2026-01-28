@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&display=swap');
+
+@page {
+    size: 6in 9in;
+    margin: 0.8in 0.6in 0.8in 0.9in;
+    /* Inner gutter margin is larger */
+}
+
+body {
+    font-family: 'Crimson Pro', serif;
+    font-size: 11.5pt;
+    line-height: 1.5;
+    text-align: justify;
+    color: #000;
+}
+
+h1 {
+    font-size: 24pt;
+    font-weight: 700;
+    text-align: right;
+    text-transform: uppercase;
+    margin-top: 30%;
+    /* Drop header down the page */
+    margin-bottom: 0.5in;
+    page-break-before: always;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.2in;
+}
+
+h2 {
+    font-size: 14pt;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.1em;
+}
+
+h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    margin-top: 1.2em;
+    font-style: italic;
+}
+
+p {
+    margin-bottom: 0;
+    text-indent: 1.5em;
+}
+
+/* First paragraph after a header should not be indented */
+h1+p,
+h2+p,
+h3+p {
+    text-indent: 0;
+}
+
+ul,
+ol {
+    margin: 1em 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Front Matter */
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 2em 0;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 1.5em 2em;
+    border-left: 2px solid #000;
+    padding-left: 1em;
+}

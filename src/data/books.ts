@@ -21,6 +21,33 @@ export interface Book {
 
 export const books: Book[] = [
     {
+        id: "the-competition-protocol",
+        asin: "COMING_SOON",
+        title: "The Competition Protocol",
+        subtitle: "A Step-by-Step Guide to Getting the Best of You",
+        description: "Master the art of preparation. This book is a manual for the 7 days leading up to your event, teaching you how to build rituals and standard procedures that automate excellence and eliminate anxiety.",
+        author: "Giannis Notaras",
+        coverImage: "/covers/the-competition-protocol.jpg", // Final Cover
+        features: [
+            "The T-Minus 7 Day countdown checklist",
+            "How to build an 'Anchor' to trigger flow state instantly",
+            "SOPs for gear check, nutrition, and warm-up",
+            "Visualizing the win: A structured protocol"
+        ],
+        reviews: [
+            {
+                quote: "I used to panic before every race. The protocols in this book gave me a system to trust. Now I just execute.",
+                author: "Beta Reader",
+                role: "Triathlete"
+            }
+        ],
+        palette: {
+            primary: "#dc2626", // Red-600 (Intense)
+            secondary: "#1c1917" // Stone-900
+        },
+        price: "$19.99"
+    },
+    {
         id: "mental-blocks",
         asin: "B0F87QX82W",
         title: "Overcoming Mental Blocks",

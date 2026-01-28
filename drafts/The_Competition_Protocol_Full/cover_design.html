@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Competition Protocol - Cover</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #333;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .book-cover {
+            width: 1600px; /* High res width */
+            height: 2560px; /* High res height (1:1.6 ratio) */
+            /* Scale down for viewing if needed, but keeping intrinsic size high */
+            background-color: #09090b; /* Zinc 950 (Deep Matte Black) */
+            position: relative;
+            padding: 120px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+            border: 1px solid #333;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
+            /* Zoom out to fit screen */
+            transform: scale(0.35); 
+        }
+
+        .header {
+            border-top: 20px solid #dc2626; /* Red 600 */
+            padding-top: 60px;
+        }
+
+        .author {
+            font-size: 60px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #a1a1aa; /* Zinc 400 */
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 280px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: white;
+            margin: 0;
+        }
+
+        .title span {
+            display: block;
+        }
+
+        .title .highlight {
+            color: #dc2626; /* Red 600 */
+        }
+
+        .subtitle {
+            font-size: 70px;
+            font-weight: 400;
+            margin-top: 40px;
+            color: #e4e4e7; /* Zinc 200 */
+            max-width: 90%;
+            line-height: 1.2;
+        }
+
+        .graphic-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.15;
+        }
+
+        /* Abstract "Checklist" Graphic */
+        .checklist-graphic {
+            font-family: monospace;
+            font-size: 150px;
+            line-height: 1.5;
+            color: #dc2626;
+            text-align: left;
+        }
+
+        .footer {
+            border-bottom: 20px solid #dc2626;
+            padding-bottom: 60px;
+        }
+
+        .tagline {
+            font-size: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="book-cover">
+        <div class="header">
+            <div class="author">Giannis Notaras</div>
+            <h1 class="title">
+                THE<br>
+                COMPETITION<br>
+                <span class="highlight">PROTOCOL</span>
+            </h1>
+            <p class="subtitle">A Step-by-Step Guide to Getting the Best of You</p>
+        </div>
+
+        <div class="graphic-container">
+            <div class="checklist-graphic">
+                [X] PREPARE<br>
+                [X] CALIBRATE<br>
+                [X] EXECUTE<br>
+                [X] DOMINATE
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="tagline">The Pilot's Checklist for Peak Performance</div>
+        </div>
+    </div>
+
+</body>
+</html>
