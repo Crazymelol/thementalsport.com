@@ -1,3 +1,10 @@
+---
+title: "Mental Training Basics: Unlocking Peak Performance"
+description: "A practical guide to daily mental‑training habits for athletes."
+date: "2026-01-28"
+tags: ["mental training", "performance", "sports psychology"]
+---
+
 # Mental Training Basics: Unlocking Peak Performance
 
 *Published on 2026-01-28*
@@ -77,3 +84,8 @@ Mental training is not a luxury; it’s a foundational pillar of elite performan
 ---
 
 *Author: The Mental Sport Team*
+
+*Published on 2026-01-28*
+
+---
+
