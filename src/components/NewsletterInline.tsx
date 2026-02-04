@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, CheckCircle2, AlertCircle, ArrowRight, Download } from 'lucide-react';
 
 export default function NewsletterInline() {
     const [email, setEmail] = useState('');
@@ -63,9 +63,16 @@ export default function NewsletterInline() {
                     <CheckCircle2 className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-stone-900 mb-2">You&apos;re In!</h3>
-                <p className="text-stone-600">
-                    Check your inbox. We&apos;ve sent you a confirmation email.
+                <p className="text-stone-600 mb-6">
+                    Check your inbox for confirmation.
                 </p>
+                <div className="flex justify-center">
+                    <a
+                        href="/resources/competition-protocol"
+                        className="inline-flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 font-black uppercase tracking-widest text-sm hover:bg-black transition-colors rounded-none">
+                        <Download className="w-4 h-4" /> Access The Protocol
+                    </a>
+                </div>
             </div>
         );
     }
