@@ -1,7 +1,7 @@
 ---
 title: "Day 10: The Injury Reset (You Aren't Broken)"
 description: "Injury is the athlete's nightmare. Here is how to handle the mental descent and stay in the game while on the sidelines."
-date: "2026-02-14"
+date: "2026-02-13"
 tags: ["Injury", "Recovery", "Mental Health", "Resilience"]
 ---
 

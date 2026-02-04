@@ -1,7 +1,7 @@
 ---
 title: "Day 8: Audio Conditioning (Playlist Pharmacology)"
 description: "Music isn't just entertainment; it's a performance-enhancing drug. How to curate your 'Viking' and 'Zen' playlists."
-date: "2026-02-12"
+date: "2026-02-11"
 tags: ["Music", "Flow State", "Preparation", "Phelps"]
 ---
 

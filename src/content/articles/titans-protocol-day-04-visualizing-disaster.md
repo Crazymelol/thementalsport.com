@@ -1,7 +1,7 @@
 ---
 title: "Day 4: Visualizing Disaster (The Anti-Fragile Mind)"
 description: "Why Michael Phelps visualized things going wrong, and how 'The Disaster Drill' makes you invincible."
-date: "2026-02-08"
+date: "2026-02-07"
 tags: ["Michael Phelps", "Visualization", "Stoicism", "Preparation"]
 ---
 

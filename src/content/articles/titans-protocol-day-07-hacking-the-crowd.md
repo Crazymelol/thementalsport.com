@@ -1,7 +1,7 @@
 ---
 title: "Day 7: Hacking the Crowd (The Djokovic Reframe)"
 description: "Novak Djokovic is the master of playing against a hostile crowd. Learn how he transmutes negative energy into power."
-date: "2026-02-11"
+date: "2026-02-10"
 tags: ["Novak Djokovic", "Mindfulness", "Crowd Psychology", "Resilience"]
 ---
 

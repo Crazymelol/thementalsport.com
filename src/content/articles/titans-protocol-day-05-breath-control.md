@@ -1,7 +1,7 @@
 ---
 title: "Day 5: The Breath Remote Control (Reset in 30 Seconds)"
 description: "Your breathing controls your heart rate. Learn the physiological hacks used by LeBron James and Navy SEALs."
-date: "2026-02-09"
+date: "2026-02-08"
 tags: ["Breathing", "LeBron James", "Physiology", "Stress"]
 ---
 

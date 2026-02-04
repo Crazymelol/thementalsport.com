@@ -1,7 +1,7 @@
 ---
 title: "Day 9: The Stoic Firewall (Control the Controllables)"
 description: "The ultimate mental defense system. Learn to separate 'Internals' from 'Externals' and stop wasting energy on luck."
-date: "2026-02-13"
+date: "2026-02-12"
 tags: ["Stoicism", "Focus", "Mental Toughness", "Control"]
 ---
 

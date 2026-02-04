@@ -1,7 +1,7 @@
 ---
 title: "Day 2: The Contract (Why Motivation is Garbage)"
 description: "Kobe Bryant didn't rely on motivation. He had a contract. Learn the 'Mamba Mentality' approach to discipline."
-date: "2026-02-06"
+date: "2026-02-05"
 tags: ["Kobe Bryant", "Mamba Mentality", "Discipline", "Motivation"]
 ---
 
