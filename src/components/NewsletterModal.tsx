@@ -35,7 +35,22 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                 body: JSON.stringify({ email })
             });
 
-            if (!res.ok) throw new Error('Subscription failed');
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => null);
+                console.error('Newsletter subscription failed. Status:', res.status, 'Response:', errorData);
+                throw new Error(errorData?.error || 'Subscription failed');
+            }
+
+            // Track conversion
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            if (typeof window !== 'undefined' && (window as any).gtag) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (window as any).gtag('event', 'generate_lead', {
+                    event_category: 'newsletter',
+                    event_label: 'modal_signup',
+                    value: 1
+                });
+            }
 
             setStatus('success');
             setEmail('');

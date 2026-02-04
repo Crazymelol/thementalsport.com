@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Script from "next/script";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,6 +87,7 @@ export default function RootLayout({
         </Script>
         <Navbar />
         {children}
+        <ExitIntentPopup />
       </body>
     </html>
   );

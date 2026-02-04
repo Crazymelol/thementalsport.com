@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import NewsletterInline from '@/components/NewsletterInline';
 
 /* 
  * Server Component 
@@ -71,11 +72,7 @@ export default async function BlogPost({ params }: PageProps) {
 
                 {/* Footer / CTA */}
                 <div className="mt-20 pt-12 border-t border-zinc-200">
-                    <h3 className="text-2xl font-black uppercase tracking-tighter mb-4">Ready to master your mind?</h3>
-                    <p className="text-zinc-600 mb-6">Join the newsletter to get articles like this delivered to your inbox.</p>
-                    <a href="/links" className="inline-block bg-zinc-900 text-white px-8 py-4 font-black uppercase tracking-widest text-sm hover:bg-black transition-colors">
-                        Join Now
-                    </a>
+                    <NewsletterInline />
                 </div>
 
             </article>
