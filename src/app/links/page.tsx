@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Instagram, Linkedin, Twitter, Mail, BookOpen } from 'lucide-react';
+import { Instagram, Linkedin, Twitter, Mail, BookOpen, Download } from 'lucide-react';
 import { books } from '@/data/books';
 
 export const metadata = {
@@ -36,19 +36,37 @@ export default function LinksPage() {
                 {/* Links Stack */}
                 <div className="space-y-4 w-full animate-in slide-in-from-bottom-4 duration-1000 delay-200">
 
-                    {/* 1. LEAD MAGNET (Primary Action) */}
-                    <a
-                        href="/#newsletter-modal"
-                        className="group relative block w-full p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_40px_rgba(168,85,247,0.3)] hover:shadow-[0_0_60px_rgba(168,85,247,0.5)] transition-all transform hover:-translate-y-1"
+                    {/* 1. FREE GUIDE (New Lead Magnet) */}
+                    <Link
+                        href="/resources/competition-protocol"
+                        className="group relative block w-full p-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 shadow-[0_0_40px_rgba(255,100,0,0.3)] hover:shadow-[0_0_60px_rgba(255,100,0,0.5)] transition-all transform hover:-translate-y-1"
                     >
                         <div className="bg-zinc-950 h-full w-full p-4 flex items-center justify-between relative z-10 hover:bg-zinc-900 transition-colors">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 flex items-center justify-center shrink-0">
-                                    <Mail className="w-5 h-5 text-white" />
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-red-500 to-yellow-500 flex items-center justify-center shrink-0">
+                                    <Download className="w-5 h-5 text-white" />
+                                </div>
+                                <div className="text-left">
+                                    <div className="font-black text-white uppercase tracking-wider text-sm">Free Competition Protocol</div>
+                                    <div className="text-zinc-400 text-xs font-medium">The Elite Athlete&apos;s Manual</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+
+                    {/* 2. NEWSLETTER */}
+                    <a
+                        href="/#newsletter-modal"
+                        className="group relative block w-full border border-zinc-800 hover:border-zinc-700 transition-all"
+                    >
+                        <div className="bg-zinc-900 h-full w-full p-4 flex items-center justify-between relative z-10 hover:bg-zinc-800 transition-colors">
+                            <div className="flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-none bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0">
+                                    <Mail className="w-5 h-5 text-zinc-400" />
                                 </div>
                                 <div className="text-left">
                                     <div className="font-black text-white uppercase tracking-wider text-sm">Join the Inner Circle</div>
-                                    <div className="text-zinc-400 text-xs font-medium">Get exclusive mental drills</div>
+                                    <div className="text-zinc-500 text-xs font-medium">Get exclusive mental drills</div>
                                 </div>
                             </div>
                         </div>
