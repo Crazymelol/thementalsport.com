@@ -37,7 +37,17 @@ export function getAllArticles(): Article[] {
     });
 
     // Sort by date desc
-    return allArticles.sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
+    const now = new Date();
+    // Reset time to midnight to ensure inclusive comparison if needed, 
+    // or just compare strict timestamps. For creating a "daily release", 
+    // simple comparison is usually enough.
+
+    const publishedArticles = allArticles.filter(article => {
+        const articleDate = new Date(article.date);
+        return articleDate <= now;
+    });
+
+    return publishedArticles.sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
 }
 
 export function getArticleBySlug(slug: string): Article | null {
