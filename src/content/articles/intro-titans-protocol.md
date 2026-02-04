@@ -1,7 +1,7 @@
 ---
 title: "The Titan's Protocol: 12 Days to a New Mindset"
 description: "Starting tomorrow, we are launching a 12-day crash course in elite mental performance. Here is what to expect."
-date: "2026-02-04"
+date: "2026-02-03"
 tags: ["Announcement", "Mental Training", "Series"]
 ---
 
