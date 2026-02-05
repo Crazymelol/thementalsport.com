@@ -7,7 +7,7 @@ export const metadata = {
     description: 'Articles on mental performance, fencing psychology, and high-performance neuroscience.',
 };
 
-export const revalidate = 0; // Disable cache for debugging
+export const revalidate = 3600; // Revalidate every hour
 
 export default function BlogIndex() {
     const articles = getAllArticles();
@@ -21,7 +21,6 @@ export default function BlogIndex() {
                     <h1 className="text-6xl font-black uppercase tracking-tighter leading-none">
                         The Insight
                     </h1>
-                    <p className="text-xs text-red-500 font-mono">Debug Build: {new Date().toISOString()}</p>
                     <div className="w-24 h-2 bg-zinc-900"></div>
                     <p className="text-xl text-zinc-600 font-medium max-w-2xl">
                         Deep dives into the psychology of winning. No fluff. Just actionable strategies for the obsessively dedicated.
