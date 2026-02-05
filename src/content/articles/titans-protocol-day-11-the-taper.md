@@ -1,7 +1,7 @@
 ---
 title: "Day 11: The Taper (Don't Leave It In The Gym)"
 description: "Why most athletes burn out before the final, and how to structure your final 7 days for peak performance."
-date: "2026-02-14"
+date: "2026-02-10T09:00:00+02:00"
 tags: ["Peaking", "Training", "Recovery", "Competition"]
 ---
 

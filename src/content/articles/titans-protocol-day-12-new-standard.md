@@ -1,7 +1,7 @@
 ---
 title: "Day 12: The New Standard (This Is Who You Are Now)"
 description: "The Titan's Protocol isn't a checklist; it's an identity. How to integrate these 12 days into a lifetime of dominance."
-date: "2026-02-15"
+date: "2026-02-10T18:00:00+02:00"
 tags: ["Identity", "Habits", "Excellence", "Titan Mindset"]
 ---
 

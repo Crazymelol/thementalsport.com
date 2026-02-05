@@ -1,7 +1,7 @@
 ---
 title: "Day 1: The Biology of Choking (And How to Hack It)"
 description: "Why your body freezes in high-pressure moments and the 'Fear is Fuel' protocol used by GSP to dominate."
-date: "2026-02-04"
+date: "2026-02-05T09:00:00+02:00"
 tags: ["Mental Toughness", "Anxiety", "GSP", "Neuroscience"]
 ---
 

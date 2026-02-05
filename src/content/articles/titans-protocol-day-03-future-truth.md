@@ -1,7 +1,7 @@
 ---
 title: "Day 3: Future Truth (The Ali Protocol)"
 description: "How Muhammad Ali used 'Future Truth' declarations to program his subconscious mind for victory."
-date: "2026-02-06"
+date: "2026-02-06T09:00:00+02:00"
 tags: ["Muhammad Ali", "Self-Talk", "Confidence", "Affirmations"]
 ---
 

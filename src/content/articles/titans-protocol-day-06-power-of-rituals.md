@@ -1,7 +1,7 @@
 ---
 title: "Day 6: The Anchor (Why Rituals Win Championships)"
 description: "Serena Williams bounces the ball 5 times. Nadal arranges his bottles. Discover how rituals anchor you in the zone."
-date: "2026-02-09"
+date: "2026-02-07T18:00:00+02:00"
 tags: ["Rituals", "Serena Williams", "Rafael Nadal", "Focus"]
 ---
 
