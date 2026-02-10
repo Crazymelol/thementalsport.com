@@ -1,5 +1,5 @@
 ---
-title: "Day 31: The Clinical Debrief (Analysis, Not Emotion)"
+title: "Day 22: Post-Game Analysis (The Clinical Debrief)"
 description: "Most athletes only analyze their losses. Pros analyze everything. The 3-question framework to debrief every single game."
 date: "2026-02-20T09:00:00+02:00"
 tags: ["Analysis", "Growth Mindset", "Feedback", "Improvement"]
@@ -23,9 +23,3 @@ Write this down 24 hours after the game (not immediately).
 3.  **The Ugly (Fix):** What was a disaster? (e.g., *"I lost my temper at the ref."*) -> **Action:** Stoicism drills (Day 27).
 
 Be a scientist. Be cold. Data doesn't have feelings.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Need a structured way to track your progress? The **[Competition Protocol](/books/the-competition-protocol)** includes printable Debrief Sheets for every event.

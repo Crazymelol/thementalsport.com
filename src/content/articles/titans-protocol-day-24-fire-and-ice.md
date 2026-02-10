@@ -1,5 +1,5 @@
 ---
-title: "Day 24: Fire and Ice (Contrast Therapy)"
+title: "Day 18: Cold & Heat (Contrast Therapy)"
 description: "Saunas and Ice Baths aren't just trends. They are potent recovery tools for inflammation and growth hormone. Here is the protocol."
 date: "2026-02-16T18:00:00+02:00"
 tags: ["Recovery", "Cold Plunge", "Sauna", "Biohacking"]
@@ -25,9 +25,3 @@ After a heavy training block:
 3.  Sauna (15 mins).
 4.  Cold Plunge (3 mins).
 5.  **End on Cold.** (Why? Because if you end on warm, inflammation creeps back in. End cold to seal the system).
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Learn how to build a recovery week in **[The Competition Protocol](/books/the-competition-protocol)**. Your body grows when you rest, not when you train.

@@ -1,5 +1,5 @@
 ---
-title: "Day 29: The Captain's Code (Servant Leadership)"
+title: "Day 21: The Captain's Code (Servant Leadership)"
 description: "Being a Captain isn't about the armband. It's about 'Sweeping the Sheds.' Learn the All Blacks' philosophy of leadership."
 date: "2026-02-19T09:00:00+02:00"
 tags: ["Leadership", "Teamwork", "Culture", "All Blacks"]
@@ -23,9 +23,3 @@ If you are looking at the ground, the game is over.
 *   **Chin Up:** Physically lift your head.
 *   **Chest Out:** Open posture (confidence).
 *   **Touch:** High-five or pat every single teammate. Physical touch reduces cortisol in the group.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Leadership starts with self-leadership. Build unshakeable confidence with our **[Confidence-Building Workbook](/books/confidence-building)**.

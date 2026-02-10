@@ -1,5 +1,5 @@
 ---
-title: "Day 26: Hotel Room Hacks (Sleep Anywhere)"
+title: "Day 19: Hotel Room Hacks (Sleep Anywhere)"
 description: "Hotel rooms are designed for vacationers, not athletes. How to 'sanitize' your room for sleep and focus."
 date: "2026-02-17T18:00:00+02:00"
 tags: ["Sleep", "Travel", "Environment", "Hacks"]
@@ -25,9 +25,3 @@ Do not live out of your suitcase. It creates visual clutter and stress.
 *   Make the room yours.
 
 When the room feels organized, your brain feels organized. Chaos in the room = Chaos in the mind.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Get the full packing list in **[The Competition Protocol](/books/the-competition-protocol)**.

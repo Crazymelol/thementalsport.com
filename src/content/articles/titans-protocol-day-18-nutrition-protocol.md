@@ -1,5 +1,5 @@
 ---
-title: "Day 18: Bio-Hacking the Pre-Game Body"
+title: "Day 15: Bio-Hacking the Pre-Game Body (Nutrition)"
 description: "Your body is a chemistry set. Learn why broad 'carb loading' is a mistake and how to manage the 'Gut-Brain Axis' to prevent nausea."
 date: "2026-02-13T18:00:00+02:00"
 tags: ["Nutrition", "Diet", "Metabolism", "Hydration"]
@@ -51,9 +51,3 @@ Digestion stops. Food sits there like a rock. Nausea sets in.
 **How to Hack the Gut:**
 *   **Liquid Calories:** If you are too nervous to eat solid food on race morning, switch to liquid (smoothies, Ensure, sports drinks). Liquid destroys gastric barriers faster.
 *   **The Comfort Meal:** Pick one meal that you *know* makes you feel good. Eat that. Every time. It’s a psychological anchor as much as a physiological one.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Detailed meal timing charts and hydration formulas are available in **[The Competition Protocol](/books/the-competition-protocol)**.

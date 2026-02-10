@@ -1,5 +1,5 @@
 ---
-title: "Day 22: The Protocol For Life (Beyond Sports)"
+title: "Day 17: Protocol For Life (Beyond Sport)"
 description: "The principles of elite performance apply to business, public speaking, and life. How to be a 'Boardroom Athlete' using the Taper and Anchor system."
 date: "2026-02-15T18:00:00+02:00"
 tags: ["Business", "Productivity", "Mindset", "Performance"]
@@ -34,10 +34,3 @@ Use the "Zero-Option" policy for your workday.
 *   Remove the phone.
 *   Script the first 2 hours of the day.
 *   Do not negotiate with yourself about checking email.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> This concludes the extended Titans Protocol. To give these tools to your children, check out **[Unbreakable](/books/unbreakable)**, our book on mental toughness for kids.
-> For the complete adult manual, get **[The Competition Protocol](/books/the-competition-protocol)**.

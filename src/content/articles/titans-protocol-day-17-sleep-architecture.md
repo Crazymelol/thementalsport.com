@@ -1,5 +1,5 @@
 ---
-title: "Day 17: Sleep Architecture (The Bank Strategy)"
+title: "Day 15: Sleep Architecture (The Bank Strategy)"
 description: "One night of bad sleep won't kill your performance. Learn the 'Bank Strategy' and how to bio-hack your hotel room for deep rest."
 date: "2026-02-13T09:00:00+02:00"
 tags: ["Sleep", "Recovery", "Performance", "Health"]
@@ -57,9 +57,3 @@ If your mind is racing, it is suffering from **Working Memory Overflow.** It is 
 *   **The Fix:** The Brain Dump.
 *   Write down everything in your head on a piece of paper. *"I need to verify the address." "I hope my knee holds up."*
 *   Once it is on paper, your brain marks the data as "Saved." It can now power down.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Mastering recovery is one of the pillars of **[The Competition Protocol](/books/the-competition-protocol)**. The book explores advanced recovery tactics used by Olympic sprinters.

@@ -1,5 +1,5 @@
 ---
-title: "Day 39: Fear of Failure (The Ego Trap)"
+title: "Day 26: Fear of Failure (The Ego Trap)"
 description: "You aren't afraid of losing. You are afraid of looking bad. How to separate your Ego from your Outcome."
 date: "2026-02-24T09:00:00+02:00"
 tags: ["Fear", "Ego", "Mindset", "Psychology"]
@@ -18,9 +18,3 @@ You think everyone is watching you. You think if you miss, everyone will talk ab
 
 No one cares about your failure as much as you do.
 Once you realize you are not the main character in everyone else's movie, you become free.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Conquer the inner critic with **[Overcoming Mental Blocks](/books/mental-blocks)**.

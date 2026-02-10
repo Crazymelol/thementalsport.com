@@ -1,5 +1,5 @@
 ---
-title: "Day 30: The Bench Role (Leading from the Shadows)"
+title: "Day 21: The Bench Role (Leading from the Shadows)"
 description: "Sitting on the bench sucks. But it's also an opportunity. How to be an 'Energy Giver' and force the coach to put you in."
 date: "2026-02-19T18:00:00+02:00"
 tags: ["Teamwork", "Mindset", "Resilience", "Discipline"]
@@ -25,9 +25,3 @@ Use the bench time to study the opponent.
 *"Number 4 always goes left."*
 *"Their defense is leaving the corner open."*
 Find the weakness. So when you get your 2 minutes of playing time, you exploit it immediately.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Stay ready so you don't have to get ready. The **[Mental Blocks Guide](/books/mental-blocks)** teaches you how to maintain focus even when you aren't the star.

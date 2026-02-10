@@ -1,5 +1,5 @@
 ---
-title: "Day 27: The Referee Protocol (Stoicism Under Fire)"
+title: "Day 20: Dealing with Bad Refs (Stoicism)"
 description: "Bad calls are part of the game. If you argue, you lose focus. Learn the 'Stoic Nod' and how to weaponize unfairness."
 date: "2026-02-18T09:00:00+02:00"
 tags: ["Stoicism", "Focus", "Psychology", "Resilience"]
@@ -28,9 +28,3 @@ Train your reaction. When a bad call hits:
 4.  Reset.
 
 This terrifies opponents. They expect you to break. When you don't, they wonder: *"Why is he so calm? What does he know that I don't?"*
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Emotional resilience is the core of **[The Competition Protocol](/books/the-competition-protocol)**. Master your emotions, master the game.

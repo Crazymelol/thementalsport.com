@@ -1,5 +1,5 @@
 ---
-title: "Day 37: Caffeine Strategy (Timing Your Dose)"
+title: "Day 25: Caffeine Strategy (Timing Your Dose)"
 description: "Caffeine is the most abused performance drug. Stop drinking it at the wrong time and crashing. The T-Minus 60 Protocol."
 date: "2026-02-23T09:00:00+02:00"
 tags: ["Nutrition", "Caffeine", "Performance", "Biohacking"]
@@ -19,9 +19,3 @@ Ideally, we want that loan to hit exactly when the whistle blows.
 3.  **Source:** Pill or Black Coffee. No sugar (sugar crash kills the buzz).
 
 This turns Caffeine from a habit into a weapon.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Detailed supplement protocols are in the **[Physiological Peak Performance Blueprint](/books/physiological-performance)**.

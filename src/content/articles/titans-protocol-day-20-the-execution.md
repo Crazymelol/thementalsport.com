@@ -1,5 +1,5 @@
 ---
-title: "Day 20: The Execution (The Final 60 Seconds)"
+title: "Day 16: The Endgame (The Execution)"
 description: "The gap between the warm-up and the whistle is where doubt creeps in. Learn the 'No-Mind' protocol to shut down your inner coach."
 date: "2026-02-14T18:00:00+02:00"
 tags: ["Execution", "Flow State", "Mindset", "Competition"]
@@ -54,9 +54,3 @@ Your memory is flawed. You are emotional. You will either think you are a god (a
 *   Do not quit the sport.
 
 Get drunk (if you want). Cry. Scream. But do not **decide.**
-
----
-
-> [!TIP]
-> **Go Deeper**
-> This concludes the Competition Protocol series sample. To own the complete manual and master every single variable of performance, get **[The Competition Protocol](/books/the-competition-protocol)** today.

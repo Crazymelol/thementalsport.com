@@ -1,5 +1,5 @@
 ---
-title: "Day 40: Imposter Syndrome (You Belong Here)"
+title: "Day 26: Imposter Syndrome (You Belong Here)"
 description: "'They are going to find out I'm a fraud.' Why high-performers feel like fakes, and how to rewire that belief."
 date: "2026-02-24T18:00:00+02:00"
 tags: ["Imposter Syndrome", "Confidence", "Psychology", "Mindset"]
@@ -16,9 +16,3 @@ That guy who looks super confident? He is terrified. He is just acting.
 **Confidence is not the absence of doubt. It is the action in spite of it.**
 You don't need to "feel" like you belong. You just need to do the work that someone who belongs would do.
 Fake it until you become it. Biology follows behavior.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Build real, unshakeable belief with the **[Confidence-Building Workbook](/books/confidence-building)**.

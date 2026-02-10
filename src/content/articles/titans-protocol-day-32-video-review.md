@@ -1,5 +1,5 @@
 ---
-title: "Day 32: The Video Review (Watching Yourself Fail)"
+title: "Day 22: Video Review (Watching Yourself Fail)"
 description: "Watching game tape is painful. It exposes your ego. Here is how to watch film without destroying your confidence."
 date: "2026-02-20T18:00:00+02:00"
 tags: ["Video Analysis", "Growth Mindset", "Ego", "Tactics"]
@@ -26,9 +26,3 @@ By removing "Me" from the equation, you can see the mechanics.
 3.  **Decision Speed:** Are you hesitating?
 
 Don't watch for highlights. Highlights are for Instagram. Watch for mistakes. Mistakes are for growth.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Turn your insights into action with the **[Physiological Peak Performance Blueprint](/books/physiological-performance)**. Train the weaknesses you see on film.

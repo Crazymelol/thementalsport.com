@@ -1,5 +1,5 @@
 ---
-title: "Day 21: The Injury Reset (The 'Active Patient' Mindset)"
+title: "Day 17: The Injury Reset II (Active Recovery)"
 description: "The hardest part of sports is the 'Identity Crash' when you get hurt. Learn how to switch your sport to 'Professional Rehabber.'"
 date: "2026-02-15T09:00:00+02:00"
 tags: ["Injury", "Rehab", "Mindset", "Identity"]
@@ -30,16 +30,10 @@ If you attack Rehab with the same intensity you attacked Training, you will reco
 Neuroscience tells us that visualizing movement stimulates the same neural pathways as doing the movement.
 **Mirror Neurons** fire when you watch someone do a skill, or when you imagine it.
 *   **SOP:** If you have a broken leg, spend 20 minutes a day closely improving the visualization of yourself running perfectly.
-*   Studies show that athletes who visualize during injury lose less muscle atrophy and maintain neural sharpness compared to those who don't.
+*   **Studies show** that athletes who visualize during injury lose less muscle atrophy and maintain neural sharpness compared to those who don't.
 
 ## The Comeback Trap
 
 The Rule of 10%:
 Never increase volume or intensity by more than 10% per week when returning.
 Check your ego at the door. You are a rookie again. Build the base.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Injury is inevitable, but quitting is optional. **[The Competition Protocol](/books/the-competition-protocol)** includes a full "Injury Reset" workbook to keep your mind sharp while your body heals.

@@ -1,5 +1,5 @@
 ---
-title: "Day 25: Travel Protocols (Beating Jet Lag)"
+title: "Day 19: Travel Protocols (Beating Jet Lag)"
 description: "Flying dehydrates you and wrecks your circadian rhythm. Learn how elite teams travel to ensure they perform on Day 1."
 date: "2026-02-17T09:00:00+02:00"
 tags: ["Travel", "Jet Lag", "Logistics", "Preparation"]
@@ -25,9 +25,3 @@ Your Circadian Rhythm is set by light entering the eyes.
 **3. Compression**
 Blood pools in the legs during flights. This creates "Cankles" and heavy legs.
 *   **Wear medical-grade compression socks.** Not "tight socks." Real compression.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Travel logistics are a key part of **[The Competition Protocol](/books/the-competition-protocol)**. Don't let a long flight ruin months of training.

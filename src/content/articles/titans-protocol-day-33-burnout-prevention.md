@@ -1,5 +1,5 @@
 ---
-title: "Day 33: Burnout Prevention (The Long Season)"
+title: "Day 23: Burnout Prevention (The Long Season)"
 description: "Burnout isn't about working too hard. It's about working without purpose. How to spot the 'Red Flags' before you quit."
 date: "2026-02-21T09:00:00+02:00"
 tags: ["Burnout", "Mental Health", "Longevity", "Motivation"]
@@ -25,9 +25,3 @@ These are Red Flags. Your brain is trying to escape.
 **The Fix: Deload Weeks**
 You cannot sprint a marathon.
 Every 4th week, reduce volume by 40%. You don't lose fitness; you gain sanity.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Structure your season for longevity with **[The Competition Protocol](/books/the-competition-protocol)**.

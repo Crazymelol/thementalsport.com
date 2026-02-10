@@ -1,5 +1,5 @@
 ---
-title: "Day 15: The Gear Audit (Zero Failure Standard)"
+title: "Day 14: The Gear Audit (Zero Failure Standard)"
 description: "Equipment failure isn't bad luck; it's negligence. Learn the 'Kill Kit' protocol and how to pack your bag so you can sleep in peace."
 date: "2026-02-12T09:00:00+02:00"
 tags: ["Preparation", "Gear", "Stoicism", "Logistics"]
@@ -73,9 +73,3 @@ Packing is a sacred ritual. It should be done the afternoon before, in a calm, m
 
 Once the bag is zipped, the "Gear" file in your brain is closed. You never have to ask *"Did I bring my...?"*
 You know you did. You touched it. You can sleep in peace.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> This logic comes from the "Zero-Failure" module in **[The Competition Protocol](/books/the-competition-protocol)**. The book contains the complete "Oh Sh*t Kit" component list used by professional triathletes.

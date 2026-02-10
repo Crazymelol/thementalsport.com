@@ -1,5 +1,5 @@
 ---
-title: "Day 16: The Warm-Up Ritual (Transitioning Identity)"
+title: "Day 14: The Warm-Up Ritual (Transitioning Identity)"
 description: "The Warm-Up isn't just about sweating. It's about shedding the 'Nice Person' and becoming the 'Competitor.' The 5-stage protocol to switch modes."
 date: "2026-02-12T18:00:00+02:00"
 tags: ["Warmup", "Identity", "Ritual", "Performance"]
@@ -57,9 +57,3 @@ Putting on your competition uniform is the final step.
 When the jersey goes on, the "Nice Guy" stays in the locker room.
 The person wearing the jersey does not have doubts. They have a job.
 You are now a machine.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Learn how to construct your own psychological Anchor in **[The Competition Protocol](/books/the-competition-protocol)**. The full manual breaks down how to link sound, smell, and touch to instant focus.

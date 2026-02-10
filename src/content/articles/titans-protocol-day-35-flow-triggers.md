@@ -1,5 +1,5 @@
 ---
-title: "Day 35: Flow State Triggers (Deep Dive)"
+title: "Day 24: Flow State Triggers (Deep Dive)"
 description: "Flow isn't magic. It's neurochemistry. The 3 specific environmental triggers required to get into the Zone."
 date: "2026-02-22T09:00:00+02:00"
 tags: ["Flow State", "Focus", "Neuroscience", "Productivity"]
@@ -24,9 +24,3 @@ You need to know *instantly* if you are right or wrong.
 *   Too easy = Boredom.
 *   Too hard = Anxiety.
 *   **The Sweet Spot:** 4% harder than your current skill level. This is the "Stretch Zone."
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Learn the full Flow Protocol in **[The Competition Protocol](/books/the-competition-protocol)**.

@@ -1,5 +1,5 @@
 ---
-title: "Day 44: Celebrating Wins (Without Complacency)"
+title: "Day 28: Celebrating Wins (Without Complacency)"
 description: "Winning is dangerous. It makes you soft. How to celebrate the victory but stay hungry for the war."
 date: "2026-02-26T18:00:00+02:00"
 tags: ["Success", "Mindset", "Complacency", "Growth"]
@@ -16,9 +16,3 @@ You are the Champion until midnight.
 At 12:01 AM, you are 0-0. You are nobody. You have to earn it all over again.
 
 Enjoy the trophy. Take the picture. But don't sleep with the medal.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Maintain your edge with **[Resilient Confidence](/books/resilient-confidence)**.

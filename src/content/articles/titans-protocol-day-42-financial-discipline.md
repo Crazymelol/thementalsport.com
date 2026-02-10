@@ -1,5 +1,5 @@
 ---
-title: "Day 42: The Professional Mindset (Financial Discipline)"
+title: "Day 27: Financial Discipline (The Professional Mindset)"
 description: "Broke athletes make bad decisions. Why financial stability is a performance enhancer."
 date: "2026-02-25T18:00:00+02:00"
 tags: ["Finance", "Career", "Professionalism", "Life Skills"]
@@ -18,9 +18,3 @@ The best asset you own is your body.
 *   $200 on sneakers isn't spending; it's equipment.
 *   $200 on bottle service is burning money.
 Know the difference.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Be a pro in all aspects of life. **[The Competition Protocol](/books/the-competition-protocol)** covers lifestyle management for the elite.

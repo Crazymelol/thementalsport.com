@@ -1,5 +1,5 @@
 ---
-title: "Day 34: The Off-Season Mindset (The Growth Phase)"
+title: "Day 23: The Off-Season Mindset (The Growth Phase)"
 description: "Championships are won in the winter. Why the 'Off-Season' is actually the 'Build Season.'"
 date: "2026-02-21T18:00:00+02:00"
 tags: ["Off-Season", "Training", "Planning", "Growth"]
@@ -21,9 +21,3 @@ Sign a contract with yourself for the Off-Season.
 *"I will return 10lbs heavier/lighter."*
 *"I will fix my left hand."*
 Come back a different player.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Design your training blocks with the **[Physiological Peak Performance Blueprint](/books/physiological-performance)**.

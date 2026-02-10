@@ -1,5 +1,5 @@
 ---
-title: "Day 47: The Monthly Reset (Reviewing February)"
+title: "Day 30: The Monthly Reset (Reviewing February)"
 description: "February is done. Did you get 1% better? The End-of-Month Audit protocol."
 date: "2026-02-28T09:00:00+02:00"
 tags: ["Review", "Planning", "Audit", "Habits"]
@@ -20,9 +20,3 @@ Be honest. If you lie to yourself, you stay average.
 
 If you got an F, good. Fix it in March.
 If you got an A, careful. Do not get comfortable.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Tracking is essential. Use the journals provided in **[The Competition Protocol](/books/the-competition-protocol)**.

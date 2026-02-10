@@ -1,5 +1,5 @@
 ---
-title: "Day 23: Hydration Strategy (The Hidden Fatigue)"
+title: "Day 18: Hydration Strategy (The Hidden Fatigue)"
 description: "Dehydration creates 'Brain Fog' before it hurts your legs. Learn how to calculate your sweat rate and why water alone isn't enough."
 date: "2026-02-16T09:00:00+02:00"
 tags: ["Hydration", "Physiology", "Performance", "Health"]
@@ -29,9 +29,3 @@ You need to know your burn rate.
 2.  Do the workout (do not drink anything).
 3.  Weigh yourself naked after.
 4.  The difference (e.g., 1.5 lbs) is your hour sweat rate. Only replace what you lose.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Hydration is detailed in the **[Physiological Peak Performance Blueprint](/books/physiological-performance)**. Stop guessing and start measuring.

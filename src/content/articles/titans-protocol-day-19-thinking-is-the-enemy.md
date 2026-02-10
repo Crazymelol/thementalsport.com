@@ -1,5 +1,5 @@
 ---
-title: "Day 19: The Awakening (The Morning Of)"
+title: "Day 16: The Awakening (The Morning Of)"
 description: "The alarm goes off. The heart rates spikes. Learn how to handle the 'Cortisol Awakening Response' and channel that energy into focus."
 date: "2026-02-14T09:00:00+02:00"
 tags: ["Morning Routine", "Cortisol", "Anxiety", "Focus"]
@@ -44,9 +44,3 @@ You don't need a fancy ice bath. You just need a shower.
 Caffeine is a powerful ergogenic aid. But it has a half-life of 6 hours and peak absorption at 45-60 minutes.
 *   **Mistake:** Drinking coffee 4 hours before the race. The effect will wear off by start time, leaving you with the "crash."
 *   **Protocol:** Save the caffeine for T-Minus 60 minutes (The Priming Window).
-
----
-
-> [!TIP]
-> **Go Deeper**
-> This morning routine is just the start. **[The Competition Protocol](/books/the-competition-protocol)** maps out every minute from the moment you wake up to the moment the whistle blows.

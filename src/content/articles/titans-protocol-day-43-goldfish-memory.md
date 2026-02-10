@@ -1,5 +1,5 @@
 ---
-title: "Day 43: The Goldfish Memory (Resetting After Failure)"
+title: "Day 28: The Goldfish Memory (Resetting After Failure)"
 description: "A goldfish has a memory of 10 seconds. Be a goldfish. How to delete mistakes instantly."
 date: "2026-02-26T09:00:00+02:00"
 tags: ["Resilience", "Mindset", "Failure", "Focus"]
@@ -17,9 +17,3 @@ Then, you must flush it.
 *   **Verbal:** Say *"Next."*
 
 If you carry the last play into the next play, you will lose twice.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Train your resilience with the specific drills in **[Overcoming Mental Blocks](/books/mental-blocks)**.

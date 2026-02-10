@@ -1,5 +1,5 @@
 ---
-title: "Day 45: Legacy Building (What You Leave Behind)"
+title: "Day 29: Legacy Building (What You Leave Behind)"
 description: "You won't play forever. What will remain when the jersey comes off? Building a legacy beyond the stats."
 date: "2026-02-27T09:00:00+02:00"
 tags: ["Legacy", "Purpose", "Career", "Life"]
@@ -17,9 +17,3 @@ Your Legacy is the *Culture* you leave behind.
 *   Did you treat the staff with respect?
 
 The records will be broken. The stories will remain. Write a good story.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Build a life of substance with **[The Competition Protocol](/books/the-competition-protocol)**.

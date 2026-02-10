@@ -1,5 +1,5 @@
 ---
-title: "Day 28: Psychological Warfare (Trash Talk)"
+title: "Day 20: Trash Talk (Psychological Warfare)"
 description: "Trash talk isn't about insults; it's about breaking their rhythm. How to handle it (and how to use silence as a weapon)."
 date: "2026-02-18T18:00:00+02:00"
 tags: ["Psychology", "Competition", "Focus", "Mindset"]
@@ -26,9 +26,3 @@ The best trash talk is **Evidence.**
 
 This says: *"You are so easy, this is fun for me."*
 That destroys their soul.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Learn how to build an impenetrable mental fortress in **[The Competition Protocol](/books/the-competition-protocol)**.
