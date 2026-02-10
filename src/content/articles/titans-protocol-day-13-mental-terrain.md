@@ -1,8 +1,8 @@
 ---
-title: "Day 13: Mental Terrain Mapping (The Venue Hack)"
-description: "Most athletes are anxious because they fear the unknown. Learn how to 'Satellite Map' the venue so you feel at home before you even arrive."
+title: "Day 13: Mental Terrain Mapping (Visualizing the Venue)"
+description: "Most people visualize wrong. They see a 'highlight reel'. Pros build a simulation. Learn the PETTLEP model for functional imagery."
 date: "2026-02-11T09:00:00+02:00"
-tags: ["Visualization", "Preparation", "Anxiety", "Tactics"]
+tags: ["Visualization", "Imagery", "Preparation", "Anxiety"]
 ---
 
 Most people visualize wrong.
@@ -40,13 +40,13 @@ By the time you walk in physically, you should feel like you have been there 100
 
 Developed by sports scientists Holmes and Collins, **PETTLEP** is the gold standard for functional imagery. It ensures that your visualization activates the exact same neural pathways as the physical action.
 
-*   **P - Physical:** Visualize yourself wearing your uniform. Feel the tightness of your shoes. If possible, hold your equipment (racket, ball) while visualizing.
-*   **E - Environment:** See the specific details of the venue you researched. The color of the mats. The smell of the grass.
-*   **T - Task:** Visualize the *skills*, not just the result. See your hands moving.
-*   **T - Timing:** Visualize in **Real Time.** Do not "fast forward" the hard parts. If the race takes 10 minutes, the visualization takes 10 minutes.
-*   **L - Learning:** Adapt the visual as you get better.
-*   **E - Emotion:** Don't just see it; **feel** the butterflies. Fee the adrenaline. Then feel yourself regulating it.
-*   **P - Perspective:** Use "First Person" (GoPro view) for skills, and "Third Person" (Drone view) for tactics.
+**P - Physical:** Visualize yourself wearing your uniform. Feel the tightness of your shoes. If possible, hold your equipment (racket, ball) while visualizing.
+**E - Environment:** See the specific details of the venue you researched. The color of the mats. The smell of the grass.
+**T - Task:** Visualize the *skills*, not just the result. See your hands moving.
+**T - Timing:** Visualize in **Real Time.** Do not "fast forward" the hard parts. If the race takes 10 minutes, the visualization takes 10 minutes.
+**L - Learning:** Adapt the visual as you get better.
+**E - Emotion:** Don't just see it; **feel** the butterflies. Fee the adrenaline. Then feel yourself regulating it.
+**P - Perspective:** Use "First Person" (GoPro view) for skills, and "Third Person" (Drone view) for tactics.
 
 ## The "Murphy's Law" Protocol (Disaster Scripting)
 
@@ -64,8 +64,4 @@ Spend 5 minutes visualizing things going wrong, and then—this is the key—**v
 
 When you pre-program the solution, the crisis doesn't cause panic. It just triggers the response. *"Oh, this is happening? I know what to do."*
 
----
-
-> [!TIP]
-> **Go Deeper**
-> This strategy is part of the "Mental Terrain" module in **[The Competition Protocol](/books/the-competition-protocol)**. The full book includes the complete Venue Recon Checklist and 3 guided visualization scripts.
+**Tomorrow:** The Gear Audit (Trust Your Equipment).

@@ -1,8 +1,8 @@
 ---
-title: "Day 14: Social Firewalling (Protecting Your Bubble)"
-description: "The venue is full of 'Energy Vampires.' Learn how to build a psychological firewall to protect your focus from distracted parents and nervous teammates."
+title: "Day 13: Social Firewalling (Blocking Distractions)"
+description: "The venue is filled with 'Energy Vampires'. Learn how to construct a psychological firewall and protect your headspace on Game Day."
 date: "2026-02-11T18:00:00+02:00"
-tags: ["Focus", "Distraction", "Psychology", "Environment"]
+tags: ["Distraction", "Focus", "Game Day", "Psychology"]
 ---
 
 You have arrived at the venue.
@@ -49,20 +49,4 @@ When you feel overwhelmed:
 
 This stabilizes your visual field. It tells your Amygdala: *"We are not being hunted. We are still."*
 
----
-### CASE STUDY: The Tennis Star's Towel
-
-*Subject: Roger Federer*
-
-**The Scenario:** Tennis is a game of breaks. Between points, the crowd screams, the opponent grunts, the thoughts race.
-
-**The Protocol:** Watch Roger between points. He walks to the back of the court. He asks for the towel. He wipes his face (even if he isn't sweating). He adjusts his strings.
-He is creating a **Mini-Bubble.** For those 20 seconds, he is not in the stadium. He is in his towel. He is resetting the computer.
-
-**The Lesson:** You cannot be "On" for 3 hours. You need micro-breaks. Create a physical ritual (The Towel) to hide from the world.
-
----
-
-> [!TIP]
-> **Go Deeper**
-> Learn how to build your own "Oh Sh*t Kit" and psychological stress anchors in **[The Competition Protocol](/books/the-competition-protocol)**. The book includes a full chapter on Environment Architecture.
+**Tomorrow:** The Warm-Up Ritual (Priming the Engine).
