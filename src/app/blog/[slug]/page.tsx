@@ -4,6 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import NewsletterInline from '@/components/NewsletterInline';
+import BookCTA from '@/components/BookCTA';
+import { books } from '@/data/books';
 
 /* 
  * Server Component 
@@ -72,6 +74,7 @@ export default async function BlogPost({ params }: PageProps) {
 
                 {/* Footer / CTA */}
                 <div className="mt-20 pt-12 border-t border-zinc-200">
+                    <BookCTA book={books.find(b => b.id === 'the-competition-protocol') || books[0]} />
                     <NewsletterInline />
                 </div>
 

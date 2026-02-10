@@ -1,23 +1,19 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import { books } from '@/data/books';
+import { getAllArticles } from '@/lib/blog';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import NewsletterModal from '@/components/NewsletterModal';
+import NewsletterWrapper from '@/components/NewsletterWrapper';
+
+export const revalidate = 0; // Ensure homepage always shows latest articles
 
 export default function AuthorHome() {
-    const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
+    // Fetch latest 3 articles
+    const latestArticles = getAllArticles().slice(0, 3);
 
     return (
         <main className="min-h-screen bg-white selection:bg-zinc-900 selection:text-white">
-
-            {/* Newsletter Modal */}
-            <NewsletterModal
-                isOpen={isNewsletterOpen}
-                onClose={() => setIsNewsletterOpen(false)}
-            />
 
             {/* 1. AUTHOR HERO */}
             <section className="bg-zinc-950 text-white py-24 lg:py-32 relative overflow-hidden">
@@ -30,11 +26,9 @@ export default function AuthorHome() {
                         Performance Expert. Author. <span className="text-white block mt-2 font-bold">Win the inner game.</span>
                     </p>
                     <div className="pt-8 mb-12">
-                        <button
-                            onClick={() => setIsNewsletterOpen(true)}
-                            className="px-10 py-4 bg-white text-zinc-950 font-black rounded-none hover:bg-zinc-200 transition-colors uppercase tracking-widest text-sm border-2 border-transparent">
+                        <NewsletterWrapper className="px-10 py-4 bg-white text-zinc-950 font-black rounded-none hover:bg-zinc-200 transition-colors uppercase tracking-widest text-sm border-2 border-transparent">
                             Join The Newsletter
-                        </button>
+                        </NewsletterWrapper>
                     </div>
                 </div>
 
@@ -44,18 +38,49 @@ export default function AuthorHome() {
                 </div>
             </section>
 
-            {/* TRUST STRIP (New) */}
+            {/* TRUST STRIP */}
             <section className="py-12 bg-zinc-50 border-b border-zinc-200">
                 <div className="container mx-auto px-6 text-center">
                     <p className="text-zinc-400 text-xs font-bold uppercase tracking-[0.2em] mb-8">Trusted methodologies used by athletes in</p>
                     <div className="flex flex-wrap justify-center items-center gap-8 md:gap-20 opacity-80">
-                        {/* Text Placeholders - Bold & Sharp */}
                         <span className="text-4xl font-black text-zinc-900 tracking-tighter">NBA</span>
                         <span className="text-4xl font-black text-zinc-900 tracking-tighter">NFL</span>
                         <span className="text-4xl font-black text-zinc-900 tracking-tighter">MLB</span>
                         <span className="text-4xl font-black text-zinc-900 tracking-tighter">NCAA</span>
                         <span className="text-4xl font-black text-zinc-900 tracking-tighter">OLYMPICS</span>
                     </div>
+                </div>
+            </section>
+
+            {/* NEW: LATEST INSIGHTS (Articles) */}
+            <section className="py-24 container mx-auto px-6 border-b border-zinc-200">
+                <div className="flex items-center justify-between mb-16">
+                    <h2 className="text-4xl font-black text-zinc-900 uppercase tracking-tighter">Latest Insights</h2>
+                    <div className="hidden md:flex h-px bg-zinc-200 flex-1 ml-12 mr-8"></div>
+                    <Link href="/blog" className="text-sm font-bold uppercase tracking-widest hover:text-zinc-600 transition-colors flex items-center gap-2">
+                        View All <ArrowRight className="w-4 h-4" />
+                    </Link>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-12">
+                    {latestArticles.map((article) => (
+                        <Link href={`/blog/${article.slug}`} key={article.slug} className="group block space-y-4">
+                            <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-zinc-400">
+                                <span>{article.date.split('T')[0]}</span>
+                                <span className="w-1 h-1 bg-zinc-300 rounded-full"></span>
+                                <span className="text-zinc-900">{article.tags[0]}</span>
+                            </div>
+                            <h3 className="text-2xl font-black text-zinc-900 leading-tight group-hover:underline decoration-2 underline-offset-4 decoration-zinc-900">
+                                {article.title}
+                            </h3>
+                            <p className="text-zinc-600 leading-relaxed text-sm line-clamp-3">
+                                {article.description}
+                            </p>
+                            <div className="pt-2 text-xs font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
+                                Read More <ArrowRight className="w-3 h-3" />
+                            </div>
+                        </Link>
+                    ))}
                 </div>
             </section>
 
@@ -101,7 +126,7 @@ export default function AuthorHome() {
                 </div>
             </section>
 
-            {/* 3. ABOUT AUTHOR (Enhanced) */}
+            {/* 3. ABOUT AUTHOR */}
             <section id="about" className="py-24 bg-zinc-50 border-t border-zinc-200">
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -137,7 +162,7 @@ export default function AuthorHome() {
 
             <footer className="bg-zinc-950 text-zinc-500 py-16 text-center text-sm border-t border-zinc-900">
                 <div className="mb-6 flex justify-center gap-6 font-bold uppercase tracking-widest text-xs">
-                    <button onClick={() => setIsNewsletterOpen(true)} className="hover:text-white transition-colors">Newsletter</button>
+                    <NewsletterWrapper className="hover:text-white transition-colors">Newsletter</NewsletterWrapper>
                     <Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link>
                 </div>
                 &copy; 2026 Giannis Notaras. Build The Mindset.

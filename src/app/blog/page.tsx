@@ -7,7 +7,7 @@ export const metadata = {
     description: 'Articles on mental performance, fencing psychology, and high-performance neuroscience.',
 };
 
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 0; // Disable cache to ensure Latest Articles always show
 
 export default function BlogIndex() {
     const articles = getAllArticles();
