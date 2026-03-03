@@ -3,6 +3,7 @@ import { books } from '@/data/books';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Star, ArrowRight, ShoppingCart, CheckCircle2, Quote } from 'lucide-react';
+import Image from 'next/image';
 
 /* 
  * This is a Server Component. 
@@ -140,9 +141,11 @@ export default async function BookPage({ params }: PageProps) {
                     {/* Right: Book Cover Image */}
                     <div className="order-1 lg:order-2 flex justify-center animate-in slide-in-from-right duration-1000">
                         <div className="relative group cursor-pointer transition-transform hover:scale-105 duration-500">
-                            <img
+                            <Image
                                 src={book.coverImage}
                                 alt={`${book.title} cover`}
+                                width={300}
+                                height={450}
                                 className="w-[300px] h-[450px] object-contain shadow-[20px_20px_60px_rgba(0,0,0,0.3)] border border-zinc-100 bg-zinc-50"
                             />
                         </div>
@@ -202,10 +205,12 @@ export default async function BookPage({ params }: PageProps) {
                         {books.filter(b => b.id !== book.id).slice(0, 3).map((relatedBook) => (
                             <a href={`/book/${relatedBook.id}`} key={relatedBook.id} className="group block bg-white border border-zinc-200 hover:border-zinc-900 transition-all">
                                 <div className="aspect-[3/4] bg-zinc-100 relative overflow-hidden border-b border-zinc-100">
-                                    <img
+                                    <Image
                                         src={relatedBook.coverImage}
                                         alt={`${relatedBook.title} cover`}
-                                        className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                        className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
                                     />
                                 </div>
                                 <div className="p-8">

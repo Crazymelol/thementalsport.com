@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Instagram, Linkedin, Twitter, Mail, BookOpen, Download } from 'lucide-react';
 import { books } from '@/data/books';
 
@@ -55,7 +56,7 @@ export default function LinksPage() {
                     </Link>
 
                     {/* 2. NEWSLETTER */}
-                    <a
+                    <Link
                         href="/#newsletter-modal"
                         className="group relative block w-full border border-zinc-800 hover:border-zinc-700 transition-all"
                     >
@@ -70,7 +71,7 @@ export default function LinksPage() {
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </Link>
 
                     {/* 2. FEATURED BOOK (Visual) */}
                     <a
@@ -81,8 +82,8 @@ export default function LinksPage() {
                     >
                         <div className="flex items-center gap-4">
                             {/* Tiny Cover Preview */}
-                            <div className="w-12 h-16 bg-zinc-800 shrink-0 shadow-lg border border-zinc-700 group-hover:scale-105 transition-transform">
-                                <img src={featuredBook.coverImage} alt="Cover" className="w-full h-full object-cover" />
+                            <div className="w-12 h-16 bg-zinc-800 shrink-0 shadow-lg border border-zinc-700 group-hover:scale-105 transition-transform relative">
+                                <Image src={featuredBook.coverImage} alt="Cover" fill sizes="48px" className="object-cover" />
                             </div>
                             <div className="text-left">
                                 <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-1">Best Seller</div>
