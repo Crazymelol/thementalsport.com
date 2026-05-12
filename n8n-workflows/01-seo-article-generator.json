@@ -1,0 +1,88 @@
+{
+  "name": "01 - SEO Article Generator (Weekly)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "weeks", "weeksInterval": 1 }]
+        }
+      },
+      "name": "Schedule Trigger (Weekly)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const topics = [\n  { keyword: 'mental toughness for athletes', title: 'How to Build Mental Toughness as an Athlete' },\n  { keyword: 'sports psychology techniques', title: '5 Sports Psychology Techniques Every Athlete Needs' },\n  { keyword: 'pre competition anxiety', title: 'How to Overcome Pre-Competition Anxiety' },\n  { keyword: 'athlete confidence building', title: 'The Science of Building Unshakable Athlete Confidence' },\n  { keyword: 'flow state sports', title: 'How to Trigger Flow State Before Your Event' },\n  { keyword: 'mental blocks in sports', title: 'Breaking Through Mental Blocks in Competition' },\n  { keyword: 'visualization techniques athletes', title: 'Visualization Techniques That Elite Athletes Use Daily' },\n  { keyword: 'ADHD athlete performance', title: 'How Athletes with ADHD Can Unlock Peak Performance' },\n  { keyword: 'resilience sports psychology', title: 'Building Resilience: The Mental Skill Every Champion Needs' },\n  { keyword: 'kids mental toughness', title: 'Teaching Mental Toughness to Young Athletes' }\n];\n\nconst pick = topics[Math.floor(Math.random() * topics.length)];\nconst slug = pick.keyword.replace(/\\s+/g, '-').toLowerCase();\nconst date = new Date().toISOString().split('T')[0];\n\nreturn [{ json: { ...pick, slug, date } }];"
+      },
+      "name": "Pick Random SEO Topic",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"model\": \"claude-opus-4-7\",\n  \"max_tokens\": 2000,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"Write a 1000-word SEO blog article for thementalsport.com by Giannis Notaras, a mental performance expert. Target keyword: '{{ $json.keyword }}'. Title: '{{ $json.title }}'.\\n\\nFormat as markdown with:\\n- Frontmatter: title, description (160 chars max), tags array, date: {{ $json.date }}\\n- H2 subheadings\\n- Practical, action-oriented tone\\n- End with a CTA to check out the books at thementalsport.com\\n- No fluff, no filler. Real advice from a performance expert.\\n\\nReturn ONLY the markdown, no extra commentary.\"\n  }]\n}"
+      },
+      "name": "Generate Article with Claude",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst content = response.content[0].text;\nconst item = $('Pick Random SEO Topic').first().json;\n\nconst filename = `titans-protocol-auto-${item.slug}-${item.date}.md`;\nconst encoded = Buffer.from(content).toString('base64');\n\nreturn [{ json: { content: encoded, filename, slug: item.slug, date: item.date, title: item.title } }];"
+      },
+      "name": "Prepare File for GitHub",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/Crazymelol/thementalsport.com/contents/src/content/articles/{{ $json.filename }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "={{ 'Bearer ' + $env.GITHUB_TOKEN }}" },
+            { "name": "Accept", "value": "application/vnd.github.v3+json" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"message\": \"auto: add SEO article - {{ $json.title }}\",\n  \"content\": \"{{ $json.content }}\",\n  \"branch\": \"main\"\n}"
+      },
+      "name": "Commit Article to GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (Weekly)": { "main": [[{ "node": "Pick Random SEO Topic", "type": "main", "index": 0 }]] },
+    "Pick Random SEO Topic": { "main": [[{ "node": "Generate Article with Claude", "type": "main", "index": 0 }]] },
+    "Generate Article with Claude": { "main": [[{ "node": "Prepare File for GitHub", "type": "main", "index": 0 }]] },
+    "Prepare File for GitHub": { "main": [[{ "node": "Commit Article to GitHub", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "automation" }, { "name": "seo" }]
+}

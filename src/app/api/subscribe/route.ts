@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-    const { email } = await request.json();
+    const { email, tag } = await request.json();
 
     if (!email) {
         return NextResponse.json({ error: 'Email is required' }, { status: 400 });
@@ -15,15 +15,13 @@ export async function POST(request: Request) {
     }
 
     try {
+        const body: Record<string, unknown> = { api_key: apiKey, email };
+        if (tag) body.tags = [tag];
+
         const res = await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                api_key: apiKey,
-                email: email,
-            }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
         });
 
         const data = await res.json();

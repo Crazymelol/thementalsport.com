@@ -46,14 +46,13 @@ export default function Navbar() {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-8">
-                    <a
-                        href="#books"
-                        onClick={(e) => scrollToSection(e, 'books')}
+                    <Link
+                        href="/books"
                         className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
                             }`}
                     >
                         Books
-                    </a>
+                    </Link>
                     <a
                         href="#about"
                         onClick={(e) => scrollToSection(e, 'about')}
@@ -98,13 +97,13 @@ export default function Navbar() {
             {isOpen && (
                 <div className="absolute top-full left-0 w-full bg-stone-900 text-white py-6 shadow-xl md:hidden">
                     <div className="flex flex-col space-y-4 px-6">
-                        <a
-                            href="#books"
-                            onClick={(e) => scrollToSection(e, 'books')}
+                        <Link
+                            href="/books"
+                            onClick={() => setIsOpen(false)}
                             className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
                         >
                             Books
-                        </a>
+                        </Link>
                         <a
                             href="#about"
                             onClick={(e) => scrollToSection(e, 'about')}

@@ -118,7 +118,7 @@ export default async function BookPage({ params }: PageProps) {
                     {/* Left: Text */}
                     <div className="order-2 lg:order-1 space-y-8 animate-in slide-in-from-left duration-700">
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-100 text-zinc-900 text-xs font-black uppercase tracking-[0.2em] border border-zinc-200">
-                            <Star className="w-3 h-3 fill-current" /> New Release 2025
+                            <Star className="w-3 h-3 fill-current" /> New Release 2026
                         </div>
                         <h1 className="text-5xl lg:text-7xl font-black leading-[1.1] text-zinc-900 uppercase tracking-tighter">
                             {book.title} <br />

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import NewsletterWrapper from '@/components/NewsletterWrapper';
+import LeadMagnet from '@/components/LeadMagnet';
 
 export const revalidate = 0; // Ensure homepage always shows latest articles
 
@@ -116,8 +117,11 @@ export default function AuthorHome() {
                                     <p className="text-zinc-600 text-sm line-clamp-3 leading-relaxed">
                                         {book.description}
                                     </p>
-                                    <div className="flex items-center gap-2 text-zinc-900 font-bold text-sm pt-4 uppercase tracking-widest">
-                                        View Details <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    <div className="flex items-center justify-between pt-4 border-t border-zinc-100">
+                                        <span className="text-lg font-black text-zinc-900">{book.price}</span>
+                                        <span className="flex items-center gap-2 text-zinc-900 font-bold text-sm uppercase tracking-widest">
+                                            View Details <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -125,6 +129,9 @@ export default function AuthorHome() {
                     ))}
                 </div>
             </section>
+
+            {/* LEAD MAGNET */}
+            <LeadMagnet />
 
             {/* 3. ABOUT AUTHOR */}
             <section id="about" className="py-24 bg-zinc-50 border-t border-zinc-200">
