@@ -1,0 +1,117 @@
+{
+  "name": "02 - Social Media Auto-Poster (Daily)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "days", "daysInterval": 1 }]
+        }
+      },
+      "name": "Schedule Trigger (Daily 9am)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/Crazymelol/thementalsport.com/contents/src/content/articles",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "={{ 'Bearer ' + $env.GITHUB_TOKEN }}" },
+            { "name": "Accept", "value": "application/vnd.github.v3+json" }
+          ]
+        }
+      },
+      "name": "Fetch Article List from GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const articles = $input.first().json;\nconst pick = articles[Math.floor(Math.random() * articles.length)];\nreturn [{ json: { filename: pick.name, download_url: pick.download_url } }];"
+      },
+      "name": "Pick Random Article",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.download_url }}"
+      },
+      "name": "Fetch Article Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 500,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"Based on this article, create two social media posts for Giannis Notaras (mental performance expert):\\n\\n1. LINKEDIN (200 words max): Professional, insight-driven, end with a question to drive comments. Include link: thementalsport.com\\n\\n2. INSTAGRAM CAPTION (150 words max): Punchy, motivational, 5 relevant hashtags, end with 'Link in bio.'\\n\\nArticle:\\n{{ $json.body.substring(0, 2000) }}\\n\\nReturn JSON: { linkedin: '...', instagram: '...' }\"\n  }]\n}"
+      },
+      "name": "Generate Social Posts with Claude",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.content[0].text;\nlet parsed;\ntry {\n  const match = raw.match(/\\{[\\s\\S]*\\}/);\n  parsed = JSON.parse(match ? match[0] : raw);\n} catch {\n  parsed = { linkedin: raw, instagram: raw };\n}\nreturn [{ json: parsed }];"
+      },
+      "name": "Parse Posts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.linkedin }}",
+        "additionalFields": {}
+      },
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [1560, 200],
+      "credentials": { "linkedInOAuth2Api": { "id": "linkedin-creds", "name": "LinkedIn account" } }
+    },
+    {
+      "parameters": {},
+      "name": "Instagram caption stored in output",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1560, 400]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (Daily 9am)": { "main": [[{ "node": "Fetch Article List from GitHub", "type": "main", "index": 0 }]] },
+    "Fetch Article List from GitHub": { "main": [[{ "node": "Pick Random Article", "type": "main", "index": 0 }]] },
+    "Pick Random Article": { "main": [[{ "node": "Fetch Article Content", "type": "main", "index": 0 }]] },
+    "Fetch Article Content": { "main": [[{ "node": "Generate Social Posts with Claude", "type": "main", "index": 0 }]] },
+    "Generate Social Posts with Claude": { "main": [[{ "node": "Parse Posts", "type": "main", "index": 0 }]] },
+    "Parse Posts": {
+      "main": [[
+        { "node": "Post to LinkedIn", "type": "main", "index": 0 },
+        { "node": "Instagram caption stored in output", "type": "main", "index": 0 }
+      ]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "automation" }, { "name": "social-media" }]
+}
