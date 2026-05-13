@@ -53,6 +53,12 @@ export default function Navbar() {
                     >
                         Books
                     </Link>
+                    <Link
+                        href="/course"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-red-500 transition-colors ${!scrolled && 'hover:text-red-400'}`}
+                    >
+                        Course
+                    </Link>
                     <a
                         href="#about"
                         onClick={(e) => scrollToSection(e, 'about')}
