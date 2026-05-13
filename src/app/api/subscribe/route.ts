@@ -30,6 +30,16 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: data.message || 'Failed to subscribe' }, { status: res.status });
         }
 
+        // Fire the n8n nurture sequence webhook (fire-and-forget)
+        const n8nWebhook = process.env.N8N_NURTURE_WEBHOOK;
+        if (n8nWebhook) {
+            fetch(n8nWebhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, tag }),
+            }).catch(() => { /* don't block on n8n failures */ });
+        }
+
         return NextResponse.json({ success: true, data });
     } catch {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

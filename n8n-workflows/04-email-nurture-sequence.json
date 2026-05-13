@@ -1,0 +1,140 @@
+{
+  "name": "04 - Email Nurture Sequence (7 emails / 14 days)",
+  "nodes": [
+    {
+      "parameters": {"path": "lead-magnet-signup", "options": {}},
+      "name": "Webhook (signup)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "id": "webhook-node"
+    },
+    {
+      "parameters": {
+        "fromEmail": "notarasioannis@hotmail.com",
+        "toEmail": "={{ $json.body.email }}",
+        "subject": "Your free chapter is here",
+        "emailType": "html",
+        "message": "<p>Hey,</p><p>Here's the first chapter of <strong>The Competition Protocol</strong>:</p><p><a href='https://thementalsport.com/free-chapter.pdf'>Download Free Chapter</a></p><p>Tomorrow I'll share the biggest mistake athletes make before competition.</p><p>— Giannis</p>",
+        "options": {}
+      },
+      "name": "Email 1 Welcome",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [460, 300],
+      "id": "email-1"
+    },
+    {"parameters": {"amount": 2, "unit": "days"}, "name": "Wait 2d", "type": "n8n-nodes-base.wait", "typeVersion": 1.1, "position": [680, 300], "id": "w2"},
+    {
+      "parameters": {
+        "fromEmail": "notarasioannis@hotmail.com",
+        "toEmail": "={{ $('Webhook (signup)').item.json.body.email }}",
+        "subject": "The mistake that costs athletes their best performances",
+        "emailType": "html",
+        "message": "<p>Most athletes train harder before big events. That's sabotage. Your nervous system needs reduced load to peak.</p><p>The Competition Protocol's T-Minus 7 checklist fixes this.</p><p><a href='https://www.amazon.com/dp/B0GKF5TGMQ'>Get it on Amazon ($9.99)</a></p><p>— Giannis</p>",
+        "options": {}
+      },
+      "name": "Email 2 Day2",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [900, 300],
+      "id": "email-2"
+    },
+    {"parameters": {"amount": 2, "unit": "days"}, "name": "Wait 2d more", "type": "n8n-nodes-base.wait", "typeVersion": 1.1, "position": [1120, 300], "id": "w3"},
+    {
+      "parameters": {
+        "fromEmail": "notarasioannis@hotmail.com",
+        "toEmail": "={{ $('Webhook (signup)').item.json.body.email }}",
+        "subject": "Why your confidence collapses under pressure",
+        "emailType": "html",
+        "message": "<p>Confidence isn't a feeling — it's a skill. Built through deliberate reps, not positive thinking.</p><p><strong>Unlocking Resilient Confidence</strong> is the system I use with pro athletes.</p><p><a href='https://www.amazon.com/dp/B0F87V8WRX'>Get it on Amazon ($9.99)</a></p><p>— Giannis</p>",
+        "options": {}
+      },
+      "name": "Email 3 Day4",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1340, 300],
+      "id": "email-3"
+    },
+    {"parameters": {"amount": 3, "unit": "days"}, "name": "Wait 3d", "type": "n8n-nodes-base.wait", "typeVersion": 1.1, "position": [1560, 300], "id": "w4"},
+    {
+      "parameters": {
+        "fromEmail": "notarasioannis@hotmail.com",
+        "toEmail": "={{ $('Webhook (signup)').item.json.body.email }}",
+        "subject": "The mental block no one talks about",
+        "emailType": "html",
+        "message": "<p>Mental blocks are unprocessed fear in your nervous system.</p><p><strong>Overcoming Mental Blocks</strong> gives you the framework to dismantle yours.</p><p><a href='https://www.amazon.com/dp/B0F87QX82W'>Get it on Amazon ($9.99)</a></p><p>— Giannis</p>",
+        "options": {}
+      },
+      "name": "Email 4 Day7",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1780, 300],
+      "id": "email-4"
+    },
+    {"parameters": {"amount": 2, "unit": "days"}, "name": "Wait 2d again", "type": "n8n-nodes-base.wait", "typeVersion": 1.1, "position": [2000, 300], "id": "w5"},
+    {
+      "parameters": {
+        "fromEmail": "notarasioannis@hotmail.com",
+        "toEmail": "={{ $('Webhook (signup)').item.json.body.email }}",
+        "subject": "For the parents and coaches reading this",
+        "emailType": "html",
+        "message": "<p>If you're raising or coaching a young athlete — this is for you.</p><p><strong>Nurturing Self-Worth</strong>: build kids' genuine self-esteem that holds under pressure.</p><p><a href='https://www.amazon.com/dp/B0F845R96L'>Get it on Amazon ($9.99)</a></p><p>— Giannis</p>",
+        "options": {}
+      },
+      "name": "Email 5 Day9",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [2220, 300],
+      "id": "email-5"
+    },
+    {"parameters": {"amount": 3, "unit": "days"}, "name": "Wait 3d more", "type": "n8n-nodes-base.wait", "typeVersion": 1.1, "position": [2440, 300], "id": "w6"},
+    {
+      "parameters": {
+        "fromEmail": "notarasioannis@hotmail.com",
+        "toEmail": "={{ $('Webhook (signup)').item.json.body.email }}",
+        "subject": "The physiology of peak performance",
+        "emailType": "html",
+        "message": "<p>Champions train mind AND body as one system.</p><p><strong>Physiological Peak Performance Blueprint</strong> connects sleep, nutrition, recovery to mental sharpness.</p><p><a href='https://www.amazon.com/dp/B0F87P1H5Y'>Get it on Amazon ($14.99)</a></p><p>— Giannis</p>",
+        "options": {}
+      },
+      "name": "Email 6 Day12",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [2660, 300],
+      "id": "email-6"
+    },
+    {"parameters": {"amount": 2, "unit": "days"}, "name": "Wait final 2d", "type": "n8n-nodes-base.wait", "typeVersion": 1.1, "position": [2880, 300], "id": "w7"},
+    {
+      "parameters": {
+        "fromEmail": "notarasioannis@hotmail.com",
+        "toEmail": "={{ $('Webhook (signup)').item.json.body.email }}",
+        "subject": "Everything I've built for you",
+        "emailType": "html",
+        "message": "<p>Two weeks ago you got a free chapter. Here's everything:</p><ul><li><a href='https://www.amazon.com/dp/B0GKF5TGMQ'>The Competition Protocol ($9.99)</a></li><li><a href='https://www.amazon.com/dp/B0F87QX82W'>Overcoming Mental Blocks ($9.99)</a></li><li><a href='https://www.amazon.com/dp/B0F87V8WRX'>Resilient Confidence ($9.99)</a></li><li><a href='https://www.amazon.com/dp/B0F8CT8Z7M'>Confidence Workbook ($12.99)</a></li><li><a href='https://www.amazon.com/dp/B0F85N8SBQ'>ADHD Athlete's Edge ($14.99)</a></li><li><a href='https://www.amazon.com/dp/B0F87P1H5Y'>Physiological Blueprint ($14.99)</a></li><li><a href='https://www.amazon.com/dp/B0F845R96L'>Nurturing Self-Worth ($9.99)</a></li><li><a href='https://www.amazon.com/dp/B0FBRXBBPK'>Unbreakable for kids ($6.99)</a></li></ul><p><strong>Or go all-in:</strong> The Mental Performance Protocol — 8-week course at <a href='https://thementalsport.com/course'>thementalsport.com/course</a></p><p>Reply and tell me which you picked. I read every reply.</p><p>— Giannis</p>",
+        "options": {}
+      },
+      "name": "Email 7 Day14",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [3100, 300],
+      "id": "email-7"
+    }
+  ],
+  "connections": {
+    "Webhook (signup)": {"main": [[{"node": "Email 1 Welcome", "type": "main", "index": 0}]]},
+    "Email 1 Welcome": {"main": [[{"node": "Wait 2d", "type": "main", "index": 0}]]},
+    "Wait 2d": {"main": [[{"node": "Email 2 Day2", "type": "main", "index": 0}]]},
+    "Email 2 Day2": {"main": [[{"node": "Wait 2d more", "type": "main", "index": 0}]]},
+    "Wait 2d more": {"main": [[{"node": "Email 3 Day4", "type": "main", "index": 0}]]},
+    "Email 3 Day4": {"main": [[{"node": "Wait 3d", "type": "main", "index": 0}]]},
+    "Wait 3d": {"main": [[{"node": "Email 4 Day7", "type": "main", "index": 0}]]},
+    "Email 4 Day7": {"main": [[{"node": "Wait 2d again", "type": "main", "index": 0}]]},
+    "Wait 2d again": {"main": [[{"node": "Email 5 Day9", "type": "main", "index": 0}]]},
+    "Email 5 Day9": {"main": [[{"node": "Wait 3d more", "type": "main", "index": 0}]]},
+    "Wait 3d more": {"main": [[{"node": "Email 6 Day12", "type": "main", "index": 0}]]},
+    "Email 6 Day12": {"main": [[{"node": "Wait final 2d", "type": "main", "index": 0}]]},
+    "Wait final 2d": {"main": [[{"node": "Email 7 Day14", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"}
+}
