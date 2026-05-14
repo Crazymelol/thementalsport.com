@@ -168,8 +168,12 @@ export default function AuthorHome() {
             </section>
 
             <footer className="bg-zinc-950 text-zinc-500 py-16 text-center text-sm border-t border-zinc-900">
-                <div className="mb-6 flex justify-center gap-6 font-bold uppercase tracking-widest text-xs">
+                <div className="mb-6 flex flex-wrap justify-center gap-6 font-bold uppercase tracking-widest text-xs">
+                    <Link href="/books" className="hover:text-white transition-colors">Books</Link>
+                    <Link href="/course" className="hover:text-white transition-colors">Course</Link>
+                    <Link href="/blog" className="hover:text-white transition-colors">Articles</Link>
                     <NewsletterWrapper className="hover:text-white transition-colors">Newsletter</NewsletterWrapper>
+                    <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                     <Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link>
                 </div>
                 &copy; 2026 Giannis Notaras. Build The Mindset.
