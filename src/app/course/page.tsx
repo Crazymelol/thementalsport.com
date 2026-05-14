@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     },
 };
 
-const GUMROAD_URL = 'https://giannisnotaras.gumroad.com/l/mental-performance-protocol';
+const GUMROAD_URL = 'https://notarasio0.gumroad.com/l/qvikid';
 
 const modules = [
     { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
