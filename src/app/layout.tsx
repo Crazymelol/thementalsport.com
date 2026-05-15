@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Script from "next/script";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import StickyBar from "@/components/StickyBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,6 +89,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <ExitIntentPopup />
+        <StickyBar />
       </body>
     </html>
   );

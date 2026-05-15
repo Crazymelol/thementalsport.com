@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Star, ArrowRight, ShoppingCart, CheckCircle2, Quote } from 'lucide-react';
 import Image from 'next/image';
+import NewsletterInline from '@/components/NewsletterInline';
 
 /* 
  * This is a Server Component. 
@@ -223,6 +224,11 @@ export default async function BookPage({ params }: PageProps) {
                         ))}
                     </div>
                 </div>
+            </section>
+
+            {/* EMAIL OPT-IN */}
+            <section className="py-16 container mx-auto px-6 max-w-3xl">
+                <NewsletterInline />
             </section>
 
             {/* STICKY BOTTOM BAR (Mobile) */}

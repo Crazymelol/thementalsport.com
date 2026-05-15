@@ -3,6 +3,7 @@ import { books } from '@/data/books';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+import NewsletterInline from '@/components/NewsletterInline';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -57,6 +58,10 @@ export default function BooksPage() {
                         </Link>
                     ))}
                 </div>
+            </section>
+
+            <section className="pb-24 container mx-auto px-6 max-w-3xl">
+                <NewsletterInline />
             </section>
         </main>
     );
