@@ -133,9 +133,11 @@ export default async function BookPage({ params }: PageProps) {
                             <a href={AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="btn-amazon justify-center">
                                 <ShoppingCart className="w-5 h-5" /> Buy on Amazon <span className="opacity-75 mx-1">|</span> {book.price}
                             </a>
-                            <button className="px-8 py-4 border-2 border-zinc-200 text-zinc-900 font-black uppercase tracking-widest hover:border-zinc-900 transition-colors flex items-center justify-center gap-2 rounded-none">
-                                Read a Sample <ArrowRight className="w-4 h-4" />
-                            </button>
+                            {book.gumroadUrl && (
+                                <a href={book.gumroadUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-zinc-900 text-white font-black uppercase tracking-widest hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2">
+                                    <ShoppingCart className="w-5 h-5" /> PDF — $17
+                                </a>
+                            )}
                         </div>
                     </div>
 

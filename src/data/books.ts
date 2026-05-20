@@ -1,6 +1,7 @@
 export interface Book {
     id: string; // URL slug
     asin: string;
+    gumroadUrl?: string;
     title: string;
     subtitle: string;
     description: string;
@@ -23,6 +24,7 @@ export const books: Book[] = [
     {
         id: "the-competition-protocol",
         asin: "B0GKF5TGMQ",
+        gumroadUrl: "https://notarasio.gumroad.com/l/yfkgwv",
         title: "The Competition Protocol",
         subtitle: "A Step-by-Step Guide to Mastering Your Mindset, Crushing Anxiety, and dominating Your Sport",
         description: "Master the art of preparation. This book is a manual for the 7 days leading up to your event, teaching you how to build rituals and standard procedures that automate excellence and eliminate anxiety.",
@@ -50,6 +52,7 @@ export const books: Book[] = [
     {
         id: "mental-blocks",
         asin: "B0F87QX82W",
+        gumroadUrl: "https://notarasio.gumroad.com/l/albwf",
         title: "Overcoming Mental Blocks",
         subtitle: "A Guide to Peak Performance",
         description: "Your roadmap to silencing inner critics, mastering your mindset, and unlocking the unstoppable version of YOU.",
@@ -87,6 +90,7 @@ export const books: Book[] = [
     {
         id: "unbreakable",
         asin: "B0FBRXBBPK",
+        gumroadUrl: "https://notarasio.gumroad.com/l/lazrca",
         title: "Unbreakable",
         subtitle: "Leo and Maya's Mental Toughness Adventure",
         description: "Climb Mental Toughness Mountain with Leo and Maya! A powerful and playful journey that teaches children ages 6–9 how to stay strong on the inside—even when life gets tough.",
@@ -116,6 +120,7 @@ export const books: Book[] = [
     {
         id: "confidence-building",
         asin: "B0F8CT8Z7M",
+        gumroadUrl: "https://notarasio.gumroad.com/l/bknbwi",
         title: "Confidence-Building Workbook",
         subtitle: "Overcome Self-Doubt and Cultivate Unshakable Self-Assurance",
         description: "This hands-on, step-by-step guide helps you dismantle limiting beliefs, conquer fear, and build resilient confidence. Packed with actionable exercises, reflective prompts, and science-backed strategies.",
@@ -145,6 +150,7 @@ export const books: Book[] = [
     {
         id: "resilient-confidence",
         asin: "B0F87V8WRX",
+        gumroadUrl: "https://notarasio.gumroad.com/l/jzzsp",
         title: "Unlocking Resilient Confidence",
         subtitle: "The Key to Consistent High Performance",
         description: "A definitive guide to building an unshakable mindset that thrives under pressure, transforms adversity into advantage, and fuels excellence in sports, business, and life.",
@@ -174,6 +180,7 @@ export const books: Book[] = [
     {
         id: "nurturing-self-worth",
         asin: "B0F845R96L",
+        gumroadUrl: "https://notarasio.gumroad.com/l/zkkptv",
         title: "Nurturing Self-Worth",
         subtitle: "The Complete Parent's Guide to Building Healthy Self-Esteem in Children",
         description: "A comprehensive guide for parents and educators to raise children who believe in themselves, handle setbacks with strength, and thrive socially and academically.",
@@ -203,6 +210,7 @@ export const books: Book[] = [
     {
         id: "physiological-performance",
         asin: "B0F87P1H5Y",
+        gumroadUrl: "https://notarasio.gumroad.com/l/ryzhc",
         title: "Physiological Peak Performance Blueprint",
         subtitle: "Unlock Your Body's Full Potential: The Science-Driven Guide to Optimizing Physical Performance",
         description: "Dives deep into the science of human physiology, offering a roadmap to harness your body's innate systems for unparalleled strength, endurance, and efficiency.",
@@ -232,6 +240,7 @@ export const books: Book[] = [
     {
         id: "adhd-athletes-edge",
         asin: "B0F85N8SBQ",
+        gumroadUrl: "https://notarasio.gumroad.com/l/boced",
         title: "The ADHD Athlete's Edge",
         subtitle: "Turn Your Distraction Into Domination with Daily Routines Designed to Channel Hyperactivity into Peak Performance",
         description: "A practical and motivating guide for athletes with ADHD to unlock their full potential by learning how to train with their brain rather than fighting it.",
