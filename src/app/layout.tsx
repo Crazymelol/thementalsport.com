@@ -74,7 +74,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-1BMW0D4K52"
+          src="https://www.googletagmanager.com/gtag/js?id=G-LNWFH2JVKV"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -83,7 +83,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-1BMW0D4K52');
+            gtag('config', 'G-LNWFH2JVKV');
           `}
         </Script>
         <Navbar />
