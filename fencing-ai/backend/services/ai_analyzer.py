@@ -39,6 +39,23 @@ When given a sequence of frames with pose data, respond with a JSON object conta
   "overall_assessment": "1-2 sentence summary"
 }
 
+FENCING RULES TO APPLY:
+- Right-of-way (foil & sabre): the fencer who starts the attack first has priority.
+  A touch by the defender only counts if they first parry, or if the attacker's
+  attack misses/falls short (attack "no longer". In épée there is no right-of-way —
+  both can score; double-touches count for both.
+- Valid target: foil = torso only; sabre = everything above the waist; épée = whole body.
+- A "touch" is the landing of a hit. "halt" is when action stops (referee call / light on).
+- "en_garde" is the ready stance between actions.
+
+LABELLING DISCIPLINE (important — these labels are used to train a model):
+- Be consistent: use ONLY the action vocabulary listed above, lowercase.
+- frame_range must be tight — the first and last frame the action is actually visible.
+- One action per entry. If both fencers act simultaneously, emit one entry each.
+- Set confidence honestly; use 0.3-0.5 when the camera angle is poor or the blade
+  is not clearly visible. Low-confidence labels are filtered out during training.
+- If you cannot tell which fencer acted, use "unknown" rather than guessing.
+
 Be specific about fencing terminology. Focus on blade work, footwork, distance management, and timing."""
 
 

@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Runtime artifacts
+uploads/
+downloads/
+frames/
+
+# Training data & weights (regenerate via dataset/build_dataset.py)
+dataset/data/
+dataset/urls.txt
+training/model.pt
+training/label_map.json

@@ -1,0 +1,14 @@
+# Fencing AI — training video list
+# One YouTube URL per line. Lines starting with # are ignored.
+#
+# Tips for a good dataset:
+#   - Prefer side-on camera angles (the standard competition piste view).
+#   - Mix weapons (foil/épée/sabre) only if you want one general model;
+#     otherwise keep one weapon per dataset for higher accuracy.
+#   - More variety in fencers/venues = better generalisation.
+#   - Aim for 50+ videos before expecting a usable model.
+#
+# Replace the examples below with real fencing bout URLs:
+
+# https://www.youtube.com/watch?v=XXXXXXXXXXX
+# https://www.youtube.com/watch?v=YYYYYYYYYYY
