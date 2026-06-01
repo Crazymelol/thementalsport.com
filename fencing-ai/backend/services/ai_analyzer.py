@@ -201,6 +201,22 @@ def _build_anthropic_messages(frame_paths, pose_data, frame_indices) -> list[dic
 # ---------------------------------------------------------------------------
 
 _resolved_model: str | None = None
+_ranked_models: list[str] = []   # all free vision candidates, best first
+_model_idx: int = 0              # which one we're currently using
+
+
+def _advance_model() -> str | None:
+    """
+    Move to the next candidate free model (called when the current one is
+    persistently rate-limited). Returns the new model id, or None if exhausted.
+    """
+    global _model_idx, _resolved_model
+    if _model_idx + 1 < len(_ranked_models):
+        _model_idx += 1
+        _resolved_model = _ranked_models[_model_idx]
+        print(f"[ai_analyzer] switching to next free model: {_resolved_model}")
+        return _resolved_model
+    return None
 
 
 async def _resolve_model() -> str:
@@ -255,8 +271,11 @@ async def _resolve_model() -> str:
                                 "/r1", "-r1", "deepseek-r", "qwq", "marco-o")
                     return any(p in low for p in patterns)
 
+                global _ranked_models, _model_idx
                 preferred = [m for m in free_vision if not _is_reasoner(m)]
                 ranked = preferred + [m for m in free_vision if m not in preferred]
+                _ranked_models = ranked
+                _model_idx = 0
                 _resolved_model = ranked[0]
                 print(f"[ai_analyzer] auto-selected free vision model: {_resolved_model}")
                 print(f"[ai_analyzer] available free vision models: {ranked[:10]}")
@@ -315,17 +334,21 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
             except Exception as e:
                 err = str(e)
                 is_rate_limit = "429" in err or "rate" in err.lower() or "rate_limit" in err.lower()
-                if is_rate_limit and attempt < 2:
-                    wait = 10 * (attempt + 1)  # 10s, 20s
-                    print(f"[ai_analyzer] frame {idx} rate-limited, retrying in {wait}s…")
-                    await asyncio.sleep(wait)
-                else:
-                    print(f"[ai_analyzer] frame {idx} failed: {e}")
-                    # If the whole model is rate-limited, reset so next job re-resolves.
-                    if is_rate_limit:
-                        global _resolved_model
-                        _resolved_model = None
+                if is_rate_limit:
+                    # First try a short backoff on the same model; if it's still
+                    # jammed, rotate to the next free model and retry on that.
+                    if attempt == 0:
+                        print(f"[ai_analyzer] frame {idx} rate-limited on {model}, waiting 8s…")
+                        await asyncio.sleep(8)
+                        continue
+                    nxt = _advance_model()
+                    if nxt:
+                        model = nxt
+                        continue
+                    print(f"[ai_analyzer] frame {idx}: all free models rate-limited, skipping")
                     break
+                print(f"[ai_analyzer] frame {idx} failed: {e}")
+                break
         if response is None:
             continue
 
