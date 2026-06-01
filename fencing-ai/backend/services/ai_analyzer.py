@@ -24,7 +24,7 @@ PROVIDER = os.environ.get("ANALYZER_PROVIDER", "anthropic").lower()
 
 _DEFAULT_MODELS = {
     "anthropic":  "claude-haiku-4-5-20251001",
-    "openrouter": "meta-llama/llama-3.2-11b-vision-instruct:free",
+    "openrouter": "qwen/qwen-2-vl-7b-instruct:free",
     "nvidia":     "meta/llama-3.2-11b-vision-instruct",
 }
 
