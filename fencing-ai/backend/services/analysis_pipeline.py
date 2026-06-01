@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Any
 
 from .pose_estimator import PoseEstimator
-from .ai_analyzer import analyze_frames_batch
+from .ai_analyzer import analyze_frames_batch, MAX_AI_FRAMES
 
 # How many frames to send to Claude per batch (stay under token limit)
 BATCH_SIZE = 6
@@ -32,7 +32,15 @@ class AnalysisPipeline:
         all_scoring_events = []
         overall_assessments = []
 
-        batches = list(_chunk(list(enumerate(frame_paths)), BATCH_SIZE))
+        # For single-image (free) providers, evenly sample down to MAX_AI_FRAMES
+        # so we don't fire hundreds of requests and hit rate limits.
+        ai_frames = list(enumerate(frame_paths))
+        if MAX_AI_FRAMES and total > MAX_AI_FRAMES:
+            stride = total / MAX_AI_FRAMES
+            picked = sorted({int(k * stride) for k in range(MAX_AI_FRAMES)})
+            ai_frames = [(i, frame_paths[i]) for i in picked]
+
+        batches = list(_chunk(ai_frames, BATCH_SIZE))
         for batch_idx, batch in enumerate(batches):
             indices = [i for i, _ in batch]
             paths = [str(p) for _, p in batch]

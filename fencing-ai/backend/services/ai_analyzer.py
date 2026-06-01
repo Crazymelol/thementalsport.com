@@ -36,6 +36,12 @@ _SINGLE_IMAGE_PROVIDERS = {"openrouter", "nvidia"}
 _MAX_IMAGE_EDGE = 768   # px — downscale longest side to keep payload small
 _JPEG_QUALITY = 70
 
+# Single-image providers make ONE request per frame, so a long video would fire
+# hundreds of requests and hit free-tier rate limits. Cap how many frames we
+# actually send to the AI (evenly sampled across the video). Pose stats are
+# still computed on every frame. 0 = no cap (Anthropic sends full batches).
+MAX_AI_FRAMES = 0 if PROVIDER == "anthropic" else 48
+
 ANALYZER_MODEL = os.environ.get("ANALYZER_MODEL", _DEFAULT_MODELS.get(PROVIDER, "claude-haiku-4-5-20251001"))
 
 # ---------------------------------------------------------------------------
@@ -64,6 +70,10 @@ def _get_client():
                 _openai_client = openai.AsyncOpenAI(
                     base_url="https://openrouter.ai/api/v1",
                     api_key=os.environ.get("OPENROUTER_API_KEY", ""),
+                    default_headers={
+                        "HTTP-Referer": "https://github.com/crazymelol/thementalsport.com",
+                        "X-Title": "Fencing AI Analyzer",
+                    },
                 )
             else:  # nvidia
                 _openai_client = openai.AsyncOpenAI(
