@@ -3,7 +3,12 @@ from pathlib import Path
 from typing import Any
 
 from .pose_estimator import PoseEstimator
-from .ai_analyzer import analyze_frames_batch, MAX_AI_FRAMES
+from .ai_analyzer import analyze_frames_batch, MAX_AI_FRAMES, PROVIDER
+
+# Touch/right-of-way judgments need to see motion ACROSS frames. The single-image
+# free providers analyze each frame in isolation, so their scoring is unreliable;
+# only the multi-frame Anthropic path produces a trustworthy tally.
+SCORE_RELIABLE = PROVIDER == "anthropic"
 
 # How many frames to send to Claude per batch (stay under token limit)
 BATCH_SIZE = 6
@@ -70,6 +75,7 @@ class AnalysisPipeline:
             "technique_notes": all_technique_notes,
             "scoring_events": all_scoring_events,
             "score": score,
+            "score_reliable": SCORE_RELIABLE,
             "performance_stats": performance_stats,
             "overall_assessment": " ".join(overall_assessments) or "Analysis complete.",
         }

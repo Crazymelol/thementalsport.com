@@ -241,13 +241,26 @@ async def _resolve_model() -> str:
                     free_vision.append(mid)
 
             if free_vision:
-                _resolved_model = free_vision[0]
+                # "reasoning"/"omni" models spend their token budget on internal
+                # thinking and often return empty content before emitting the JSON
+                # we need — they make poor structured-output labellers. Rank plain
+                # vision-language models first, fall back to the rest only if none.
+                def _is_reasoner(mid: str) -> bool:
+                    low = mid.lower()
+                    return "reasoning" in low or "thinking" in low or "-omni" in low
+
+                preferred = [m for m in free_vision if not _is_reasoner(m)]
+                ranked = preferred + [m for m in free_vision if m not in preferred]
+                _resolved_model = ranked[0]
                 print(f"[ai_analyzer] auto-selected free vision model: {_resolved_model}")
-                print(f"[ai_analyzer] available free vision models: {free_vision[:10]}")
+                print(f"[ai_analyzer] available free vision models: {ranked[:10]}")
                 return _resolved_model
             print("[ai_analyzer] no free vision models found on OpenRouter right now.")
         except Exception as e:
+            # Don't cache on failure (e.g. transient network blip) — leave
+            # _resolved_model unset so the next batch can retry auto-resolution.
             print(f"[ai_analyzer] model auto-resolve failed: {e}")
+            return ANALYZER_MODEL
 
     _resolved_model = ANALYZER_MODEL
     return _resolved_model
@@ -285,7 +298,9 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
         try:
             response = await client.chat.completions.create(
                 model=model,
-                max_tokens=1024,
+                # Headroom so reasoning-capable models can finish thinking AND
+                # still emit the JSON payload (1024 was often exhausted first).
+                max_tokens=3000,
                 messages=messages,
             )
         except Exception as e:

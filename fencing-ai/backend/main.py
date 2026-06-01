@@ -35,7 +35,10 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
     allow_origin_regex=_cors_regex,
-    allow_credentials=True,
+    # The API is stateless (keys live server-side, no cookies/sessions), so we
+    # don't need credentialed CORS. Keeping this False avoids granting any
+    # *.vercel.app origin credentialed access via the wildcard regex.
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -72,11 +75,16 @@ async def analyze_upload(
         raise HTTPException(400, "File must be a video")
 
     job_id = str(uuid.uuid4())
-    video_path = UPLOAD_DIR / f"{job_id}_{file.filename}"
+    # Strip any directory components from the client-supplied filename so a
+    # crafted name like "../../etc/x" can't escape UPLOAD_DIR (path traversal).
+    safe_name = Path(file.filename or "video").name
+    video_path = UPLOAD_DIR / f"{job_id}_{safe_name}"
 
+    # Stream to disk in chunks instead of file.read() — a multi-GB / multi-hour
+    # video read whole into memory at once would OOM the backend.
     async with aiofiles.open(video_path, "wb") as f:
-        content = await file.read()
-        await f.write(content)
+        while chunk := await file.read(1 << 20):  # 1 MiB at a time
+            await f.write(chunk)
 
     job_store.create(job_id, {"filename": file.filename, "source": "upload"})
     background_tasks.add_task(run_pipeline, job_id, str(video_path))

@@ -63,12 +63,20 @@ async def get_video(video_id: str):
     if not entry:
         raise HTTPException(404, "Video not found")
 
-    label_file = DATA_DIR / entry["labels_file"]
-    data = json.loads(label_file.read_text())
+    labels_file = entry.get("labels_file")
+    if not labels_file:
+        raise HTTPException(500, f"Manifest entry for {video_id} is missing 'labels_file'")
+    label_file = DATA_DIR / labels_file
+    try:
+        data = json.loads(label_file.read_text())
+    except FileNotFoundError:
+        raise HTTPException(404, f"Label file for {video_id} not found on disk")
+    except json.JSONDecodeError as e:
+        raise HTTPException(500, f"Label file for {video_id} is corrupted: {e}")
 
     # Frames are 1-indexed on disk (frame_0001.jpg); label indices are 0-based.
     frame_urls = [
-        f"/frames/{video_id}/frame_{i + 1:04d}.jpg" for i in range(entry["frames"])
+        f"/frames/{video_id}/frame_{i + 1:04d}.jpg" for i in range(entry.get("frames", 0))
     ]
 
     return {
@@ -89,8 +97,15 @@ async def save_labels(video_id: str, req: SaveLabelsRequest):
     if not entry:
         raise HTTPException(404, "Video not found")
 
-    label_file = DATA_DIR / entry["labels_file"]
-    existing = json.loads(label_file.read_text())
+    labels_file = entry.get("labels_file")
+    if not labels_file:
+        raise HTTPException(500, f"Manifest entry for {video_id} is missing 'labels_file'")
+    label_file = DATA_DIR / labels_file
+    try:
+        existing = json.loads(label_file.read_text())
+    except (FileNotFoundError, json.JSONDecodeError):
+        # First correction for this video, or the file was lost/corrupt — start fresh.
+        existing = {}
     existing["labels"] = [l.model_dump() for l in req.labels]
     existing["reviewed"] = req.reviewed
     label_file.write_text(json.dumps(existing, indent=2))
