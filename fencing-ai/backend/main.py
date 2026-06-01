@@ -5,12 +5,14 @@ from pathlib import Path
 from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import aiofiles
 
 from services.video_processor import VideoProcessor
 from services.analysis_pipeline import AnalysisPipeline
 from services.job_store import JobStore
+from dataset_routes import router as dataset_router
 
 app = FastAPI(title="Fencing AI Analyzer", version="1.0.0")
 
@@ -24,10 +26,16 @@ app.add_middleware(
 
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
+FRAMES_DIR = Path("frames")
+FRAMES_DIR.mkdir(exist_ok=True)
 
 job_store = JobStore()
 video_processor = VideoProcessor()
 pipeline = AnalysisPipeline()
+
+# Dataset correction UI: routes + static serving of extracted frames.
+app.include_router(dataset_router)
+app.mount("/frames", StaticFiles(directory="frames"), name="frames")
 
 
 class YouTubeRequest(BaseModel):

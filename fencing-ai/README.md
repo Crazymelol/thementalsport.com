@@ -88,6 +88,10 @@ cd backend
 cp dataset/urls.example.txt dataset/urls.txt
 # Edit dataset/urls.txt — paste fencing-bout YouTube URLs (one per line).
 ```
+**Best source: the official FIE channel** — https://www.youtube.com/@FIEvideo —
+thousands of full bouts, all shot from the standard side-on piste camera, which
+is exactly the consistent angle pose estimation needs. Open the bout videos you
+want and paste their URLs into `dataset/urls.txt`.
 
 ### Step 2 — Build the dataset (Claude auto-labels every clip)
 ```bash
@@ -99,7 +103,17 @@ estimation, and asks Claude to label the actions. Results are saved to
 `dataset/data/manifest.json`. Re-running skips videos already processed, so you
 can grow the dataset incrementally. *Costs Anthropic API credits per video.*
 
-### Step 3 — Train the student model
+### Step 3 — Correct the labels (this is what beats the teacher)
+Claude's labels have errors. Fix a slice of them in the browser:
+1. Start the backend (`uvicorn main:app --reload`) and frontend (`npm run dev`).
+2. Go to **http://localhost:3000/dataset** — every video shows its review status.
+3. Open a video to scrub frame-by-frame, fix/add/delete labels (action, frame
+   range, which fencer), and **Save & mark reviewed**.
+
+Corrected labels overwrite the auto-generated `.labels.json` files, so the next
+training run learns from human-verified data.
+
+### Step 4 — Train the student model
 ```bash
 python -m training.train_action_classifier --epochs 30
 ```
@@ -109,9 +123,9 @@ windows instantly and locally.
 
 ### Important honesty note
 A student trained purely on Claude's labels **inherits Claude's mistakes** — it
-imitates the teacher, it doesn't surpass it. To push past that ceiling, build a
-small correction UI (or hand-edit the `.labels.json` files) to fix a slice of
-labels, then retrain. Aim for **50+ videos** before expecting usable accuracy.
+imitates the teacher, it doesn't surpass it. The correction UI (Step 3) is how
+you break that ceiling: human-verified labels let the model exceed Claude.
+Aim for **50+ videos** before expecting usable accuracy.
 
 > **Legal note:** downloading YouTube videos may conflict with YouTube's Terms
 > of Service, and competition footage is usually copyrighted. This is fine for

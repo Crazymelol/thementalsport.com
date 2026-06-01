@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { UploadCloud, PlayCircle, Swords } from "lucide-react";
+import Link from "next/link";
+import { UploadCloud, PlayCircle, Swords, Database } from "lucide-react";
 import axios from "axios";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -155,6 +156,14 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      {/* Dataset / training link */}
+      <Link
+        href="/dataset"
+        className="mt-8 text-sm text-gray-400 hover:text-white inline-flex items-center gap-2"
+      >
+        <Database className="w-4 h-4" /> Review training dataset →
+      </Link>
     </main>
   );
 }

@@ -1,14 +1,25 @@
 # Fencing AI — training video list
 # One YouTube URL per line. Lines starting with # are ignored.
 #
-# Tips for a good dataset:
-#   - Prefer side-on camera angles (the standard competition piste view).
-#   - Mix weapons (foil/épée/sabre) only if you want one general model;
-#     otherwise keep one weapon per dataset for higher accuracy.
-#   - More variety in fencers/venues = better generalisation.
-#   - Aim for 50+ videos before expecting a usable model.
+# RECOMMENDED SOURCE: the official FIE (International Fencing Federation)
+# YouTube channel — https://www.youtube.com/@FIEvideo
+# It has thousands of full World Cup / Grand Prix / World Championship bouts,
+# all shot from the standard side-on piste camera. That consistent angle is
+# exactly what MediaPipe pose estimation and the action classifier want.
 #
-# Replace the examples below with real fencing bout URLs:
+# How to fill this file from the FIE channel:
+#   1. Open https://www.youtube.com/@FIEvideo/videos
+#   2. Open the individual bout videos you want (e.g. "Final" / "Semi-final").
+#   3. Copy each video URL and paste it on its own line below.
+#
+# Tips for a good dataset:
+#   - Prefer side-on camera angles (FIE footage is ideal).
+#   - Keep one weapon per dataset (foil OR épée OR sabre) for higher accuracy,
+#     since right-of-way and target areas differ between them.
+#   - More variety in fencers/venues = better generalisation.
+#   - Aim for 50+ bouts before expecting a usable model.
+#
+# Paste real FIE bout URLs below (remove the leading # to activate a line):
 
 # https://www.youtube.com/watch?v=XXXXXXXXXXX
 # https://www.youtube.com/watch?v=YYYYYYYYYYY
