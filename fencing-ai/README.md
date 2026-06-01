@@ -71,6 +71,33 @@ Open http://localhost:3000
 |---|---|
 | `NEXT_PUBLIC_API_URL` | `http://localhost:8000` |
 
+## Quick test — analyse one video from the command line
+
+The fastest way to verify everything works on real footage, without starting the
+web server or frontend:
+
+```bash
+cd backend
+cp .env.example .env          # add ANTHROPIC_API_KEY=sk-ant-...
+pip install -r requirements.txt
+
+python run_analysis.py "https://www.youtube.com/watch?v=<a-real-FIE-bout>"
+# or a local file:
+python run_analysis.py /path/to/bout.mp4
+```
+
+It downloads/reads the video, extracts frames, runs pose estimation + Claude
+analysis, and prints a full report (score, actions, technique notes, stats).
+A `preflight` step checks your API key and ffmpeg up front and fails with a clear
+message if either is missing.
+
+> **Note on networks:** this needs outbound access to the video host (YouTube).
+> Some sandboxed/CI environments block that — run it where YouTube is reachable
+> (e.g. your own machine). The Claude API call only needs `api.anthropic.com`.
+
+> **Note on your API key:** keep it in `backend/.env` (which is git-ignored).
+> Don't paste it into chats, commits, or screenshots.
+
 ## Training a custom model (knowledge distillation)
 
 The live app uses Claude vision in a zero-shot way — accurate but slow and
