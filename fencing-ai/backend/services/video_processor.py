@@ -5,6 +5,25 @@ import yt_dlp
 import ffmpeg
 
 
+def _ffmpeg_exe() -> str:
+    """Return the ffmpeg binary path. Prefer system ffmpeg; fall back to imageio_ffmpeg bundle."""
+    import shutil
+    sys_ffmpeg = shutil.which("ffmpeg")
+    if sys_ffmpeg:
+        return sys_ffmpeg
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except ImportError:
+        pass
+    raise RuntimeError(
+        "ffmpeg not found on PATH and imageio-ffmpeg is not installed.\n"
+        "Install one of:\n"
+        "  pip install imageio-ffmpeg   (easiest, no system package needed)\n"
+        "  brew install ffmpeg / apt install ffmpeg"
+    )
+
+
 FRAMES_DIR = Path("frames")
 DOWNLOADS_DIR = Path("downloads")
 FRAMES_DIR.mkdir(exist_ok=True)
@@ -33,7 +52,11 @@ class VideoProcessor:
                 qscale=2,
             )
             .overwrite_output()
-            .run(capture_stdout=True, capture_stderr=True)
+            .run(
+                cmd=_ffmpeg_exe(),
+                capture_stdout=True,
+                capture_stderr=True,
+            )
         )
 
     async def download_youtube(self, url: str, job_id: str) -> str:
