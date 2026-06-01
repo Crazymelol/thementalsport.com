@@ -348,7 +348,9 @@ def _summarize_pose(pose: dict) -> str:
     return " | ".join(parts) if parts else "Pose detected"
 
 
-def _parse_json_response(text: str) -> dict:
+def _parse_json_response(text: str | None) -> dict:
+    if not text:
+        return {"actions": [], "technique_notes": [], "scoring_events": [], "overall_assessment": ""}
     text = text.strip()
     if text.startswith("```"):
         lines = text.split("\n")
