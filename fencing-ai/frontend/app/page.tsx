@@ -157,10 +157,18 @@ export default function Home() {
         ))}
       </div>
 
+      {/* Live judging */}
+      <Link
+        href="/live"
+        className="mt-8 px-6 py-3 bg-red-700 hover:bg-red-600 rounded-xl font-semibold inline-flex items-center gap-2 text-white"
+      >
+        <Swords className="w-5 h-5" /> Live Sabre Judge (camera)
+      </Link>
+
       {/* Dataset / training link */}
       <Link
         href="/dataset"
-        className="mt-8 text-sm text-gray-400 hover:text-white inline-flex items-center gap-2"
+        className="mt-3 text-sm text-gray-400 hover:text-white inline-flex items-center gap-2"
       >
         <Database className="w-4 h-4" /> Review training dataset →
       </Link>
