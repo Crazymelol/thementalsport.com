@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { ArrowLeft, Swords } from "lucide-react";
-import { judgeFrame, resetROW, type JudgingResult, type Action } from "@/lib/sabre-detector";
+import { judgeFrame, resetROW, type JudgingResult, type Action, type ModelActions } from "@/lib/sabre-detector";
+import { SabreModel, PoseBuffer } from "@/lib/model-inference";
 
 // MediaPipe CDN — model is cached by the browser after first load (offline-capable after that)
 const WASM_URL = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm";
@@ -38,12 +39,20 @@ export default function LivePage() {
   const lastResult  = useRef<JudgingResult | null>(null);
   const touchCooldown = useRef(0);
 
+  // Trained-model inference (optional — falls back to heuristics if no model deployed)
+  const modelRef    = useRef<SabreModel | null>(null);
+  const leftBufRef  = useRef<PoseBuffer | null>(null);
+  const rightBufRef = useRef<PoseBuffer | null>(null);
+  const predLeft    = useRef<{ action: Action; confidence: number } | undefined>(undefined);
+  const predRight   = useRef<{ action: Action; confidence: number } | undefined>(undefined);
+
   const [phase, setPhase]   = useState<Phase>("idle");
   const [error, setError]   = useState("");
   const [score, setScore]   = useState({ left: 0, right: 0 });
   const [result, setResult] = useState<JudgingResult | null>(null);
   const [lastTouch, setLastTouch] = useState("");
   const [flashSide, setFlashSide] = useState<"left" | "right" | null>(null);
+  const [engine, setEngine] = useState<"heuristics" | "model">("heuristics");
 
   // ── Load MediaPipe ──────────────────────────────────────────────────────────
   const loadModel = useCallback(async () => {
@@ -63,6 +72,19 @@ export default function LivePage() {
         minTrackingConfidence: 0.5,
       });
       landmarkerRef.current = landmarker;
+
+      // Try to load the trained sabre model. If none is deployed, stay on heuristics.
+      const model = new SabreModel();
+      const loaded = await model.load();
+      if (loaded && model.config) {
+        modelRef.current = model;
+        leftBufRef.current  = new PoseBuffer(model.config.window, model.config.feature_dim);
+        rightBufRef.current = new PoseBuffer(model.config.window, model.config.feature_dim);
+        setEngine("model");
+      } else {
+        setEngine("heuristics");
+      }
+
       setPhase("ready");
     } catch (e: any) {
       setError("Failed to load pose model: " + e.message);
@@ -116,7 +138,20 @@ export default function LivePage() {
       drawSkeleton(ctx, sorted[0], "#60a5fa", canvas.width, canvas.height);
       drawSkeleton(ctx, sorted[1], "#f87171", canvas.width, canvas.height);
 
-      const jr = judgeFrame(sorted[0], sorted[1], now);
+      // Trained-model inference (fire-and-forget; predictions applied next frame)
+      const model = modelRef.current;
+      if (model?.isLoaded && leftBufRef.current && rightBufRef.current) {
+        leftBufRef.current.push(sorted[0]);
+        rightBufRef.current.push(sorted[1]);
+        model.predict(leftBufRef.current).then(p => { if (p) predLeft.current  = p as any; });
+        model.predict(rightBufRef.current).then(p => { if (p) predRight.current = p as any; });
+      }
+
+      const modelActions: ModelActions | undefined = model?.isLoaded
+        ? { left: predLeft.current, right: predRight.current }
+        : undefined;
+
+      const jr = judgeFrame(sorted[0], sorted[1], now, modelActions);
       lastResult.current = jr;
       setResult(jr);
 
@@ -141,6 +176,8 @@ export default function LivePage() {
 
   const startBout = useCallback(async () => {
     resetROW();
+    leftBufRef.current?.reset();
+    rightBufRef.current?.reset();
     setScore({ left: 0, right: 0 });
     setLastTouch("");
     await startCamera();
@@ -187,7 +224,21 @@ export default function LivePage() {
         </Link>
         <Swords className="w-5 h-5 text-blue-400" />
         <span className="font-bold text-white tracking-wide">SABRE LIVE JUDGE</span>
-        <span className="ml-auto text-xs text-gray-500 uppercase tracking-widest">
+        <span
+          className={`ml-auto text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wider ${
+            engine === "model"
+              ? "bg-green-900/60 text-green-300 border border-green-700"
+              : "bg-gray-800 text-gray-400 border border-gray-700"
+          }`}
+          title={
+            engine === "model"
+              ? "Using the trained AI model for action detection"
+              : "No trained model deployed — using rule-based heuristics"
+          }
+        >
+          {engine === "model" ? "AI MODEL" : "HEURISTICS"}
+        </span>
+        <span className="text-xs text-gray-500 uppercase tracking-widest">
           {phase === "running" ? "● LIVE" : phase.toUpperCase()}
         </span>
       </div>

@@ -46,19 +46,20 @@ pose_estimator = PoseEstimator()
 
 
 def pose_to_vector(pose: dict | None) -> np.ndarray:
-    """Flatten one frame's keypoints into a fixed-length vector (zeros if no pose)."""
+    """
+    Return one frame's canonical NORMALISED feature vector (zeros if no pose).
+
+    Uses the precomputed `vector` from PoseEstimator (33 landmarks x [x,y,z,vis],
+    normalised 0-1). This MUST stay identical to what the browser produces in
+    lib/model-inference.ts so the trained model sees the same features at
+    training and live-inference time.
+    """
     vec = np.zeros(FEATURES_PER_FRAME, dtype=np.float32)
     if not pose:
         return vec
-    kp = pose.get("keypoints", {})
-    for i, name in enumerate(KEYPOINT_NAMES):
-        j = kp.get(name)
-        if j:
-            base = i * 4
-            vec[base] = j["x"]
-            vec[base + 1] = j["y"]
-            vec[base + 2] = j["z"]
-            vec[base + 3] = j["visibility"]
+    v = pose.get("vector")
+    if v:
+        vec[: len(v)] = np.asarray(v, dtype=np.float32)
     return vec
 
 

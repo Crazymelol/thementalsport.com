@@ -44,6 +44,7 @@ class PoseEstimator:
             return None
 
         keypoints = {}
+        vector = []  # canonical model feature vector: 33 landmarks x [x, y, z, visibility], NORMALISED 0-1
         for i, lm in enumerate(results.pose_landmarks.landmark):
             keypoints[KEYPOINT_NAMES[i]] = {
                 "x": round(lm.x * w, 1),
@@ -51,9 +52,12 @@ class PoseEstimator:
                 "z": round(lm.z, 3),
                 "visibility": round(lm.visibility, 3),
             }
+            # Normalised (0-1) coords — MediaPipe's raw output, identical between
+            # Python and the browser JS API. This is what the trained model consumes.
+            vector.extend([lm.x, lm.y, lm.z, lm.visibility])
 
         metrics = self._compute_fencing_metrics(keypoints, w, h)
-        return {"keypoints": keypoints, "metrics": metrics}
+        return {"keypoints": keypoints, "metrics": metrics, "vector": vector}
 
     def _compute_fencing_metrics(self, kp: dict, w: int, h: int) -> dict:
         def pt(name):

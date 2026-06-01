@@ -180,13 +180,41 @@ export function resetROW() {
   prevState.right = null;
 }
 
+/**
+ * Optional action predictions from the trained model. When provided, they
+ * override the heuristic action classification (perception), while the
+ * right-of-way and touch/scoring logic (rulebook) below stays the same.
+ */
+export interface ModelActions {
+  left?:  { action: Action; confidence: number };
+  right?: { action: Action; confidence: number };
+}
+
+// Actions the model is allowed to override (perception). Touch stays geometric.
+const PERCEPTION_ACTIONS: Action[] = [
+  "attack", "lunge", "fleche", "parry", "riposte", "advance", "retreat", "en_garde",
+];
+
+function applyModel(state: FencerState, pred?: { action: Action; confidence: number }) {
+  if (!pred || pred.confidence < 0.5) return;
+  if (state.action === "touch") return; // never override a detected touch
+  if (!PERCEPTION_ACTIONS.includes(pred.action)) return;
+  state.action = pred.action;
+  state.hasROW = pred.action === "attack" || pred.action === "lunge" || pred.action === "fleche";
+}
+
 export function judgeFrame(
   leftLandmarks: XY[],
   rightLandmarks: XY[],
-  now = performance.now()
+  now = performance.now(),
+  modelActions?: ModelActions
 ): JudgingResult {
   const left  = analyseFencer("left",  leftLandmarks,  rightLandmarks, now);
   const right = analyseFencer("right", rightLandmarks, leftLandmarks,  now);
+
+  // Trained-model perception overrides heuristics when confident.
+  applyModel(left,  modelActions?.left);
+  applyModel(right, modelActions?.right);
 
   // ROW: first to initiate attack claims it; a parry transfers it.
   if (left.action === "parry")  { rowHolder = "right"; rowTimestamp = now; }

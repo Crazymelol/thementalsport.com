@@ -17,3 +17,5 @@ python-dotenv==1.0.1
 httpx==0.27.2
 # Training (Step 3 — pose-sequence action classifier)
 torch==2.4.1
+# Export trained model to ONNX for in-browser inference
+onnx==1.16.2
