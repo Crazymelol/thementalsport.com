@@ -75,7 +75,7 @@ Open http://localhost:3000
 
 | Provider | Sign-up | Default free model | Label quality |
 |---|---|---|---|
-| **NVIDIA NIM** | [build.nvidia.com](https://build.nvidia.com) | `nvidia/llama-3.2-11b-vision-instruct` | Good |
+| **NVIDIA NIM** | [build.nvidia.com](https://build.nvidia.com) | `meta/llama-3.2-11b-vision-instruct` | Good |
 | **OpenRouter** | [openrouter.ai](https://openrouter.ai) | `meta-llama/llama-3.2-11b-vision-instruct:free` | Good |
 | **Anthropic Haiku** | [console.anthropic.com](https://console.anthropic.com) | `claude-haiku-4-5-20251001` | Best (~$25/50 videos) |
 

@@ -25,8 +25,16 @@ PROVIDER = os.environ.get("ANALYZER_PROVIDER", "anthropic").lower()
 _DEFAULT_MODELS = {
     "anthropic":  "claude-haiku-4-5-20251001",
     "openrouter": "meta-llama/llama-3.2-11b-vision-instruct:free",
-    "nvidia":     "nvidia/llama-3.2-11b-vision-instruct",
+    "nvidia":     "meta/llama-3.2-11b-vision-instruct",
 }
+
+# Free vision models (NVIDIA NIM / many OpenRouter free tiers) accept only ONE
+# image per request and cap the inline base64 size. Anthropic handles the full
+# batch in a single call. So for the OpenAI-compatible providers we send one
+# downscaled frame per request and merge the results.
+_SINGLE_IMAGE_PROVIDERS = {"openrouter", "nvidia"}
+_MAX_IMAGE_EDGE = 768   # px — downscale longest side to keep payload small
+_JPEG_QUALITY = 70
 
 ANALYZER_MODEL = os.environ.get("ANALYZER_MODEL", _DEFAULT_MODELS.get(PROVIDER, "claude-haiku-4-5-20251001"))
 
@@ -182,41 +190,53 @@ def _build_anthropic_messages(frame_paths, pose_data, frame_indices) -> list[dic
 # ---------------------------------------------------------------------------
 
 async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
+    """
+    Free vision models take one image per request. Send each frame individually
+    (downscaled) and merge the JSON results back into one batch result.
+    """
     client = _get_client()
-    messages = _build_openai_messages(frame_paths, pose_data, frame_indices)
 
-    response = await client.chat.completions.create(
-        model=ANALYZER_MODEL,
-        max_tokens=2000,
-        messages=messages,
-    )
-
-    return _parse_json_response(response.choices[0].message.content)
-
-
-def _build_openai_messages(frame_paths, pose_data, frame_indices) -> list[dict]:
-    user_content = []
+    merged = {"actions": [], "technique_notes": [], "scoring_events": [], "overall_assessment": ""}
+    assessments = []
 
     for path, pose, idx in zip(frame_paths, pose_data, frame_indices):
-        img_b64 = _encode_image(path)
+        img_b64 = _encode_image_small(path)
         if img_b64 is None:
             continue
-        user_content.append({
-            "type": "image_url",
-            "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"},
-        })
+
         pose_summary = _summarize_pose(pose) if pose else "No pose detected"
-        user_content.append({"type": "text", "text": f"Frame {idx}: {pose_summary}"})
+        messages = [
+            {"role": "system", "content": FENCING_SYSTEM_PROMPT},
+            {"role": "user", "content": [
+                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}},
+                {"type": "text", "text": (
+                    f"This is frame {idx} of a fencing bout. Pose: {pose_summary}. "
+                    "Identify the action, any technique observations, and any scoring touch "
+                    "in THIS frame. Use frame_range [%d, %d]. Return valid JSON only." % (idx, idx)
+                )},
+            ]},
+        ]
 
-    user_content.append({
-        "type": "text",
-        "text": "Analyze these fencing frames. Identify all actions, technique observations, and any scoring touches. Return valid JSON only.",
-    })
+        try:
+            response = await client.chat.completions.create(
+                model=ANALYZER_MODEL,
+                max_tokens=1024,
+                messages=messages,
+            )
+        except Exception as e:
+            # One bad frame shouldn't kill the whole batch — skip and continue.
+            print(f"[ai_analyzer] frame {idx} failed: {e}")
+            continue
 
-    return [
-        {"role": "system", "content": FENCING_SYSTEM_PROMPT},
-        {"role": "user", "content": user_content},
-    ]
+        result = _parse_json_response(response.choices[0].message.content)
+        merged["actions"].extend(result.get("actions", []))
+        merged["technique_notes"].extend(result.get("technique_notes", []))
+        merged["scoring_events"].extend(result.get("scoring_events", []))
+        if result.get("overall_assessment"):
+            assessments.append(result["overall_assessment"])
+
+    merged["overall_assessment"] = " ".join(assessments)[:500]
+    return merged
 
 
 # ---------------------------------------------------------------------------
@@ -229,6 +249,22 @@ def _encode_image(path: str) -> str | None:
             return base64.standard_b64encode(f.read()).decode("utf-8")
     except Exception:
         return None
+
+
+def _encode_image_small(path: str) -> str | None:
+    """Downscale + re-encode a frame so it fits free vision models' size limit."""
+    try:
+        from PIL import Image
+        import io
+
+        img = Image.open(path).convert("RGB")
+        img.thumbnail((_MAX_IMAGE_EDGE, _MAX_IMAGE_EDGE))
+        buf = io.BytesIO()
+        img.save(buf, format="JPEG", quality=_JPEG_QUALITY)
+        return base64.standard_b64encode(buf.getvalue()).decode("utf-8")
+    except Exception:
+        # Fall back to the raw file if Pillow/resize fails.
+        return _encode_image(path)
 
 
 def _summarize_pose(pose: dict) -> str:
