@@ -4,8 +4,7 @@ import { useEffect, useState, use } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { ArrowLeft, Clock, Target, TrendingUp, MessageSquare } from "lucide-react";
-
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+import { getApiUrl } from "@/lib/api-url";
 
 type Job = {
   job_id: string;
@@ -95,7 +94,7 @@ export default function AnalysisPage({ params }: { params: Promise<{ id: string 
 
     async function poll() {
       try {
-        const { data } = await axios.get<Job>(`${API}/api/jobs/${id}`);
+        const { data } = await axios.get<Job>(`${getApiUrl()}/api/jobs/${id}`);
         setJob(data);
         if (data.status === "complete" || data.status === "error") {
           clearInterval(interval);

@@ -4,8 +4,7 @@ import { useEffect, useState, use, useCallback } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { ArrowLeft, Plus, Trash2, Save, ChevronLeft, ChevronRight } from "lucide-react";
-
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+import { getApiUrl } from "@/lib/api-url";
 
 // Must match the training vocabulary in training/dataset_loader.py (minus "none").
 const ACTIONS = [
@@ -43,7 +42,7 @@ export default function CorrectionPage({ params }: { params: Promise<{ id: strin
 
   useEffect(() => {
     axios
-      .get<VideoData>(`${API}/api/dataset/videos/${id}`)
+      .get<VideoData>(`${getApiUrl()}/api/dataset/videos/${id}`)
       .then(({ data }) => {
         setData(data);
         setLabels(data.labels.map(normalize));
@@ -88,7 +87,7 @@ export default function CorrectionPage({ params }: { params: Promise<{ id: strin
     setSavedMsg("");
     setError("");
     try {
-      await axios.put(`${API}/api/dataset/videos/${id}/labels`, {
+      await axios.put(`${getApiUrl()}/api/dataset/videos/${id}/labels`, {
         labels: labels,
         reviewed: true,
       });

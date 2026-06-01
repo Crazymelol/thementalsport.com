@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { ArrowLeft, CheckCircle2, Circle, Database } from "lucide-react";
-
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+import { getApiUrl } from "@/lib/api-url";
 
 type Video = {
   id: string;
@@ -21,7 +20,7 @@ export default function DatasetPage() {
 
   useEffect(() => {
     axios
-      .get<Video[]>(`${API}/api/dataset/videos`)
+      .get<Video[]>(`${getApiUrl()}/api/dataset/videos`)
       .then(({ data }) => setVideos(data))
       .catch((e) =>
         setError(e.response?.data?.detail || "Could not load dataset. Is the backend running and the dataset built?")

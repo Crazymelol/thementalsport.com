@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { UploadCloud, PlayCircle, Swords, Database } from "lucide-react";
 import axios from "axios";
-
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+import { getApiUrl } from "@/lib/api-url";
 
 export default function Home() {
   const router = useRouter();
@@ -22,7 +21,7 @@ export default function Home() {
     try {
       const form = new FormData();
       form.append("file", file);
-      const { data } = await axios.post(`${API}/api/analyze/upload`, form);
+      const { data } = await axios.post(`${getApiUrl()}/api/analyze/upload`, form);
       router.push(`/analysis/${data.job_id}`);
     } catch (e: any) {
       setError(e.response?.data?.detail || "Upload failed. Is the backend running?");
@@ -35,7 +34,7 @@ export default function Home() {
     setLoading(true);
     setError("");
     try {
-      const { data } = await axios.post(`${API}/api/analyze/youtube`, { url: youtubeUrl });
+      const { data } = await axios.post(`${getApiUrl()}/api/analyze/youtube`, { url: youtubeUrl });
       router.push(`/analysis/${data.job_id}`);
     } catch (e: any) {
       setError(e.response?.data?.detail || "YouTube analysis failed.");
