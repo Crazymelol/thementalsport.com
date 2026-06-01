@@ -27,15 +27,21 @@ _DEFAULT_MODELS = {
     "anthropic":  "claude-haiku-4-5-20251001",
     "openrouter": "qwen/qwen-2-vl-7b-instruct:free",
     "nvidia":     "meta/llama-3.2-11b-vision-instruct",
+    "ollama":     "llama3.2-vision",
 }
 
 # Free vision models (NVIDIA NIM / many OpenRouter free tiers) accept only ONE
 # image per request and cap the inline base64 size. Anthropic handles the full
 # batch in a single call. So for the OpenAI-compatible providers we send one
-# downscaled frame per request and merge the results.
-_SINGLE_IMAGE_PROVIDERS = {"openrouter", "nvidia"}
+# downscaled frame per request and merge the results. Ollama (local) is also
+# OpenAI-compatible and one-image-at-a-time.
+_SINGLE_IMAGE_PROVIDERS = {"openrouter", "nvidia", "ollama"}
 _MAX_IMAGE_EDGE = 768   # px — downscale longest side to keep payload small
 _JPEG_QUALITY = 70
+
+# Ollama runs locally with no rate limits or per-request cost, so we don't need
+# to pace requests for it (only the metered cloud free tiers).
+_RATE_LIMITED_PROVIDERS = {"openrouter", "nvidia"}
 
 # Single-image providers make ONE request per frame, so a long video would fire
 # hundreds of requests and hit free-tier rate limits. Cap how many frames we
@@ -67,7 +73,7 @@ def _get_client():
             )
         return _anthropic_client
 
-    if PROVIDER in ("openrouter", "nvidia"):
+    if PROVIDER in ("openrouter", "nvidia", "ollama"):
         if _openai_client is None:
             import openai
             if PROVIDER == "openrouter":
@@ -79,14 +85,21 @@ def _get_client():
                         "X-Title": "Fencing AI Analyzer",
                     },
                 )
-            else:  # nvidia
+            elif PROVIDER == "nvidia":
                 _openai_client = openai.AsyncOpenAI(
                     base_url="https://integrate.api.nvidia.com/v1",
                     api_key=os.environ.get("NVIDIA_API_KEY", ""),
                 )
+            else:  # ollama — local server, OpenAI-compatible endpoint
+                base = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
+                _openai_client = openai.AsyncOpenAI(
+                    base_url=f"{base.rstrip('/')}/v1",
+                    api_key="ollama",  # required by the SDK but ignored by Ollama
+                    timeout=600,        # local vision inference can be slow
+                )
         return _openai_client
 
-    raise ValueError(f"Unknown ANALYZER_PROVIDER: {PROVIDER!r}. Use anthropic | openrouter | nvidia")
+    raise ValueError(f"Unknown ANALYZER_PROVIDER: {PROVIDER!r}. Use anthropic | openrouter | nvidia | ollama")
 
 
 # ---------------------------------------------------------------------------
@@ -363,7 +376,9 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
             assessments.append(result["overall_assessment"])
 
         # Pace requests to stay within free-tier rate limits (~6 req/min).
-        await asyncio.sleep(2)
+        # Local Ollama has no limits, so don't slow it down.
+        if PROVIDER in _RATE_LIMITED_PROVIDERS:
+            await asyncio.sleep(2)
 
     merged["overall_assessment"] = " ".join(assessments)[:500]
     return merged
