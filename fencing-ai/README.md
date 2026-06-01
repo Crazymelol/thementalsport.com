@@ -71,6 +71,50 @@ Open http://localhost:3000
 |---|---|
 | `NEXT_PUBLIC_API_URL` | `http://localhost:8000` |
 
+## Deployment (Vercel + Railway)
+
+### Step 1 — Deploy the backend to Railway
+
+1. Go to [railway.app](https://railway.app) → **New project → Deploy from GitHub repo**
+2. Select this repository and set the **root directory** to `fencing-ai/backend`
+3. Railway detects `Dockerfile` automatically and builds it
+4. In **Variables**, add:
+   ```
+   ANTHROPIC_API_KEY = sk-ant-...
+   CORS_ORIGINS      = http://localhost:3000   (update after you have the Vercel URL)
+   ```
+5. Once deployed, copy the Railway public URL (e.g. `https://fencing-ai-backend.up.railway.app`)
+
+> **Plan:** Railway's free Hobby tier ($5/month credit) is enough. Choose at least
+> **1 GB RAM** — mediapipe needs it.
+
+### Step 2 — Deploy the frontend to Vercel
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project → Import Git Repository**
+2. Select this repository, set the **root directory** to `fencing-ai/frontend`
+3. In **Environment Variables**, add:
+   ```
+   NEXT_PUBLIC_API_URL = https://your-railway-url.up.railway.app
+   ```
+4. Click **Deploy**. Vercel builds the Next.js app automatically.
+5. Copy the Vercel URL (e.g. `https://fencing-ai.vercel.app`)
+
+### Step 3 — Wire the two together
+
+1. Back in Railway → Variables, update `CORS_ORIGINS` to include the Vercel URL:
+   ```
+   CORS_ORIGINS = https://fencing-ai.vercel.app
+   ```
+   (You can also use `CORS_ORIGIN_REGEX = https://.*\.vercel\.app` to cover all preview URLs.)
+2. Redeploy the Railway service (or it auto-deploys on the variable change).
+
+That's it — open the Vercel URL in your browser and analyse a video.
+
+> **Note on storage:** Railway containers have an ephemeral filesystem. Uploaded
+> videos and extracted frames are available during the session but lost on restart.
+> For persistent storage add a Railway Volume or use S3 — fine to ignore for
+> initial testing.
+
 ## Quick test — analyse one video from the command line
 
 The fastest way to verify everything works on real footage, without starting the

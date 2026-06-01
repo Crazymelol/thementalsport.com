@@ -1,0 +1,14 @@
+.env
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+uploads/
+downloads/
+frames/
+dataset/data/
+training/model.pt
+training/label_map.json
+smoke_test.py
+run_analysis.py

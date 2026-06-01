@@ -16,9 +16,19 @@ from dataset_routes import router as dataset_router
 
 app = FastAPI(title="Fencing AI Analyzer", version="1.0.0")
 
+# CORS_ORIGINS: comma-separated exact origins (e.g. "http://localhost:3000,https://myapp.com")
+# CORS_ORIGIN_REGEX: regex for wildcard patterns (default covers all *.vercel.app deployments)
+_cors_origins = [
+    o.strip()
+    for o in os.environ.get("CORS_ORIGINS", "http://localhost:3000").split(",")
+    if o.strip()
+]
+_cors_regex = os.environ.get("CORS_ORIGIN_REGEX", r"https://.*\.vercel\.app")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://*.vercel.app"],
+    allow_origins=_cors_origins,
+    allow_origin_regex=_cors_regex,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
