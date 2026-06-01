@@ -41,7 +41,10 @@ _JPEG_QUALITY = 70
 # hundreds of requests and hit free-tier rate limits. Cap how many frames we
 # actually send to the AI (evenly sampled across the video). Pose stats are
 # still computed on every frame. 0 = no cap (Anthropic sends full batches).
-MAX_AI_FRAMES = 0 if PROVIDER == "anthropic" else 48
+# Fewer frames = fewer requests against the free-tier rate limit, and a faster
+# job. 24 evenly-sampled frames is plenty of coverage for a short clip.
+# Override with MAX_AI_FRAMES env var if you have higher limits (paid key).
+MAX_AI_FRAMES = 0 if PROVIDER == "anthropic" else int(os.environ.get("MAX_AI_FRAMES", "24"))
 
 ANALYZER_MODEL = os.environ.get("ANALYZER_MODEL", _DEFAULT_MODELS.get(PROVIDER, "claude-haiku-4-5-20251001"))
 
