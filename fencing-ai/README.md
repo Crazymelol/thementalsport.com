@@ -62,9 +62,28 @@ Open http://localhost:3000
 ## Environment Variables
 
 ### Backend (`backend/.env`)
-| Variable | Description |
-|---|---|
-| `ANTHROPIC_API_KEY` | Your Anthropic API key |
+
+| Variable | Default | Description |
+|---|---|---|
+| `ANALYZER_PROVIDER` | `anthropic` | `anthropic` \| `openrouter` \| `nvidia` |
+| `ANTHROPIC_API_KEY` | — | Required when provider=anthropic |
+| `OPENROUTER_API_KEY` | — | Required when provider=openrouter |
+| `NVIDIA_API_KEY` | — | Required when provider=nvidia |
+| `ANALYZER_MODEL` | *(per provider)* | Override the model (see table below) |
+
+**Free labeling options** — no credit card required:
+
+| Provider | Sign-up | Default free model | Label quality |
+|---|---|---|---|
+| **NVIDIA NIM** | [build.nvidia.com](https://build.nvidia.com) | `nvidia/llama-3.2-11b-vision-instruct` | Good |
+| **OpenRouter** | [openrouter.ai](https://openrouter.ai) | `meta-llama/llama-3.2-11b-vision-instruct:free` | Good |
+| **Anthropic Haiku** | [console.anthropic.com](https://console.anthropic.com) | `claude-haiku-4-5-20251001` | Best (~$25/50 videos) |
+
+Example for fully free setup:
+```bash
+ANALYZER_PROVIDER=nvidia
+NVIDIA_API_KEY=nvapi-...
+```
 
 ### Frontend (`frontend/.env.local`)
 | Variable | Default |
