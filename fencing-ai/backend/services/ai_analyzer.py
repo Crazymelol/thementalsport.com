@@ -212,7 +212,7 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
                 {"type": "text", "text": (
                     f"This is frame {idx} of a fencing bout. Pose: {pose_summary}. "
                     "Identify the action, any technique observations, and any scoring touch "
-                    "in THIS frame. Use frame_range [%d, %d]. Return valid JSON only." % (idx, idx)
+                    f"in THIS frame. Use frame_range [{idx}, {idx}]. Return valid JSON only."
                 )},
             ]},
         ]
