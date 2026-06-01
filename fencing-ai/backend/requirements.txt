@@ -4,7 +4,10 @@ python-multipart==0.0.9
 anthropic==0.34.2
 mediapipe==0.10.14
 opencv-python-headless==4.10.0.84
-yt-dlp==2024.9.27
+# yt-dlp must stay current — YouTube changes break older versions regularly.
+# Floor (>=) rather than pinned so fresh installs pull the latest extractor fixes.
+# If downloads start failing, run:  pip install -U yt-dlp   (or: yt-dlp -U)
+yt-dlp>=2026.3.17
 ffmpeg-python==0.2.0
 imageio-ffmpeg==0.5.1   # bundles a static ffmpeg binary — no system install needed
 numpy==1.26.4
