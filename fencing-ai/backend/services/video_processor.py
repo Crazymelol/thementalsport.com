@@ -1,25 +1,58 @@
 import os
 import asyncio
+import functools
+import subprocess
 from pathlib import Path
 import yt_dlp
 import ffmpeg
 
 
+def _works(exe: str | None) -> bool:
+    """True only if the binary exists AND actually executes (catches present-but-broken installs)."""
+    if not exe:
+        return False
+    try:
+        r = subprocess.run(
+            [exe, "-version"],
+            capture_output=True,
+            timeout=10,
+        )
+        return r.returncode == 0
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+@functools.lru_cache(maxsize=1)
 def _ffmpeg_exe() -> str:
-    """Return the ffmpeg binary path. Prefer system ffmpeg; fall back to imageio_ffmpeg bundle."""
+    """
+    Resolve a *working* ffmpeg binary.
+
+    Prefers a functional system ffmpeg, but test-runs it first — a system binary
+    can exist yet fail to execute (e.g. a half-installed package missing a shared
+    library). Falls back to the static binary bundled with imageio-ffmpeg, which
+    has no external .so dependencies.
+    """
     import shutil
+
+    candidates = []
     sys_ffmpeg = shutil.which("ffmpeg")
     if sys_ffmpeg:
-        return sys_ffmpeg
+        candidates.append(sys_ffmpeg)
     try:
         import imageio_ffmpeg
-        return imageio_ffmpeg.get_ffmpeg_exe()
+        candidates.append(imageio_ffmpeg.get_ffmpeg_exe())
     except ImportError:
         pass
+
+    for exe in candidates:
+        if _works(exe):
+            return exe
+
     raise RuntimeError(
-        "ffmpeg not found on PATH and imageio-ffmpeg is not installed.\n"
+        "No working ffmpeg found.\n"
+        f"  Tried: {candidates or '(none)'}\n"
         "Install one of:\n"
-        "  pip install imageio-ffmpeg   (easiest, no system package needed)\n"
+        "  pip install imageio-ffmpeg   (easiest, self-contained, no system package)\n"
         "  brew install ffmpeg / apt install ffmpeg"
     )
 

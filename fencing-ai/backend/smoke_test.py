@@ -90,13 +90,18 @@ print("\n── 2. System tools ────────────────
 
 def _ffmpeg_bin():
     import subprocess
-    r = subprocess.run(["ffmpeg", "-version"], capture_output=True, text=True)
+    # Use the same resolver the pipeline uses — it skips present-but-broken binaries.
+    from services.video_processor import _ffmpeg_exe
+    exe = _ffmpeg_exe()
+    r = subprocess.run([exe, "-version"], capture_output=True, text=True)
     if r.returncode != 0:
-        raise RuntimeError("ffmpeg returned non-zero")
+        raise RuntimeError(f"resolved ffmpeg returned non-zero: {exe}")
     first_line = r.stdout.splitlines()[0]
-    return first_line.split("version")[1].strip().split()[0] if "version" in first_line else "ok"
+    version = first_line.split("version")[1].strip().split()[0] if "version" in first_line else "ok"
+    source = "system" if exe.startswith(("/usr", "/bin", "/opt")) and "imageio" not in exe else "bundled"
+    return f"{version} ({source})"
 
-check("ffmpeg binary on PATH", _ffmpeg_bin)
+check("working ffmpeg resolved", _ffmpeg_bin)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
