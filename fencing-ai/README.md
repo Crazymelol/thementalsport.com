@@ -73,47 +73,54 @@ Open http://localhost:3000
 
 ## Deployment (Vercel + Railway)
 
-### Step 1 — Deploy the backend to Railway
+GitHub Actions auto-deploy the frontend to Vercel and the backend to Railway
+on every push to `main`. Run the setup script **once** on your local machine to
+link accounts, then pushes handle everything automatically.
 
-1. Go to [railway.app](https://railway.app) → **New project → Deploy from GitHub repo**
-2. Select this repository and set the **root directory** to `fencing-ai/backend`
-3. Railway detects `Dockerfile` automatically and builds it
-4. In **Variables**, add:
-   ```
-   ANTHROPIC_API_KEY = sk-ant-...
-   CORS_ORIGINS      = http://localhost:3000   (update after you have the Vercel URL)
-   ```
-5. Once deployed, copy the Railway public URL (e.g. `https://fencing-ai-backend.up.railway.app`)
+### One-time setup (run locally, ~5 minutes)
 
-> **Plan:** Railway's free Hobby tier ($5/month credit) is enough. Choose at least
-> **1 GB RAM** — mediapipe needs it.
+**Prerequisites:** Node.js, [GitHub CLI](https://cli.github.com), `jq`
 
-### Step 2 — Deploy the frontend to Vercel
+```bash
+# Clone the repo locally first if you haven't
+git clone https://github.com/crazymelol/thementalsport.com
+cd thementalsport.com/fencing-ai
 
-1. Go to [vercel.com](https://vercel.com) → **Add New Project → Import Git Repository**
-2. Select this repository, set the **root directory** to `fencing-ai/frontend`
-3. In **Environment Variables**, add:
-   ```
-   NEXT_PUBLIC_API_URL = https://your-railway-url.up.railway.app
-   ```
-4. Click **Deploy**. Vercel builds the Next.js app automatically.
-5. Copy the Vercel URL (e.g. `https://fencing-ai.vercel.app`)
+chmod +x setup_deploy.sh
+./setup_deploy.sh
+```
 
-### Step 3 — Wire the two together
+The script will:
+1. Install Vercel CLI and link the frontend project (opens browser to log in)
+2. Ask for your Vercel token → [vercel.com/account/tokens](https://vercel.com/account/tokens)
+3. Ask for your Railway token → [railway.app/account/tokens](https://railway.app/account/tokens)
+4. Ask for your Railway service ID (from your Railway project settings)
+5. Set all secrets in GitHub automatically
+6. Set `NEXT_PUBLIC_API_URL` in Vercel pointing at your Railway backend
 
-1. Back in Railway → Variables, update `CORS_ORIGINS` to include the Vercel URL:
-   ```
-   CORS_ORIGINS = https://fencing-ai.vercel.app
-   ```
-   (You can also use `CORS_ORIGIN_REGEX = https://.*\.vercel\.app` to cover all preview URLs.)
-2. Redeploy the Railway service (or it auto-deploys on the variable change).
+After that, push to `main` → both services deploy automatically via GitHub Actions.
 
-That's it — open the Vercel URL in your browser and analyse a video.
+### Railway first-time project creation
 
-> **Note on storage:** Railway containers have an ephemeral filesystem. Uploaded
-> videos and extracted frames are available during the session but lost on restart.
-> For persistent storage add a Railway Volume or use S3 — fine to ignore for
-> initial testing.
+Before running the setup script, create the Railway project:
+1. [railway.app](https://railway.app) → **New Project → Deploy from GitHub repo**
+2. Select this repo, set root directory → **`fencing-ai/backend`**
+3. Railway detects the `Dockerfile` and builds it
+4. In **Variables** add: `ANTHROPIC_API_KEY = sk-ant-...`
+5. Copy the **Service ID** from the service's Settings page (needed by the setup script)
+
+> **RAM:** choose a plan with **≥1 GB RAM** — mediapipe needs it ($5/month Hobby tier).
+
+### What auto-deploys on push
+
+| File changed | Action triggered |
+|---|---|
+| `fencing-ai/frontend/**` | Frontend deploys to Vercel |
+| `fencing-ai/backend/**`  | Backend deploys to Railway |
+
+> **Note on storage:** Railway containers have an ephemeral filesystem — uploaded
+> videos and frames are available during the session but lost on restart.
+> For persistent storage, add a Railway Volume or use S3.
 
 ## Quick test — analyse one video from the command line
 
