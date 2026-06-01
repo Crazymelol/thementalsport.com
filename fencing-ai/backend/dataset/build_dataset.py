@@ -26,6 +26,10 @@ from pathlib import Path
 
 import numpy as np
 
+# Load .env before importing ai_analyzer (which reads provider/keys at import).
+from dotenv import load_dotenv
+load_dotenv()
+
 # Run as a module from the backend/ dir so these imports resolve.
 from services.video_processor import VideoProcessor
 from services.pose_estimator import PoseEstimator, KEYPOINT_NAMES

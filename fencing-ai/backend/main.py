@@ -2,6 +2,12 @@ import os
 import uuid
 import asyncio
 from pathlib import Path
+
+# Load .env before importing anything that reads environment variables at import time
+# (e.g. services.ai_analyzer reads ANALYZER_PROVIDER / API keys on import).
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
