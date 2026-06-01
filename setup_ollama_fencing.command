@@ -15,7 +15,11 @@
 set -e
 cd "$(dirname "$0")"
 
-MODEL="${OLLAMA_MODEL:-llama3.2-vision}"
+# Default to a SMALL vision model that fits comfortably in 8 GB RAM.
+# qwen2.5vl:3b (~3.2 GB) is a strong small VLM; moondream (~1.8 GB) is the
+# lightweight fallback if the first pull fails or RAM is very tight.
+MODEL="${OLLAMA_MODEL:-qwen2.5vl:3b}"
+FALLBACK_MODEL="moondream"
 BACKEND_ENV="fencing-ai/backend/.env"
 
 echo "==================================================="
@@ -58,8 +62,12 @@ echo "[3/5] Ollama is running."
 
 # --- 4. Download the vision model ------------------------------------------
 echo "[4/5] Downloading vision model '$MODEL' (a few GB — one-time)..."
-ollama pull "$MODEL"
-echo "[4/5] Model ready."
+if ! ollama pull "$MODEL"; then
+  echo "      '$MODEL' unavailable — falling back to '$FALLBACK_MODEL'..."
+  MODEL="$FALLBACK_MODEL"
+  ollama pull "$MODEL"
+fi
+echo "[4/5] Model ready: $MODEL"
 
 # --- 5. Point the fencing backend at Ollama --------------------------------
 echo "[5/5] Configuring backend ($BACKEND_ENV)..."
