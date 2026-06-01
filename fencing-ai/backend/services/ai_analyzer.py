@@ -12,6 +12,7 @@ Environment variables:
   ANALYZER_MODEL      overrides the default model for the chosen provider
 """
 
+import asyncio
 import os
 import base64
 import json
@@ -247,7 +248,12 @@ async def _resolve_model() -> str:
                 # vision-language models first, fall back to the rest only if none.
                 def _is_reasoner(mid: str) -> bool:
                     low = mid.lower()
-                    return "reasoning" in low or "thinking" in low or "-omni" in low
+                    # Exclude known reasoning/thinking architectures by name pattern.
+                    # "kimi-k2" and "kimi-k1.5" are Moonshot reasoning models;
+                    # "o1", "o3", "r1" suffixes/prefixes are also common patterns.
+                    patterns = ("reasoning", "thinking", "-omni", "kimi-k", "/o1", "/o3",
+                                "/r1", "-r1", "deepseek-r", "qwq", "marco-o")
+                    return any(p in low for p in patterns)
 
                 preferred = [m for m in free_vision if not _is_reasoner(m)]
                 ranked = preferred + [m for m in free_vision if m not in preferred]
@@ -295,17 +301,32 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
             ]},
         ]
 
-        try:
-            response = await client.chat.completions.create(
-                model=model,
-                # Headroom so reasoning-capable models can finish thinking AND
-                # still emit the JSON payload (1024 was often exhausted first).
-                max_tokens=3000,
-                messages=messages,
-            )
-        except Exception as e:
-            # One bad frame shouldn't kill the whole batch — skip and continue.
-            print(f"[ai_analyzer] frame {idx} failed: {e}")
+        response = None
+        for attempt in range(3):
+            try:
+                response = await client.chat.completions.create(
+                    model=model,
+                    # Headroom so reasoning-capable models can finish thinking AND
+                    # still emit the JSON payload (1024 was often exhausted first).
+                    max_tokens=3000,
+                    messages=messages,
+                )
+                break
+            except Exception as e:
+                err = str(e)
+                is_rate_limit = "429" in err or "rate" in err.lower() or "rate_limit" in err.lower()
+                if is_rate_limit and attempt < 2:
+                    wait = 10 * (attempt + 1)  # 10s, 20s
+                    print(f"[ai_analyzer] frame {idx} rate-limited, retrying in {wait}s…")
+                    await asyncio.sleep(wait)
+                else:
+                    print(f"[ai_analyzer] frame {idx} failed: {e}")
+                    # If the whole model is rate-limited, reset so next job re-resolves.
+                    if is_rate_limit:
+                        global _resolved_model
+                        _resolved_model = None
+                    break
+        if response is None:
             continue
 
         result = _parse_json_response(response.choices[0].message.content)
@@ -314,6 +335,9 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
         merged["scoring_events"].extend(result.get("scoring_events", []))
         if result.get("overall_assessment"):
             assessments.append(result["overall_assessment"])
+
+        # Pace requests to stay within free-tier rate limits (~6 req/min).
+        await asyncio.sleep(2)
 
     merged["overall_assessment"] = " ".join(assessments)[:500]
     return merged
