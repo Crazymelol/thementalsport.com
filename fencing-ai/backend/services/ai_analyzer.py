@@ -199,12 +199,67 @@ def _build_anthropic_messages(frame_paths, pose_data, frame_indices) -> list[dic
 # OpenAI-compatible path (OpenRouter / NVIDIA NIM)
 # ---------------------------------------------------------------------------
 
+_resolved_model: str | None = None
+
+
+async def _resolve_model() -> str:
+    """
+    Pick a working model. An explicit ANALYZER_MODEL always wins. Otherwise, for
+    OpenRouter, query the live catalogue and auto-pick a FREE vision model — the
+    free list changes often, so hard-coding a name leads to 404s.
+    """
+    global _resolved_model
+    if _resolved_model:
+        return _resolved_model
+
+    override = os.environ.get("ANALYZER_MODEL")
+    if override:
+        _resolved_model = override
+        return _resolved_model
+
+    if PROVIDER == "openrouter":
+        try:
+            import httpx
+            async with httpx.AsyncClient(timeout=20) as c:
+                r = await c.get(
+                    "https://openrouter.ai/api/v1/models",
+                    headers={"Authorization": f"Bearer {os.environ.get('OPENROUTER_API_KEY', '')}"},
+                )
+                data = r.json().get("data", [])
+
+            free_vision = []
+            for m in data:
+                mid = m.get("id", "")
+                arch = m.get("architecture", {}) or {}
+                mods = arch.get("input_modalities") or arch.get("modality") or []
+                if isinstance(mods, str):
+                    mods = [mods]
+                pricing = m.get("pricing", {}) or {}
+                is_free = str(pricing.get("prompt", "1")) in ("0", "0.0") or mid.endswith(":free")
+                has_vision = any("image" in str(x).lower() for x in mods)
+                if is_free and has_vision:
+                    free_vision.append(mid)
+
+            if free_vision:
+                _resolved_model = free_vision[0]
+                print(f"[ai_analyzer] auto-selected free vision model: {_resolved_model}")
+                print(f"[ai_analyzer] available free vision models: {free_vision[:10]}")
+                return _resolved_model
+            print("[ai_analyzer] no free vision models found on OpenRouter right now.")
+        except Exception as e:
+            print(f"[ai_analyzer] model auto-resolve failed: {e}")
+
+    _resolved_model = ANALYZER_MODEL
+    return _resolved_model
+
+
 async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
     """
     Free vision models take one image per request. Send each frame individually
     (downscaled) and merge the JSON results back into one batch result.
     """
     client = _get_client()
+    model = await _resolve_model()
 
     merged = {"actions": [], "technique_notes": [], "scoring_events": [], "overall_assessment": ""}
     assessments = []
@@ -229,7 +284,7 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
 
         try:
             response = await client.chat.completions.create(
-                model=ANALYZER_MODEL,
+                model=model,
                 max_tokens=1024,
                 messages=messages,
             )
