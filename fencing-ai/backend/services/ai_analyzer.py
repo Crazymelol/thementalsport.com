@@ -7,6 +7,12 @@ import anthropic
 
 client = anthropic.AsyncAnthropic(api_key=os.environ.get("ANTHROPIC_API_KEY", ""))
 
+# Labeling model — defaults to Haiku (cheapest) to keep dataset-building costs low.
+# Override for higher-quality labels:  ANALYZER_MODEL=claude-opus-4-8
+#   Haiku  ~ $25 to label ~50 videos   (good labels, fast)
+#   Opus   ~ $300+                       (best labels)
+ANALYZER_MODEL = os.environ.get("ANALYZER_MODEL", "claude-haiku-4-5-20251001")
+
 FENCING_SYSTEM_PROMPT = """You are an expert fencing coach and analyst with deep knowledge of foil, épée, and sabre.
 You analyze video frames from fencing bouts to detect actions, assess technique, and track scoring.
 
@@ -67,7 +73,7 @@ async def analyze_frames_batch(
     messages = _build_messages(frame_paths, pose_data, frame_indices)
 
     response = await client.messages.create(
-        model="claude-opus-4-8",
+        model=ANALYZER_MODEL,
         max_tokens=2000,
         system=FENCING_SYSTEM_PROMPT,
         messages=messages,

@@ -149,6 +149,23 @@ message if either is missing.
 > **Note on your API key:** keep it in `backend/.env` (which is git-ignored).
 > Don't paste it into chats, commits, or screenshots.
 
+## Train without a PC (Google Colab — free)
+
+No computer? Train the model from any browser (even a tablet) using
+**[`train_in_colab.ipynb`](train_in_colab.ipynb)**:
+
+1. Open [colab.research.google.com](https://colab.research.google.com) → **File → Upload notebook** → pick `train_in_colab.ipynb`
+2. Run the cells in order — paste your Anthropic API key and FIE bout URLs when prompted
+3. The last cell downloads `sabre.onnx` + `sabre.json`
+4. Put those in `fencing-ai/frontend/public/models/` → the live judge upgrades to **AI MODEL**
+
+**Cost:** Colab compute is free. The only cost is Claude labeling, which defaults
+to the cheapest model (Haiku, ~$25 for ~50 videos). For **$0**, skip auto-labeling
+and hand-label in the `/dataset` page instead.
+
+> Labeling model is set by `ANALYZER_MODEL` (default `claude-haiku-4-5-...`).
+> For best-quality labels: `ANALYZER_MODEL=claude-opus-4-8` (~10x the cost).
+
 ## Training a custom model (knowledge distillation)
 
 The live app uses Claude vision in a zero-shot way — accurate but slow and
