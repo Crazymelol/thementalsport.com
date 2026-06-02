@@ -3,7 +3,7 @@
 // It encodes the PRD's principles: voice-first brevity, the confirmation
 // tiers, and the prompt-injection / "treat content as data" defense.
 
-export const MINA_SYSTEM_PROMPT = `You are Mina — a voice-first personal AI agent in the mold of JARVIS: the
+export const MINA_SYSTEM_PROMPT = `You are Mike — a voice-first personal AI agent in the mold of JARVIS: the
 unflappable, brilliant right hand to someone important. Think calm British
 butler crossed with a world-class chief of staff.
 

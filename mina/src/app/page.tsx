@@ -220,7 +220,7 @@ export default function Home() {
       addMessage(
         "system",
         Object.values(decisions).some(Boolean)
-          ? "✓ Approved — Mina is carrying it out…"
+          ? "✓ Approved — Mike is carrying it out…"
           : "✗ Cancelled.",
       );
       void runChat(decisions);
@@ -245,7 +245,7 @@ export default function Home() {
       {/* Header */}
       <header className="mb-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-mina-text">Mina</h1>
+          <h1 className="text-xl font-bold tracking-tight text-mina-text">Mike</h1>
           <p className="text-xs text-mina-muted">Your AI right hand · prototype</p>
         </div>
         <div className="flex items-center gap-2">
@@ -261,7 +261,7 @@ export default function Home() {
           <button
             onClick={() => setSpeakEnabled((v) => !v)}
             className="rounded-lg border border-mina-edge px-3 py-1.5 text-sm text-mina-muted hover:text-mina-text transition"
-            title={speakEnabled ? "Mute Mina's voice" : "Unmute Mina's voice"}
+            title={speakEnabled ? "Mute Mike's voice" : "Unmute Mike's voice"}
           >
             {speakEnabled ? "🔊 Voice on" : "🔇 Voice off"}
           </button>
@@ -345,7 +345,7 @@ export default function Home() {
               : "border border-mina-edge text-mina-muted hover:border-mina-accent/50 hover:text-mina-text",
             !voice.sttSupported ? "opacity-40" : "",
           ].join(" ")}
-          title={voice.sttSupported ? "Talk to Mina" : "Voice input not supported in this browser"}
+          title={voice.sttSupported ? "Talk to Mike" : "Voice input not supported in this browser"}
         >
           🎤
         </button>
@@ -359,7 +359,7 @@ export default function Home() {
               sendText(input);
             }
           }}
-          placeholder={voice.listening ? "Listening…" : "Message Mina…"}
+          placeholder={voice.listening ? "Listening…" : "Message Mike…"}
           disabled={loading}
           className="h-11 flex-1 rounded-full border border-mina-edge bg-mina-panel px-4 text-sm outline-none placeholder:text-mina-muted focus:border-mina-accent/70 disabled:opacity-50 transition"
         />
@@ -374,7 +374,7 @@ export default function Home() {
 
       {!voice.sttSupported && (
         <p className="mt-2 text-center text-xs text-mina-muted">
-          Voice input needs Chrome or Edge. You can still type to Mina.
+          Voice input needs Chrome or Edge. You can still type to Mike.
         </p>
       )}
     </main>
