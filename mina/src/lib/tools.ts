@@ -241,8 +241,11 @@ const BY_NAME = new Map(TOOLS.map((t) => [t.name, t]));
 
 export const getTool = (name: string): ToolDef | undefined => BY_NAME.get(name);
 
-/** Tool definitions in the shape the Anthropic API expects. */
+/** Tool definitions in the shape the OpenAI / Groq chat API expects. */
 export const toolDefsForApi = () =>
-  TOOLS.map(({ name, description, input_schema }) => ({ name, description, input_schema }));
+  TOOLS.map(({ name, description, input_schema }) => ({
+    type: "function" as const,
+    function: { name, description, parameters: input_schema },
+  }));
 
 export const isWrite = (name: string): boolean => getTool(name)?.tier === "write";

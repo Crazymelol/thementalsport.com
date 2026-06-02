@@ -8,7 +8,6 @@ import { useVoice } from "@/hooks/useVoice";
 import type {
   ActionProposal,
   ApiMessage,
-  ContentBlock,
   ServerEvent,
 } from "@/lib/types";
 
@@ -23,14 +22,7 @@ const newId = () =>
     ? crypto.randomUUID()
     : Math.random().toString(36).slice(2);
 
-const textOf = (content: string | ContentBlock[]): string => {
-  if (typeof content === "string") return content;
-  return content
-    .filter((b): b is Extract<ContentBlock, { type: "text" }> => b.type === "text")
-    .map((b) => b.text)
-    .join("")
-    .trim();
-};
+const textOf = (content: string | null): string => (content ?? "").trim();
 
 function loadSession(): { bubbles: Bubble[]; messages: ApiMessage[] } | null {
   try {
@@ -145,8 +137,8 @@ export default function Home() {
               setStreaming(streamingRef.current);
               break;
             case "assistant": {
-              convoRef.current.push({ role: "assistant", content: event.content });
-              const t = textOf(event.content);
+              convoRef.current.push(event.message);
+              const t = event.message.role === "assistant" ? textOf(event.message.content) : "";
               if (t) {
                 lastMinaText = t;
                 addMessage("mina", t);
@@ -158,7 +150,7 @@ export default function Home() {
               break;
             }
             case "tool_result":
-              convoRef.current.push({ role: "user", content: event.content });
+              for (const m of event.messages) convoRef.current.push(m);
               break;
             case "tool_card":
               addBubble({ id: newId(), kind: "tool_card", toolName: event.toolName, data: event.data });
