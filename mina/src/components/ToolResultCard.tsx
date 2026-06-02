@@ -114,6 +114,30 @@ function FilesCard({ data }: { data: FileList }) {
   );
 }
 
+function WebCard({ data }: { data: { url: string; title?: string; text?: string; error?: string } }) {
+  let host = data.url;
+  try {
+    host = new URL(data.url).host;
+  } catch {}
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
+        🌐 Web — {host}
+      </p>
+      {data.error ? (
+        <p className="text-sm text-mina-danger">{data.error}</p>
+      ) : (
+        <div className="rounded-lg bg-black/20 px-3 py-2">
+          {data.title && <p className="text-sm font-medium text-mina-text">{data.title}</p>}
+          {data.text && (
+            <p className="mt-1 max-h-32 overflow-hidden text-xs text-mina-muted">{data.text.slice(0, 400)}…</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ToolResultCard({
   toolName,
   data,
@@ -123,7 +147,9 @@ export default function ToolResultCard({
 }) {
   let inner: JSX.Element;
 
-  if (toolName === "get_calendar_events") {
+  if (toolName === "browse_url") {
+    inner = <WebCard data={data as { url: string; title?: string; text?: string; error?: string }} />;
+  } else if (toolName === "get_calendar_events") {
     inner = <CalendarCard data={data as { date: string; events: CalendarEvent[] }} />;
   } else if (toolName === "search_emails") {
     inner = <EmailCard data={data as { query: string; results: Email[] }} />;

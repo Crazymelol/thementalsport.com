@@ -11,6 +11,7 @@
 
 import type { Tier } from "./types";
 import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
+import { fetchPage } from "./web";
 
 export type ToolDef = {
   name: string;
@@ -269,6 +270,39 @@ export const TOOLS: ToolDef[] = [
         title: "Write file",
         detail: `Path: ${str(input.path)}\n\n${c.length > 400 ? c.slice(0, 400) + "…" : c}`,
       };
+    },
+  },
+
+  // ---- Web ----------------------------------------------------------------
+  {
+    name: "browse_url",
+    description:
+      "Fetch a web page and read its text content. Use this to look something up online, read an article, or check a public page. Read-only — it cannot click, log in, or fill forms.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: {
+        url: { type: "string", description: "The page URL, e.g. 'https://example.com/article'." },
+      },
+      required: ["url"],
+    },
+    run: async (input) => {
+      const url = str(input.url);
+      if (!url) return JSON.stringify({ error: "No URL provided." });
+      try {
+        const page = await fetchPage(url);
+        return JSON.stringify({
+          url: page.url,
+          title: page.title,
+          text: page.text,
+          truncated: page.truncated,
+        });
+      } catch (e) {
+        return JSON.stringify({
+          url,
+          error: `Couldn't read that page: ${e instanceof Error ? e.message : "unknown error"}`,
+        });
+      }
     },
   },
 ];
