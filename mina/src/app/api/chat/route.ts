@@ -66,8 +66,9 @@ export async function POST(req: Request) {
       });
 
       // Conversation in OpenAI message shape, with Mina's system prompt pinned first.
+      const nowLine = `\n\nCurrent date and time: ${new Date().toString()}.`;
       const messages = [
-        { role: "system" as const, content: MINA_SYSTEM_PROMPT },
+        { role: "system" as const, content: MINA_SYSTEM_PROMPT + nowLine },
         ...body.messages,
       ] as OpenAI.Chat.Completions.ChatCompletionMessageParam[];
 
