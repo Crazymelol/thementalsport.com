@@ -18,7 +18,9 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-const MODEL = "llama-3.3-70b-versatile";
+// GPT-OSS speaks the OpenAI tool-calling format natively, which avoids the
+// malformed/glued tool-call names some Llama models emit on Groq.
+const MODEL = "openai/gpt-oss-120b";
 const MAX_TOKENS = 4096;
 const MAX_LOOPS = 6;
 
