@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Keep the mail libraries out of the bundler; they're Node-only and run in
   // the serverless function as-is.
-  serverExternalPackages: ["imapflow", "nodemailer"],
+  serverExternalPackages: ["imapflow", "nodemailer", "googleapis"],
 };
 
 export default nextConfig;
