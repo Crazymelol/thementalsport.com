@@ -98,8 +98,20 @@ export function useVoice() {
       if (!clean) return;
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(clean);
-      u.rate = 1.03;
-      u.pitch = 1.0;
+
+      // Pick a British English voice to match her JARVIS-like character.
+      // Voices load asynchronously, so this may be empty on the very first
+      // call; it fills in on subsequent calls once the list is ready.
+      const voices = window.speechSynthesis.getVoices();
+      const preferred =
+        voices.find((v) => /en-GB/i.test(v.lang) && /(male|daniel|arthur|george|oliver)/i.test(v.name)) ??
+        voices.find((v) => /en-GB/i.test(v.lang)) ??
+        voices.find((v) => /\bUK\b|British/i.test(v.name));
+      if (preferred) u.voice = preferred;
+      u.lang = preferred?.lang ?? "en-GB";
+
+      u.rate = 0.98; // measured, composed — not rushed
+      u.pitch = 0.92; // a touch lower; calm and assured
       u.onstart = () => setSpeaking(true);
       u.onend = () => setSpeaking(false);
       u.onerror = () => setSpeaking(false);

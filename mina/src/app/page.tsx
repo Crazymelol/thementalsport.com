@@ -246,7 +246,7 @@ export default function Home() {
       <header className="mb-4 flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-mina-text">Mina</h1>
-          <p className="text-xs text-mina-muted">Voice-first AI agent · prototype</p>
+          <p className="text-xs text-mina-muted">Your AI right hand · prototype</p>
         </div>
         <div className="flex items-center gap-2">
           {bubbles.length > 0 && (
@@ -281,7 +281,7 @@ export default function Home() {
       >
         {isEmpty && (
           <div className="space-y-3 text-sm text-mina-muted">
-            <p className="font-medium text-mina-text/70">Ask Mina anything. For example:</p>
+            <p className="font-medium text-mina-text/70">At your service. You might ask:</p>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {[
                 { q: "What's on my calendar today?", icon: "📅" },

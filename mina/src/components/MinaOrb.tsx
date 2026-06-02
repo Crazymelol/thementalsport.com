@@ -6,9 +6,9 @@
 export type MinaState = "idle" | "listening" | "thinking" | "speaking";
 
 const LABEL: Record<MinaState, string> = {
-  idle: "Tap the mic or type to talk to Mina",
+  idle: "At your service.",
   listening: "Listening…",
-  thinking: "Thinking…",
+  thinking: "One moment…",
   speaking: "Speaking…",
 };
 
