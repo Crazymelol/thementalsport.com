@@ -1,10 +1,127 @@
-# Mina — Voice-First AI Agent
+# Jarvis OS — A Personal AI Operating System
 ## Product Requirements Document
 
-**Version:** 1.2  
+**Version:** 2.0  
 **Status:** Draft  
 **Author:** Product Team  
 **Date:** 2026-06-02
+
+> **About this version.** v1.x specified *Mina*, a single voice-first assistant.
+> v2.0 reframes that work as the first node of something larger: **Jarvis** — a
+> central orchestrator that connects thinking engines, a team of specialist
+> agents, real-world tools, and the channels you already use to communicate.
+> Mina's persona, voice engine, and safety model all carry forward unchanged;
+> what's new is the **hub-and-spoke architecture** in §0a that lets the system
+> *do real work* across the whole business, not just answer questions.
+> Wherever this document says "Mina," read it as "the agent persona"; "Jarvis"
+> refers to the orchestrator and the system as a whole.
+
+---
+
+## 0a. The Vision — Jarvis as a Central Hub
+
+Jarvis is not a chatbot. It is the **orchestrator at the center of a network** —
+the conductor that routes a request from however you said it, to whichever
+specialist can handle it, using whichever real tools get it done, and reports
+back. It turns a pile of disconnected services into one system you simply *talk
+to*.
+
+```
+        ┌──────────────────────────────────────────────┐
+        │            COMMUNICATION CHANNELS              │   how you reach in
+        │        Slack  ·  iMessage  ·  Voice            │
+        └───────────────────────┬────────────────────────┘
+                                │
+                                ▼
+                  ┌──────────────────────────┐
+                  │          JARVIS           │           the hub
+                  │   Orchestrator / Router   │   holds the big picture,
+                  │   (intent → delegation)   │   routes, sequences, reports
+                  └────────────┬──────────────┘
+              ┌────────────────┼────────────────┐
+              ▼                ▼                ▼
+      ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+      │ CORE ENGINE  │  │  SPECIALIST  │  │   MEMORY &   │
+      │  (the LLMs)  │  │    AGENTS    │  │    AUDIT     │
+      │ Claude,      │  │ each w/ own  │  │ shared state │
+      │ ChatGPT, …   │  │ context +    │  │ + history    │
+      │              │  │ skills +     │  │              │
+      │              │  │ tool lane    │  │              │
+      └──────────────┘  └──────┬───────┘  └──────────────┘
+                                │
+                                ▼
+        ┌──────────────────────────────────────────────┐
+        │                    TOOLS                       │   what gets work done
+        │ Gmail · Calendar · Instagram · Meta Ads ·      │
+        │ Analytics · Stripe · Files · …                 │
+        └────────────────────────────────────────────────┘
+```
+
+### The five layers
+
+1. **Communication channels — how you talk to the system.**
+   Slack, iMessage, and voice are equal front doors. The same request — "how did
+   yesterday's ad spend do?" — works whether typed in Slack, texted, or spoken.
+   Jarvis is channel-agnostic; channels are thin adapters into the hub.
+
+2. **Jarvis — the orchestrator (the hub).**
+   Receives a request, works out *intent*, and decides who should handle it.
+   It may answer directly, hand off to one specialist agent, or sequence several
+   ("pull the analytics, then draft the summary, then post it to Slack"). It
+   holds the big-picture context and is the single place the safety model
+   (§9a, §10) is enforced — every write action still passes the confirmation
+   gate, no matter which agent or channel triggered it.
+
+3. **Core engine — the thinking (LLMs).**
+   The raw reasoning power: Claude (primary), with others (e.g. ChatGPT) usable
+   per task. The engine is swappable; today's prototype runs on a hosted model
+   and can later move toward local/private inference per the v1 privacy goals.
+
+4. **Specialist agents — focused experts, each in its lane.**
+   Rather than one agent that knows everything, Jarvis delegates to narrow
+   specialists, each with **its own context, its own skills, and its own set of
+   tools**. Examples:
+   - **Inbox Agent** — Gmail: triage, draft, summarise threads.
+   - **Calendar Agent** — scheduling, conflict resolution, suggestions.
+   - **Marketing Agent** — Instagram + Meta Ads: performance, pause/boost (write
+     actions gated).
+   - **Analytics Agent** — pulls and explains business metrics.
+   - **Finance Agent** — Stripe: revenue, refunds (always gated).
+   This keeps each agent's instructions tight, its tool list small, and its
+   blast radius contained — which is good for both reliability and safety.
+
+5. **Tools — the hands.**
+   The concrete integrations that touch the outside world: Gmail, Calendar,
+   Instagram, Meta Ads, analytics, Stripe, the local filesystem, and more. Tools
+   are tiered **read** vs **write** exactly as in §10; reads run freely, writes
+   require your explicit approval.
+
+### Why this shape
+
+- **You speak once; the system coordinates.** No tool-switching, no context
+  loss — Jarvis carries the thread across agents and tools.
+- **It does work, not just talk.** The value is in the tool layer actually
+  executing (sending, scheduling, adjusting spend), with Jarvis sequencing it.
+- **Safety scales with it.** One enforcement point (the hub) means the
+  confirmation tiers and anti-injection rules apply uniformly, however the
+  request arrived and whichever agent acts.
+- **It grows by addition.** New capability = a new agent and/or a new tool in a
+  lane. The hub, channels, and safety model don't change.
+
+### Build roadmap (today → full Jarvis OS)
+
+| Phase | What exists | Status |
+|---|---|---|
+| **0 — Mina v1** | Single voice agent, web app, JARVIS persona, safety-gated stub tools, Groq brain, deployed | ✅ Done |
+| **1 — First real tool** | One integration wired end-to-end (e.g. Gmail or Calendar) so a real task completes | ▶ Next |
+| **2 — First real channel** | Talk to Jarvis from Slack or iMessage, not just the web UI | Planned |
+| **3 — Orchestrator** | Jarvis routes intent to ≥2 specialist agents, each with its own context + tools | Planned |
+| **4 — Agent fleet** | Inbox, Calendar, Marketing, Analytics, Finance agents live; multi-step sequencing | Planned |
+| **5 — Hardening** | Local/private inference option, full audit log, spend caps, memory across sessions | Planned |
+
+The detailed component specs below (voice, integrations, safety, memory) remain
+the source of truth for *how each piece behaves*; §0a is the map of how they
+compose into one system.
 
 ---
 
