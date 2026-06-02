@@ -86,7 +86,7 @@ export async function POST(req: Request) {
               if (isWrite(tc.function.name)) {
                 const approved = body.decisions[tc.id] === true;
                 content = approved
-                  ? (tool?.run(input) ?? "Done.")
+                  ? ((await tool?.run(input)) ?? "Done.")
                   : "The user declined this action. Do not retry it; ask what they'd like instead.";
                 if (approved && tool) {
                   try {
@@ -94,7 +94,7 @@ export async function POST(req: Request) {
                   } catch {}
                 }
               } else {
-                content = tool?.run(input) ?? "Unknown tool.";
+                content = (await tool?.run(input)) ?? "Unknown tool.";
                 try {
                   send({ type: "tool_card", toolName: tc.function.name, data: JSON.parse(content) });
                 } catch {}
@@ -182,14 +182,16 @@ export async function POST(req: Request) {
           }
 
           // All read-only: execute now, emit cards, loop.
-          const toolMsgs: ApiMessage[] = toolCalls.map((c) => {
-            const tool = getTool(c.function.name);
-            const content = tool?.run(parseArgs(c.function.arguments)) ?? "Unknown tool.";
-            try {
-              send({ type: "tool_card", toolName: c.function.name, data: JSON.parse(content) });
-            } catch {}
-            return { role: "tool", tool_call_id: c.id, content };
-          });
+          const toolMsgs: ApiMessage[] = await Promise.all(
+            toolCalls.map(async (c): Promise<ApiMessage> => {
+              const tool = getTool(c.function.name);
+              const content = (await tool?.run(parseArgs(c.function.arguments))) ?? "Unknown tool.";
+              try {
+                send({ type: "tool_card", toolName: c.function.name, data: JSON.parse(content) });
+              } catch {}
+              return { role: "tool", tool_call_id: c.id, content };
+            }),
+          );
           for (const m of toolMsgs) messages.push(m as OpenAI.Chat.Completions.ChatCompletionMessageParam);
           send({ type: "tool_result", messages: toolMsgs });
 

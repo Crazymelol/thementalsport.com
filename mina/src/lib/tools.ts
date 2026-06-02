@@ -10,6 +10,7 @@
 // `run()` body with a real API call. The rest of the system is unchanged.
 
 import type { Tier } from "./types";
+import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
 
 export type ToolDef = {
   name: string;
@@ -20,8 +21,8 @@ export type ToolDef = {
     properties: Record<string, unknown>;
     required?: string[];
   };
-  /** Stub executor. Returns a string Mina reads as the tool result. */
-  run: (input: Record<string, unknown>) => string;
+  /** Executor. Returns a string Mina reads as the tool result. May be async. */
+  run: (input: Record<string, unknown>) => string | Promise<string>;
   /** Builds the human-facing title + detail for a write-tier approval card. */
   summarize?: (input: Record<string, unknown>) => { title: string; detail: string };
 };
@@ -100,15 +101,33 @@ export const TOOLS: ToolDef[] = [
       },
       required: ["query"],
     },
-    run: (input) =>
-      JSON.stringify({
-        query: str(input.query),
-        results: [
-          { from: "Alex <alex@acme.com>", subject: "Re: Proposal", snippet: "Looks great — let's lock the Friday call.", unread: true },
-          { from: "Stripe", subject: "Payment received", snippet: "$500.00 from Acme Corp.", unread: false },
-        ],
-        note: "STUB DATA — not a real inbox yet.",
-      }),
+    run: async (input) => {
+      const query = str(input.query);
+      if (!gmailConfigured()) {
+        return JSON.stringify({
+          query,
+          results: [
+            { from: "Alex <alex@acme.com>", subject: "Re: Proposal", snippet: "Looks great — let's lock the Friday call.", unread: true },
+            { from: "Stripe", subject: "Payment received", snippet: "$500.00 from Acme Corp.", unread: false },
+          ],
+          note: "STUB DATA — not a real inbox yet.",
+        });
+      }
+      try {
+        const results = await searchEmails(query);
+        return JSON.stringify({
+          query,
+          results,
+          note: results.length ? "Live Gmail results." : "No matching emails found.",
+        });
+      } catch (e) {
+        return JSON.stringify({
+          query,
+          results: [],
+          error: `Couldn't reach Gmail: ${e instanceof Error ? e.message : "unknown error"}`,
+        });
+      }
+    },
   },
   {
     name: "send_email",
@@ -124,13 +143,30 @@ export const TOOLS: ToolDef[] = [
       },
       required: ["to", "subject", "body"],
     },
-    run: (input) =>
-      JSON.stringify({
-        sent: true,
-        to: str(input.to),
-        subject: str(input.subject),
-        note: "STUB — pretend this email was sent.",
-      }),
+    run: async (input) => {
+      const to = str(input.to);
+      const subject = str(input.subject);
+      const body = str(input.body);
+      if (!gmailConfigured()) {
+        return JSON.stringify({
+          sent: true,
+          to,
+          subject,
+          note: "STUB — pretend this email was sent (Gmail not connected).",
+        });
+      }
+      try {
+        await sendEmail(to, subject, body);
+        return JSON.stringify({ sent: true, to, subject, note: "Email sent via Gmail." });
+      } catch (e) {
+        return JSON.stringify({
+          sent: false,
+          to,
+          subject,
+          error: `Failed to send: ${e instanceof Error ? e.message : "unknown error"}`,
+        });
+      }
+    },
     summarize: (input) => ({
       title: "Send email",
       detail: `To: ${str(input.to)}\nSubject: ${str(input.subject)}\n\n${str(input.body)}`,
