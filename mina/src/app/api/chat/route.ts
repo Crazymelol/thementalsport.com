@@ -18,9 +18,10 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-// Llama 4 handles OpenAI-format tool calls reliably and — unlike the GPT-OSS
-// reasoning models — doesn't leak internal "reasoning" notes into replies.
-const MODEL = "meta-llama/llama-4-maverick-17b-128e-instruct";
+// GPT-OSS follows the OpenAI tool-calling format natively. It's a reasoning
+// model, so we set reasoning_format: "hidden" (below) to keep its internal
+// notes out of the spoken reply.
+const MODEL = "openai/gpt-oss-120b";
 const MAX_TOKENS = 4096;
 const MAX_LOOPS = 6;
 
@@ -115,7 +116,9 @@ export async function POST(req: Request) {
             tools,
             messages,
             stream: true,
-          });
+            // Groq-specific: keep GPT-OSS's internal reasoning out of `content`.
+            reasoning_format: "hidden",
+          } as OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming);
 
           let text = "";
           // Accumulate streamed tool calls by index.
