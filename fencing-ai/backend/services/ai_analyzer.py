@@ -428,19 +428,98 @@ def _summarize_pose(pose: dict) -> str:
     return " | ".join(parts) if parts else "Pose detected"
 
 
+def _empty_result(assessment: str = "") -> dict:
+    return {
+        "actions": [],
+        "technique_notes": [],
+        "scoring_events": [],
+        "overall_assessment": assessment,
+    }
+
+
+def _normalize_result(parsed, raw_text: str = "") -> dict:
+    """
+    Coerce whatever the model returned into our expected dict shape. Small local
+    models (moondream, etc.) are loose: they may return a bare JSON list, a dict
+    with the wrong field types, or an object nested under another key. Never let
+    that crash the merge step — always hand back the four expected keys with the
+    right types.
+    """
+    # A bare list — the model emitted just the actions array (or a list of
+    # objects). Treat list-of-dicts as actions; anything else is unusable.
+    if isinstance(parsed, list):
+        actions = [x for x in parsed if isinstance(x, dict)]
+        return {
+            "actions": actions,
+            "technique_notes": [],
+            "scoring_events": [],
+            "overall_assessment": "",
+        }
+
+    if not isinstance(parsed, dict):
+        # A bare string/number/bool — keep the raw text as the assessment.
+        return _empty_result(str(raw_text or parsed)[:500])
+
+    def _as_list(v):
+        if isinstance(v, list):
+            return [x for x in v if isinstance(x, dict)]
+        if isinstance(v, dict):
+            return [v]
+        return []
+
+    assessment = parsed.get("overall_assessment", "")
+    if not isinstance(assessment, str):
+        assessment = str(assessment)
+
+    return {
+        "actions": _as_list(parsed.get("actions")),
+        "technique_notes": _as_list(parsed.get("technique_notes")),
+        "scoring_events": _as_list(parsed.get("scoring_events")),
+        "overall_assessment": assessment[:500],
+    }
+
+
 def _parse_json_response(text: str | None) -> dict:
     if not text:
-        return {"actions": [], "technique_notes": [], "scoring_events": [], "overall_assessment": ""}
+        return _empty_result()
     text = text.strip()
     if text.startswith("```"):
         lines = text.split("\n")
         text = "\n".join(lines[1:-1] if lines[-1] == "```" else lines[1:])
+        text = text.strip()
+    # Small models often wrap JSON in prose. Try a direct parse first, then fall
+    # back to extracting the first {...} or [...] block from the surrounding text.
     try:
-        return json.loads(text)
+        return _normalize_result(json.loads(text), text)
     except json.JSONDecodeError:
-        return {
-            "actions": [],
-            "technique_notes": [],
-            "scoring_events": [],
-            "overall_assessment": text[:500],
-        }
+        pass
+
+    snippet = _extract_json_block(text)
+    if snippet is not None:
+        try:
+            return _normalize_result(json.loads(snippet), text)
+        except json.JSONDecodeError:
+            pass
+
+    # No parseable JSON at all — keep the prose as the assessment so the user
+    # still sees what the model said instead of a blank result.
+    return _empty_result(text[:500])
+
+
+def _extract_json_block(text: str) -> str | None:
+    """Return the first balanced {...} or [...] block found in text, else None."""
+    starts = [i for i in (text.find("{"), text.find("[")) if i != -1]
+    if not starts:
+        return None
+    start = min(starts)
+    open_ch = text[start]
+    close_ch = "}" if open_ch == "{" else "]"
+    depth = 0
+    for i in range(start, len(text)):
+        if text[i] == open_ch:
+            depth += 1
+        elif text[i] == close_ch:
+            depth -= 1
+            if depth == 0:
+                return text[start:i + 1]
+    return None
