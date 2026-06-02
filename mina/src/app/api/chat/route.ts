@@ -1,16 +1,3 @@
-// Mina's brain. Server-side only — the Anthropic SDK and your API key never
-// reach the browser.
-//
-// This implements a MANUAL tool-use loop (not the auto tool runner) on
-// purpose: the PRD's safety model requires a human-in-the-loop approval gate
-// before any write action, and the manual loop is where we insert it.
-//
-//   • read-tier tools  -> executed automatically, loop continues
-//   • write-tier tools -> NOT executed; we stream an `action_required` event
-//                         and stop. The client shows approval cards; on the
-//                         user's decision it re-POSTs with `decisions`, and we
-//                         resume — executing only what was approved.
-
 import Anthropic from "@anthropic-ai/sdk";
 import { MINA_SYSTEM_PROMPT } from "@/lib/systemPrompt";
 import { toolDefsForApi, getTool, isWrite } from "@/lib/tools";
@@ -22,7 +9,7 @@ export const maxDuration = 60;
 
 const MODEL = "claude-opus-4-8";
 const MAX_TOKENS = 16000;
-const MAX_LOOPS = 6; // safety stop for the read-tool auto-loop
+const MAX_LOOPS = 6;
 
 export async function POST(req: Request) {
   let body: ChatRequest;
@@ -41,7 +28,7 @@ export async function POST(req: Request) {
 
       let client: Anthropic;
       try {
-        client = new Anthropic(); // reads ANTHROPIC_API_KEY from the environment
+        client = new Anthropic();
       } catch {
         send({
           type: "error",
@@ -53,12 +40,10 @@ export async function POST(req: Request) {
         return;
       }
 
-      // Work on a local copy of the conversation in Anthropic message shape.
       const messages = body.messages as unknown as Anthropic.MessageParam[];
       const tools = toolDefsForApi() as unknown as Anthropic.Tool[];
 
       try {
-        // --- Phase 0: resolve any pending write decisions from the user ----
         if (body.decisions) {
           const last = messages[messages.length - 1];
           const toolResults: Anthropic.ToolResultBlockParam[] = [];
@@ -73,6 +58,11 @@ export async function POST(req: Request) {
                 content = approved
                   ? (tool?.run(input) ?? "Done.")
                   : "The user declined this action. Do not retry it; ask what they'd like instead.";
+                if (approved && tool) {
+                  try {
+                    send({ type: "tool_card", toolName: block.name, data: JSON.parse(content) });
+                  } catch {}
+                }
               } else {
                 content = tool?.run(input) ?? "Unknown tool.";
               }
@@ -86,7 +76,6 @@ export async function POST(req: Request) {
           }
         }
 
-        // --- Main loop: stream a turn, run read tools, repeat -------------
         for (let i = 0; i < MAX_LOOPS; i++) {
           const ms = client.messages.stream({
             model: MODEL,
@@ -96,7 +85,7 @@ export async function POST(req: Request) {
               {
                 type: "text",
                 text: MINA_SYSTEM_PROMPT,
-                cache_control: { type: "ephemeral" }, // cache tools + system prefix
+                cache_control: { type: "ephemeral" },
               },
             ],
             tools,
@@ -126,8 +115,6 @@ export async function POST(req: Request) {
 
           const writeUses = toolUses.filter((b) => isWrite(b.name));
           if (writeUses.length > 0) {
-            // Stop and ask the user. Any read tools in this same turn will be
-            // executed alongside the writes when the user responds.
             const actions: ActionProposal[] = writeUses.map((b) => {
               const tool = getTool(b.name);
               const s = tool?.summarize?.((b.input ?? {}) as Record<string, unknown>);
@@ -144,12 +131,15 @@ export async function POST(req: Request) {
             break;
           }
 
-          // All read-only: execute now and loop without a client round-trip.
-          const toolResults: Anthropic.ToolResultBlockParam[] = toolUses.map((b) => ({
-            type: "tool_result",
-            tool_use_id: b.id,
-            content: getTool(b.name)?.run((b.input ?? {}) as Record<string, unknown>) ?? "Unknown tool.",
-          }));
+          // Read-only tools: execute, emit cards, loop
+          const toolResults: Anthropic.ToolResultBlockParam[] = toolUses.map((b) => {
+            const tool = getTool(b.name);
+            const content = tool?.run((b.input ?? {}) as Record<string, unknown>) ?? "Unknown tool.";
+            try {
+              send({ type: "tool_card", toolName: b.name, data: JSON.parse(content) });
+            } catch {}
+            return { type: "tool_result", tool_use_id: b.id, content };
+          });
           messages.push({ role: "user", content: toolResults });
           send({ type: "tool_result", content: toolResults as never });
 
