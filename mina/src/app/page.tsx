@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import MinaOrb, { type MinaState } from "@/components/MinaOrb";
 import ActionCard from "@/components/ActionCard";
+import ToolResultCard from "@/components/ToolResultCard";
 import { useVoice } from "@/hooks/useVoice";
 import type {
   ActionProposal,
@@ -11,7 +12,11 @@ import type {
   ServerEvent,
 } from "@/lib/types";
 
-type Bubble = { id: string; role: "user" | "mina" | "system"; text: string };
+type Bubble =
+  | { id: string; kind: "message"; role: "user" | "mina" | "system"; text: string }
+  | { id: string; kind: "tool_card"; toolName: string; data: unknown };
+
+const STORAGE_KEY = "mina_session_v1";
 
 const newId = () =>
   typeof crypto !== "undefined" && "randomUUID" in crypto
@@ -27,6 +32,22 @@ const textOf = (content: string | ContentBlock[]): string => {
     .trim();
 };
 
+function loadSession(): { bubbles: Bubble[]; messages: ApiMessage[] } | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as { bubbles: Bubble[]; messages: ApiMessage[] };
+  } catch {
+    return null;
+  }
+}
+
+function saveSession(bubbles: Bubble[], messages: ApiMessage[]) {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ bubbles, messages }));
+  } catch {}
+}
+
 export default function Home() {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const [streaming, setStreaming] = useState("");
@@ -34,13 +55,27 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [speakEnabled, setSpeakEnabled] = useState(true);
+  const [hydrated, setHydrated] = useState(false);
 
   const convoRef = useRef<ApiMessage[]>([]);
   const streamingRef = useRef("");
   const decisionsRef = useRef<Record<string, boolean>>({});
+  const bubblesRef = useRef<Bubble[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const voice = useVoice();
+
+  // Restore session from sessionStorage on first mount
+  useEffect(() => {
+    const saved = loadSession();
+    if (saved) {
+      setBubbles(saved.bubbles);
+      bubblesRef.current = saved.bubbles;
+      convoRef.current = saved.messages;
+    }
+    setHydrated(true);
+  }, []);
 
   const orbState: MinaState = voice.listening
     ? "listening"
@@ -54,10 +89,35 @@ export default function Home() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [bubbles, streaming, pending]);
 
-  const addBubble = useCallback((role: Bubble["role"], text: string) => {
-    if (!text.trim()) return;
-    setBubbles((b) => [...b, { id: newId(), role, text }]);
+  const addBubble = useCallback((b: Bubble) => {
+    setBubbles((prev) => {
+      const next = [...prev, b];
+      bubblesRef.current = next;
+      saveSession(next, convoRef.current);
+      return next;
+    });
   }, []);
+
+  const addMessage = useCallback(
+    (role: "user" | "mina" | "system", text: string) => {
+      if (!text.trim()) return;
+      addBubble({ id: newId(), kind: "message", role, text });
+    },
+    [addBubble],
+  );
+
+  const clearConversation = useCallback(() => {
+    setBubbles([]);
+    bubblesRef.current = [];
+    convoRef.current = [];
+    setPending([]);
+    setStreaming("");
+    streamingRef.current = "";
+    voice.cancelSpeak();
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch {}
+  }, [voice]);
 
   const runChat = useCallback(
     async (decisions?: Record<string, boolean>) => {
@@ -89,21 +149,26 @@ export default function Home() {
               const t = textOf(event.content);
               if (t) {
                 lastMinaText = t;
-                addBubble("mina", t);
+                addMessage("mina", t);
               }
               streamingRef.current = "";
               setStreaming("");
+              // Persist after assistant message
+              saveSession(bubblesRef.current, convoRef.current);
               break;
             }
             case "tool_result":
               convoRef.current.push({ role: "user", content: event.content });
+              break;
+            case "tool_card":
+              addBubble({ id: newId(), kind: "tool_card", toolName: event.toolName, data: event.data });
               break;
             case "action_required":
               decisionsRef.current = {};
               setPending(event.actions);
               break;
             case "error":
-              addBubble("system", `⚠️ ${event.message}`);
+              addMessage("system", `⚠️ ${event.message}`);
               break;
             case "done":
               break;
@@ -126,14 +191,14 @@ export default function Home() {
 
         if (lastMinaText && speakEnabled) voice.speak(lastMinaText);
       } catch (err) {
-        addBubble("system", `⚠️ ${err instanceof Error ? err.message : "Connection error."}`);
+        addMessage("system", `⚠️ ${err instanceof Error ? err.message : "Connection error."}`);
       } finally {
         streamingRef.current = "";
         setStreaming("");
         setLoading(false);
       }
     },
-    [addBubble, speakEnabled, voice],
+    [addBubble, addMessage, speakEnabled, voice],
   );
 
   const sendText = useCallback(
@@ -141,35 +206,34 @@ export default function Home() {
       const t = text.trim();
       if (!t || loading) return;
       voice.cancelSpeak();
-      addBubble("user", t);
+      addMessage("user", t);
       convoRef.current.push({ role: "user", content: t });
       setInput("");
+      inputRef.current?.focus();
       void runChat();
     },
-    [addBubble, loading, runChat, voice],
+    [addMessage, loading, runChat, voice],
   );
 
-  // Decide on a pending action; once all are decided, continue the turn.
   const decide = useCallback(
     (id: string, approved: boolean) => {
       decisionsRef.current[id] = approved;
       const allResolved = pending.every((a) => a.id in decisionsRef.current);
       if (!allResolved) {
-        // Remove decided cards; keep waiting on the rest.
         setPending((p) => p.filter((a) => !(a.id in decisionsRef.current)));
         return;
       }
       const decisions = { ...decisionsRef.current };
       setPending([]);
-      addBubble(
+      addMessage(
         "system",
         Object.values(decisions).some(Boolean)
-          ? "✓ You approved an action. Mina is carrying it out…"
-          : "✗ You cancelled. Mina will adjust.",
+          ? "✓ Approved — Mina is carrying it out…"
+          : "✗ Cancelled.",
       );
       void runChat(decisions);
     },
-    [addBubble, pending, runChat],
+    [addMessage, pending, runChat],
   );
 
   const micClick = () => {
@@ -180,21 +244,36 @@ export default function Home() {
     }
   };
 
+  if (!hydrated) return null;
+
+  const isEmpty = bubbles.length === 0 && !streaming;
+
   return (
     <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 py-6">
       {/* Header */}
       <header className="mb-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight">Mina</h1>
+          <h1 className="text-xl font-bold tracking-tight text-mina-text">Mina</h1>
           <p className="text-xs text-mina-muted">Voice-first AI agent · prototype</p>
         </div>
-        <button
-          onClick={() => setSpeakEnabled((v) => !v)}
-          className="rounded-lg border border-mina-edge px-3 py-1.5 text-sm text-mina-muted hover:text-mina-text"
-          title={speakEnabled ? "Mute Mina's voice" : "Unmute Mina's voice"}
-        >
-          {speakEnabled ? "🔊 Voice on" : "🔇 Voice off"}
-        </button>
+        <div className="flex items-center gap-2">
+          {bubbles.length > 0 && (
+            <button
+              onClick={clearConversation}
+              className="rounded-lg px-3 py-1.5 text-xs text-mina-muted hover:text-mina-text transition"
+              title="Clear conversation"
+            >
+              Clear
+            </button>
+          )}
+          <button
+            onClick={() => setSpeakEnabled((v) => !v)}
+            className="rounded-lg border border-mina-edge px-3 py-1.5 text-sm text-mina-muted hover:text-mina-text transition"
+            title={speakEnabled ? "Mute Mina's voice" : "Unmute Mina's voice"}
+          >
+            {speakEnabled ? "🔊 Voice on" : "🔇 Voice off"}
+          </button>
+        </div>
       </header>
 
       {/* Orb */}
@@ -206,23 +285,50 @@ export default function Home() {
       <div
         ref={scrollRef}
         className="scroll-slim mb-4 flex-1 space-y-3 overflow-y-auto rounded-xl border border-mina-edge bg-mina-panel/50 p-4"
+        style={{ minHeight: "300px", maxHeight: "calc(100vh - 340px)" }}
       >
-        {bubbles.length === 0 && !streaming && (
-          <div className="space-y-2 text-sm text-mina-muted">
-            <p>Try asking:</p>
-            <ul className="space-y-1">
-              <li>“What's on my calendar today?”</li>
-              <li>“Draft a reply to Alex accepting the proposal.”</li>
-              <li>“How much revenue did I make this month?”</li>
-              <li>“Refund Alex's last charge.” <span className="opacity-60">(watch the approval step)</span></li>
-            </ul>
+        {isEmpty && (
+          <div className="space-y-3 text-sm text-mina-muted">
+            <p className="font-medium text-mina-text/70">Ask Mina anything. For example:</p>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {[
+                { q: "What's on my calendar today?", icon: "📅" },
+                { q: "Draft a reply to Alex accepting the proposal.", icon: "✉️" },
+                { q: "How much revenue did I make this month?", icon: "💳" },
+                { q: "Refund Alex's last charge.", icon: "⚠️" },
+              ].map(({ q, icon }) => (
+                <button
+                  key={q}
+                  onClick={() => sendText(q)}
+                  disabled={loading}
+                  className="flex items-start gap-2 rounded-lg border border-mina-edge bg-mina-panel/60 px-3 py-2 text-left text-xs text-mina-muted hover:border-mina-accent/50 hover:text-mina-text transition disabled:opacity-40"
+                >
+                  <span className="shrink-0">{icon}</span>
+                  <span>{q}</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
-        {bubbles.map((b) => (
-          <Message key={b.id} role={b.role} text={b.text} />
-        ))}
+        {bubbles.map((b) => {
+          if (b.kind === "tool_card") {
+            return <ToolResultCard key={b.id} toolName={b.toolName} data={b.data} />;
+          }
+          return <Message key={b.id} role={b.role} text={b.text} />;
+        })}
+
+        {/* Streaming text bubble */}
         {streaming && <Message role="mina" text={streaming} />}
+
+        {/* Thinking indicator — shows when waiting for first token */}
+        {loading && !streaming && pending.length === 0 && (
+          <div className="flex justify-start">
+            <div className="rounded-2xl border border-mina-edge bg-mina-panel px-4 py-3">
+              <ThinkingDots />
+            </div>
+          </div>
+        )}
 
         {pending.map((a) => (
           <ActionCard
@@ -243,8 +349,8 @@ export default function Home() {
           className={[
             "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg transition",
             voice.listening
-              ? "bg-mina-accent text-black"
-              : "border border-mina-edge text-mina-muted hover:text-mina-text",
+              ? "bg-mina-accent text-black shadow-[0_0_16px_-2px] shadow-mina-accent/70"
+              : "border border-mina-edge text-mina-muted hover:border-mina-accent/50 hover:text-mina-text",
             !voice.sttSupported ? "opacity-40" : "",
           ].join(" ")}
           title={voice.sttSupported ? "Talk to Mina" : "Voice input not supported in this browser"}
@@ -252,14 +358,18 @@ export default function Home() {
           🎤
         </button>
         <input
+          ref={inputRef}
           value={voice.listening && voice.interim ? voice.interim : input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") sendText(input);
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendText(input);
+            }
           }}
           placeholder={voice.listening ? "Listening…" : "Message Mina…"}
           disabled={loading}
-          className="h-11 flex-1 rounded-full border border-mina-edge bg-mina-panel px-4 text-sm outline-none placeholder:text-mina-muted focus:border-mina-accent disabled:opacity-50"
+          className="h-11 flex-1 rounded-full border border-mina-edge bg-mina-panel px-4 text-sm outline-none placeholder:text-mina-muted focus:border-mina-accent/70 disabled:opacity-50 transition"
         />
         <button
           onClick={() => sendText(input)}
@@ -279,16 +389,30 @@ export default function Home() {
   );
 }
 
-function Message({ role, text }: { role: Bubble["role"]; text: string }) {
+function ThinkingDots() {
+  return (
+    <div className="flex items-center gap-1">
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="h-1.5 w-1.5 rounded-full bg-mina-accent/60 animate-pulse"
+          style={{ animationDelay: `${i * 0.2}s` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Message({ role, text }: { role: "user" | "mina" | "system"; text: string }) {
   if (role === "system") {
-    return <p className="text-center text-xs text-mina-muted">{text}</p>;
+    return <p className="text-center text-xs text-mina-muted py-1">{text}</p>;
   }
   const isUser = role === "user";
   return (
     <div className={isUser ? "flex justify-end" : "flex justify-start"}>
       <div
         className={[
-          "max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2 text-sm",
+          "max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
           isUser
             ? "bg-mina-accent text-black"
             : "border border-mina-edge bg-mina-panel text-mina-text",
