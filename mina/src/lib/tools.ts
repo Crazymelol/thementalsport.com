@@ -12,6 +12,7 @@
 import type { Tier } from "./types";
 import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
 import { fetchPage } from "./web";
+import { googleConfigured, listCalendarEvents, createCalendarEvent } from "./google";
 
 export type ToolDef = {
   name: string;
@@ -44,46 +45,80 @@ export const TOOLS: ToolDef[] = [
       },
       required: ["date"],
     },
-    run: (input) =>
-      JSON.stringify({
-        date: str(input.date, "today"),
-        events: [
-          { time: "09:00", title: "Standup", durationMin: 15 },
-          { time: "11:00", title: "Deep work block", durationMin: 90 },
-          { time: "15:00", title: "Call with Alex (Acme Corp)", durationMin: 45 },
-        ],
-        note: "STUB DATA — not a real calendar yet.",
-      }),
+    run: async (input) => {
+      const date = str(input.date, "today");
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          date,
+          events: [
+            { time: "09:00", title: "Standup", durationMin: 15 },
+            { time: "11:00", title: "Deep work block", durationMin: 90 },
+            { time: "15:00", title: "Call with Alex (Acme Corp)", durationMin: 45 },
+          ],
+          note: "STUB DATA — not a real calendar yet.",
+        });
+      }
+      try {
+        // Whole-day window in the server's local time; the model asked about `date`.
+        const now = new Date();
+        const start = new Date(now);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(start);
+        end.setDate(end.getDate() + 1);
+        const data = await listCalendarEvents(start.toISOString(), end.toISOString());
+        return JSON.stringify({ ...data, note: "Live Google Calendar." });
+      } catch (e) {
+        return JSON.stringify({
+          date,
+          events: [],
+          error: e instanceof Error ? e.message : "Couldn't reach Google Calendar.",
+        });
+      }
+    },
   },
   {
     name: "create_calendar_event",
     description:
-      "Create a new calendar event. This WRITES to the calendar, so it requires user confirmation.",
+      "Create a calendar event. WRITES to the calendar, so it requires user confirmation. Provide startDateTime as ISO 8601 with timezone offset; use the current date/time given in the system context to resolve phrases like 'tomorrow at 3pm'.",
     tier: "write",
     input_schema: {
       type: "object",
       properties: {
         title: { type: "string" },
-        date: { type: "string", description: "e.g. 'Friday'" },
-        time: { type: "string", description: "e.g. '3pm'" },
-        durationMin: { type: "number" },
-      },
-      required: ["title", "date", "time"],
-    },
-    run: (input) =>
-      JSON.stringify({
-        created: true,
-        event: {
-          title: str(input.title),
-          date: str(input.date),
-          time: str(input.time),
-          durationMin: typeof input.durationMin === "number" ? input.durationMin : 30,
+        startDateTime: {
+          type: "string",
+          description: "ISO 8601 with offset, e.g. 2026-06-05T15:00:00+01:00",
         },
-        note: "STUB — pretend this was added to the calendar.",
-      }),
+        durationMin: { type: "number", description: "Length in minutes (default 30)." },
+      },
+      required: ["title", "startDateTime"],
+    },
+    run: async (input) => {
+      const title = str(input.title);
+      const startDateTime = str(input.startDateTime);
+      const durationMin = typeof input.durationMin === "number" ? input.durationMin : 30;
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          created: true,
+          title,
+          startDateTime,
+          note: "STUB — pretend this was added (Google Calendar not connected).",
+        });
+      }
+      try {
+        const res = await createCalendarEvent({ title, startDateTime, durationMin });
+        return JSON.stringify({ ...res, note: "Event created in Google Calendar." });
+      } catch (e) {
+        return JSON.stringify({
+          created: false,
+          title,
+          error: e instanceof Error ? e.message : "Couldn't create the event.",
+        });
+      }
+    },
     summarize: (input) => ({
       title: "Create calendar event",
-      detail: `“${str(input.title)}” on ${str(input.date)} at ${str(input.time)}${
+      detail: `“${str(input.title)}” at ${str(input.startDateTime)}${
         typeof input.durationMin === "number" ? ` for ${input.durationMin} min` : ""
       }`,
     }),
