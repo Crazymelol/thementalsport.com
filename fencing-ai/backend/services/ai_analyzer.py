@@ -339,12 +339,12 @@ async def _analyze_openai_compat(frame_paths, pose_data, frame_indices) -> dict:
         response = None
         for attempt in range(3):
             try:
+                extra = {"think": False} if PROVIDER == "ollama" else {}
                 response = await client.chat.completions.create(
                     model=model,
-                    # Headroom so reasoning-capable models can finish thinking AND
-                    # still emit the JSON payload (1024 was often exhausted first).
                     max_tokens=3000,
                     messages=messages,
+                    extra_body=extra if extra else None,
                 )
                 break
             except Exception as e:
