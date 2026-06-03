@@ -3,6 +3,8 @@
 
 export type Tier = "read" | "write";
 
+export type AgentId = "inbox" | "calendar" | "workspace" | "finance" | "general";
+
 export type ToolCall = {
   id: string;
   type: "function";
