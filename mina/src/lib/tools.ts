@@ -14,6 +14,14 @@ import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
 import { fetchPage } from "./web";
 import { memoryConfigured, addMemory, searchMemories, deleteMemory } from "./memory";
 import {
+  addAddendum,
+  removeAddendum,
+  setEnabled,
+  listAddenda,
+  isValidTarget,
+  type AddendumTarget,
+} from "./promptStore";
+import {
   googleConfigured,
   listCalendarEvents,
   createCalendarEvent,
@@ -617,6 +625,103 @@ export const TOOLS: ToolDef[] = [
       title: "Forget a memory",
       detail: `Delete memory id: ${str(input.id)}`,
     }),
+  },
+
+  // ---- Self-improvement ---------------------------------------------------
+  {
+    name: "propose_prompt_improvement",
+    description:
+      "Propose an addition to your OWN instructions to permanently improve how you work (e.g. a recurring preference or correction the user gave you). WRITES to your persistent instructions, so it requires user approval. Additive only — you cannot edit or remove existing rules. `target` is 'global' or one specialist id: inbox, calendar, workspace, finance, general.",
+    tier: "write",
+    input_schema: {
+      type: "object",
+      properties: {
+        target: { type: "string", description: "'global' or a specialist id." },
+        text: { type: "string", description: "The guidance to append, phrased as an instruction." },
+        rationale: { type: "string", description: "Why this helps — shown on the approval card." },
+      },
+      required: ["target", "text", "rationale"],
+    },
+    run: async (input) => {
+      const rawTarget = str(input.target, "global");
+      const target: AddendumTarget = isValidTarget(rawTarget) ? rawTarget : "global";
+      const text = str(input.text);
+      const rationale = str(input.rationale);
+      if (!text) return JSON.stringify({ added: false, error: "Nothing to add." });
+      const res = await addAddendum(target, text, rationale);
+      return JSON.stringify(
+        res.added
+          ? { added: true, id: res.addendum?.id, target, text, note: "Added to your instructions." }
+          : { added: false, error: res.error },
+      );
+    },
+    summarize: (input) => ({
+      title: `Teach myself (${str(input.target, "global")})`,
+      detail: `${str(input.text)}\n\nWhy: ${str(input.rationale)}`,
+    }),
+  },
+  {
+    name: "revert_prompt_improvement",
+    description:
+      "Permanently delete one of your learned instruction addenda by id (get ids from list_prompt_improvements). WRITES, so it requires user approval.",
+    tier: "write",
+    input_schema: {
+      type: "object",
+      properties: { id: { type: "string", description: "The addendum id to delete." } },
+      required: ["id"],
+    },
+    run: async (input) => {
+      const id = str(input.id);
+      const res = await removeAddendum(id);
+      return JSON.stringify({ ...res, id, note: res.removed ? "Reverted." : "No such addendum." });
+    },
+    summarize: (input) => ({
+      title: "Revert a learned instruction",
+      detail: `Delete addendum id: ${str(input.id)}`,
+    }),
+  },
+  {
+    name: "toggle_prompt_improvement",
+    description:
+      "Enable or disable a learned instruction addendum by id without deleting it. WRITES, so it requires user approval.",
+    tier: "write",
+    input_schema: {
+      type: "object",
+      properties: {
+        id: { type: "string", description: "The addendum id." },
+        enabled: { type: "boolean", description: "true to enable, false to disable." },
+      },
+      required: ["id", "enabled"],
+    },
+    run: async (input) => {
+      const id = str(input.id);
+      const enabled = input.enabled !== false;
+      const res = await setEnabled(id, enabled);
+      return JSON.stringify({ ok: res.ok, id, enabled, note: res.ok ? "Updated." : "No such addendum." });
+    },
+    summarize: (input) => ({
+      title: `${input.enabled !== false ? "Enable" : "Disable"} a learned instruction`,
+      detail: `Addendum id: ${str(input.id)}`,
+    }),
+  },
+  {
+    name: "list_prompt_improvements",
+    description:
+      "List all your learned instruction addenda (id, target, text, rationale, enabled). Read-only. Use when the user asks what you've learned or taught yourself.",
+    tier: "read",
+    input_schema: { type: "object", properties: {} },
+    run: async () => {
+      const all = await listAddenda();
+      return JSON.stringify({
+        improvements: all.map((a) => ({
+          id: a.id,
+          target: a.target,
+          text: a.text,
+          rationale: a.rationale,
+          enabled: a.enabled,
+        })),
+      });
+    },
   },
 
   // ---- Web ----------------------------------------------------------------
