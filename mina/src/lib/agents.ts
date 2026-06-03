@@ -11,6 +11,13 @@ type AgentDef = {
 
 const MEMORY_TOOLS = ["remember", "recall", "forget"];
 
+const SELF_IMPROVE_TOOLS = [
+  "propose_prompt_improvement",
+  "revert_prompt_improvement",
+  "toggle_prompt_improvement",
+  "list_prompt_improvements",
+];
+
 export const AGENTS: Record<AgentId, AgentDef> = {
   inbox: {
     id: "inbox",
@@ -64,7 +71,7 @@ export function toolsForAgent(
   id: AgentId,
 ): OpenAI.Chat.Completions.ChatCompletionTool[] {
   const agent = AGENTS[id];
-  const toolNames = new Set([...agent.toolNames, ...MEMORY_TOOLS]);
+  const toolNames = new Set([...agent.toolNames, ...MEMORY_TOOLS, ...SELF_IMPROVE_TOOLS]);
   return ALL_TOOL_DEFS.filter((t) => toolNames.has((t as { function: { name: string } }).function.name));
 }
 

@@ -12,6 +12,7 @@
 import OpenAI from "openai";
 import { MINA_SYSTEM_PROMPT } from "./systemPrompt";
 import { memoryBlock } from "./memory";
+import { addendaBlock } from "./promptStore";
 import { getTool, isWrite } from "./tools";
 import { route } from "./router";
 import { toolsForAgent, getAgentForTool, AGENTS } from "./agents";
@@ -96,11 +97,12 @@ export async function runBrain(opts: {
 
   const agent = AGENTS[agentId];
   const tools = toolsForAgent(agentId);
+  const addBlock = await addendaBlock(agentId);
 
   const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
     {
       role: "system",
-      content: MINA_SYSTEM_PROMPT + nowLine + memBlock + agent.promptAddon,
+      content: MINA_SYSTEM_PROMPT + nowLine + memBlock + agent.promptAddon + addBlock,
     },
     ...(opts.messages as OpenAI.Chat.Completions.ChatCompletionMessageParam[]),
   ];

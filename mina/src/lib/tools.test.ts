@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { getTool } from "./tools";
+import { getTool, isWrite } from "./tools";
 
 afterEach(() => vi.unstubAllEnvs());
 
@@ -95,5 +95,36 @@ describe("Memory tools", () => {
     const card = getTool("forget")!.summarize!({ id: "m_abc123" });
     expect(card.title).toMatch(/forget/i);
     expect(card.detail).toMatch(/m_abc123/);
+  });
+});
+
+describe("self-improvement tools", () => {
+  it("registers all four tools", () => {
+    expect(getTool("propose_prompt_improvement")).toBeDefined();
+    expect(getTool("revert_prompt_improvement")).toBeDefined();
+    expect(getTool("toggle_prompt_improvement")).toBeDefined();
+    expect(getTool("list_prompt_improvements")).toBeDefined();
+  });
+
+  it("marks the three mutators as write-tier and the list as read", () => {
+    expect(isWrite("propose_prompt_improvement")).toBe(true);
+    expect(isWrite("revert_prompt_improvement")).toBe(true);
+    expect(isWrite("toggle_prompt_improvement")).toBe(true);
+    expect(isWrite("list_prompt_improvements")).toBe(false);
+  });
+
+  it("write tools provide an approval summary", () => {
+    const s = getTool("propose_prompt_improvement")!.summarize!({
+      target: "inbox",
+      text: "always cc legal",
+      rationale: "policy",
+    });
+    expect(s.title).toContain("inbox");
+    expect(s.detail).toContain("always cc legal");
+  });
+
+  it("list_prompt_improvements runs read-only without a store and returns a shape", async () => {
+    const out = await getTool("list_prompt_improvements")!.run({});
+    expect(JSON.parse(out)).toHaveProperty("improvements");
   });
 });
