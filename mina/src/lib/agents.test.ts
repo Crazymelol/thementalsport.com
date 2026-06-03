@@ -71,3 +71,13 @@ describe("getAgentForTool", () => {
     expect(getAgentForTool("nonexistent_tool")).toBe("general");
   });
 });
+
+describe("self-improvement tools are cross-cutting", () => {
+  it("every agent can see all four self-improvement tools", () => {
+    const names = ["propose_prompt_improvement", "revert_prompt_improvement", "toggle_prompt_improvement", "list_prompt_improvements"];
+    for (const agent of ["inbox", "calendar", "workspace", "finance", "general"] as const) {
+      const have = new Set(toolsForAgent(agent).map((t) => (t as { function: { name: string } }).function.name));
+      for (const n of names) expect(have.has(n)).toBe(true);
+    }
+  });
+});
