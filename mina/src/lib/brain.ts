@@ -78,7 +78,18 @@ export async function runBrain(opts: {
       last?.role === "assistant" && "tool_calls" in last && last.tool_calls
         ? (last.tool_calls as ToolCall[])[0]?.function.name
         : undefined;
-    agentId = firstToolName ? getAgentForTool(firstToolName) : "general";
+    // An approval re-run must carry the assistant tool_calls it's approving.
+    // If they're missing the history is malformed — surface it rather than
+    // silently dropping the user's approved action.
+    if (!firstToolName) {
+      return {
+        text: "",
+        cards,
+        error: "Approval re-run received no pending tool calls to resolve.",
+        messages: opts.messages,
+      };
+    }
+    agentId = getAgentForTool(firstToolName);
   } else {
     agentId = await route(opts.messages);
   }
