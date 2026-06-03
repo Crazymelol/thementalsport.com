@@ -3,11 +3,15 @@
 // HTTP framing and converts BrainResult events into the SSE wire format.
 
 import { runBrain } from "@/lib/brain";
+import { trimHistory } from "@/lib/history";
 import type { ChatRequest, ServerEvent } from "@/lib/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const maxDuration = 60;
+// Raise the ceiling: the web app re-sends the whole conversation, so a turn can
+// run several tool loops. (Vercel caps this at the plan limit — 60s on Hobby —
+// but asking for more is harmless and helps on Pro.) We also cap context below.
+export const maxDuration = 300;
 
 export async function POST(req: Request) {
   let body: ChatRequest;
@@ -32,8 +36,13 @@ export async function POST(req: Request) {
       }
 
       try {
+        // Cap the conversation we feed the brain. The web app accumulates the
+        // whole session and re-sends it every turn; unbounded, that grows until
+        // a turn times out (the "spins then nothing" symptom). Slack avoids this
+        // by only sending recent history — trimHistory mirrors that, snapping to
+        // a clean turn boundary so tool-call/result pairs are never split.
         const result = await runBrain({
-          messages: body.messages,
+          messages: trimHistory(body.messages),
           decisions: body.decisions,
         });
 
