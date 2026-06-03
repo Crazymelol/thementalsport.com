@@ -12,6 +12,7 @@
 import type { Tier } from "./types";
 import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
 import { fetchPage } from "./web";
+import { memoryConfigured, addMemory, searchMemories, deleteMemory } from "./memory";
 import {
   googleConfigured,
   listCalendarEvents,
@@ -530,6 +531,92 @@ export const TOOLS: ToolDef[] = [
         });
       }
     },
+  },
+
+  // ---- Memory -------------------------------------------------------------
+  {
+    name: "remember",
+    description:
+      "Save a durable fact or preference about the principal (their business, people, habits, how they like things done) to long-term memory. Runs immediately and is always shown to the user. Do NOT store passwords, API keys, or tokens.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: {
+        text: { type: "string", description: "The fact to remember, phrased concisely." },
+      },
+      required: ["text"],
+    },
+    run: async (input) => {
+      const text = str(input.text);
+      if (!text) return JSON.stringify({ remembered: false, error: "Nothing to remember." });
+      if (!memoryConfigured()) {
+        return JSON.stringify({
+          remembered: true,
+          text,
+          note: "STUB — memory store not set up yet (add Upstash Redis on Vercel).",
+        });
+      }
+      const mem = await addMemory(text);
+      return JSON.stringify({ remembered: true, id: mem.id, text: mem.text, note: "Saved to memory." });
+    },
+  },
+  {
+    name: "recall",
+    description:
+      "Search the principal's long-term memory for a fact or preference. Read-only. Use before claiming you don't know something about them.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "What to look up." },
+      },
+      required: ["query"],
+    },
+    run: async (input) => {
+      const query = str(input.query);
+      if (!memoryConfigured()) {
+        return JSON.stringify({
+          query,
+          memories: [],
+          note: "STUB — memory store not set up yet (add Upstash Redis on Vercel).",
+        });
+      }
+      const matches = await searchMemories(query);
+      return JSON.stringify({
+        query,
+        memories: matches.map((m) => ({ id: m.id, text: m.text })),
+        note: "Live memory.",
+      });
+    },
+  },
+  {
+    name: "forget",
+    description:
+      "Delete a remembered fact by its id (get ids from recall). WRITES to memory (destructive), so it requires confirmation.",
+    tier: "write",
+    input_schema: {
+      type: "object",
+      properties: {
+        id: { type: "string", description: "The memory id to delete." },
+      },
+      required: ["id"],
+    },
+    run: async (input) => {
+      const id = str(input.id);
+      if (!memoryConfigured()) {
+        return JSON.stringify({
+          deleted: true,
+          id,
+          note: "STUB — memory store not set up yet.",
+        });
+      }
+      const res = await deleteMemory(id);
+      return JSON.stringify({ ...res, id, note: res.deleted ? "Removed from memory." : "No such memory." });
+    },
+    summarize: (input) => ({
+      title: "Forget a memory",
+      detail: `Delete memory id: ${str(input.id)}`,
+    }),
   },
 
   // ---- Web ----------------------------------------------------------------

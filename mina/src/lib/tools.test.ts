@@ -70,3 +70,30 @@ describe("Google Suite approval cards", () => {
     expect(card.detail).toMatch(/Alex/);
   });
 });
+
+describe("Memory tools", () => {
+  function clearMemory() {
+    vi.stubEnv("UPSTASH_REDIS_REST_URL", "");
+    vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "");
+  }
+
+  it("remember falls back to stub when memory not configured", async () => {
+    clearMemory();
+    const out = JSON.parse(await getTool("remember")!.run({ text: "Business is The Mental Sport" }));
+    expect(out.remembered).toBe(true);
+    expect(out.note).toMatch(/stub/i);
+  });
+
+  it("recall falls back to stub when memory not configured", async () => {
+    clearMemory();
+    const out = JSON.parse(await getTool("recall")!.run({ query: "business" }));
+    expect(out.note).toMatch(/stub/i);
+    expect(Array.isArray(out.memories)).toBe(true);
+  });
+
+  it("forget summarize produces an approval card", () => {
+    const card = getTool("forget")!.summarize!({ id: "m_abc123" });
+    expect(card.title).toMatch(/forget/i);
+    expect(card.detail).toMatch(/m_abc123/);
+  });
+});

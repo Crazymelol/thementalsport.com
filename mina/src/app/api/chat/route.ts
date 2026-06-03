@@ -12,6 +12,7 @@
 import OpenAI from "openai";
 import { MINA_SYSTEM_PROMPT } from "@/lib/systemPrompt";
 import { toolDefsForApi, getTool, isWrite } from "@/lib/tools";
+import { memoryBlock } from "@/lib/memory";
 import type { ChatRequest, ServerEvent, ActionProposal, ToolCall, ApiMessage } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -66,9 +67,12 @@ export async function POST(req: Request) {
       });
 
       // Conversation in OpenAI message shape, with Mina's system prompt pinned first.
+      // Mike's durable memory is loaded once and injected so he always "knows"
+      // his principal without spending a tool call.
       const nowLine = `\n\nCurrent date and time: ${new Date().toString()}.`;
+      const memBlock = await memoryBlock();
       const messages = [
-        { role: "system" as const, content: MINA_SYSTEM_PROMPT + nowLine },
+        { role: "system" as const, content: MINA_SYSTEM_PROMPT + nowLine + memBlock },
         ...body.messages,
       ] as OpenAI.Chat.Completions.ChatCompletionMessageParam[];
 

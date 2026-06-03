@@ -195,6 +195,39 @@ function ContactsCard({ data }: { data: { query: string; contacts: { name: strin
   );
 }
 
+function RememberCard({ data }: { data: { text?: string } }) {
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
+        🧠 Remembered
+      </p>
+      <p className="rounded-lg bg-black/20 px-3 py-2 text-sm text-mina-text">{data.text}</p>
+    </div>
+  );
+}
+
+function RecallCard({ data }: { data: { query: string; memories: { id: string; text: string }[] } }) {
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
+        🧠 Memory — "{data.query}"
+      </p>
+      {data.memories.length === 0 ? (
+        <p className="text-sm text-mina-muted">Nothing on that yet.</p>
+      ) : (
+        <div className="space-y-1">
+          {data.memories.map((m) => (
+            <div key={m.id} className="rounded-lg bg-black/20 px-3 py-1.5">
+              <p className="text-sm text-mina-text">{m.text}</p>
+              <p className="text-[10px] text-mina-muted/70">{m.id}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ToolResultCard({
   toolName,
   data,
@@ -220,6 +253,10 @@ export default function ToolResultCard({
     inner = <SheetCard data={data as { rows: string[][] }} />;
   } else if (toolName === "search_contacts") {
     inner = <ContactsCard data={data as { query: string; contacts: { name: string; email?: string; phone?: string }[] }} />;
+  } else if (toolName === "remember") {
+    inner = <RememberCard data={data as { text?: string }} />;
+  } else if (toolName === "recall") {
+    inner = <RecallCard data={data as { query: string; memories: { id: string; text: string }[] }} />;
   } else {
     inner = (
       <div className="space-y-1">
