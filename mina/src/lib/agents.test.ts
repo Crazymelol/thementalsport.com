@@ -3,19 +3,19 @@ import { toolsForAgent, getAgentForTool, AGENTS } from "./agents";
 
 describe("toolsForAgent", () => {
   it("inbox agent has search_emails and send_email", () => {
-    const names = toolsForAgent("inbox").map((t) => t.function.name);
+    const names = toolsForAgent("inbox").map((t) => (t as { function: { name: string } }).function.name);
     expect(names).toContain("search_emails");
     expect(names).toContain("send_email");
   });
 
   it("inbox agent does NOT have calendar tools", () => {
-    const names = toolsForAgent("inbox").map((t) => t.function.name);
+    const names = toolsForAgent("inbox").map((t) => (t as { function: { name: string } }).function.name);
     expect(names).not.toContain("get_calendar_events");
   });
 
   it("every agent includes remember, recall, forget", () => {
     for (const id of Object.keys(AGENTS) as (keyof typeof AGENTS)[]) {
-      const names = toolsForAgent(id).map((t) => t.function.name);
+      const names = toolsForAgent(id).map((t) => (t as { function: { name: string } }).function.name);
       expect(names).toContain("remember");
       expect(names).toContain("recall");
       expect(names).toContain("forget");
@@ -23,13 +23,13 @@ describe("toolsForAgent", () => {
   });
 
   it("calendar agent has get_calendar_events and create_calendar_event", () => {
-    const names = toolsForAgent("calendar").map((t) => t.function.name);
+    const names = toolsForAgent("calendar").map((t) => (t as { function: { name: string } }).function.name);
     expect(names).toContain("get_calendar_events");
     expect(names).toContain("create_calendar_event");
   });
 
   it("workspace agent has all drive/doc/sheet/contacts tools", () => {
-    const names = toolsForAgent("workspace").map((t) => t.function.name);
+    const names = toolsForAgent("workspace").map((t) => (t as { function: { name: string } }).function.name);
     expect(names).toContain("search_drive");
     expect(names).toContain("read_drive_file");
     expect(names).toContain("read_doc");
@@ -40,13 +40,13 @@ describe("toolsForAgent", () => {
   });
 
   it("finance agent has get_revenue_summary and issue_refund", () => {
-    const names = toolsForAgent("finance").map((t) => t.function.name);
+    const names = toolsForAgent("finance").map((t) => (t as { function: { name: string } }).function.name);
     expect(names).toContain("get_revenue_summary");
     expect(names).toContain("issue_refund");
   });
 
   it("general agent has browse_url", () => {
-    const names = toolsForAgent("general").map((t) => t.function.name);
+    const names = toolsForAgent("general").map((t) => (t as { function: { name: string } }).function.name);
     expect(names).toContain("browse_url");
   });
 });

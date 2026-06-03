@@ -65,7 +65,7 @@ export function toolsForAgent(
 ): OpenAI.Chat.Completions.ChatCompletionTool[] {
   const agent = AGENTS[id];
   const toolNames = new Set([...agent.toolNames, ...MEMORY_TOOLS]);
-  return ALL_TOOL_DEFS.filter((t) => toolNames.has(t.function.name));
+  return ALL_TOOL_DEFS.filter((t) => toolNames.has((t as { function: { name: string } }).function.name));
 }
 
 /** Reverse-lookup: which agent owns this tool name? Falls back to "general". */

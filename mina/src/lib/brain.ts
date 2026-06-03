@@ -1,23 +1,22 @@
 // Mike's core think-and-act loop, shared by every channel (web, Slack, …).
 //
-// Takes a conversation (OpenAI message array) and a set of already-resolved
-// write decisions, runs the Groq model + tool loop to completion, and returns
-// a plain result object. The caller (a route handler) is responsible for
-// streaming or posting that result wherever it needs to go.
+// Orchestrator flow (Phase 3):
+//   1. route(messages)       — one Groq call to pick the specialist agent
+//   2. toolsForAgent(id)     — scoped tool list for that agent only
+//   3. agent.promptAddon     — focused instruction appended to system prompt
+//   4. existing think-loop   — unchanged: reads auto-run, writes → pendingActions
+//   5. getAgentForTool()     — on approval re-run, recover agent from tool name
 //
-// Safety model is identical to the web app:
-//   read tools  → executed automatically, loop continues
-//   write tools → NOT executed; returned as `pendingActions` for the caller
-//                 to present to the user (approval card, Slack buttons, etc.)
-//   decisions   → map of toolCallId → boolean; approved ones execute on re-run
+// runBrain() signature is unchanged — all callers (web, Slack) need no edits.
 
 import OpenAI from "openai";
 import { MINA_SYSTEM_PROMPT } from "./systemPrompt";
 import { memoryBlock } from "./memory";
-import { toolDefsForApi, getTool, isWrite } from "./tools";
-import type { ApiMessage, ActionProposal, ToolCall } from "./types";
+import { getTool, isWrite } from "./tools";
+import { route } from "./router";
+import { toolsForAgent, getAgentForTool, AGENTS } from "./agents";
+import type { ApiMessage, ActionProposal, ToolCall, AgentId } from "./types";
 
-const MODEL = "openai/gpt-oss-120b";
 const MAX_TOKENS = 4096;
 const MAX_LOOPS = 6;
 
@@ -40,6 +39,8 @@ export type BrainResult = {
   pendingActions?: ActionProposal[];
   /** The full message history (input + new turns) — pass back next request. */
   messages: ApiMessage[];
+  /** Which specialist handled this turn (for display + approval resumption). */
+  agent?: AgentId;
   error?: string;
 };
 
@@ -67,12 +68,31 @@ export async function runBrain(opts: {
   const nowLine = `\n\nCurrent date and time: ${new Date().toString()}.`;
   const memBlock = await memoryBlock();
 
+  // Determine which agent to use.
+  // On an approval re-run, recover agent from the pending tool name (stateless).
+  // On a fresh turn, ask the router.
+  let agentId: AgentId;
+  if (opts.decisions) {
+    const last = opts.messages[opts.messages.length - 1];
+    const firstToolName =
+      last?.role === "assistant" && "tool_calls" in last && last.tool_calls
+        ? (last.tool_calls as ToolCall[])[0]?.function.name
+        : undefined;
+    agentId = firstToolName ? getAgentForTool(firstToolName) : "general";
+  } else {
+    agentId = await route(opts.messages);
+  }
+
+  const agent = AGENTS[agentId];
+  const tools = toolsForAgent(agentId);
+
   const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
-    { role: "system", content: MINA_SYSTEM_PROMPT + nowLine + memBlock },
+    {
+      role: "system",
+      content: MINA_SYSTEM_PROMPT + nowLine + memBlock + agent.promptAddon,
+    },
     ...(opts.messages as OpenAI.Chat.Completions.ChatCompletionMessageParam[]),
   ];
-
-  const tools = toolDefsForApi() as OpenAI.Chat.Completions.ChatCompletionTool[];
 
   try {
     // Phase 0: resolve pending write decisions from a previous turn.
@@ -105,7 +125,7 @@ export async function runBrain(opts: {
     // Main loop: call model, run read tools, repeat.
     for (let i = 0; i < MAX_LOOPS; i++) {
       const completion = await client.chat.completions.create({
-        model: MODEL,
+        model: "openai/gpt-oss-120b",
         max_tokens: MAX_TOKENS,
         tools,
         messages,
@@ -167,7 +187,8 @@ export async function runBrain(opts: {
           text,
           cards,
           pendingActions,
-          messages: messages.slice(1) as ApiMessage[], // strip system prompt
+          agent: agentId,
+          messages: messages.slice(1) as ApiMessage[],
         };
       }
 
@@ -183,7 +204,7 @@ export async function runBrain(opts: {
       for (const m of toolMsgs) messages.push(m);
     }
 
-    return { text, cards, messages: messages.slice(1) as ApiMessage[] };
+    return { text, cards, agent: agentId, messages: messages.slice(1) as ApiMessage[] };
   } catch (err) {
     const error =
       err instanceof OpenAI.APIError
