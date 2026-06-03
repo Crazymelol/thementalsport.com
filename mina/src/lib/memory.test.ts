@@ -4,12 +4,21 @@ import { memoryConfigured, scoreMemory } from "./memory";
 afterEach(() => vi.unstubAllEnvs());
 
 describe("memoryConfigured", () => {
-  it("is false when Upstash env vars are missing", () => {
+  it("is false when Redis env vars are missing", () => {
+    vi.stubEnv("KV_REST_API_URL", "");
+    vi.stubEnv("KV_REST_API_TOKEN", "");
     vi.stubEnv("UPSTASH_REDIS_REST_URL", "");
     vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "");
     expect(memoryConfigured()).toBe(false);
   });
-  it("is true only when both are set", () => {
+  it("is true when the KV-style vars are set", () => {
+    vi.stubEnv("KV_REST_API_URL", "https://x.upstash.io");
+    vi.stubEnv("KV_REST_API_TOKEN", "tok");
+    expect(memoryConfigured()).toBe(true);
+  });
+  it("is true when the native Upstash vars are set", () => {
+    vi.stubEnv("KV_REST_API_URL", "");
+    vi.stubEnv("KV_REST_API_TOKEN", "");
     vi.stubEnv("UPSTASH_REDIS_REST_URL", "https://x.upstash.io");
     vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "tok");
     expect(memoryConfigured()).toBe(true);

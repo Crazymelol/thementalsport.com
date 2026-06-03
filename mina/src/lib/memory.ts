@@ -20,18 +20,26 @@ export type Memory = {
   createdAt: string;
 };
 
+// The Vercel Upstash integration provisions KV_REST_API_URL / KV_REST_API_TOKEN.
+// We also accept the native UPSTASH_REDIS_REST_* names as a fallback so the
+// store works regardless of which naming scheme the environment uses.
+function redisUrl(): string | undefined {
+  return process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+}
+function redisToken(): string | undefined {
+  return process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+}
+
 export function memoryConfigured(): boolean {
-  return Boolean(
-    process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN,
-  );
+  return Boolean(redisUrl() && redisToken());
 }
 
 let _client: Redis | null = null;
 function redis(): Redis {
   if (!_client) {
     _client = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+      url: redisUrl()!,
+      token: redisToken()!,
     });
   }
   return _client;
