@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { googleConfigured, GOOGLE_SCOPES, isAuthError, GoogleAuthError } from "./google";
+import { googleConfigured, GOOGLE_SCOPES, isAuthError, GoogleAuthError, driveQuery } from "./google";
 
 afterEach(() => vi.unstubAllEnvs());
 
@@ -28,6 +28,20 @@ describe("GOOGLE_SCOPES", () => {
       "https://www.googleapis.com/auth/spreadsheets",
       "https://www.googleapis.com/auth/contacts",
     ]);
+  });
+});
+
+describe("driveQuery", () => {
+  it("returns trashed=false filter when no search term", () => {
+    expect(driveQuery()).toBe("trashed = false");
+  });
+  it("adds a name contains clause, escaping single quotes", () => {
+    expect(driveQuery("Q1 report")).toBe(
+      "trashed = false and name contains 'Q1 report'",
+    );
+    expect(driveQuery("o'brien")).toBe(
+      "trashed = false and name contains 'o\\'brien'",
+    );
   });
 });
 

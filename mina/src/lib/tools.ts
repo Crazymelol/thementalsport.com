@@ -12,7 +12,18 @@
 import type { Tier } from "./types";
 import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
 import { fetchPage } from "./web";
-import { googleConfigured, listCalendarEvents, createCalendarEvent } from "./google";
+import {
+  googleConfigured,
+  listCalendarEvents,
+  createCalendarEvent,
+  listDriveFiles,
+  readDriveFile,
+  readDoc,
+  createDoc,
+  readSheet,
+  appendSheetRow,
+  searchContacts,
+} from "./google";
 
 export type ToolDef = {
   name: string;
@@ -260,51 +271,264 @@ export const TOOLS: ToolDef[] = [
     }),
   },
 
-  // ---- Files --------------------------------------------------------------
+  // ---- Drive --------------------------------------------------------------
   {
-    name: "list_files",
-    description: "List files in one of the user's allowed folders. Read-only.",
+    name: "search_drive",
+    description:
+      "Search the user's Google Drive by file name, or list recent files if no search term. Read-only. Returns file names and IDs; use read_drive_file to read one.",
     tier: "read",
     input_schema: {
       type: "object",
       properties: {
-        folder: { type: "string", description: "e.g. 'Documents', 'Desktop'." },
+        search: { type: "string", description: "Optional name to search for." },
       },
-      required: ["folder"],
     },
-    run: (input) =>
-      JSON.stringify({
-        folder: str(input.folder, "Documents"),
-        files: ["Q1-report.md", "ideas.txt", "contract-acme.pdf"],
-        note: "STUB DATA — not connected to a real filesystem yet.",
-      }),
+    run: async (input) => {
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          search: str(input.search, ""),
+          files: [
+            { id: "stub1", name: "Q1-report.docx", mimeType: "application/vnd.google-apps.document" },
+            { id: "stub2", name: "ideas.txt", mimeType: "text/plain" },
+            { id: "stub3", name: "contract-acme.pdf", mimeType: "application/pdf" },
+          ],
+          note: "STUB DATA — not connected to Drive yet.",
+        });
+      }
+      try {
+        const data = await listDriveFiles(str(input.search, "") || undefined);
+        return JSON.stringify({ ...data, note: "Live Google Drive." });
+      } catch (e) {
+        return JSON.stringify({
+          search: str(input.search, ""),
+          files: [],
+          error: e instanceof Error ? e.message : "Couldn't reach Google Drive.",
+        });
+      }
+    },
   },
   {
-    name: "write_file",
+    name: "read_drive_file",
     description:
-      "Create or overwrite a file with new contents. This changes the user's files, so it requires confirmation.",
+      "Read the text contents of a Drive file by its ID (get IDs from search_drive). Read-only. Google Docs/Sheets are exported to text.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: {
+        fileId: { type: "string", description: "The Drive file ID." },
+      },
+      required: ["fileId"],
+    },
+    run: async (input) => {
+      const fileId = str(input.fileId);
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          id: fileId,
+          name: "ideas.txt",
+          mimeType: "text/plain",
+          text: "Stub file contents — Drive not connected yet.",
+          note: "STUB DATA — not connected to Drive yet.",
+        });
+      }
+      try {
+        const data = await readDriveFile(fileId);
+        return JSON.stringify({ ...data, note: "Live Google Drive." });
+      } catch (e) {
+        return JSON.stringify({
+          id: fileId,
+          error: e instanceof Error ? e.message : "Couldn't read that file.",
+        });
+      }
+    },
+  },
+
+  // ---- Docs ---------------------------------------------------------------
+  {
+    name: "read_doc",
+    description: "Read the text of a Google Doc by its document ID. Read-only.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: { documentId: { type: "string" } },
+      required: ["documentId"],
+    },
+    run: async (input) => {
+      const documentId = str(input.documentId);
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          id: documentId,
+          title: "Sample Doc",
+          text: "Stub document text — Docs not connected yet.",
+          note: "STUB DATA — not connected to Docs yet.",
+        });
+      }
+      try {
+        const data = await readDoc(documentId);
+        return JSON.stringify({ ...data, note: "Live Google Docs." });
+      } catch (e) {
+        return JSON.stringify({
+          id: documentId,
+          error: e instanceof Error ? e.message : "Couldn't read that doc.",
+        });
+      }
+    },
+  },
+  {
+    name: "create_doc",
+    description:
+      "Create a new Google Doc with a title and body text. WRITES to the user's Drive, so it requires confirmation.",
     tier: "write",
     input_schema: {
       type: "object",
       properties: {
-        path: { type: "string" },
-        contents: { type: "string" },
+        title: { type: "string" },
+        body: { type: "string", description: "The document's text content." },
       },
-      required: ["path", "contents"],
+      required: ["title"],
     },
-    run: (input) =>
-      JSON.stringify({
-        written: true,
-        path: str(input.path),
-        bytes: str(input.contents).length,
-        note: "STUB — pretend this file was written.",
-      }),
+    run: async (input) => {
+      const title = str(input.title);
+      const body = str(input.body, "");
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          created: true,
+          title,
+          note: "STUB — pretend this Doc was created (Drive not connected).",
+        });
+      }
+      try {
+        const res = await createDoc({ title, body });
+        return JSON.stringify({ ...res, note: "Created in Google Docs." });
+      } catch (e) {
+        return JSON.stringify({
+          created: false,
+          title,
+          error: e instanceof Error ? e.message : "Couldn't create the doc.",
+        });
+      }
+    },
     summarize: (input) => {
-      const c = str(input.contents);
+      const b = str(input.body, "");
       return {
-        title: "Write file",
-        detail: `Path: ${str(input.path)}\n\n${c.length > 400 ? c.slice(0, 400) + "…" : c}`,
+        title: "Create Google Doc",
+        detail: `Title: ${str(input.title)}\n\n${b.length > 400 ? b.slice(0, 400) + "…" : b}`,
       };
+    },
+  },
+
+  // ---- Sheets -------------------------------------------------------------
+  {
+    name: "read_sheet",
+    description:
+      "Read cells from a Google Sheet by spreadsheet ID and optional A1 range (e.g. 'Sheet1!A1:C10'). Read-only.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: {
+        spreadsheetId: { type: "string" },
+        range: { type: "string", description: "Optional A1 range." },
+      },
+      required: ["spreadsheetId"],
+    },
+    run: async (input) => {
+      const spreadsheetId = str(input.spreadsheetId);
+      const range = str(input.range, "");
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          id: spreadsheetId,
+          range: range || "A1:Z50",
+          rows: [["Name", "Amount"], ["Alex", "100"], ["Sam", "250"]],
+          note: "STUB DATA — not connected to Sheets yet.",
+        });
+      }
+      try {
+        const data = await readSheet({ spreadsheetId, range: range || undefined });
+        return JSON.stringify({ ...data, note: "Live Google Sheets." });
+      } catch (e) {
+        return JSON.stringify({
+          id: spreadsheetId,
+          error: e instanceof Error ? e.message : "Couldn't read that sheet.",
+        });
+      }
+    },
+  },
+  {
+    name: "append_sheet_row",
+    description:
+      "Append one row of values to a Google Sheet. WRITES to the sheet, so it requires confirmation.",
+    tier: "write",
+    input_schema: {
+      type: "object",
+      properties: {
+        spreadsheetId: { type: "string" },
+        values: { type: "array", items: { type: "string" }, description: "Cell values for the new row." },
+        range: { type: "string", description: "Optional target range (default A1)." },
+      },
+      required: ["spreadsheetId", "values"],
+    },
+    run: async (input) => {
+      const spreadsheetId = str(input.spreadsheetId);
+      const values = Array.isArray(input.values) ? input.values.map((v) => String(v)) : [];
+      const range = str(input.range, "");
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          appended: true,
+          id: spreadsheetId,
+          values,
+          note: "STUB — pretend the row was appended (Sheets not connected).",
+        });
+      }
+      try {
+        const res = await appendSheetRow({ spreadsheetId, values, range: range || undefined });
+        return JSON.stringify({ ...res, note: "Appended to Google Sheets." });
+      } catch (e) {
+        return JSON.stringify({
+          appended: false,
+          id: spreadsheetId,
+          error: e instanceof Error ? e.message : "Couldn't append the row.",
+        });
+      }
+    },
+    summarize: (input) => {
+      const values = Array.isArray(input.values) ? input.values.map((v) => String(v)) : [];
+      return {
+        title: "Append row to Sheet",
+        detail: `Sheet: ${str(input.spreadsheetId)}\nRow: ${values.join(" | ")}`,
+      };
+    },
+  },
+
+  // ---- Contacts -----------------------------------------------------------
+  {
+    name: "search_contacts",
+    description: "Search the user's Google Contacts by name or email. Read-only.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: { query: { type: "string" } },
+      required: ["query"],
+    },
+    run: async (input) => {
+      const query = str(input.query);
+      if (!googleConfigured()) {
+        return JSON.stringify({
+          query,
+          contacts: [
+            { name: "Alex Rivera", email: "alex@acme.com", phone: "+1 555 0100" },
+          ],
+          note: "STUB DATA — not connected to Contacts yet.",
+        });
+      }
+      try {
+        const data = await searchContacts(query);
+        return JSON.stringify({ ...data, note: "Live Google Contacts." });
+      } catch (e) {
+        return JSON.stringify({
+          query,
+          contacts: [],
+          error: e instanceof Error ? e.message : "Couldn't reach Contacts.",
+        });
+      }
     },
   },
 

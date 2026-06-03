@@ -14,7 +14,6 @@ type RevenueData = {
   activeSubscribers: number;
   failedPayments?: number;
 };
-type FileList = { folder: string; files: string[] };
 
 function CalendarCard({ data }: { data: { date: string; events: CalendarEvent[] } }) {
   return (
@@ -92,28 +91,6 @@ function RevenueCard({ data }: { data: RevenueData }) {
   );
 }
 
-function FilesCard({ data }: { data: FileList }) {
-  return (
-    <div className="space-y-2">
-      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
-        📁 Files — {data.folder}
-      </p>
-      {data.files.length === 0 ? (
-        <p className="text-sm text-mina-muted">Empty folder.</p>
-      ) : (
-        <div className="space-y-1">
-          {data.files.map((f) => (
-            <div key={f} className="flex items-center gap-2 rounded-lg bg-black/20 px-3 py-1.5">
-              <span className="text-mina-muted text-xs">◦</span>
-              <span className="text-sm text-mina-text">{f}</span>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 function WebCard({ data }: { data: { url: string; title?: string; text?: string; error?: string } }) {
   let host = data.url;
   try {
@@ -138,6 +115,86 @@ function WebCard({ data }: { data: { url: string; title?: string; text?: string;
   );
 }
 
+function DriveCard({ data }: { data: { search?: string; files: { id: string; name: string; mimeType: string }[] } }) {
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
+        📁 Drive{data.search ? ` — "${data.search}"` : ""}
+      </p>
+      {data.files.length === 0 ? (
+        <p className="text-sm text-mina-muted">No files.</p>
+      ) : (
+        <div className="space-y-1">
+          {data.files.map((f) => (
+            <div key={f.id} className="rounded-lg bg-black/20 px-3 py-1.5">
+              <p className="text-sm text-mina-text">{f.name}</p>
+              <p className="text-[10px] text-mina-muted/70">{f.id}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DocCard({ data }: { data: { title?: string; name?: string; text?: string } }) {
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
+        📄 Doc — {data.title ?? data.name ?? "document"}
+      </p>
+      <p className="max-h-40 overflow-hidden whitespace-pre-wrap text-xs text-mina-muted">
+        {(data.text ?? "").slice(0, 600)}
+      </p>
+    </div>
+  );
+}
+
+function SheetCard({ data }: { data: { rows: string[][] } }) {
+  const rows = data.rows ?? [];
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
+        📊 Sheet
+      </p>
+      <div className="overflow-x-auto">
+        <table className="text-xs text-mina-text">
+          <tbody>
+            {rows.slice(0, 15).map((r, i) => (
+              <tr key={i}>
+                {r.map((c, j) => (
+                  <td key={j} className="border border-mina-edge/40 px-2 py-1">{c}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function ContactsCard({ data }: { data: { query: string; contacts: { name: string; email?: string; phone?: string }[] } }) {
+  return (
+    <div className="space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-mina-accent">
+        👤 Contacts — "{data.query}"
+      </p>
+      {data.contacts.length === 0 ? (
+        <p className="text-sm text-mina-muted">No matches.</p>
+      ) : (
+        data.contacts.map((c, i) => (
+          <div key={i} className="rounded-lg bg-black/20 px-3 py-2">
+            <p className="text-sm text-mina-text">{c.name}</p>
+            {c.email && <p className="text-xs text-mina-muted">{c.email}</p>}
+            {c.phone && <p className="text-xs text-mina-muted">{c.phone}</p>}
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
 export default function ToolResultCard({
   toolName,
   data,
@@ -155,8 +212,14 @@ export default function ToolResultCard({
     inner = <EmailCard data={data as { query: string; results: Email[] }} />;
   } else if (toolName === "get_revenue_summary") {
     inner = <RevenueCard data={data as RevenueData} />;
-  } else if (toolName === "list_files") {
-    inner = <FilesCard data={data as FileList} />;
+  } else if (toolName === "search_drive") {
+    inner = <DriveCard data={data as { search?: string; files: { id: string; name: string; mimeType: string }[] }} />;
+  } else if (toolName === "read_doc" || toolName === "read_drive_file") {
+    inner = <DocCard data={data as { title?: string; name?: string; text?: string }} />;
+  } else if (toolName === "read_sheet") {
+    inner = <SheetCard data={data as { rows: string[][] }} />;
+  } else if (toolName === "search_contacts") {
+    inner = <ContactsCard data={data as { query: string; contacts: { name: string; email?: string; phone?: string }[] }} />;
   } else {
     inner = (
       <div className="space-y-1">
@@ -170,10 +233,18 @@ export default function ToolResultCard({
     );
   }
 
+  const note =
+    data && typeof data === "object" && "note" in data
+      ? String((data as { note?: unknown }).note ?? "")
+      : "";
+  const isStub = /stub/i.test(note);
+
   return (
     <div className="rounded-xl border border-mina-edge/60 bg-mina-panel/80 p-3 text-sm">
       {inner}
-      <p className="mt-2 text-right text-[10px] text-mina-muted/50">sample data · stub</p>
+      <p className="mt-2 text-right text-[10px] text-mina-muted/50">
+        {isStub ? "sample data · stub" : "live"}
+      </p>
     </div>
   );
 }

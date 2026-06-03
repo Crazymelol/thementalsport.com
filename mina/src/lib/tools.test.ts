@@ -28,3 +28,45 @@ describe("create_calendar_event approval card summary", () => {
     expect(s.detail).toMatch(/Call with Alex/);
   });
 });
+
+describe("Google Suite stub fallbacks", () => {
+  function clearGoogle() {
+    vi.stubEnv("GOOGLE_CLIENT_ID", "");
+    vi.stubEnv("GOOGLE_CLIENT_SECRET", "");
+    vi.stubEnv("GOOGLE_REFRESH_TOKEN", "");
+  }
+
+  it("search_drive falls back to stub when Google not configured", async () => {
+    clearGoogle();
+    const out = JSON.parse(await getTool("search_drive")!.run({}));
+    expect(out.note).toMatch(/stub/i);
+    expect(Array.isArray(out.files)).toBe(true);
+  });
+
+  it("read_sheet falls back to stub when Google not configured", async () => {
+    clearGoogle();
+    const out = JSON.parse(await getTool("read_sheet")!.run({ spreadsheetId: "x" }));
+    expect(out.note).toMatch(/stub/i);
+    expect(Array.isArray(out.rows)).toBe(true);
+  });
+
+  it("search_contacts falls back to stub when not configured", async () => {
+    clearGoogle();
+    const out = JSON.parse(await getTool("search_contacts")!.run({ query: "alex" }));
+    expect(out.note).toMatch(/stub/i);
+  });
+});
+
+describe("Google Suite approval cards", () => {
+  it("create_doc summarize produces an approval card", () => {
+    const card = getTool("create_doc")!.summarize!({ title: "Notes", body: "hello world" });
+    expect(card.title).toMatch(/Doc/i);
+    expect(card.detail).toMatch(/hello world/);
+  });
+
+  it("append_sheet_row summarize produces an approval card", () => {
+    const card = getTool("append_sheet_row")!.summarize!({ spreadsheetId: "x", values: ["Alex", "100"] });
+    expect(card.title).toMatch(/row/i);
+    expect(card.detail).toMatch(/Alex/);
+  });
+});
