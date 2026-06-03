@@ -128,3 +128,23 @@ describe("self-improvement tools", () => {
     expect(JSON.parse(out)).toHaveProperty("improvements");
   });
 });
+
+describe("finance / stripe tools", () => {
+  it("registers all three finance tools with correct tiers", () => {
+    expect(getTool("get_revenue_summary")?.tier).toBe("read");
+    expect(getTool("list_recent_payments")?.tier).toBe("read");
+    expect(isWrite("issue_refund")).toBe(true);
+  });
+
+  it("get_revenue_summary returns stub data when Stripe is not configured", async () => {
+    const out = JSON.parse(await getTool("get_revenue_summary")!.run({ period: "this month" }));
+    expect(out.note).toContain("STUB");
+    expect(out).toHaveProperty("grossUSD");
+  });
+
+  it("issue_refund summary describes the charge and amount", () => {
+    const s = getTool("issue_refund")!.summarize!({ chargeId: "ch_123", amountUSD: 49.5 });
+    expect(s.detail).toContain("ch_123");
+    expect(s.detail).toContain("$49.50");
+  });
+});

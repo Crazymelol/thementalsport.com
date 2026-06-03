@@ -51,9 +51,9 @@ export const AGENTS: Record<AgentId, AgentDef> = {
   finance: {
     id: "finance",
     label: "Finance",
-    toolNames: ["get_revenue_summary", "issue_refund"],
+    toolNames: ["get_revenue_summary", "list_recent_payments", "issue_refund"],
     promptAddon:
-      "\n\n# Your role\nYou are Jarvis's finance specialist. Only use finance tools. Refunds always require explicit double-confirmation — always show the amount and recipient before requesting approval.",
+      "\n\n# Your role\nYou are Jarvis's finance specialist. Only use finance tools. To refund, first use list_recent_payments to find the exact charge id, then issue_refund against it. Refunds always require explicit double-confirmation — always show the amount and charge before requesting approval.",
   },
   general: {
     id: "general",

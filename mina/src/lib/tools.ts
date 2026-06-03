@@ -13,6 +13,7 @@ import type { Tier } from "./types";
 import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
 import { fetchPage } from "./web";
 import { memoryConfigured, addMemory, searchMemories, deleteMemory } from "./memory";
+import { stripeConfigured, getRevenueSummary, listRecentPayments, issueRefund } from "./stripe";
 import {
   addAddendum,
   removeAddendum,
@@ -232,52 +233,113 @@ export const TOOLS: ToolDef[] = [
   // ---- Stripe / finance ---------------------------------------------------
   {
     name: "get_revenue_summary",
-    description: "Read a revenue / payments summary from Stripe. Read-only.",
+    description:
+      "Read a revenue / payments summary from Stripe for a period (gross revenue net of refunds, payment count, active subscribers, failed payments). Read-only.",
     tier: "read",
     input_schema: {
       type: "object",
       properties: {
-        period: { type: "string", description: "e.g. 'this month', 'last 7 days'." },
+        period: { type: "string", description: "e.g. 'this month', 'last 7 days', 'today', 'this year'." },
       },
       required: ["period"],
     },
-    run: (input) =>
-      JSON.stringify({
-        period: str(input.period, "this month"),
-        grossUSD: 8420.0,
-        payments: 17,
-        activeSubscribers: 42,
-        failedPayments: 1,
-        note: "STUB DATA — not connected to a real Stripe account yet.",
-      }),
+    run: async (input) => {
+      const period = str(input.period, "this month");
+      if (!stripeConfigured()) {
+        return JSON.stringify({
+          period,
+          grossUSD: 8420.0,
+          payments: 17,
+          activeSubscribers: 42,
+          failedPayments: 1,
+          note: "STUB DATA — not connected to a real Stripe account yet.",
+        });
+      }
+      try {
+        const summary = await getRevenueSummary(period);
+        return JSON.stringify({ ...summary, note: "Live Stripe." });
+      } catch (e) {
+        return JSON.stringify({
+          period,
+          error: e instanceof Error ? e.message : "Couldn't reach Stripe.",
+        });
+      }
+    },
+  },
+  {
+    name: "list_recent_payments",
+    description:
+      "List recent Stripe charges (id, amount, status, customer, date). Read-only. Use this to find the charge id needed before issuing a refund.",
+    tier: "read",
+    input_schema: {
+      type: "object",
+      properties: {
+        limit: { type: "number", description: "How many recent charges to return (default 10, max 100)." },
+      },
+    },
+    run: async (input) => {
+      const limit = typeof input.limit === "number" ? input.limit : 10;
+      if (!stripeConfigured()) {
+        return JSON.stringify({
+          payments: [
+            { id: "ch_STUB1", amountUSD: 149.0, refundedUSD: 0, status: "succeeded", customer: "alex@example.com", created: "2026-06-02", description: "Pro plan" },
+            { id: "ch_STUB2", amountUSD: 49.0, refundedUSD: 0, status: "succeeded", customer: "sam@example.com", created: "2026-06-01", description: "Starter plan" },
+          ],
+          note: "STUB DATA — not connected to a real Stripe account yet.",
+        });
+      }
+      try {
+        const payments = await listRecentPayments(limit);
+        return JSON.stringify({ payments, note: "Live Stripe." });
+      } catch (e) {
+        return JSON.stringify({ payments: [], error: e instanceof Error ? e.message : "Couldn't reach Stripe." });
+      }
+    },
   },
   {
     name: "issue_refund",
     description:
-      "Issue a refund for a charge. This moves real money and is hard to reverse, so it ALWAYS requires explicit user confirmation.",
+      "Issue a refund against a Stripe charge id (get ids from list_recent_payments). Optionally partial via amountUSD; omit to refund the full charge. This moves real money and is hard to reverse, so it ALWAYS requires explicit user confirmation.",
     tier: "write",
     input_schema: {
       type: "object",
       properties: {
-        customer: { type: "string" },
-        amountUSD: { type: "number" },
-        reason: { type: "string" },
+        chargeId: { type: "string", description: "The Stripe charge id, e.g. 'ch_...'." },
+        amountUSD: { type: "number", description: "Optional partial amount; omit for a full refund." },
+        reason: {
+          type: "string",
+          description: "Optional: 'duplicate', 'fraudulent', or 'requested_by_customer'.",
+        },
       },
-      required: ["customer", "amountUSD"],
+      required: ["chargeId"],
     },
-    run: (input) =>
-      JSON.stringify({
-        refunded: true,
-        customer: str(input.customer),
-        amountUSD: typeof input.amountUSD === "number" ? input.amountUSD : 0,
-        note: "STUB — pretend this refund was issued.",
-      }),
-    summarize: (input) => ({
-      title: "Issue refund",
-      detail: `Refund $${typeof input.amountUSD === "number" ? input.amountUSD.toFixed(2) : "?"} to ${str(
-        input.customer,
-      )}${input.reason ? `\nReason: ${str(input.reason)}` : ""}`,
-    }),
+    run: async (input) => {
+      const chargeId = str(input.chargeId);
+      const amountUSD = typeof input.amountUSD === "number" ? input.amountUSD : undefined;
+      const reason = str(input.reason) || undefined;
+      if (!chargeId) return JSON.stringify({ refunded: false, error: "No charge id provided." });
+      if (!stripeConfigured()) {
+        return JSON.stringify({
+          refunded: true,
+          chargeId,
+          amountUSD: amountUSD ?? 0,
+          note: "STUB — pretend this refund was issued (Stripe not connected).",
+        });
+      }
+      try {
+        const res = await issueRefund({ chargeId, amountUSD, reason });
+        return JSON.stringify({ ...res, note: res.refunded ? "Refund issued." : "Refund not completed." });
+      } catch (e) {
+        return JSON.stringify({ refunded: false, chargeId, error: e instanceof Error ? e.message : "Refund failed." });
+      }
+    },
+    summarize: (input) => {
+      const amt = typeof input.amountUSD === "number" ? `$${input.amountUSD.toFixed(2)}` : "full amount";
+      return {
+        title: "Issue refund",
+        detail: `Refund ${amt} on charge ${str(input.chargeId)}${input.reason ? `\nReason: ${str(input.reason)}` : ""}`,
+      };
+    },
   },
 
   // ---- Drive --------------------------------------------------------------
