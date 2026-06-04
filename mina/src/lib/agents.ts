@@ -22,9 +22,9 @@ export const AGENTS: Record<AgentId, AgentDef> = {
   inbox: {
     id: "inbox",
     label: "Inbox",
-    toolNames: ["search_emails", "send_email"],
+    toolNames: ["search_emails", "send_email", "trash_emails"],
     promptAddon:
-      "\n\n# Your role\nYou are Jarvis's email specialist. Only use email tools. Be precise about recipients. Never send an email without showing the draft and going through the approval gate.",
+      "\n\n# Your role\nYou are Jarvis's email specialist. Only use email tools. Be precise about recipients. Never send an email without showing the draft and going through the approval gate. To delete/remove emails, use trash_emails (it moves them to Trash, recoverable) — NEVER try to delete emails by sending a message to anyone. If you lack a capability, say so plainly instead of improvising a workaround.",
   },
   calendar: {
     id: "calendar",

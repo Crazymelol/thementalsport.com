@@ -10,7 +10,7 @@
 // `run()` body with a real API call. The rest of the system is unchanged.
 
 import type { Tier } from "./types";
-import { gmailConfigured, searchEmails, sendEmail } from "./gmail";
+import { gmailConfigured, searchEmails, sendEmail, trashEmails } from "./gmail";
 import { fetchPage } from "./web";
 import { memoryConfigured, addMemory, searchMemories, deleteMemory } from "./memory";
 import { stripeConfigured, getRevenueSummary, listRecentPayments, issueRefund } from "./stripe";
@@ -227,6 +227,50 @@ export const TOOLS: ToolDef[] = [
     summarize: (input) => ({
       title: "Send email",
       detail: `To: ${str(input.to)}\nSubject: ${str(input.subject)}\n\n${str(input.body)}`,
+    }),
+  },
+
+  {
+    name: "trash_emails",
+    description:
+      "Move all inbox emails matching a query (e.g. a sender name like 'eurobank') to Gmail Trash. Destructive but recoverable (Gmail keeps trashed mail ~30 days). ALWAYS requires explicit user confirmation. Only use when the user clearly asks to delete/remove/clear emails.",
+    tier: "write",
+    input_schema: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "What to match — usually a sender, e.g. 'eurobank'." },
+      },
+      required: ["query"],
+    },
+    run: async (input) => {
+      const query = str(input.query);
+      if (!query) return JSON.stringify({ trashed: 0, error: "No query provided." });
+      if (!gmailConfigured()) {
+        return JSON.stringify({
+          trashed: 3,
+          query,
+          note: "STUB — pretend these were trashed (Gmail not connected).",
+        });
+      }
+      try {
+        const res = await trashEmails(query);
+        return JSON.stringify({
+          ...res,
+          note: res.trashed
+            ? `Moved ${res.trashed} email(s) to Trash.`
+            : "No matching emails found.",
+        });
+      } catch (e) {
+        return JSON.stringify({
+          trashed: 0,
+          query,
+          error: `Couldn't trash emails: ${e instanceof Error ? e.message : "unknown error"}`,
+        });
+      }
+    },
+    summarize: (input) => ({
+      title: "Move emails to Trash",
+      detail: `Trash all inbox emails matching “${str(input.query)}”.\n\nThis is recoverable — Gmail keeps trashed mail for ~30 days.`,
     }),
   },
 
