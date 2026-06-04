@@ -36,5 +36,6 @@ export type ServerEvent =
   | { type: "tool_result"; messages: ApiMessage[] }
   | { type: "tool_card"; toolName: string; data: unknown }
   | { type: "action_required"; actions: ActionProposal[] }
+  | { type: "agent"; agentId: AgentId }
   | { type: "done" }
   | { type: "error"; message: string };
