@@ -41,5 +41,11 @@ export function getProviders(): Provider[] {
       "https://openrouter.ai/api/v1",
       "nousresearch/hermes-3-llama-3.1-405b:free",
     ),
+    make(
+      "Gemini",
+      process.env.GEMINI_API_KEY,
+      "https://generativelanguage.googleapis.com/v1beta/openai/",
+      "gemini-2.0-flash",
+    ),
   ].filter(Boolean) as Provider[];
 }
