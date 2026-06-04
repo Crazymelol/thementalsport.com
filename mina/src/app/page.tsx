@@ -54,6 +54,8 @@ export default function Home() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [tick, setTick] = useState(0);
+  const [errors, setErrors] = useState<{ msg: string; time: string }[]>([]);
+  const [errOpen, setErrOpen] = useState(false);
 
   const convoRef = useRef<ApiMessage[]>([]);
   const streamingRef = useRef("");
@@ -175,6 +177,10 @@ export default function Home() {
               break;
             case "error":
               addMessage("system", `⚠️ ${event.message}`);
+              setErrors((prev) => [
+                { msg: event.message, time: new Date().toLocaleTimeString("en-GB") },
+                ...prev.slice(0, 19),
+              ]);
               break;
             case "done":
               break;
@@ -354,6 +360,49 @@ export default function Home() {
             </button>
 
             {/* Status indicator */}
+            {/* Error counter */}
+            <div className="relative">
+              <button
+                onClick={() => setErrOpen((v) => !v)}
+                className="flex items-center gap-1.5 px-2 py-1 rounded hud-panel transition"
+                style={errors.length > 0 ? { borderColor: "rgba(255,50,50,0.4)" } : {}}
+              >
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{
+                    background: errors.length > 0 ? "#ff4466" : "rgba(0,212,255,0.2)",
+                    boxShadow: errors.length > 0 ? "0 0 6px #ff4466" : "none",
+                  }}
+                />
+                <span className="hud-label" style={errors.length > 0 ? { color: "#ff4466" } : {}}>
+                  ERR {errors.length}
+                </span>
+              </button>
+
+              {errOpen && errors.length > 0 && (
+                <div
+                  className="absolute right-0 top-8 z-50 w-80 rounded p-3 space-y-2 max-h-64 overflow-y-auto scroll-slim"
+                  style={{ background: "rgba(5,0,10,0.97)", border: "1px solid rgba(255,50,50,0.3)" }}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="hud-label" style={{ color: "#ff4466" }}>ERROR LOG</p>
+                    <button
+                      onClick={() => { setErrors([]); setErrOpen(false); }}
+                      className="hud-label hover:text-mina-danger transition"
+                    >
+                      CLEAR
+                    </button>
+                  </div>
+                  {errors.map((e, i) => (
+                    <div key={i} className="rounded p-2" style={{ background: "rgba(255,50,50,0.06)", border: "1px solid rgba(255,50,50,0.15)" }}>
+                      <p className="hud-label mb-0.5" style={{ color: "#ff4466" }}>{e.time}</p>
+                      <p className="text-[10px] font-mono text-mina-text leading-relaxed">{e.msg}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <div className="flex items-center gap-1.5 px-2 py-1 rounded hud-panel">
               <span
                 className="h-1.5 w-1.5 rounded-full animate-pulse"
