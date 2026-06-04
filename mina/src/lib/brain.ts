@@ -16,6 +16,7 @@ import { addendaBlock } from "./promptStore";
 import { getTool, isWrite } from "./tools";
 import { route } from "./router";
 import { toolsForAgent, getAgentForTool, AGENTS } from "./agents";
+import { getProviders } from "./providers";
 import type { ApiMessage, ActionProposal, ToolCall, AgentId } from "./types";
 
 const MAX_TOKENS = 4096;
@@ -45,13 +46,6 @@ export type BrainResult = {
   error?: string;
 };
 
-function groqClient(): OpenAI {
-  return new OpenAI({
-    apiKey: process.env.GROQ_API_KEY!,
-    baseURL: "https://api.groq.com/openai/v1",
-  });
-}
-
 export async function runBrain(opts: {
   /** Conversation so far (no system prompt — we prepend it). */
   messages: ApiMessage[];
@@ -61,11 +55,10 @@ export async function runBrain(opts: {
   const cards: ToolCard[] = [];
   let text = "";
 
-  if (!process.env.GROQ_API_KEY) {
-    return { text: "", cards, error: "No GROQ_API_KEY configured.", messages: opts.messages };
+  const providers = getProviders();
+  if (providers.length === 0) {
+    return { text: "", cards, error: "No AI provider configured. Add GROQ_API_KEY, NVIDIA_API_KEY, or OPENROUTER_API_KEY.", messages: opts.messages };
   }
-
-  const client = groqClient();
   const nowLine = `\n\nCurrent date and time: ${new Date().toString()}.`;
   const memBlock = await memoryBlock();
 
@@ -137,27 +130,19 @@ export async function runBrain(opts: {
 
     // Main loop: call model, run read tools, repeat.
     for (let i = 0; i < MAX_LOOPS; i++) {
-      // Retry up to 3x on 429 rate-limit with exponential backoff.
-      let completion!: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>;
-      for (let attempt = 0; attempt < 3; attempt++) {
-        try {
-          completion = await client.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+      // Race all providers — first successful response wins (Plan C).
+      // Each provider call is wrapped so rejections don't crash Promise.any.
+      const completion = await Promise.any(
+        providers.map((p) =>
+          p.client.chat.completions.create({
+            model: p.model,
             max_tokens: MAX_TOKENS,
             tools,
             messages,
             stream: true,
-          } as OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming);
-          break;
-        } catch (err: unknown) {
-          const status = (err as { status?: number }).status;
-          if (status === 429 && attempt < 2) {
-            await new Promise((r) => setTimeout(r, 1000 * 2 ** attempt));
-          } else {
-            throw err;
-          }
-        }
-      }
+          } as OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming),
+        ),
+      );
 
       let turnText = "";
       const acc = new Map<number, { id: string; name: string; args: string }>();
