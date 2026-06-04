@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 const PLAYLIST_ID = 'PL4B1unWiRnWAEY7O83SLhYUbG9IN9jDc5';
 const STORAGE_KEY = 'mpp_access';
+const COURSE_PASSWORD = 'MINDSET';
 
 const modules = [
     { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
@@ -33,8 +34,7 @@ export default function AccessClient() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const correct = process.env.NEXT_PUBLIC_COURSE_PASSWORD;
-        if (correct && password === correct) {
+        if (password.trim().toUpperCase() === COURSE_PASSWORD) {
             localStorage.setItem(STORAGE_KEY, 'true');
             setUnlocked(true);
             setError(false);
