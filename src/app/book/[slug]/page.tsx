@@ -80,19 +80,6 @@ export default async function BookPage({ params }: PageProps) {
         "description": book.description,
         "image": book.coverImage,
         "isbn": book.asin,
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "reviewCount": book.reviews.length.toString()
-        },
-        "review": book.reviews.map(review => ({
-            "@type": "Review",
-            "author": {
-                "@type": "Person",
-                "name": review.author
-            },
-            "reviewBody": review.quote
-        })),
         "offers": {
             "@type": "Offer",
             "url": AMAZON_LINK,
