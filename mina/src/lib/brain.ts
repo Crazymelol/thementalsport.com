@@ -16,10 +16,36 @@ import { addendaBlock } from "./promptStore";
 import { getTool, isWrite } from "./tools";
 import { route } from "./router";
 import { toolsForAgent, getAgentForTool, AGENTS } from "./agents";
+import { getProviders } from "./providers";
 import type { ApiMessage, ActionProposal, ToolCall, AgentId } from "./types";
 
 const MAX_TOKENS = 4096;
 const MAX_LOOPS = 6;
+// How long to wait for a provider to open a stream before moving to the next.
+const OPEN_TIMEOUT_MS = 12_000;
+// How long to wait between stream chunks before declaring the stream stalled.
+const IDLE_TIMEOUT_MS = 20_000;
+
+/**
+ * Wrap a chat completion stream so a mid-stream stall can't hang the turn.
+ * If no chunk arrives within IDLE_TIMEOUT_MS, the iterator throws and the
+ * caller's try/catch surfaces an error instead of spinning forever.
+ */
+async function* withIdleTimeout(
+  stream: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>,
+): AsyncGenerator<OpenAI.Chat.Completions.ChatCompletionChunk> {
+  const it = stream[Symbol.asyncIterator]();
+  for (;;) {
+    const next = await Promise.race([
+      it.next(),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("Stream stalled (idle timeout).")), IDLE_TIMEOUT_MS),
+      ),
+    ]);
+    if (next.done) return;
+    yield next.value;
+  }
+}
 
 const parseArgs = (raw: string): Record<string, unknown> => {
   try {
@@ -45,13 +71,6 @@ export type BrainResult = {
   error?: string;
 };
 
-function groqClient(): OpenAI {
-  return new OpenAI({
-    apiKey: process.env.GROQ_API_KEY!,
-    baseURL: "https://api.groq.com/openai/v1",
-  });
-}
-
 export async function runBrain(opts: {
   /** Conversation so far (no system prompt — we prepend it). */
   messages: ApiMessage[];
@@ -61,11 +80,10 @@ export async function runBrain(opts: {
   const cards: ToolCard[] = [];
   let text = "";
 
-  if (!process.env.GROQ_API_KEY) {
-    return { text: "", cards, error: "No GROQ_API_KEY configured.", messages: opts.messages };
+  const providers = getProviders();
+  if (providers.length === 0) {
+    return { text: "", cards, error: "No AI provider configured. Add GROQ_API_KEY, NVIDIA_API_KEY, or OPENROUTER_API_KEY.", messages: opts.messages };
   }
-
-  const client = groqClient();
   const nowLine = `\n\nCurrent date and time: ${new Date().toString()}.`;
   const memBlock = await memoryBlock();
 
@@ -137,19 +155,37 @@ export async function runBrain(opts: {
 
     // Main loop: call model, run read tools, repeat.
     for (let i = 0; i < MAX_LOOPS; i++) {
-      const completion = await client.chat.completions.create({
-        model: "openai/gpt-oss-120b",
-        max_tokens: MAX_TOKENS,
-        tools,
-        messages,
-        stream: true,
-        reasoning_format: "hidden",
-      } as OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming);
+      // The council: try providers in order, each guarded by a timeout. Groq is
+      // first (fast + reliable at tool calls); NVIDIA then OpenRouter back it up.
+      // A provider that errors or doesn't return a stream within OPEN_TIMEOUT_MS
+      // is skipped so a stalled free model can never hang the whole turn.
+      let completion: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk> | null = null;
+      let lastErr: unknown;
+      for (const p of providers) {
+        try {
+          completion = await Promise.race([
+            p.client.chat.completions.create({
+              model: p.model,
+              max_tokens: MAX_TOKENS,
+              tools,
+              messages,
+              stream: true,
+            } as OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming),
+            new Promise<never>((_, reject) =>
+              setTimeout(() => reject(new Error(`${p.name} open timeout`)), OPEN_TIMEOUT_MS),
+            ),
+          ]);
+          break;
+        } catch (err) {
+          lastErr = err;
+        }
+      }
+      if (!completion) throw lastErr ?? new Error("All providers failed.");
 
       let turnText = "";
       const acc = new Map<number, { id: string; name: string; args: string }>();
 
-      for await (const chunk of completion) {
+      for await (const chunk of withIdleTimeout(completion)) {
         const delta = chunk.choices[0]?.delta;
         if (!delta) continue;
         if (delta.content) turnText += delta.content;
