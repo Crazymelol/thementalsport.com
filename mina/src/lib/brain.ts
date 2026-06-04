@@ -137,14 +137,27 @@ export async function runBrain(opts: {
 
     // Main loop: call model, run read tools, repeat.
     for (let i = 0; i < MAX_LOOPS; i++) {
-      const completion = await client.chat.completions.create({
-        model: "openai/gpt-oss-120b",
-        max_tokens: MAX_TOKENS,
-        tools,
-        messages,
-        stream: true,
-        reasoning_format: "hidden",
-      } as OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming);
+      // Retry up to 3x on 429 rate-limit with exponential backoff.
+      let completion!: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          completion = await client.chat.completions.create({
+            model: "moonshotai/kimi-k2-instruct",
+            max_tokens: MAX_TOKENS,
+            tools,
+            messages,
+            stream: true,
+          } as OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming);
+          break;
+        } catch (err: unknown) {
+          const status = (err as { status?: number }).status;
+          if (status === 429 && attempt < 2) {
+            await new Promise((r) => setTimeout(r, 1000 * 2 ** attempt));
+          } else {
+            throw err;
+          }
+        }
+      }
 
       let turnText = "";
       const acc = new Map<number, { id: string; name: string; args: string }>();
