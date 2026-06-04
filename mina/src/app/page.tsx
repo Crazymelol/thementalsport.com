@@ -609,10 +609,21 @@ function ThinkingDots() {
 
 function HudMessage({ role, text }: { role: "user" | "mina" | "system"; text: string }) {
   if (role === "system") {
+    const isError = text.startsWith("⚠️");
     return (
-      <p className="text-center hud-label py-1 tracking-widest">
+      <div
+        className="mx-auto max-w-lg rounded px-4 py-2 text-center text-xs font-mono"
+        style={isError ? {
+          background: "rgba(255,50,50,0.1)",
+          border: "1px solid rgba(255,50,50,0.3)",
+          color: "#ff6688",
+        } : {
+          color: "rgba(0,212,255,0.5)",
+          letterSpacing: "0.1em",
+        }}
+      >
         {text}
-      </p>
+      </div>
     );
   }
 
