@@ -46,6 +46,10 @@ export async function POST(req: Request) {
           decisions: body.decisions,
         });
 
+        if (result.agent) {
+          send({ type: "agent", agentId: result.agent });
+        }
+
         if (result.error) {
           send({ type: "error", message: result.error });
           send({ type: "done" });

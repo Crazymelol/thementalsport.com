@@ -4,9 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import MinaOrb, { type MinaState } from "@/components/MinaOrb";
 import ActionCard from "@/components/ActionCard";
 import ToolResultCard from "@/components/ToolResultCard";
+import Sidebar from "@/components/Sidebar";
 import { useVoice } from "@/hooks/useVoice";
 import type {
   ActionProposal,
+  AgentId,
   ApiMessage,
   ServerEvent,
 } from "@/lib/types";
@@ -48,6 +50,9 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [speakEnabled, setSpeakEnabled] = useState(true);
   const [hydrated, setHydrated] = useState(false);
+  const [agentId, setAgentId] = useState<AgentId | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const convoRef = useRef<ApiMessage[]>([]);
   const streamingRef = useRef("");
@@ -58,7 +63,6 @@ export default function Home() {
 
   const voice = useVoice();
 
-  // Restore session from sessionStorage on first mount
   useEffect(() => {
     const saved = loadSession();
     if (saved) {
@@ -105,6 +109,7 @@ export default function Home() {
     setPending([]);
     setStreaming("");
     streamingRef.current = "";
+    setAgentId(null);
     voice.cancelSpeak();
     try {
       sessionStorage.removeItem(STORAGE_KEY);
@@ -145,7 +150,6 @@ export default function Home() {
               }
               streamingRef.current = "";
               setStreaming("");
-              // Persist after assistant message
               saveSession(bubblesRef.current, convoRef.current);
               break;
             }
@@ -158,6 +162,9 @@ export default function Home() {
             case "action_required":
               decisionsRef.current = {};
               setPending(event.actions);
+              break;
+            case "agent":
+              setAgentId(event.agentId);
               break;
             case "error":
               addMessage("system", `⚠️ ${event.message}`);
@@ -188,6 +195,7 @@ export default function Home() {
         streamingRef.current = "";
         setStreaming("");
         setLoading(false);
+        setRefreshKey((k) => k + 1);
       }
     },
     [addBubble, addMessage, speakEnabled, voice],
@@ -241,143 +249,175 @@ export default function Home() {
   const isEmpty = bubbles.length === 0 && !streaming;
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 py-6">
-      {/* Header */}
-      <header className="mb-4 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold tracking-tight text-mina-text">Mike</h1>
-          <p className="text-xs text-mina-muted">Your AI right hand · prototype</p>
-        </div>
-        <div className="flex items-center gap-2">
-          {bubbles.length > 0 && (
+    <div className="flex h-screen overflow-hidden bg-mina-bg">
+      {/* ── Main chat column ── */}
+      <main className="flex flex-1 flex-col min-w-0 px-4 py-6 overflow-hidden">
+        {/* Header */}
+        <header className="mb-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight text-mina-text">Mike</h1>
+            <p className="text-xs text-mina-muted">Your AI right hand · prototype</p>
+          </div>
+          <div className="flex items-center gap-2">
+            {bubbles.length > 0 && (
+              <button
+                onClick={clearConversation}
+                className="rounded-lg px-3 py-1.5 text-xs text-mina-muted hover:text-mina-text transition"
+              >
+                Clear
+              </button>
+            )}
             <button
-              onClick={clearConversation}
-              className="rounded-lg px-3 py-1.5 text-xs text-mina-muted hover:text-mina-text transition"
-              title="Clear conversation"
+              onClick={() => setSpeakEnabled((v) => !v)}
+              className="rounded-lg border border-mina-edge px-3 py-1.5 text-sm text-mina-muted hover:text-mina-text transition"
             >
-              Clear
+              {speakEnabled ? "🔊" : "🔇"}
             </button>
+            {/* Mobile sidebar toggle */}
+            <button
+              onClick={() => setSidebarOpen((v) => !v)}
+              className="lg:hidden rounded-lg border border-mina-edge px-3 py-1.5 text-sm text-mina-muted hover:text-mina-text transition"
+              title="Show dashboard"
+            >
+              ☰
+            </button>
+          </div>
+        </header>
+
+        {/* Orb */}
+        <div className="my-4">
+          <MinaOrb state={orbState} />
+        </div>
+
+        {/* Conversation */}
+        <div
+          ref={scrollRef}
+          className="scroll-slim mb-4 flex-1 space-y-3 overflow-y-auto rounded-xl border border-mina-edge bg-mina-panel/50 p-4"
+        >
+          {isEmpty && (
+            <div className="space-y-3 text-sm text-mina-muted">
+              <p className="font-medium text-mina-text/70">At your service. You might ask:</p>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {[
+                  { q: "What's on my calendar today?", icon: "📅" },
+                  { q: "Draft a reply to Alex accepting the proposal.", icon: "✉️" },
+                  { q: "How much revenue did I make this month?", icon: "💳" },
+                  { q: "Refund Alex's last charge.", icon: "⚠️" },
+                ].map(({ q, icon }) => (
+                  <button
+                    key={q}
+                    onClick={() => sendText(q)}
+                    disabled={loading}
+                    className="flex items-start gap-2 rounded-lg border border-mina-edge bg-mina-panel/60 px-3 py-2 text-left text-xs text-mina-muted hover:border-mina-accent/50 hover:text-mina-text transition disabled:opacity-40"
+                  >
+                    <span className="shrink-0">{icon}</span>
+                    <span>{q}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
+
+          {bubbles.map((b) => {
+            if (b.kind === "tool_card") {
+              return <ToolResultCard key={b.id} toolName={b.toolName} data={b.data} />;
+            }
+            return <Message key={b.id} role={b.role} text={b.text} />;
+          })}
+
+          {streaming && <Message role="mina" text={streaming} />}
+
+          {loading && !streaming && pending.length === 0 && (
+            <div className="flex justify-start">
+              <div className="rounded-2xl border border-mina-edge bg-mina-panel px-4 py-3">
+                <ThinkingDots />
+              </div>
+            </div>
+          )}
+
+          {pending.map((a) => (
+            <ActionCard
+              key={a.id}
+              action={a}
+              disabled={loading}
+              onApprove={() => decide(a.id, true)}
+              onDeny={() => decide(a.id, false)}
+            />
+          ))}
+        </div>
+
+        {/* Composer */}
+        <div className="flex items-center gap-2">
           <button
-            onClick={() => setSpeakEnabled((v) => !v)}
-            className="rounded-lg border border-mina-edge px-3 py-1.5 text-sm text-mina-muted hover:text-mina-text transition"
-            title={speakEnabled ? "Mute Mike's voice" : "Unmute Mike's voice"}
+            onClick={micClick}
+            disabled={!voice.sttSupported || loading}
+            className={[
+              "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg transition",
+              voice.listening
+                ? "bg-mina-accent text-black shadow-[0_0_16px_-2px] shadow-mina-accent/70"
+                : "border border-mina-edge text-mina-muted hover:border-mina-accent/50 hover:text-mina-text",
+              !voice.sttSupported ? "opacity-40" : "",
+            ].join(" ")}
           >
-            {speakEnabled ? "🔊 Voice on" : "🔇 Voice off"}
+            🎤
+          </button>
+          <input
+            ref={inputRef}
+            value={voice.listening && voice.interim ? voice.interim : input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendText(input);
+              }
+            }}
+            placeholder={voice.listening ? "Listening…" : "Message Mike…"}
+            disabled={loading}
+            className="h-11 flex-1 rounded-full border border-mina-edge bg-mina-panel px-4 text-sm outline-none placeholder:text-mina-muted focus:border-mina-accent/70 disabled:opacity-50 transition"
+          />
+          <button
+            onClick={() => sendText(input)}
+            disabled={loading || !input.trim()}
+            className="h-11 rounded-full bg-mina-accent px-5 text-sm font-semibold text-black transition hover:brightness-110 disabled:opacity-40"
+          >
+            Send
           </button>
         </div>
-      </header>
 
-      {/* Orb */}
-      <div className="my-6">
-        <MinaOrb state={orbState} />
-      </div>
-
-      {/* Conversation */}
-      <div
-        ref={scrollRef}
-        className="scroll-slim mb-4 flex-1 space-y-3 overflow-y-auto rounded-xl border border-mina-edge bg-mina-panel/50 p-4"
-        style={{ minHeight: "300px", maxHeight: "calc(100vh - 340px)" }}
-      >
-        {isEmpty && (
-          <div className="space-y-3 text-sm text-mina-muted">
-            <p className="font-medium text-mina-text/70">At your service. You might ask:</p>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {[
-                { q: "What's on my calendar today?", icon: "📅" },
-                { q: "Draft a reply to Alex accepting the proposal.", icon: "✉️" },
-                { q: "How much revenue did I make this month?", icon: "💳" },
-                { q: "Refund Alex's last charge.", icon: "⚠️" },
-              ].map(({ q, icon }) => (
-                <button
-                  key={q}
-                  onClick={() => sendText(q)}
-                  disabled={loading}
-                  className="flex items-start gap-2 rounded-lg border border-mina-edge bg-mina-panel/60 px-3 py-2 text-left text-xs text-mina-muted hover:border-mina-accent/50 hover:text-mina-text transition disabled:opacity-40"
-                >
-                  <span className="shrink-0">{icon}</span>
-                  <span>{q}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+        {!voice.sttSupported && (
+          <p className="mt-2 text-center text-xs text-mina-muted">
+            Voice input needs Chrome or Edge.
+          </p>
         )}
+      </main>
 
-        {bubbles.map((b) => {
-          if (b.kind === "tool_card") {
-            return <ToolResultCard key={b.id} toolName={b.toolName} data={b.data} />;
-          }
-          return <Message key={b.id} role={b.role} text={b.text} />;
-        })}
-
-        {/* Streaming text bubble */}
-        {streaming && <Message role="mina" text={streaming} />}
-
-        {/* Thinking indicator — shows when waiting for first token */}
-        {loading && !streaming && pending.length === 0 && (
-          <div className="flex justify-start">
-            <div className="rounded-2xl border border-mina-edge bg-mina-panel px-4 py-3">
-              <ThinkingDots />
-            </div>
-          </div>
-        )}
-
-        {pending.map((a) => (
-          <ActionCard
-            key={a.id}
-            action={a}
-            disabled={loading}
-            onApprove={() => decide(a.id, true)}
-            onDeny={() => decide(a.id, false)}
+      {/* ── Sidebar — desktop always visible, mobile overlay ── */}
+      <>
+        {/* Mobile overlay backdrop */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 z-20 bg-black/60 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
           />
-        ))}
-      </div>
+        )}
 
-      {/* Composer */}
-      <div className="flex items-center gap-2">
-        <button
-          onClick={micClick}
-          disabled={!voice.sttSupported || loading}
+        <aside
           className={[
-            "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg transition",
-            voice.listening
-              ? "bg-mina-accent text-black shadow-[0_0_16px_-2px] shadow-mina-accent/70"
-              : "border border-mina-edge text-mina-muted hover:border-mina-accent/50 hover:text-mina-text",
-            !voice.sttSupported ? "opacity-40" : "",
+            "z-30 flex flex-col border-l border-mina-edge bg-mina-panel transition-transform duration-200",
+            "lg:relative lg:w-80 lg:translate-x-0 lg:flex",
+            sidebarOpen
+              ? "fixed right-0 top-0 h-full w-80 translate-x-0"
+              : "fixed right-0 top-0 h-full w-80 translate-x-full lg:translate-x-0",
           ].join(" ")}
-          title={voice.sttSupported ? "Talk to Mike" : "Voice input not supported in this browser"}
         >
-          🎤
-        </button>
-        <input
-          ref={inputRef}
-          value={voice.listening && voice.interim ? voice.interim : input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              sendText(input);
-            }
-          }}
-          placeholder={voice.listening ? "Listening…" : "Message Mike…"}
-          disabled={loading}
-          className="h-11 flex-1 rounded-full border border-mina-edge bg-mina-panel px-4 text-sm outline-none placeholder:text-mina-muted focus:border-mina-accent/70 disabled:opacity-50 transition"
-        />
-        <button
-          onClick={() => sendText(input)}
-          disabled={loading || !input.trim()}
-          className="h-11 rounded-full bg-mina-accent px-5 text-sm font-semibold text-black transition hover:brightness-110 disabled:opacity-40"
-        >
-          Send
-        </button>
-      </div>
-
-      {!voice.sttSupported && (
-        <p className="mt-2 text-center text-xs text-mina-muted">
-          Voice input needs Chrome or Edge. You can still type to Mike.
-        </p>
-      )}
-    </main>
+          <Sidebar
+            agentId={agentId}
+            refreshKey={refreshKey}
+            onClose={() => setSidebarOpen(false)}
+          />
+        </aside>
+      </>
+    </div>
   );
 }
 
