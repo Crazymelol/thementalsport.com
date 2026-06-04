@@ -17,6 +17,7 @@ import { getTool, isWrite } from "./tools";
 import { route } from "./router";
 import { toolsForAgent, getAgentForTool, AGENTS } from "./agents";
 import { getProviders } from "./providers";
+import { sortedByHealth, recordSuccess, recordFailure, healthReport } from "./healthTracker";
 import type { ApiMessage, ActionProposal, ToolCall, AgentId } from "./types";
 
 const MAX_TOKENS = 4096;
@@ -161,7 +162,8 @@ export async function runBrain(opts: {
       // is skipped so a stalled free model can never hang the whole turn.
       let completion: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk> | null = null;
       let lastErr: unknown;
-      for (const p of providers) {
+      let successfulProvider: string | null = null;
+      for (const p of sortedByHealth(providers)) {
         try {
           completion = await Promise.race([
             p.client.chat.completions.create({
@@ -175,12 +177,14 @@ export async function runBrain(opts: {
               setTimeout(() => reject(new Error(`${p.name} open timeout`)), OPEN_TIMEOUT_MS),
             ),
           ]);
+          successfulProvider = p.name;
           break;
         } catch (err) {
+          recordFailure(p.name);
           lastErr = err;
         }
       }
-      if (!completion) throw lastErr ?? new Error("All providers failed.");
+      if (!completion) throw lastErr ?? new Error(`All providers failed. ${healthReport()}`);
 
       let turnText = "";
       const acc = new Map<number, { id: string; name: string; args: string }>();
@@ -201,6 +205,7 @@ export async function runBrain(opts: {
       }
 
       text += turnText;
+      if (successfulProvider) recordSuccess(successfulProvider);
 
       const toolCalls: ToolCall[] = [...acc.values()]
         .filter((s) => s.name)
