@@ -142,7 +142,7 @@ export async function runBrain(opts: {
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
           completion = await client.chat.completions.create({
-            model: "moonshotai/kimi-k2-instruct",
+            model: "llama-3.3-70b-versatile",
             max_tokens: MAX_TOKENS,
             tools,
             messages,
