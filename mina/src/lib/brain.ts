@@ -158,14 +158,16 @@ export async function runBrain(opts: {
     for (let i = 0; i < MAX_LOOPS; i++) {
       // The council: try providers in order, each guarded by a timeout. Groq is
       // first (fast + reliable at tool calls); NVIDIA then OpenRouter back it up.
-      // A provider that errors or doesn't return a stream within OPEN_TIMEOUT_MS
-      // is skipped so a stalled free model can never hang the whole turn.
-      let completion: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk> | null = null;
+      // Both the stream-open and mid-stream phases are covered: if a provider
+      // fails to open OR stalls after opening, we fall through to the next one.
+      let turnText = "";
+      let acc = new Map<number, { id: string; name: string; args: string }>();
       let lastErr: unknown;
       let successfulProvider: string | null = null;
+
       for (const p of sortedByHealth(providers)) {
         try {
-          completion = await Promise.race([
+          const completion = await Promise.race([
             p.client.chat.completions.create({
               model: p.model,
               max_tokens: MAX_TOKENS,
@@ -177,35 +179,39 @@ export async function runBrain(opts: {
               setTimeout(() => reject(new Error(`${p.name} open timeout`)), OPEN_TIMEOUT_MS),
             ),
           ]);
+
+          // Reset accumulators before reading so a previous partial attempt
+          // doesn't contaminate this provider's output.
+          turnText = "";
+          acc = new Map();
+
+          for await (const chunk of withIdleTimeout(completion)) {
+            const delta = chunk.choices[0]?.delta;
+            if (!delta) continue;
+            if (delta.content) turnText += delta.content;
+            if (delta.tool_calls) {
+              for (const tc of delta.tool_calls) {
+                const slot = acc.get(tc.index) ?? { id: "", name: "", args: "" };
+                if (tc.id) slot.id = tc.id;
+                if (tc.function?.name) slot.name = tc.function.name;
+                if (tc.function?.arguments) slot.args += tc.function.arguments;
+                acc.set(tc.index, slot);
+              }
+            }
+          }
+
           successfulProvider = p.name;
+          recordSuccess(p.name);
           break;
         } catch (err) {
           recordFailure(p.name);
           lastErr = err;
         }
       }
-      if (!completion) throw lastErr ?? new Error(`All providers failed. ${healthReport()}`);
 
-      let turnText = "";
-      const acc = new Map<number, { id: string; name: string; args: string }>();
-
-      for await (const chunk of withIdleTimeout(completion)) {
-        const delta = chunk.choices[0]?.delta;
-        if (!delta) continue;
-        if (delta.content) turnText += delta.content;
-        if (delta.tool_calls) {
-          for (const tc of delta.tool_calls) {
-            const slot = acc.get(tc.index) ?? { id: "", name: "", args: "" };
-            if (tc.id) slot.id = tc.id;
-            if (tc.function?.name) slot.name = tc.function.name;
-            if (tc.function?.arguments) slot.args += tc.function.arguments;
-            acc.set(tc.index, slot);
-          }
-        }
-      }
+      if (!successfulProvider) throw lastErr ?? new Error(`All providers failed. ${healthReport()}`);
 
       text += turnText;
-      if (successfulProvider) recordSuccess(successfulProvider);
 
       const toolCalls: ToolCall[] = [...acc.values()]
         .filter((s) => s.name)
