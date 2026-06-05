@@ -5,13 +5,35 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import NewsletterInline from '@/components/NewsletterInline';
 import BookCTA from '@/components/BookCTA';
-import { books } from '@/data/books';
+import CourseCTA from '@/components/CourseCTA';
+import { books, Book } from '@/data/books';
 
-/* 
- * Server Component 
+/*
+ * Server Component
  */
 interface PageProps {
     params: Promise<{ slug: string }>;
+}
+
+function pickBook(tags: string[]): Book {
+    const t = tags.map(tag => tag.toLowerCase());
+    const has = (...keywords: string[]) =>
+        keywords.some(k => t.some(tag => tag.includes(k)));
+
+    if (has('adhd'))
+        return books.find(b => b.id === 'adhd-athletes-edge') ?? books[0];
+    if (has('nutrition', 'diet', 'hydration', 'supplement', 'caffeine', 'creatine', 'physiology', 'metabolism', 'biohack', 'breathing', 'cortisol', 'cold plunge', 'sauna', 'sleep'))
+        return books.find(b => b.id === 'physiological-performance') ?? books[0];
+    if (has('confidence', 'imposter', 'self-talk', 'affirmation', 'muhammad ali'))
+        return books.find(b => b.id === 'confidence-building') ?? books[0];
+    if (has('identity', 'self-worth', 'purpose', 'legacy', 'nurtur'))
+        return books.find(b => b.id === 'nurturing-self-worth') ?? books[0];
+    if (has('resilience', 'mental tough', 'injury', 'rehab', 'burnout', 'longevity'))
+        return books.find(b => b.id === 'unbreakable') ?? books[0];
+    if (has('anxiety', 'fear', 'mental block', 'pressure', 'mental health'))
+        return books.find(b => b.id === 'mental-blocks') ?? books[0];
+
+    return books.find(b => b.id === 'the-competition-protocol') ?? books[0];
 }
 
 export async function generateStaticParams() {
@@ -74,7 +96,8 @@ export default async function BlogPost({ params }: PageProps) {
 
                 {/* Footer / CTA */}
                 <div className="mt-20 pt-12 border-t border-zinc-200">
-                    <BookCTA book={books.find(b => b.id === 'the-competition-protocol') || books[0]} />
+                    <BookCTA book={pickBook(article.tags)} />
+                    <CourseCTA />
                     <NewsletterInline />
                 </div>
 
