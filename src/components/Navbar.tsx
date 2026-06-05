@@ -68,6 +68,13 @@ export default function Navbar() {
                         About
                     </a>
                     <Link
+                        href="/mental-performance"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
+                            }`}
+                    >
+                        By Sport
+                    </Link>
+                    <Link
                         href="/blog"
                         className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
                             }`}
