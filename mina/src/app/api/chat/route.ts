@@ -53,7 +53,6 @@ export async function POST(req: Request) {
         if (result.error) {
           send({ type: "error", message: result.error });
           send({ type: "done" });
-          controller.close();
           return;
         }
 
