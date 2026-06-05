@@ -59,14 +59,13 @@ export default function Navbar() {
                     >
                         Course
                     </Link>
-                    <a
-                        href="#about"
-                        onClick={(e) => scrollToSection(e, 'about')}
+                    <Link
+                        href="/about"
                         className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
                             }`}
                     >
                         About
-                    </a>
+                    </Link>
                     <Link
                         href="/mental-performance"
                         className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
