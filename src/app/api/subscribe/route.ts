@@ -1,5 +1,23 @@
 import { NextResponse } from 'next/server';
 
+let cachedFormId: string | null = null;
+
+async function getFormId(apiKey: string): Promise<string | null> {
+    if (cachedFormId) return cachedFormId;
+    const configuredId = process.env.KIT_FORM_ID;
+    if (configuredId) {
+        cachedFormId = configuredId;
+        return cachedFormId;
+    }
+    // Auto-discover first available form
+    const res = await fetch(`https://api.convertkit.com/v3/forms?api_key=${apiKey}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const id = data.forms?.[0]?.id?.toString() ?? null;
+    if (id) cachedFormId = id;
+    return id;
+}
+
 export async function POST(request: Request) {
     const { email, tag } = await request.json();
 
@@ -8,13 +26,16 @@ export async function POST(request: Request) {
     }
 
     const apiKey = process.env.KIT_API_KEY;
-    const formId = process.env.KIT_FORM_ID;
-
-    if (!apiKey || !formId) {
+    if (!apiKey) {
         return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
 
     try {
+        const formId = await getFormId(apiKey);
+        if (!formId) {
+            return NextResponse.json({ error: 'No ConvertKit form found' }, { status: 500 });
+        }
+
         const body: Record<string, unknown> = { api_key: apiKey, email };
         if (tag) body.tags = [tag];
 
@@ -37,7 +58,7 @@ export async function POST(request: Request) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, tag }),
-            }).catch(() => { /* don't block on n8n failures */ });
+            }).catch(() => { /* fire-and-forget */ });
         }
 
         return NextResponse.json({ success: true, data });
