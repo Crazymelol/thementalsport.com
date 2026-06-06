@@ -13,6 +13,7 @@ import type { Tier } from "./types";
 import { gmailConfigured, searchEmails, sendEmail, trashEmails } from "./gmail";
 import { fetchPage } from "./web";
 import { memoryConfigured, addMemory, searchMemories, deleteMemory } from "./memory";
+import { skillsConfigured, addSkill, listSkills, deleteSkill } from "./skills";
 import { stripeConfigured, getRevenueSummary, listRecentPayments, issueRefund } from "./stripe";
 import {
   addAddendum,
@@ -861,6 +862,69 @@ export const TOOLS: ToolDef[] = [
         });
       }
     },
+  },
+
+  // ---- Skills -------------------------------------------------------------
+  {
+    name: "create_skill",
+    description:
+      "Save a new named skill — a reusable instruction set you will apply automatically whenever relevant. WRITES to your skill store, so it requires user approval. Use when the user teaches you a repeatable process, preference, or approach they want you to always follow.",
+    tier: "write",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        name: { type: "string", description: "Short name for the skill (e.g. 'Email tone', 'Weekly review format')." },
+        description: { type: "string", description: "One-line summary shown in the UI." },
+        content: { type: "string", description: "Full markdown instructions — what to do and how." },
+      },
+      required: ["name", "description", "content"],
+    },
+    run: async (input) => {
+      const name = str(input.name);
+      const description = str(input.description);
+      const content = str(input.content);
+      if (!name || !content) return JSON.stringify({ added: false, error: "name and content are required." });
+      if (!skillsConfigured()) return JSON.stringify({ added: false, error: "Skill store not configured." });
+      const skill = await addSkill(name, description, content);
+      return JSON.stringify({ added: true, id: skill.id, name: skill.name });
+    },
+    summarize: (input) => ({
+      title: `New skill: ${str(input.name)}`,
+      detail: `${str(input.description)}\n\n${str(input.content)}`,
+    }),
+  },
+  {
+    name: "list_skills",
+    description:
+      "List all your saved skills (id, name, description). Read-only. Use when the user asks what skills you have.",
+    tier: "read",
+    input_schema: { type: "object" as const, properties: {}, required: [] },
+    run: async () => {
+      if (!skillsConfigured()) return JSON.stringify({ skills: [], note: "Skill store not configured." });
+      const skills = await listSkills(50);
+      return JSON.stringify({ skills: skills.map((s) => ({ id: s.id, name: s.name, description: s.description })) });
+    },
+  },
+  {
+    name: "delete_skill",
+    description:
+      "Permanently delete a saved skill by id. Get ids from list_skills. WRITES, so it requires user approval.",
+    tier: "write",
+    input_schema: {
+      type: "object" as const,
+      properties: { id: { type: "string", description: "The skill id to delete." } },
+      required: ["id"],
+    },
+    run: async (input) => {
+      const id = str(input.id);
+      if (!skillsConfigured()) return JSON.stringify({ deleted: false, error: "Skill store not configured." });
+      const result = await deleteSkill(id);
+      return JSON.stringify({ ...result, id });
+    },
+    summarize: (input) => ({
+      title: "Delete a skill",
+      detail: `Delete skill id: ${str(input.id)}`,
+    }),
   },
 ];
 
