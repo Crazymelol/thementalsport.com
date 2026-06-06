@@ -12,6 +12,7 @@
 import OpenAI from "openai";
 import { MINA_SYSTEM_PROMPT } from "./systemPrompt";
 import { memoryBlock } from "./memory";
+import { skillsBlock } from "./skills";
 import { addendaBlock } from "./promptStore";
 import { getTool, isWrite } from "./tools";
 import { route } from "./router";
@@ -86,7 +87,7 @@ export async function runBrain(opts: {
     return { text: "", cards, error: "No AI provider configured. Add GROQ_API_KEY, NVIDIA_API_KEY, or OPENROUTER_API_KEY.", messages: opts.messages };
   }
   const nowLine = `\n\nCurrent date and time: ${new Date().toString()}.`;
-  const memBlock = await memoryBlock();
+  const [memBlock, skillBlock] = await Promise.all([memoryBlock(), skillsBlock()]);
 
   // Determine which agent to use.
   // On an approval re-run, recover agent from the pending tool name (stateless).
@@ -121,7 +122,7 @@ export async function runBrain(opts: {
   const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
     {
       role: "system",
-      content: MINA_SYSTEM_PROMPT + nowLine + memBlock + agent.promptAddon + addBlock,
+      content: MINA_SYSTEM_PROMPT + nowLine + memBlock + skillBlock + agent.promptAddon + addBlock,
     },
     ...(opts.messages as OpenAI.Chat.Completions.ChatCompletionMessageParam[]),
   ];
