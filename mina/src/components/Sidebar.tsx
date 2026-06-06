@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import type { AgentId } from "@/lib/types";
 import type { Memory } from "@/lib/memory";
 import type { PromptAddendum } from "@/lib/promptStore";
+import type { Skill } from "@/lib/skills";
 
 const AGENT_META: Record<AgentId, { label: string; code: string; color: string }> = {
   inbox:     { label: "INBOX",     code: "INB", color: "#00ff88" },
@@ -27,11 +28,13 @@ type Props = {
 export default function Sidebar({ agentId, refreshKey, onClose }: Props) {
   const [memories, setMemories] = useState<Memory[]>([]);
   const [addenda, setAddenda] = useState<PromptAddendum[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
 
   const fetchAll = useCallback(async () => {
-    const [memRes, addRes] = await Promise.all([
+    const [memRes, addRes, skillRes] = await Promise.all([
       fetch("/api/memory"),
       fetch("/api/addenda"),
+      fetch("/api/skills"),
     ]);
     if (memRes.ok) {
       const d = (await memRes.json()) as { memories: Memory[] };
@@ -41,6 +44,10 @@ export default function Sidebar({ agentId, refreshKey, onClose }: Props) {
       const d = (await addRes.json()) as { addenda: PromptAddendum[] };
       setAddenda(d.addenda);
     }
+    if (skillRes.ok) {
+      const d = (await skillRes.json()) as { skills: Skill[] };
+      setSkills(d.skills);
+    }
   }, []);
 
   useEffect(() => { void fetchAll(); }, [fetchAll, refreshKey]);
@@ -48,6 +55,11 @@ export default function Sidebar({ agentId, refreshKey, onClose }: Props) {
   const deleteMemory = async (id: string) => {
     await fetch(`/api/memory/${id}`, { method: "DELETE" });
     setMemories((m) => m.filter((x) => x.id !== id));
+  };
+
+  const deleteSkill = async (id: string) => {
+    await fetch(`/api/skills/${id}`, { method: "DELETE" });
+    setSkills((s) => s.filter((x) => x.id !== id));
   };
 
   const toggleAddendum = async (id: string, enabled: boolean) => {
@@ -193,6 +205,54 @@ export default function Sidebar({ agentId, refreshKey, onClose }: Props) {
                 >
                   ✕
                 </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* Skills */}
+      <div className="hud-panel rounded-lg p-3">
+        <div className="flex items-center justify-between mb-2">
+          <p className="hud-label">SKILLS</p>
+          <span
+            className="text-[10px] font-mono px-1.5 py-0.5 rounded"
+            style={{
+              background: "rgba(0,212,255,0.1)",
+              color: "#00d4ff",
+              border: "1px solid rgba(0,212,255,0.2)",
+            }}
+          >
+            {skills.length} LOADED
+          </span>
+        </div>
+        {skills.length === 0 ? (
+          <p className="text-[10px] text-mina-muted font-mono italic">// NO SKILLS</p>
+        ) : (
+          <ul className="space-y-1.5">
+            {skills.map((s) => (
+              <li
+                key={s.id}
+                className="group rounded p-2"
+                style={{
+                  background: "rgba(170,136,255,0.05)",
+                  border: "1px solid rgba(170,136,255,0.15)",
+                }}
+              >
+                <div className="flex items-start gap-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-bold tracking-widest font-mono" style={{ color: "#aa88ff" }}>
+                      {s.name.toUpperCase()}
+                    </p>
+                    <p className="text-[10px] text-mina-muted font-mono mt-0.5 line-clamp-1">{s.description}</p>
+                  </div>
+                  <button
+                    onClick={() => void deleteSkill(s.id)}
+                    className="shrink-0 text-[10px] text-mina-muted opacity-0 group-hover:opacity-100 hover:text-mina-danger transition"
+                  >
+                    ✕
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
