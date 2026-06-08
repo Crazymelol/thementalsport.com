@@ -14,7 +14,7 @@ export default function StickyBar() {
             setDismissed(true);
             return;
         }
-        const timer = setTimeout(() => setVisible(true), 5000);
+        const timer = setTimeout(() => setVisible(true), 20000);
         return () => clearTimeout(timer);
     }, []);
 
