@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Mental Conditioning for Sports Clubs & Academies | TheMentalSport.com',
+    title: 'Mental Conditioning for Sports Clubs & Academies',
     description: 'Done-for-you mental conditioning programs for competitive sports clubs and academies. Reduce choking, build pressure-proof athletes, and win the moments that matter.',
 };
 

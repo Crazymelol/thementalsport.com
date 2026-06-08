@@ -3,7 +3,7 @@ import { getAllArticles } from '@/lib/blog';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata = {
-    title: 'The Insight | Giannis Notaras',
+    title: 'The Insight',
     description: 'Articles on mental performance, fencing psychology, and high-performance neuroscience.',
 };
 

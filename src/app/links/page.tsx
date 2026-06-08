@@ -4,7 +4,7 @@ import { Instagram, Linkedin, Mail, BookOpen, Download } from 'lucide-react';
 import { books } from '@/data/books';
 
 export const metadata = {
-    title: 'Giannis Notaras | Links',
+    title: 'Links',
     description: 'Quick links for Giannis Notaras - Mental Performance Expert.',
 };
 

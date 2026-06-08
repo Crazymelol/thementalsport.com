@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, Users, Award, Target } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'About Giannis Notaras | Mental Performance Expert & Author',
+    title: 'About | Mental Performance Expert & Author',
     description: 'Giannis Notaras is a mental performance expert and author of 8 books on sports psychology, peak performance, and athletic mindset. Founder of The Mental Sport.',
     keywords: ['Giannis Notaras', 'mental performance coach', 'sports psychology author', 'peak performance expert', 'The Mental Sport'],
     openGraph: {
