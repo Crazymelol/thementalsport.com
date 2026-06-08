@@ -144,10 +144,19 @@ export default function AuthorHome() {
             <section id="about" className="py-24 bg-zinc-50 border-t border-zinc-200">
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
-                        {/* Image Side - Placeholder */}
-                        <div className="aspect-[3/4] bg-zinc-200 rounded-none relative overflow-hidden group shadow-2xl">
-                            <div className="absolute inset-0 bg-zinc-300 flex items-center justify-center text-zinc-500 font-bold uppercase tracking-widest text-xl group-hover:scale-105 transition-transform duration-700">
-                                Author Portrait
+                        {/* Image Side - Featured Work */}
+                        <div className="aspect-[3/4] bg-zinc-900 rounded-none relative overflow-hidden group shadow-2xl flex items-center justify-center p-12">
+                            <Image
+                                src="/covers/final_neon_cover.jpg"
+                                alt="The Competition Protocol — book by Giannis Notaras"
+                                width={400}
+                                height={533}
+                                className="w-full h-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-700"
+                            />
+                            <div className="absolute bottom-6 left-6 right-6 text-center">
+                                <span className="inline-block px-4 py-2 bg-white text-zinc-950 text-xs font-black uppercase tracking-[0.2em]">
+                                    Author Of 8 Books
+                                </span>
                             </div>
                         </div>
 
@@ -165,7 +174,6 @@ export default function AuthorHome() {
                             </p>
 
                             <div className="pt-6 flex gap-8">
-                                <a href="#" className="text-zinc-400 hover:text-zinc-950 transition-colors uppercase text-sm font-black tracking-widest">Twitter / X</a>
                                 <a href="https://www.linkedin.com/in/giannisnotaras/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-950 transition-colors uppercase text-sm font-black tracking-widest">LinkedIn</a>
                                 <a href="https://www.instagram.com/giannisnotaras/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-950 transition-colors uppercase text-sm font-black tracking-widest">Instagram</a>
                             </div>
