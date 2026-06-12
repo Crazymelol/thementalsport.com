@@ -1,0 +1,91 @@
+{
+  "name": "05 - YouTube Shorts Queue Poster (posts each script EXACTLY ONCE)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "hours", "hoursInterval": 8 }]
+        }
+      },
+      "name": "Schedule Trigger (every 8h = max 3/day)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/Crazymelol/thementalsport.com/contents/social/youtube-queue/queue.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "={{ 'Bearer ' + $env.GITHUB_TOKEN }}" },
+            { "name": "Accept", "value": "application/vnd.github.v3+json" }
+          ]
+        }
+      },
+      "name": "Fetch Queue from GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// DEDUP CORE: take the FIRST pending item — never random, never repeats.\nconst gh = $input.first().json;\nconst queue = JSON.parse(Buffer.from(gh.content, 'base64').toString('utf8'));\nconst idx = queue.items.findIndex(i => i.status === 'pending');\n\n// Queue empty => post NOTHING. Looping old content is what got the channel suppressed.\nif (idx === -1) return [];\n\nconst item = queue.items[idx];\nreturn [{ json: { item, itemIndex: idx, queue, sha: gh.sha } }];"
+      },
+      "name": "Pick FIRST Pending (or stop)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {},
+      "name": "REPLACE ME — paste your existing RENDER + YOUTUBE UPLOAD nodes here (input: $json.item has title, hook, script, cta, description, tags)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Mark the item posted and re-encode the queue for commit.\nconst { itemIndex, queue, sha, item } = $('Pick FIRST Pending (or stop)').first().json;\nqueue.items[itemIndex].status = 'posted';\nqueue.items[itemIndex].posted_at = new Date().toISOString();\nconst encoded = Buffer.from(JSON.stringify(queue, null, 2)).toString('base64');\nreturn [{ json: { encoded, sha, postedTitle: item.title } }];"
+      },
+      "name": "Mark As Posted",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "https://api.github.com/repos/Crazymelol/thementalsport.com/contents/social/youtube-queue/queue.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "={{ 'Bearer ' + $env.GITHUB_TOKEN }}" },
+            { "name": "Accept", "value": "application/vnd.github.v3+json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ message: 'bot: mark posted — ' + $json.postedTitle, content: $json.encoded, sha: $json.sha }) }}"
+      },
+      "name": "Commit Updated Queue to GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (every 8h = max 3/day)": { "main": [[{ "node": "Fetch Queue from GitHub", "type": "main", "index": 0 }]] },
+    "Fetch Queue from GitHub": { "main": [[{ "node": "Pick FIRST Pending (or stop)", "type": "main", "index": 0 }]] },
+    "Pick FIRST Pending (or stop)": { "main": [[{ "node": "REPLACE ME — paste your existing RENDER + YOUTUBE UPLOAD nodes here (input: $json.item has title, hook, script, cta, description, tags)", "type": "main", "index": 0 }]] },
+    "REPLACE ME — paste your existing RENDER + YOUTUBE UPLOAD nodes here (input: $json.item has title, hook, script, cta, description, tags)": { "main": [[{ "node": "Mark As Posted", "type": "main", "index": 0 }]] },
+    "Mark As Posted": { "main": [[{ "node": "Commit Updated Queue to GitHub", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "automation" }, { "name": "youtube" }]
+}
