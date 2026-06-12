@@ -1,6 +1,10 @@
 # FIX THE YOUTUBE SHORTS BOT — duplicate-upload bug
 *2026-06-12 · Why the channel gets 37 views/video and +3 subs/month despite 275 uploads in 30 days*
 
+**STATUS: patched scripts are ready in `scripts/` in this repo.** All 4 platform
+bots (YouTube, X, Pinterest, TikTok) are pre-fixed and committed — STEP 2 is now
+just "copy files over", no manual code editing required.
+
 ## What's happening
 The uploader is **`post-youtube-daily.py`** running on your machine via cron (`post-all-platforms.sh` orchestrates it; backups of all of it are in your Google Drive "scripts" folder). It picks a video title **at random from a small hardcoded hooks list** with no memory of what it already posted — same `random.choice` pattern as every bot built on May 15. Result in the last 30 days: the SAME title uploaded as a "new" video up to **10 times** ("How To Raise A Mentally Tough Athlete" ×10, "7 Days Before Your Race" ×10, three identical uploads within one hour on June 7). YouTube suppresses the whole channel for this and it risks a "repetitious content" strike that blocks monetization outright. The TikTok / Pinterest / X sibling bots share the same flaw.
 
@@ -18,27 +22,43 @@ From the next cron run, every upload fails (`creds.refresh` dies). Nothing else 
 ## STEP 1 — at the PC: pause the cron
 `crontab -e` → comment out (`#`) the line running `post-all-platforms.sh` (or just the YouTube line inside that script).
 
-## STEP 2 — at the PC: apply the dedup patch (5 min)
-This repo now contains **`scripts/yt_dedup.py`**. Copy it next to `post-youtube-daily.py`, then in that script's `main()`:
+## STEP 2 — at the PC: copy the pre-patched scripts (2 min)
+This repo's **`scripts/`** folder now contains ready-to-drop-in replacements for
+all 4 platform bots, plus two small helper modules they import — everything is
+already wired up, no code editing needed:
 
-```python
-from yt_dedup import choose_title, mark_posted
+- `post-youtube-daily.py` — title selection now goes through `yt_dedup.choose_title`
+- `post-x-daily.py`, `post-pinterest-daily.py`, `post-tiktok-daily.py` — caption/hashtag
+  rotation now goes through `rotation.pick_lru`
+- `yt_dedup.py` — new helper used by the YouTube bot
+- `rotation.py` — new helper used by the X/Pinterest/TikTok bots
 
-title = choose_title(book, hooks)      # replaces random.choice(hooks[book])
-if title is None:
-    print('Nothing new to post — skipping.')
-    sys.exit(0)
-# ... after the upload succeeds:
-mark_posted(title)
-```
+Copy all of `scripts/*.py` from this repo over the matching files in your
+existing scripts folder (same place `post-all-platforms.sh` already calls
+them from). Keep `make-tiktok-7sec.py`, `generate-daily-content.py`, etc. —
+only the 4 poster scripts and the 2 new helpers are part of this fix.
 
 What it guarantees:
-- Every title posts **exactly once, ever** (log at `~/.local/state/yt-posted-log.json`)
-- Hard cap **3 uploads/day** (volume was never the problem)
-- Pulls **fresh scripts first** from `social/youtube-queue/queue.json` in this repo (18 new unique Shorts, ready: title/hook/script/CTA/description/tags) — Claude keeps refilling it
-- Queue empty + all hooks used → it posts **nothing**. Silence is recoverable; duplicate spam is what buried the channel.
+- **YouTube**: every title posts **exactly once, ever** (log at `~/.local/state/yt-posted-log.json`),
+  hard cap **3 uploads/day**, pulls fresh scripts first from
+  `social/youtube-queue/queue.json` in this repo (18 new unique Shorts,
+  title/hook/script/CTA/description/tags — Claude keeps refilling it). Queue
+  empty + all hooks used → posts **nothing**. Silence is recoverable; duplicate
+  spam is what buried the channel.
+- **X / Pinterest**: caption hooks and hashtag sets now cycle through their
+  full list (8, 4, and 7 items respectively) before any repeat — the old
+  `list[day_idx % len(list)]` pattern repeated the same N-day cycle forever.
+- **TikTok**: same caption-rotation fix, *plus* its daily-cap lock
+  (`TIKTOK_LOCK` / `/tmp/tiktok-posted-today.txt`) is now actually checked at
+  the top of `main()` — previously it was written but never read, so "one
+  video per day" was not enforced.
 
-Apply the same `choose_title`/`mark_posted` pattern to the TikTok, Pinterest and X bots (same bug).
+Root cause recap for YouTube specifically: `post-all-platforms.sh` exports
+`BOOK_SLOT` to `generate-daily-content.py` but **never** to
+`post-youtube-daily.py`, so the old `(day_idx*12+slot) % 15` always saw
+`slot=0` — reaching only 5 of 15 titles per book and producing the *same*
+title on every same-day cron run. `yt_dedup.choose_title` removes the slot
+dependency entirely.
 
 *Alternative architecture (optional): `n8n-workflows/05-youtube-shorts-queue-poster.json` does the same queue logic in n8n, if you ever move the pipeline there.*
 
