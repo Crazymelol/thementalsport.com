@@ -17,6 +17,7 @@
 // (see scripts/ci/get-pinterest-refresh-token.mjs for the refresh-token setup.)
 
 import {execFileSync} from 'node:child_process';
+import ffmpegStatic from 'ffmpeg-static';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -154,7 +155,9 @@ async function resolveBoardId(accessToken) {
 }
 
 function extractCoverImage(videoPath, outPath) {
-  execFileSync('ffmpeg', [
+  // ffmpeg-static ships a binary so we don't depend on the runner having one.
+  const ffmpeg = ffmpegStatic || 'ffmpeg';
+  execFileSync(ffmpeg, [
     '-y',
     '-i', videoPath,
     '-ss', '00:00:00.5',
