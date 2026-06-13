@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     default: "Giannis Notaras - Mental Performance Expert & Author",
     template: "%s | Giannis Notaras"
   },
-  description: "Performance expert helping athletes, executives, and students overcome mental hurdles. Author of 7 books on mental toughness, confidence, and peak performance.",
+  description: "Performance expert helping athletes, executives, and students overcome mental hurdles. Author of 8 books on mental toughness, confidence, and peak performance.",
   keywords: ["mental performance", "sports psychology", "mental toughness", "peak performance", "confidence building", "athlete mindset", "performance coaching", "Giannis Notaras"],
   authors: [{ name: "Giannis Notaras" }],
   creator: "Giannis Notaras",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: "https://thementalsport.com",
     siteName: "Giannis Notaras - Mental Performance Expert",
     title: "Giannis Notaras - Mental Performance Expert & Author",
-    description: "Performance expert helping athletes, executives, and students overcome mental hurdles. Author of 7 books on mental toughness, confidence, and peak performance.",
+    description: "Performance expert helping athletes, executives, and students overcome mental hurdles. Author of 8 books on mental toughness, confidence, and peak performance.",
     images: [
       {
         url: "/og-image.png",
@@ -60,9 +60,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  }
 };
 
 export default function RootLayout({

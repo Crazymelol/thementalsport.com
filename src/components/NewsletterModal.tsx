@@ -98,12 +98,12 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                 ) : (
                     <>
                         <div className="text-center mb-6">
-                            <div className="w-16 h-16 bg-zinc-100 rounded-none flex items-center justify-center mx-auto mb-4">
-                                <Mail className="w-8 h-8 text-zinc-900" />
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 text-white text-xs font-black uppercase tracking-widest mb-4">
+                                <Download className="w-3 h-3" /> Free Download
                             </div>
-                            <h2 id="modal-title" className="text-3xl font-black text-zinc-900 mb-2 uppercase tracking-tighter">Join The Newsletter</h2>
+                            <h2 id="modal-title" className="text-3xl font-black text-zinc-900 mb-2 uppercase tracking-tighter">Get The Competition Protocol</h2>
                             <p className="text-zinc-600">
-                                Get exclusive insights on peak performance, mental toughness, and new book releases.
+                                The exact 7-day mental system elite athletes use before every competition — free, instant access.
                             </p>
                         </div>
 
@@ -117,7 +117,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                                         setStatus('idle');
                                         setErrorMessage('');
                                     }}
-                                    placeholder="Enter your email"
+                                    placeholder="Your best email address"
                                     className="w-full px-4 py-3 rounded-none border border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 outline-none transition-all"
                                     disabled={status === 'loading'}
                                 />
@@ -134,11 +134,11 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                                 type="submit"
                                 disabled={status === 'loading'}
                                 className="w-full px-8 py-4 bg-zinc-900 text-white font-black rounded-none hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest border border-transparent hover:border-zinc-500">
-                                {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                                {status === 'loading' ? 'Sending...' : 'Send Me The Protocol →'}
                             </button>
 
                             <p className="text-xs text-zinc-400 text-center">
-                                We respect your privacy. Unsubscribe at any time.
+                                No spam. One email a week. Unsubscribe anytime.
                             </p>
                         </form>
                     </>

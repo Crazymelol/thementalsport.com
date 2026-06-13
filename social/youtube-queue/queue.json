@@ -1,0 +1,581 @@
+{
+  "_readme": "YouTube Shorts content queue. The n8n workflow (05-youtube-shorts-queue-poster) picks the FIRST item with status='pending', renders+uploads it, then commits it back as status='posted'. NEVER re-post a 'posted' item. When no items are pending the workflow does NOTHING (no looping old content). Claude refills this queue with fresh scripts; humans can add items too. Cadence cap: 3 posts/day.",
+  "items": [
+    {
+      "id": "short-001",
+      "status": "pending",
+      "audience": "parents",
+      "title": "The Car Ride Home Is Where Athletes Are Made — Or Broken #Shorts",
+      "hook": "What you say in the car after the game matters more than anything the coach said.",
+      "script": "Don't open with the scoreboard. Don't open with the mistakes. Open with one sentence: 'I love watching you play.' Full stop. If they want to talk tactics, let THEM bring it up. Then praise one thing they controlled: 'I noticed how you kept battling after that mistake.' Not talent. Not the result. Effort and response. That's how confidence survives a bad game.",
+      "cta": "Free mental-game guide for sports parents — link in description.",
+      "description": "What to say to your young athlete after a game — the car ride home script.\n\n🎯 FREE: Chapter 1 of The Competition Protocol → https://thementalsport.com/free\n📚 8-week course → https://thementalsport.com/course\n\n#sportsparents #youthsports #sportspsychology",
+      "tags": [
+        "sports parents",
+        "youth sports psychology",
+        "mental toughness kids"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-002",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "You Finally Won — So Why Do You Feel Empty? #Shorts",
+      "hook": "You finally won... so why do you feel empty?",
+      "script": "The post-win crash is real. Dopamine spikes, then the void. If your identity is built on the FEELING of winning, you'll chase it like a drug and crash every time. Champions anchor to identity instead: 'I am someone who competes present.' The win becomes evidence, not fuel. Evidence accumulates. Feelings evaporate.",
+      "cta": "Follow — tomorrow: why losing in an empty stadium hits harder.",
+      "description": "Post-win emptiness explained — why winning doesn't feel like you expected.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #mentaltoughness #athletemindset",
+      "tags": [
+        "post win depression athlete",
+        "athlete mindset",
+        "sports psychology"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-003",
+      "status": "pending",
+      "audience": "parents",
+      "title": "Train Your Kid For Penalty Pressure BEFORE It Happens #Shorts",
+      "hook": "Your kid WILL face a penalty, a free throw, a match point. Train this now — not in the moment.",
+      "script": "Three-step routine, kid-friendly: One — breathe out longer than you breathe in. Two — one physical anchor: tap the strap, grab the shirt, same gesture every time. Three — one word. Their word. Rehearse it in the backyard until it's boring. Pressure doesn't create new skills. Pressure reveals trained ones.",
+      "cta": "Free guide for sports parents — link in description.",
+      "description": "How to train young athletes for penalty and pressure moments.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#youthsports #sportsparents #pressure",
+      "tags": [
+        "penalty pressure",
+        "youth sports",
+        "kids sports psychology"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-004",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "LeBron Doesn't Calm Down. He Slows Down. #Shorts",
+      "hook": "LeBron doesn't calm down under pressure. He slows down. Different thing.",
+      "script": "Panic equals speed — rushed decisions, rushed breathing, rushed everything. Elite athletes don't fight the adrenaline, they manipulate time: longer exhale, eyes up, one cue word. You cannot THINK your way out of panic. You breathe your way out first — then you think. Slow is smooth. Smooth is fast.",
+      "cta": "Follow for the exact breath protocol.",
+      "description": "How elite athletes handle pressure — slowing down vs calming down.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#mentaltoughness #sportspsychology #pressure",
+      "tags": [
+        "pressure performance",
+        "athlete breathing",
+        "sports psychology"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-005",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Anxious Before Games? Good. Here's Why. #Shorts",
+      "hook": "If you're anxious before competition — good. Let me explain.",
+      "script": "Anxiety and excitement are the same physiology: heart rate up, adrenaline up, palms sweating. The only difference is the label your brain attaches. Science is clear — telling yourself 'I'm excited' outperforms 'calm down', because you're not fighting your body, you're steering it. Anxiety doesn't mean you're not ready. It means this matters to you.",
+      "cta": "Free chapter on competition nerves — link in description.",
+      "description": "Pre-competition anxiety reframe — the evidence-based way to handle nerves.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#competitionanxiety #sportspsychology #nerves",
+      "tags": [
+        "competition anxiety",
+        "pre game nerves",
+        "performance anxiety"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-006",
+      "status": "pending",
+      "audience": "parents",
+      "title": "'You're So Talented' Is Quietly Hurting Your Athlete #Shorts",
+      "hook": "'You're so talented' is one of the most damaging things you can say to a young athlete.",
+      "script": "Talent praise builds a fixed mindset: if I'm talented, mistakes mean I'm NOT — so play safe, never risk, fear failure. Swap it: 'I'm proud of HOW you kept pushing.' 'I noticed you stayed in it after the mistake.' Praise what they control — effort, response, courage. That's praise that survives a losing streak.",
+      "cta": "Follow — Saturday: the after-a-loss script.",
+      "description": "How to praise young athletes — process praise vs talent praise.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #growthmindset #youthsports",
+      "tags": [
+        "praise young athletes",
+        "growth mindset sports",
+        "sports parenting"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-007",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Stop Playing For Stats. Here's What To Play For. #Shorts",
+      "hook": "Giannis doesn't play for stats. Here's what he plays for instead.",
+      "script": "Scoreboard-watching mid-game is an attention leak — every thought about your numbers is a thought stolen from the next play. The fix is a present-moment cue: this possession. This rep. This touch. Nothing else exists. And here's the paradox: the stats show up precisely when you stop chasing them.",
+      "cta": "Free chapter — link in description.",
+      "description": "Present-moment focus in competition — why chasing stats kills performance.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#focus #athletemindset #sportspsychology",
+      "tags": [
+        "present moment sports",
+        "focus athlete",
+        "flow state"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-008",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "The Crowd Is Gone. You Just Lost. Now What? #Shorts",
+      "hook": "The crowd is gone. You just lost. Now what?",
+      "script": "Confidence built on applause dies in silence. Build it on evidence instead: your training log, your comeback moments, your process wins. After a loss: give it 24 hours, then three questions — what worked, what didn't, what's ONE fix for next time. Then close the book. Mistakes are tuition, not identity.",
+      "cta": "Follow for the 3-question debrief.",
+      "description": "How to rebuild confidence after a loss — the 24-hour rule and debrief.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#confidence #resilience #sportspsychology",
+      "tags": [
+        "confidence after loss",
+        "athlete resilience",
+        "bounce back"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-009",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Cup Final. Legs Like Concrete. Do This. #Shorts",
+      "hook": "Cup final. Everything you trained for. And your legs feel like concrete.",
+      "script": "Big-moment paralysis happens when you think about the MEANING of the moment instead of the TASK in the moment. 'This is the final' is a meaning thought — it loads pressure. Elite reset: shrink the game. Not 'this is everything' — just 'this is one pass.' One serve. One stride. Meaning is for after the whistle.",
+      "cta": "Free chapter: the biology of choking — link in description.",
+      "description": "How to handle big-game pressure — task focus vs meaning focus.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#bigame #pressure #sportspsychology",
+      "tags": [
+        "big game nerves",
+        "final pressure",
+        "clutch performance"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-010",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "You'd Never Let A Teammate Talk To You Like That #Shorts",
+      "hook": "You'd never let a teammate talk to you the way you talk to yourself.",
+      "script": "An inner critic mid-game means you're playing one-versus-two. The rewrite rule: talk to yourself in second person, by name. 'You're trained for this' beats 'I'm screwing up' — research calls it self-distancing, and it measurably improves performance under stress. Distance equals control. Coach yourself like you'd coach a teammate.",
+      "cta": "Follow for the 3-word mid-game reset.",
+      "description": "Self-talk for athletes — the second-person technique that works under pressure.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#selftalk #mentalgame #sportspsychology",
+      "tags": [
+        "self talk athletes",
+        "inner critic sports",
+        "mental game"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-011",
+      "status": "pending",
+      "audience": "parents",
+      "title": "Yamal Started At 16. Your Kid Didn't. That's Fine. #Shorts",
+      "hook": "Yamal was starting at 16. Your kid isn't. That is NOT a problem.",
+      "script": "Prodigy comparison culture is quietly wrecking youth sport. Development is not linear — late bloomers dominate adult podiums in almost every sport, because they had to build skills the early stars skipped. The only comparison that builds an athlete: them versus them, last month. Track THAT. Celebrate THAT.",
+      "cta": "Free guide for sports parents — link in description.",
+      "description": "Why comparing young athletes to prodigies backfires — late bloomer science.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#youthsports #sportsparents #development",
+      "tags": [
+        "late bloomer athlete",
+        "youth development",
+        "sports parents"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-012",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "One Early Mistake Is Unraveling Your Whole Game #Shorts",
+      "hook": "One early mistake. And now your whole game is unraveling.",
+      "script": "Errors cascade because you CARRY them. The error recovery protocol: One — physical reset gesture, wipe your hand on your shorts, same gesture every time. Two — one word: 'next.' Three — eyes to the next task within three seconds. Practiced enough, the spiral never starts. Mistakes are events. Not identities.",
+      "cta": "From my course module on real-time toughness — link in description.",
+      "description": "Error recovery for athletes — stop one mistake becoming five.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#errorrecovery #mentaltoughness #sportspsychology",
+      "tags": [
+        "error recovery sport",
+        "mistake spiral",
+        "mental reset"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-013",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Why Your Brain Sabotages You In Competition #Shorts",
+      "hook": "You didn't lose because you weren't ready. Your brain hijacked your body — and it's predictable.",
+      "script": "It's called explicit monitoring: under pressure, your prefrontal cortex grabs the wheel from motor memory. You start consciously doing what you trained to do unconsciously — and everything tightens. The fix isn't 'relax.' It's an external focus cue: target, not technique. Where the ball goes, not how your arm moves.",
+      "cta": "Full breakdown free — Chapter 1, link in description.",
+      "description": "The biology of choking under pressure — explicit monitoring explained.\n\n🎯 FREE: The Biology of Choking chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#choking #sportspsychology #pressure",
+      "tags": [
+        "why athletes choke",
+        "choking under pressure",
+        "sports science"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-014",
+      "status": "pending",
+      "audience": "parents",
+      "title": "The 24-Hour Rule Every Sports Parent Needs #Shorts",
+      "hook": "Your kid just played terribly. Say nothing about it for 24 hours.",
+      "script": "Right after a bad game, emotion is high and learning is closed — anything you say lands as criticism, even encouragement. Wait 24 hours. Then ask three questions: what felt good out there? What was hard? What's one thing to try next time? They talk, you listen. The lesson sticks because THEY found it.",
+      "cta": "Free guide for sports parents — link in description.",
+      "description": "The 24-hour rule for sports parents — what to do after a bad game.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #youthsports #parenting",
+      "tags": [
+        "sports parent advice",
+        "after bad game",
+        "youth sports"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-015",
+      "status": "pending",
+      "audience": "parents",
+      "title": "Six Words That Build Fearless Young Athletes #Shorts",
+      "hook": "Six words. Before every game. That's it.",
+      "script": "'I love watching you play.' Not 'go score.' Not 'don't be nervous.' Not 'remember what coach said.' Every instruction before a game adds pressure and steals ownership. This sentence does the opposite — it says: my love is not a scoreboard. Kids who hear it play freer, risk more, and stay in sport longer.",
+      "cta": "More scripts in the free parent guide — link in description.",
+      "description": "What to say before games — the six words youth sport psychologists recommend.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #youthsports #confidence",
+      "tags": [
+        "what to say before game",
+        "sports parent",
+        "young athlete confidence"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-016",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "The 60-Second Reset Elite Athletes Use #Shorts",
+      "hook": "Heart pounding, mind racing, two minutes before you compete. Do this.",
+      "script": "The physiological sigh: double inhale through the nose — one big, one short top-up — then a long slow exhale through the mouth. Repeat three times. It's the fastest evidence-backed way to drop your heart rate, because the double inhale pops open collapsed air sacs and the long exhale slams the brake on adrenaline. Sixty seconds. Works every time.",
+      "cta": "Free chapter with the full pre-game protocol — link in description.",
+      "description": "The physiological sigh — fastest way to calm nerves before competition.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#breathwork #pregame #sportspsychology",
+      "tags": [
+        "physiological sigh",
+        "calm nerves fast",
+        "pre game routine"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-017",
+      "status": "pending",
+      "audience": "parents",
+      "title": "Your Face Is Their Scoreboard #Shorts",
+      "hook": "Your kid checks one thing after every mistake. Not the ref. Not the coach. You.",
+      "script": "Young athletes scan the sideline after errors — and your face is their scoreboard. A wince, a head shake, arms thrown up: that's a red number. So train YOUR game face: neutral on mistakes, warm on effort. Clap the brave attempt that failed. They'll stop playing scared the day the sideline stops scaring them.",
+      "cta": "Free sideline guide for parents — link in description.",
+      "description": "Sideline behavior for sports parents — why your reactions shape their game.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #sideline #youthsports",
+      "tags": [
+        "sideline parents",
+        "youth sports behavior",
+        "sports parenting"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-018",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Boring Routines Win Championships #Shorts",
+      "hook": "Your pre-game routine should be so boring it's automatic. Here's why.",
+      "script": "Novelty costs attention, and attention is your scarcest resource on game day. Same warm-up, same music, same gear check, same breath work — every single time. A rehearsed routine is a circuit breaker: when nerves spike, you don't have to decide anything, you just execute the next familiar step. Decisions drain. Rituals carry.",
+      "cta": "Build yours with the free chapter — link in description.",
+      "description": "Pre-game routines — why repetition beats motivation on competition day.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#pregameroutine #ritual #sportspsychology",
+      "tags": [
+        "pre game routine",
+        "competition ritual",
+        "game day"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-019",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Can't Sleep The Night Before The Big Game? #Shorts",
+      "hook": "It's midnight before the biggest game of your life and your eyes won't close.",
+      "script": "First, stop trying to fall asleep — chasing sleep guarantees you stay awake. The real win is lying still with your eyes closed; rest recovers most of what sleep does, even if you never drift off. Box-breathe: in four, hold four, out four, hold four. And know this — one rough night barely dents performance. The anxiety about not sleeping costs you more than the lost sleep ever will.",
+      "cta": "Free pre-game protocol → link in description.",
+      "description": "Can't sleep before a big game? Exactly what to do instead of panicking.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #pregame #sleep #athletemindset #mentaltoughness",
+      "tags": [
+        "cant sleep before game",
+        "pre game nerves",
+        "athlete sleep"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-020",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Instagram Is Making You A Worse Athlete #Shorts",
+      "hook": "Every highlight reel you scroll is quietly making you worse.",
+      "script": "You compare your behind-the-scenes to everyone else's highlight reel — their single best moment against your average Tuesday. It breeds doubt disguised as motivation. Elite athletes curate their feed like their diet: follow what teaches process, mute what triggers comparison. Your only scoreboard is you, last month. Protect your attention — it's the most expensive thing you own on game day.",
+      "cta": "Follow for the mental-game basics.",
+      "description": "How social media comparison hurts athletes — and what to do about it.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #athletemindset #comparison #mentalgame #focus",
+      "tags": [
+        "social media athletes",
+        "comparison trap",
+        "athlete mindset"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-021",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "You Used To Do This In Your Sleep. Now You Can't. #Shorts",
+      "hook": "A skill you've done ten thousand times — and suddenly you can't do it at all.",
+      "script": "It's called the yips, and it's not physical. Under pressure your conscious mind grabs a movement that's supposed to run on autopilot, and the harder you try to control it, the worse it gets. The fix is counterintuitive: stop aiming for perfect and focus outward — the target, a rhythm, a hum under your breath — anything that gets your thinking brain off the wheel so motor memory can drive again.",
+      "cta": "Free chapter on performing under pressure → link in description.",
+      "description": "The yips explained — why a trained skill vanishes, and how to get it back.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#yips #sportspsychology #pressure #mentalgame #performance",
+      "tags": [
+        "the yips",
+        "lost skill sport",
+        "explicit monitoring"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-022",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Playing Not To Lose Is Why You're Losing #Shorts",
+      "hook": "The moment you start protecting a lead is the moment you start losing it.",
+      "script": "Playing not to lose flips your brain from approach to avoidance — you stop attacking, you start flinching, and you invite the comeback you're afraid of. Champions keep their foot down because the exact mindset that built the lead is the only one that holds it. Same intensity at plus-three as at minus-three. Don't manage the scoreboard. Keep competing the next play.",
+      "cta": "Free chapter → link in description.",
+      "description": "Why playing not to lose backfires — the psychology of protecting a lead.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #mentaltoughness #competing #athletemindset #clutch",
+      "tags": [
+        "playing not to lose",
+        "protecting a lead",
+        "competitive mindset"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-023",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Warm-Up Nerves Are Lying To You #Shorts",
+      "hook": "You feel terrible in warm-up, so you panic. Don't.",
+      "script": "Warm-up is not a prediction. How you feel twenty minutes before the whistle tells you almost nothing about how you'll perform once it's live — different arousal, different focus, different game entirely. Every athlete alive has won feeling awful in warm-up and lost feeling perfect. Stop reading the warm-up like a verdict on your day. Trust the training, not the temperature check.",
+      "cta": "Free pre-game protocol → link in description.",
+      "description": "Why a bad warm-up doesn't predict a bad game.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #pregame #nerves #athletemindset #warmup",
+      "tags": [
+        "warm up nerves",
+        "pre game anxiety",
+        "game day mindset"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-024",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Stop Saying 'I Have To.' Say This Instead. #Shorts",
+      "hook": "Two words are loading pressure onto every game you play: have to.",
+      "script": "'I have to perform' frames competition as a threat — and threat narrows your vision, tightens your muscles, and steals your touch. Swap two words: 'I get to.' I get to compete. I get to be tested. I get to find out how good I am. Same situation, opposite physiology — challenge instead of threat. It sounds soft. It's the difference between playing tight and playing free.",
+      "cta": "Follow for more one-line mental resets.",
+      "description": "The 'I get to' reframe — turning pressure into a challenge.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #reframe #pressure #mentalgame #athletemindset",
+      "tags": [
+        "pressure reframe",
+        "i get to",
+        "challenge mindset"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-025",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "The Mental Side Of Coming Back From Injury #Shorts",
+      "hook": "Your body healed months ago. Your mind didn't.",
+      "script": "Re-injury fear is real, and it makes you hesitate — and hesitation is exactly how athletes get hurt again. Rebuild trust in stages: master the movement in training before you trust it in competition, hit small confidence checkpoints, and learn to tell the difference between pain and danger. Cleared to play is not the same as ready to play. The last and hardest rehab is always mental.",
+      "cta": "Free chapter → link in description.",
+      "description": "The mental side of injury recovery — rebuilding trust in your body.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#injuryrecovery #sportspsychology #comeback #mentaltoughness #athlete",
+      "tags": [
+        "injury comeback mental",
+        "re injury fear",
+        "return to sport"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-026",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Stuck On The Bench? Read This. #Shorts",
+      "hook": "You're on the bench and it's eating you alive.",
+      "script": "You can't control the coach's decision. You can control exactly two things: your response and your readiness. Bitterness on the bench is visible — it reads as bad attitude and buries you deeper. The players who break through stay ready, stay loud for their teammates, and win the practice reps no one's watching. Your real audition is every rep you think doesn't count.",
+      "cta": "Free chapter on the competitor's mindset → link in description.",
+      "description": "Bench player mindset — what to control when you're not playing.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #benchplayer #mindset #athletemindset #mentaltoughness",
+      "tags": [
+        "bench player mindset",
+        "not getting playing time",
+        "athlete mindset"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-027",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Get Your Opponent Out Of Your Head #Shorts",
+      "hook": "They're in your head — and you're the one who put them there.",
+      "script": "Trash talk, reputation, that one cold stare — it only works if you hand it attention you owe to the next play. The reset is simple: refocus on what you control — your routine, your cue word, your task right now. The best competitors look almost boring out there, because they're opponent-proof. Their focus lives inside their own game, not across the net.",
+      "cta": "Free chapter → link in description.",
+      "description": "How to stop an opponent living rent-free in your head.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportspsychology #focus #mentalgame #competing #athletemindset",
+      "tags": [
+        "opponent in your head",
+        "trash talk",
+        "focus under pressure"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-028",
+      "status": "pending",
+      "audience": "athletes",
+      "title": "Perfectionism Is Quietly Wrecking Your Game #Shorts",
+      "hook": "The thing you're proudest of — being a perfectionist — is sabotaging you.",
+      "script": "Perfectionism sounds like high standards but plays like fear: one mistake and you unravel, because anything less than flawless feels like failure. Champions chase excellence, not perfection — they expect errors, recover in seconds, and keep competing. Aim for great with a short memory. The scoreboard rewards resilience and the next play, never a spotless first ten minutes.",
+      "cta": "Free chapter → link in description.",
+      "description": "Why perfectionism hurts performance — excellence vs perfection.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#perfectionism #sportspsychology #mentaltoughness #mindset #athlete",
+      "tags": [
+        "perfectionism athletes",
+        "fear of mistakes",
+        "excellence not perfection"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-029",
+      "status": "pending",
+      "audience": "parents",
+      "title": "Should You Let Your Kid Quit Their Sport? #Shorts",
+      "hook": "Your kid says they want to quit. Here's how to actually decide.",
+      "script": "Don't decide in the heat of a bad week. The rule: never quit on the worst day — finish the commitment you made, then choose from a calm place. Ask why. 'It's not fun anymore' is a very different answer from 'I'm scared I'll fail.' One is a values mismatch; the other is a chance to teach courage. Let them quit a sport — don't let them learn to quit on hard things.",
+      "cta": "Free guide for sports parents → link in description.",
+      "description": "Should you let your child quit? A calmer way to decide.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #youthsports #parenting #quitting #youthathlete",
+      "tags": [
+        "should my kid quit sports",
+        "youth sports",
+        "sports parenting"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-030",
+      "status": "pending",
+      "audience": "parents",
+      "title": "The Most Damaging Seat In Youth Sport #Shorts",
+      "hook": "The most damaging place in youth sport is the front seat of your car.",
+      "script": "The post-game debrief — every mistake, every missed pass, your tactical review — lands as criticism when emotions are still high, and it slowly turns the sport into a job. The kids who get coached in the car are the ones who burn out first. Your car has exactly one job after a game: safety and warmth. 'I love watching you play.' Let the coach do the coaching.",
+      "cta": "Free guide for sports parents → link in description.",
+      "description": "Why the car ride home makes or breaks young athletes.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #youthsports #parenting #carrridehome #youthathlete",
+      "tags": [
+        "car ride home",
+        "sports parent mistakes",
+        "youth sports"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-031",
+      "status": "pending",
+      "audience": "parents",
+      "title": "The Warning Signs Of Athlete Burnout #Shorts",
+      "hook": "Burnout doesn't start with quitting. It starts quietly.",
+      "script": "Watch for the early signals: dreading a practice they used to love, fatigue that rest doesn't fix, irritability, a flat 'I'm just tired.' Burnout grows from year-round specialization, constant pressure, and no real off-season. The fix isn't pushing harder — it's rest, variety, and permission to play for joy again. Protect the love of the game, and the performance takes care of itself.",
+      "cta": "Free guide for sports parents → link in description.",
+      "description": "Spotting youth athlete burnout before it ends their season.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #burnout #youthsports #parenting #youthathlete",
+      "tags": [
+        "athlete burnout signs",
+        "youth sports burnout",
+        "sports parenting"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-032",
+      "status": "pending",
+      "audience": "parents",
+      "title": "Why Picking One Sport Too Early Backfires #Shorts",
+      "hook": "Picking one sport at age nine isn't dedication. It's a risk.",
+      "script": "Early single-sport specialization raises injury and burnout rates, and it rarely produces a better adult athlete. Most professionals were multi-sport kids — they built broad coordination and, just as important, stayed in love with playing. Let them sample. The athletic ceiling is usually higher for the kid who played three sports than the one who drilled a single one since first grade.",
+      "cta": "Free guide for sports parents → link in description.",
+      "description": "Early specialization vs multi-sport — what the research says.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #youthsports #specialization #parenting #youthathlete",
+      "tags": [
+        "early specialization",
+        "multi sport kids",
+        "youth development"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-033",
+      "status": "pending",
+      "audience": "parents",
+      "title": "Stop Comparing Your Kids #Shorts",
+      "hook": "'Why can't you compete like your brother?' just did real damage.",
+      "script": "Comparison between siblings or teammates teaches a kid that their worth is relative — and that breeds either resentment or a fragile, ranking-based confidence that collapses the moment they're not the best. Compare a child only to their own last month. Celebrate their specific progress. Two kids, two timelines, two different humans. Their own growth is the only scoreboard that builds them up.",
+      "cta": "Free guide for sports parents → link in description.",
+      "description": "Why comparing siblings or teammates backfires in youth sport.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #youthsports #parenting #siblings #youthathlete",
+      "tags": [
+        "comparing kids",
+        "sibling comparison",
+        "youth sports parenting"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-034",
+      "status": "pending",
+      "audience": "parents",
+      "title": "When Your Kid Cries After Losing #Shorts",
+      "hook": "Your kid is in tears after a loss. What you do next really matters.",
+      "script": "Don't rush to fix it, and don't say 'it's just a game' — that tells them their feelings are wrong. Let the tears come; caring deeply is a strength, not a flaw to coach out of them. Sit with them and name it: 'That hurts because you care.' Later, the gentle reframe: a loss is information, not a verdict. The kids who feel it deeply are the ones who'll fight to improve.",
+      "cta": "Free guide for sports parents → link in description.",
+      "description": "What to do when your young athlete cries after a loss.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#sportsparents #youthsports #parenting #emotions #youthathlete",
+      "tags": [
+        "kid cries after losing",
+        "youth sports emotions",
+        "sports parenting"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-035",
+      "status": "pending",
+      "audience": "coaches",
+      "title": "The Halftime Talk That Actually Works #Shorts",
+      "hook": "Most halftime talks make the second half worse, not better.",
+      "script": "Yelling spikes anxiety and narrows focus at the exact moment players need clarity. The talk that actually works has three parts: one emotional reset, one or two specific adjustments, and one statement of belief. That's it. Too much information overloads tired brains and they execute none of it. Calm, clear and short beats loud and long. They don't need your panic — they need your plan.",
+      "cta": "Free chapter for coaches → link in description.",
+      "description": "How to give a halftime talk that improves the second half.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#coaching #sportspsychology #halftime #teamsport #coach",
+      "tags": [
+        "halftime talk",
+        "coaching psychology",
+        "team sport"
+      ],
+      "posted_at": null
+    },
+    {
+      "id": "short-036",
+      "status": "pending",
+      "audience": "coaches",
+      "title": "Rebuilding A Team After A Losing Streak #Shorts",
+      "hook": "Five losses in a row. The belief is gone. Here's how you rebuild it.",
+      "script": "Confidence is built on evidence, so manufacture some. Shrink the goals to controllable wins — effort metrics, small executions, one phase done right — and stack them visibly. Praise process relentlessly, take the result pressure off, and shield the group from outside noise. Belief comes back one small proof at a time. Win the rep before you ask them to win the game.",
+      "cta": "Free chapter for coaches → link in description.",
+      "description": "Rebuilding team confidence after a losing streak.\n\n🎯 FREE chapter → https://thementalsport.com/free\n📚 Course → https://thementalsport.com/course\n\n#coaching #sportspsychology #teamconfidence #losingstreak #coach",
+      "tags": [
+        "team confidence",
+        "losing streak",
+        "coaching mindset"
+      ],
+      "posted_at": null
+    }
+  ]
+}

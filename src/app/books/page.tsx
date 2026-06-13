@@ -7,7 +7,7 @@ import NewsletterInline from '@/components/NewsletterInline';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Books | Giannis Notaras',
+    title: 'Books',
     description: 'Mental performance books for athletes, executives, and parents by Giannis Notaras. Build mental toughness, confidence, and peak performance.',
     keywords: ['mental performance books', 'sports psychology books', 'mental toughness', 'athlete mindset', 'Giannis Notaras books'],
 };

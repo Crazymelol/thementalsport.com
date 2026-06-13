@@ -17,6 +17,9 @@ const { execSync } = require('child_process');
 // Change to skill directory for proper module resolution
 process.chdir(__dirname);
 
+// Use pre-installed browsers in /opt/pw-browsers (cdn.playwright.dev is blocked in this container)
+process.env.PLAYWRIGHT_BROWSERS_PATH = '/opt/pw-browsers';
+
 /**
  * Check if Playwright is installed
  */

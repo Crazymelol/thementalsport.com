@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const articles = $input.first().json;\nconst pick = articles[Math.floor(Math.random() * articles.length)];\nreturn [{ json: { filename: pick.name, download_url: pick.download_url } }];"
+        "jsCode": "const articles = $input.first().json;\nconst dayIndex = Math.floor(Date.now() / 86400000);\nconst pick = articles[dayIndex % articles.length]; // deterministic rotation — no repeats until the full list cycles\nreturn [{ json: { filename: pick.name, download_url: pick.download_url } }];"
       },
       "name": "Pick Random Article",
       "type": "n8n-nodes-base.code",

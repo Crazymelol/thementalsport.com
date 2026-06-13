@@ -4,7 +4,7 @@ import { CheckCircle2, Star, ArrowRight, Lock, Clock, BookOpen, Award } from 'lu
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'The Mental Performance Protocol | 8-Week Course | Giannis Notaras',
+    title: 'The Mental Performance Protocol | 8-Week Course',
     description: 'The complete 8-week mental performance system for athletes. Build unshakable confidence, eliminate competition anxiety, and dominate your sport.',
     keywords: ['mental performance course', 'sports psychology course', 'mental toughness training', 'athlete mindset course'],
     openGraph: {

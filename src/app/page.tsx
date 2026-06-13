@@ -20,17 +20,24 @@ export default function AuthorHome() {
             <section className="bg-zinc-950 text-white py-24 lg:py-32 relative overflow-hidden">
                 <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-zinc-950/40 to-zinc-950 pointer-events-none"></div>
                 <div className="container mx-auto px-6 max-w-5xl text-center space-y-8 relative z-10">
-                    <h1 className="text-6xl lg:text-8xl font-black mb-6 uppercase tracking-tighter leading-none">
-                        Giannis Notaras
-                    </h1>
-                    <p className="text-xl lg:text-2xl text-zinc-400 font-medium max-w-2xl mx-auto uppercase tracking-widest">
-                        Performance Expert. Author. <span className="text-white block mt-2 font-bold">Win the inner game.</span>
-                    </p>
-                    <div className="pt-8 mb-12">
-                        <NewsletterWrapper className="px-10 py-4 bg-white text-zinc-950 font-black rounded-none hover:bg-zinc-200 transition-colors uppercase tracking-widest text-sm border-2 border-transparent">
-                            Join The Newsletter
-                        </NewsletterWrapper>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 text-zinc-300 text-xs font-black uppercase tracking-[0.2em] mb-4">
+                        8 Books · Mental Performance Masterclass
                     </div>
+                    <h1 className="text-6xl lg:text-8xl font-black mb-6 uppercase tracking-tighter leading-none">
+                        Win The<br/>Inner Game
+                    </h1>
+                    <p className="text-xl lg:text-2xl text-zinc-400 font-medium max-w-2xl mx-auto leading-relaxed">
+                        The mental performance system used by elite athletes — built by Giannis Notaras.
+                    </p>
+                    <div className="pt-8 mb-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <NewsletterWrapper className="px-10 py-4 bg-white text-zinc-950 font-black rounded-none hover:bg-zinc-200 transition-colors uppercase tracking-widest text-sm">
+                            Get The Free Protocol
+                        </NewsletterWrapper>
+                        <Link href="/books" className="px-10 py-4 border border-zinc-700 text-white font-black rounded-none hover:border-white transition-colors uppercase tracking-widest text-sm flex items-center gap-2">
+                            Browse Books <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Free 7-day system • No credit card</p>
                 </div>
 
                 {/* Scroll Indicator */}
@@ -137,10 +144,19 @@ export default function AuthorHome() {
             <section id="about" className="py-24 bg-zinc-50 border-t border-zinc-200">
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
-                        {/* Image Side - Placeholder */}
-                        <div className="aspect-[3/4] bg-zinc-200 rounded-none relative overflow-hidden group shadow-2xl">
-                            <div className="absolute inset-0 bg-zinc-300 flex items-center justify-center text-zinc-500 font-bold uppercase tracking-widest text-xl group-hover:scale-105 transition-transform duration-700">
-                                Author Portrait
+                        {/* Image Side - Featured Work */}
+                        <div className="aspect-[3/4] bg-zinc-900 rounded-none relative overflow-hidden group shadow-2xl flex items-center justify-center p-12">
+                            <Image
+                                src="/covers/final_neon_cover.jpg"
+                                alt="The Competition Protocol — book by Giannis Notaras"
+                                width={400}
+                                height={533}
+                                className="w-full h-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-700"
+                            />
+                            <div className="absolute bottom-6 left-6 right-6 text-center">
+                                <span className="inline-block px-4 py-2 bg-white text-zinc-950 text-xs font-black uppercase tracking-[0.2em]">
+                                    Author Of 8 Books
+                                </span>
                             </div>
                         </div>
 
@@ -158,7 +174,6 @@ export default function AuthorHome() {
                             </p>
 
                             <div className="pt-6 flex gap-8">
-                                <a href="#" className="text-zinc-400 hover:text-zinc-950 transition-colors uppercase text-sm font-black tracking-widest">Twitter / X</a>
                                 <a href="https://www.linkedin.com/in/giannisnotaras/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-950 transition-colors uppercase text-sm font-black tracking-widest">LinkedIn</a>
                                 <a href="https://www.instagram.com/giannisnotaras/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-950 transition-colors uppercase text-sm font-black tracking-widest">Instagram</a>
                             </div>
