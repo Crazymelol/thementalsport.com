@@ -2,10 +2,11 @@
 *2026-06-12 · Why the channel gets 37 views/video and +3 subs/month despite 275 uploads in 30 days*
 
 **STATUS: patched scripts are ready in `scripts/` in this repo.** All 4 platform
-bots (YouTube, X, Pinterest, TikTok) are pre-fixed and committed — STEP 2 is now
-just "copy files over", no manual code editing required. STEP 2.5 (new) fixes
-TikTok's plain white generic video by wiring in a real renderer — that one
-needs one new line in `post-all-platforms.sh`.
+bots (YouTube, X, Pinterest, TikTok) are pre-fixed and committed — STEP 2 is
+"copy files over", no manual code editing required anywhere, including
+`post-all-platforms.sh`. TikTok's plain white generic video is fixed too
+(STEP 2.5): `post-tiktok-daily.py` now renders its own on-brand Remotion short
+on the fly, automatically — nothing to wire up.
 
 ## What's happening
 The uploader is **`post-youtube-daily.py`** running on your machine via cron (`post-all-platforms.sh` orchestrates it; backups of all of it are in your Google Drive "scripts" folder). It picks a video title **at random from a small hardcoded hooks list** with no memory of what it already posted — same `random.choice` pattern as every bot built on May 15. Result in the last 30 days: the SAME title uploaded as a "new" video up to **10 times** ("How To Raise A Mentally Tough Athlete" ×10, "7 Days Before Your Race" ×10, three identical uploads within one hour on June 7). YouTube suppresses the whole channel for this and it risks a "repetitious content" strike that blocks monetization outright. The TikTok / Pinterest / X sibling bots share the same flaw.
@@ -34,7 +35,8 @@ already wired up, no code editing needed:
   rotation now goes through `rotation.pick_lru`
 - `yt_dedup.py` — new helper used by the YouTube bot
 - `rotation.py` — new helper used by the X/Pinterest/TikTok bots
-- `render-daily-short.py` — new helper used by STEP 2.5 below
+- `render_daily_short.py` — new helper, called automatically by
+  `post-tiktok-daily.py` (see STEP 2.5) — nothing extra to run or wire up
 
 Copy all of `scripts/*.py` from this repo over the matching files in your
 existing scripts folder (same place `post-all-platforms.sh` already calls
@@ -54,8 +56,8 @@ What it guarantees:
 - **TikTok**: same caption-rotation fix, *plus* its daily-cap lock
   (`TIKTOK_LOCK` / `/tmp/tiktok-posted-today.txt`) is now actually checked at
   the top of `main()` — previously it was written but never read, so "one
-  video per day" was not enforced. *Plus* (after STEP 2.5) it posts the same
-  on-brand Remotion video as the other platforms instead of
+  video per day" was not enforced. *Plus* (see STEP 2.5) it now renders and
+  posts an on-brand Remotion video automatically, on its own, instead of
   `make-tiktok-7sec.py`'s plain white clip.
 
 Root cause recap for YouTube specifically: `post-all-platforms.sh` exports
@@ -67,32 +69,38 @@ dependency entirely.
 
 *Alternative architecture (optional): `n8n-workflows/05-youtube-shorts-queue-poster.json` does the same queue logic in n8n, if you ever move the pipeline there.*
 
-## STEP 2.5 — fix TikTok's plain white generic video (one-time, ~5 min)
+## STEP 2.5 — TikTok's plain white generic video (now fixed automatically)
 
 `post-youtube-daily.py`, `post-x-daily.py` and `post-pinterest-daily.py` were
 all already written to "prefer the Remotion short" via an `ANIM_PATH` env var
-— but nothing ever set `ANIM_PATH`, because the Remotion renderer didn't
-exist yet. TikTok instead ran `make-tiktok-7sec.py` first, which produces a
-plain white generic clip. The renderer now exists (`remotion/`, this repo) and
-`post-tiktok-daily.py` now prefers `ANIM_PATH` too — it just needs to be set.
+— but nothing ever set `ANIM_PATH`, because the Remotion renderer didn't exist
+yet. TikTok instead ran `make-tiktok-7sec.py` first, which produces a plain
+white generic clip.
 
-1. One-time setup on your machine:
-   ```bash
-   cd remotion && npm install
-   ```
-   (downloads Remotion's headless Chrome on first run — needs normal internet,
-   no special env vars on a non-sandboxed machine.)
+The renderer now exists (`remotion/`, this repo), and `post-tiktok-daily.py`
+calls it directly — **no setup, no `post-all-platforms.sh` edit, nothing to
+wire up.** On every run, if `ANIM_PATH` isn't set, it renders the next queue
+script itself (1080x1920, on-brand dark caption video, ~30-40s) and uses that
+instead of `make-tiktok-7sec.py`'s plain white clip.
 
-2. In `post-all-platforms.sh`, near the top, **before** the 4 poster scripts
-   run, add:
-   ```bash
-   export ANIM_PATH=$(python3 /path/to/scripts/render-daily-short.py)
-   ```
-   This renders the same script `post-youtube-daily.py` is about to post
-   (1080x1920, on-brand dark caption video, ~30-40s, takes ~1 min to render)
-   and points all 4 bots at it. If it prints nothing — queue exhausted or
-   render failed — every bot falls back to its previous behavior, so this is
-   safe to add even if something goes wrong.
+- First run downloads Remotion's headless Chrome (one-time, needs normal
+  internet — no special env vars on your machine) and runs `npm install` in
+  `remotion/` automatically if `node_modules` is missing. After that, each
+  render takes about a minute.
+- If the queue is exhausted or the render fails for any reason,
+  `post-tiktok-daily.py` silently falls back to `make-tiktok-7sec.py` (then to
+  the book-promo video) exactly as before — this change can only make things
+  better, never worse.
+
+Optional: if you ever want all 4 platforms to post the *exact same* Remotion
+video on a given day (instead of TikTok independently picking the next queue
+item), add this line near the top of `post-all-platforms.sh`, before the 4
+poster scripts run:
+```bash
+export ANIM_PATH=$(python3 /path/to/scripts/render_daily_short.py)
+```
+This is a nice-to-have, not required — the fix above already gets rid of the
+plain white clip without it.
 
 ## STEP 3 — clean the channel (~30 min, can wait until PC)
 YouTube Studio → Content → Shorts → search each duplicated title → **keep the single best-performing copy, delete the rest** (including same-script "— Animated" twins posted seconds apart).

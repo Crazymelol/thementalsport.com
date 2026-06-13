@@ -11,15 +11,19 @@ PATCHED 2026-06-12 — drop-in replacement; needs rotation.py in the same folder
   CAPTION_HOOKS without repeating one before the others are used (the old
   CAPTION_HOOKS[day_idx % 7] just repeated the same 7-day pattern forever).
 
-PATCHED 2026-06-13 — now prefers ANIM_PATH (a Remotion-rendered short, see
-render-daily-short.py) over make-tiktok-7sec.py, which was producing a plain
-white generic clip. make-tiktok-7sec.py is now only a fallback for days
-ANIM_PATH isn't set.
+PATCHED 2026-06-13 — now prefers a Remotion-rendered short (on-brand vertical
+caption video) over make-tiktok-7sec.py, which was producing a plain white
+generic clip. If ANIM_PATH is already set (e.g. by post-all-platforms.sh) it's
+used as-is; otherwise this script renders one itself via
+render_daily_short.get_short_path() — no env var or other script needs to
+change. make-tiktok-7sec.py is now only a last-resort fallback if both of
+those are unavailable.
 """
 import json, os, sys, subprocess, pickle
 from pathlib import Path
 
 from rotation import pick_lru
+from render_daily_short import get_short_path
 
 MANIFEST = '/tmp/daily-manifest.json'
 UPLOADER_DIR = Path.home() / 'TiktokAutoUploader'
@@ -64,9 +68,19 @@ def main():
 
     m = json.load(open(MANIFEST))
     anim_path = os.environ.get('ANIM_PATH', '')
+    if not (anim_path and os.path.exists(anim_path) and os.path.getsize(anim_path) > 10000):
+        # ANIM_PATH wasn't pre-rendered by post-all-platforms.sh — render it
+        # ourselves so this script needs no external wiring at all.
+        try:
+            rendered = get_short_path()
+            if rendered:
+                anim_path = str(rendered)
+        except Exception as e:
+            print(f'TikTok: self-render failed ({e})')
+
     if anim_path and os.path.exists(anim_path) and os.path.getsize(anim_path) > 10000:
         # Prefer the Remotion short (on-brand vertical caption video, see
-        # render-daily-short.py) over make-tiktok-7sec.py's plain white clip.
+        # render_daily_short.py) over make-tiktok-7sec.py's plain white clip.
         tiktok_video = anim_path
         print(f'TikTok: using Remotion short {tiktok_video}')
     else:
