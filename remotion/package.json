@@ -1,0 +1,24 @@
+{
+  "name": "thementalsport-shorts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts ShortVideo out/short.mp4",
+    "render-queue": "tsx src/render-queue.ts"
+  },
+  "dependencies": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.476",
+    "@remotion/cli": "4.0.476",
+    "@remotion/bundler": "4.0.476",
+    "@remotion/renderer": "4.0.476"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "@types/node": "22.0.0",
+    "typescript": "5.8.2",
+    "tsx": "4.19.2"
+  }
+}

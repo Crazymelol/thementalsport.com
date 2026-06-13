@@ -45,3 +45,8 @@ next-env.d.ts
 ruvector.db
 .env.local
 __pycache__/
+
+# remotion (video rendering)
+remotion/node_modules/
+remotion/out/
+remotion/.remotion/
