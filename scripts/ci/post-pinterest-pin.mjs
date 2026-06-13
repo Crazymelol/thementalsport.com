@@ -126,6 +126,24 @@ async function resolveBoardId(accessToken) {
     headers: {Authorization: `Bearer ${accessToken}`},
   });
   if (!res.ok) {
+    if (res.status === 401) {
+      // Classify the auth failure: a Sandbox token works against the sandbox
+      // host but 401s against production, which is the usual cause here.
+      let hint = ' Regenerate the token and re-save the PINTEREST_ACCESS_TOKEN secret.';
+      try {
+        const sb = await fetch('https://api-sandbox.pinterest.com/v5/boards?page_size=1', {
+          headers: {Authorization: `Bearer ${accessToken}`},
+        });
+        if (sb.ok) {
+          hint = ' This is a SANDBOX token — it only works on Pinterest\'s test server, not your real account. Regenerate it with the environment set to "Production Limited", then re-save the PINTEREST_ACCESS_TOKEN secret.';
+        } else {
+          hint = ' The token was rejected by both production and sandbox (expired or mis-pasted). Regenerate it and re-save the PINTEREST_ACCESS_TOKEN secret.';
+        }
+      } catch {
+        // sandbox probe unreachable; keep the generic hint
+      }
+      throw new Error(`Pinterest authorization failed (401).${hint}`);
+    }
     throw new Error(`Pinterest list-boards failed: ${res.status} ${await res.text()}`);
   }
   const data = await res.json();
