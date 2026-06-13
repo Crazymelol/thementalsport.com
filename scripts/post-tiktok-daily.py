@@ -10,6 +10,11 @@ PATCHED 2026-06-12 — drop-in replacement; needs rotation.py in the same folder
 - Caption hook now comes from rotation.pick_lru, which cycles through
   CAPTION_HOOKS without repeating one before the others are used (the old
   CAPTION_HOOKS[day_idx % 7] just repeated the same 7-day pattern forever).
+
+PATCHED 2026-06-13 — now prefers ANIM_PATH (a Remotion-rendered short, see
+render-daily-short.py) over make-tiktok-7sec.py, which was producing a plain
+white generic clip. make-tiktok-7sec.py is now only a fallback for days
+ANIM_PATH isn't set.
 """
 import json, os, sys, subprocess, pickle
 from pathlib import Path
@@ -58,18 +63,23 @@ def main():
         print(f'ERROR: {MANIFEST} not found'); sys.exit(1)
 
     m = json.load(open(MANIFEST))
-    # TikTok content = ~7-second vertical video with Giannis XTTS voice hook.
-    comp = os.environ.get('TIKTOK_COMP', 'Confidence')
     anim_path = os.environ.get('ANIM_PATH', '')
-    tiktok_video = '/tmp/tiktok-7sec.mp4'
-    sub = subprocess.run(
-        ['python3', str(Path(__file__).parent / 'make-tiktok-7sec.py'), comp, tiktok_video, anim_path],
-        capture_output=True, text=True, timeout=300)
-    print(sub.stdout.strip())
-    if sub.returncode != 0 or not (os.path.exists(tiktok_video) and os.path.getsize(tiktok_video) > 10000):
-        print('STDERR:', sub.stderr[-300:])
-        tiktok_video = anim_path if anim_path and os.path.exists(anim_path) and os.path.getsize(anim_path) > 10000 else m['video_path']
-        print(f'TikTok: 7sec build failed, falling back to {tiktok_video}')
+    if anim_path and os.path.exists(anim_path) and os.path.getsize(anim_path) > 10000:
+        # Prefer the Remotion short (on-brand vertical caption video, see
+        # render-daily-short.py) over make-tiktok-7sec.py's plain white clip.
+        tiktok_video = anim_path
+        print(f'TikTok: using Remotion short {tiktok_video}')
+    else:
+        comp = os.environ.get('TIKTOK_COMP', 'Confidence')
+        tiktok_video = '/tmp/tiktok-7sec.mp4'
+        sub = subprocess.run(
+            ['python3', str(Path(__file__).parent / 'make-tiktok-7sec.py'), comp, tiktok_video, anim_path],
+            capture_output=True, text=True, timeout=300)
+        print(sub.stdout.strip())
+        if sub.returncode != 0 or not (os.path.exists(tiktok_video) and os.path.getsize(tiktok_video) > 10000):
+            print('STDERR:', sub.stderr[-300:])
+            tiktok_video = m['video_path']
+            print(f'TikTok: 7sec build failed, falling back to {tiktok_video}')
     hook = pick_lru('tiktok-caption', CAPTION_HOOKS)
     caption = (
         f'{hook}\n\n'
