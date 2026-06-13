@@ -193,6 +193,12 @@ async function main() {
     return;
   }
 
+  // Authenticate first so a bad/expired token fails in seconds, before we
+  // spend ~70s rendering. Also keeps a freshly-saved token from aging out
+  // mid-run.
+  const accessToken = await getAccessToken();
+  const boardId = await resolveBoardId(accessToken);
+
   const videoPath = path.join(REMOTION_DIR, 'out', `${item.id}.mp4`);
   if (!fs.existsSync(videoPath)) {
     console.log(`Rendering ${item.id}: "${item.title}"`);
@@ -207,9 +213,6 @@ async function main() {
 
   const coverPath = path.join(REMOTION_DIR, 'out', `${item.id}-cover.jpg`);
   extractCoverImage(videoPath, coverPath);
-
-  const accessToken = await getAccessToken();
-  const boardId = await resolveBoardId(accessToken);
 
   console.log('Registering video upload...');
   const {media_id, upload_url, upload_parameters} = await registerVideoUpload(accessToken);
