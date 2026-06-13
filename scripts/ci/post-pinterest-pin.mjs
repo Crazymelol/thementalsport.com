@@ -4,9 +4,17 @@
 // posted (tracked separately from the YouTube `status` field via
 // `pinterest_status`, so the same queue feeds both platforms independently).
 //
-// Requires env vars: PINTEREST_CLIENT_ID, PINTEREST_CLIENT_SECRET,
-// PINTEREST_REFRESH_TOKEN, PINTEREST_BOARD_ID
-// (see scripts/ci/get-pinterest-refresh-token.mjs for setup).
+// Auth (two supported modes):
+//   - Unattended (preferred): PINTEREST_CLIENT_ID + PINTEREST_CLIENT_SECRET +
+//     PINTEREST_REFRESH_TOKEN — refreshes its own access token every run, so
+//     it keeps posting forever without human touch.
+//   - Quick start: PINTEREST_ACCESS_TOKEN — a token pasted straight from the
+//     Pinterest developer dashboard. Works immediately but expires, so it
+//     needs periodic manual renewal. Used only if no refresh token is set.
+//
+// PINTEREST_BOARD_ID is optional: if unset, the poster reuses the account's
+// first board (or creates one named "Mental Sport").
+// (see scripts/ci/get-pinterest-refresh-token.mjs for the refresh-token setup.)
 
 import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
@@ -28,6 +36,13 @@ function requireEnv(name) {
 }
 
 async function getAccessToken() {
+  // Refresh-token mode is preferred (unattended forever). If no refresh token
+  // is configured, fall back to a directly-supplied access token so the poster
+  // can run before the full OAuth setup is in place.
+  if (!process.env.PINTEREST_REFRESH_TOKEN && process.env.PINTEREST_ACCESS_TOKEN) {
+    return process.env.PINTEREST_ACCESS_TOKEN;
+  }
+
   const clientId = requireEnv('PINTEREST_CLIENT_ID');
   const clientSecret = requireEnv('PINTEREST_CLIENT_SECRET');
   const refreshToken = requireEnv('PINTEREST_REFRESH_TOKEN');
@@ -101,6 +116,43 @@ async function waitForMediaReady(accessToken, mediaId) {
   throw new Error('Pinterest media processing timed out');
 }
 
+async function resolveBoardId(accessToken) {
+  if (process.env.PINTEREST_BOARD_ID) {
+    return process.env.PINTEREST_BOARD_ID;
+  }
+
+  const res = await fetch('https://api.pinterest.com/v5/boards?page_size=25', {
+    headers: {Authorization: `Bearer ${accessToken}`},
+  });
+  if (!res.ok) {
+    throw new Error(`Pinterest list-boards failed: ${res.status} ${await res.text()}`);
+  }
+  const data = await res.json();
+  if (data.items && data.items.length > 0) {
+    console.log(`Using existing board: "${data.items[0].name}" (${data.items[0].id})`);
+    return data.items[0].id;
+  }
+
+  console.log('No boards found; creating "Mental Sport"...');
+  const createRes = await fetch('https://api.pinterest.com/v5/boards', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: 'Mental Sport',
+      description: 'Sports psychology & mental-performance tips for athletes, parents and coaches.',
+    }),
+  });
+  if (!createRes.ok) {
+    throw new Error(`Pinterest create-board failed: ${createRes.status} ${await createRes.text()}`);
+  }
+  const board = await createRes.json();
+  console.log(`Created board: "${board.name}" (${board.id})`);
+  return board.id;
+}
+
 function extractCoverImage(videoPath, outPath) {
   execFileSync('ffmpeg', [
     '-y',
@@ -136,7 +188,7 @@ async function main() {
   extractCoverImage(videoPath, coverPath);
 
   const accessToken = await getAccessToken();
-  const boardId = requireEnv('PINTEREST_BOARD_ID');
+  const boardId = await resolveBoardId(accessToken);
 
   console.log('Registering video upload...');
   const {media_id, upload_url, upload_parameters} = await registerVideoUpload(accessToken);
