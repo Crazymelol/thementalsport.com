@@ -1,0 +1,53 @@
+name: Pinterest Auto-Poster
+
+on:
+  schedule:
+    # Staggered from the YouTube poster cron (8,16,23) to avoid concurrent
+    # pushes to social/youtube-queue/queue.json.
+    - cron: '0 4,11,19 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pinterest-poster
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Remotion dependencies
+        working-directory: remotion
+        run: npm install
+
+      - name: Install poster dependencies
+        working-directory: scripts/ci
+        run: npm install
+
+      - name: Install browser dependencies for Remotion render
+        run: npx --yes playwright install-deps chromium
+
+      - name: Render + upload next Pin
+        env:
+          PINTEREST_CLIENT_ID: ${{ secrets.PINTEREST_CLIENT_ID }}
+          PINTEREST_CLIENT_SECRET: ${{ secrets.PINTEREST_CLIENT_SECRET }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
+          PINTEREST_BOARD_ID: ${{ secrets.PINTEREST_BOARD_ID }}
+        run: node scripts/ci/post-pinterest-pin.mjs
+
+      - name: Commit updated queue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin master
+          git add social/youtube-queue/queue.json
+          git diff --staged --quiet || git commit -m "bot: mark Pinterest pin as posted"
+          git push
