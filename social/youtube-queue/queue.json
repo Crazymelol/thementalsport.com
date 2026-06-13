@@ -3,7 +3,7 @@
   "items": [
     {
       "id": "short-001",
-      "status": "pending",
+      "status": "posted",
       "audience": "parents",
       "title": "The Car Ride Home Is Where Athletes Are Made — Or Broken #Shorts",
       "hook": "What you say in the car after the game matters more than anything the coach said.",
@@ -15,7 +15,8 @@
         "youth sports psychology",
         "mental toughness kids"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-13T22:26:55.812Z",
+      "youtube_id": "sY5sqa1JPKo"
     },
     {
       "id": "short-002",
