@@ -41,12 +41,19 @@ async function getAccessToken() {
   // is configured, fall back to a directly-supplied access token so the poster
   // can run before the full OAuth setup is in place.
   if (!process.env.PINTEREST_REFRESH_TOKEN && process.env.PINTEREST_ACCESS_TOKEN) {
-    return process.env.PINTEREST_ACCESS_TOKEN;
+    const raw = process.env.PINTEREST_ACCESS_TOKEN;
+    const token = raw.trim();
+    // Safe diagnostics — length isn't the secret (and the value is masked in
+    // logs anyway). Catches a truncated paste or stray whitespace/newline.
+    console.log(
+      `Access token: ${token.length} chars (raw ${raw.length}), starts with "pina_": ${token.startsWith('pina_')}`,
+    );
+    return token;
   }
 
-  const clientId = requireEnv('PINTEREST_CLIENT_ID');
-  const clientSecret = requireEnv('PINTEREST_CLIENT_SECRET');
-  const refreshToken = requireEnv('PINTEREST_REFRESH_TOKEN');
+  const clientId = requireEnv('PINTEREST_CLIENT_ID').trim();
+  const clientSecret = requireEnv('PINTEREST_CLIENT_SECRET').trim();
+  const refreshToken = requireEnv('PINTEREST_REFRESH_TOKEN').trim();
 
   const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
   const res = await fetch('https://api.pinterest.com/v5/oauth/token', {
