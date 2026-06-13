@@ -199,6 +199,173 @@ Novelty costs attention, your scarcest resource on game day. Same warm-up, same 
 
 ---
 
+## Batch 2 — 18 more posts (short-019 … short-036)
+*Fresh angles: night-before nerves, the yips, injury comebacks, burnout, coaches. Same drill — attach video, paste caption, all platforms, ~3/day.*
+
+### 19 · short-019.mp4 — Can't sleep before the game (athletes)
+It's midnight before the biggest game of your life and your eyes won't close.
+
+Stop *trying* to sleep — chasing it keeps you awake. Just lie still with eyes closed; rest recovers most of what sleep does. Box-breathe (in 4, hold 4, out 4). One rough night barely dents performance — the worry costs more than the lost sleep.
+
+🎯 Free pre-game protocol → thementalsport.com/free
+
+`#sportspsychology #pregame #sleep #athletemindset #mentaltoughness`
+
+### 20 · short-020.mp4 — Instagram is making you worse (athletes)
+Every highlight reel you scroll is quietly making you worse.
+
+You compare your behind-the-scenes to everyone's highlight reel — their best moment vs your average Tuesday. Curate your feed like your diet: follow process, mute comparison. Your only scoreboard is you, last month.
+
+🎯 Free chapter → thementalsport.com/free
+
+`#sportspsychology #athletemindset #comparison #mentalgame #focus`
+
+### 21 · short-021.mp4 — The yips (athletes)
+A skill you've done ten thousand times — and suddenly you can't.
+
+It's the yips, and it's not physical: under pressure your conscious mind hijacks a movement meant to run on autopilot. The fix is counterintuitive — stop aiming for perfect, focus outward (target, rhythm, a hum) so motor memory can drive again.
+
+🎯 Free chapter on performing under pressure → thementalsport.com/free
+
+`#yips #sportspsychology #pressure #mentalgame #performance`
+
+### 22 · short-022.mp4 — Playing not to lose (athletes)
+The moment you start protecting a lead is the moment you start losing it.
+
+Playing not to lose flips you from attacking to flinching — and invites the comeback. The mindset that built the lead is the only one that holds it. Same intensity at plus-three as minus-three.
+
+🎯 Free chapter → thementalsport.com/free
+
+`#sportspsychology #mentaltoughness #competing #athletemindset #clutch`
+
+### 23 · short-023.mp4 — Warm-up nerves are lying (athletes)
+You feel terrible in warm-up, so you panic. Don't.
+
+Warm-up isn't a prediction. How you feel 20 minutes before says almost nothing about how you'll perform live. Everyone's won feeling awful and lost feeling perfect. Trust the training, not the temperature check.
+
+🎯 Free pre-game protocol → thementalsport.com/free
+
+`#sportspsychology #pregame #nerves #athletemindset #warmup`
+
+### 24 · short-024.mp4 — Say "I get to" (athletes)
+Two words are loading pressure onto every game: "have to."
+
+"I have to perform" frames it as a threat, and threat tightens you up. Swap it: "I get to compete. I get to be tested." Same situation, opposite physiology — challenge, not threat. It's the difference between tight and free.
+
+🎯 Free chapter → thementalsport.com/free
+
+`#sportspsychology #reframe #pressure #mentalgame #athletemindset`
+
+### 25 · short-025.mp4 — The mental side of injury comeback (athletes)
+Your body healed months ago. Your mind didn't.
+
+Re-injury fear makes you hesitate — and hesitation is how you get hurt again. Rebuild trust in stages, hit small confidence checkpoints, separate pain from danger. Cleared to play isn't the same as ready to play. The last rehab is mental.
+
+🎯 Free chapter → thementalsport.com/free
+
+`#injuryrecovery #sportspsychology #comeback #mentaltoughness #athlete`
+
+### 26 · short-026.mp4 — Stuck on the bench (athletes)
+You're on the bench and it's eating you alive.
+
+You can't control the coach's call. You can control your response and your readiness. Bitterness is visible and buries you deeper. The players who break through stay ready and win the reps no one's watching.
+
+🎯 Free chapter on the competitor's mindset → thementalsport.com/free
+
+`#sportspsychology #benchplayer #mindset #athletemindset #mentaltoughness`
+
+### 27 · short-027.mp4 — Get your opponent out of your head (athletes)
+They're in your head — and you put them there.
+
+Trash talk and reputation only work if you give them attention you owe the next play. Refocus on what you control: routine, cue word, task. The best competitors look almost boring — opponent-proof.
+
+🎯 Free chapter → thementalsport.com/free
+
+`#sportspsychology #focus #mentalgame #competing #athletemindset`
+
+### 28 · short-028.mp4 — Perfectionism is wrecking your game (athletes)
+The thing you're proudest of — being a perfectionist — is sabotaging you.
+
+Perfectionism plays like fear: one mistake and you unravel. Champions chase excellence, not perfection — they expect errors and recover in seconds. Aim for great with a short memory.
+
+🎯 Free chapter → thementalsport.com/free
+
+`#perfectionism #sportspsychology #mentaltoughness #mindset #athlete`
+
+### 29 · short-029.mp4 — Should you let your kid quit? (parents)
+Your kid says they want to quit. Here's how to actually decide.
+
+Never decide on the worst day — finish the commitment, then choose from calm. Ask why: "it's not fun anymore" is different from "I'm scared I'll fail." Let them quit a sport — not quit on hard things.
+
+🎯 Free guide for sports parents → thementalsport.com/free
+
+`#sportsparents #youthsports #parenting #quitting #youthathlete`
+
+### 30 · short-030.mp4 — The most damaging seat in youth sport (parents)
+The most damaging place in youth sport is the front seat of your car.
+
+The post-game debrief lands as criticism when emotions are high and turns sport into a job. Kids coached in the car burn out first. The car has one job: safety and warmth. "I love watching you play."
+
+🎯 Free guide for sports parents → thementalsport.com/free
+
+`#sportsparents #youthsports #parenting #carrridehome #youthathlete`
+
+### 31 · short-031.mp4 — Warning signs of burnout (parents)
+Burnout doesn't start with quitting. It starts quietly.
+
+Watch for dread before practice they used to love, fatigue rest won't fix, irritability. It grows from year-round specialization and no off-season. The fix isn't pushing harder — it's rest, variety, and permission to play for joy.
+
+🎯 Free guide for sports parents → thementalsport.com/free
+
+`#sportsparents #burnout #youthsports #parenting #youthathlete`
+
+### 32 · short-032.mp4 — Specializing too early backfires (parents)
+Picking one sport at age nine isn't dedication. It's a risk.
+
+Early specialization raises injury and burnout and rarely makes a better adult athlete. Most pros were multi-sport kids. Let them sample — the ceiling is higher for the kid who played three sports than the one who drilled one.
+
+🎯 Free guide for sports parents → thementalsport.com/free
+
+`#sportsparents #youthsports #specialization #parenting #youthathlete`
+
+### 33 · short-033.mp4 — Stop comparing your kids (parents)
+"Why can't you compete like your brother?" just did real damage.
+
+Comparison teaches a kid their worth is relative — breeding resentment or fragile, ranking-based confidence. Compare a child only to their own last month. Two kids, two timelines. Their growth is the only scoreboard.
+
+🎯 Free guide for sports parents → thementalsport.com/free
+
+`#sportsparents #youthsports #parenting #siblings #youthathlete`
+
+### 34 · short-034.mp4 — When your kid cries after losing (parents)
+Your kid is in tears after a loss. What you do next matters.
+
+Don't rush to fix it or say "it's just a game" — that tells them their feelings are wrong. Sit with them: "That hurts because you care." Later, the reframe: a loss is information. Kids who feel deeply fight to improve.
+
+🎯 Free guide for sports parents → thementalsport.com/free
+
+`#sportsparents #youthsports #parenting #emotions #youthathlete`
+
+### 35 · short-035.mp4 — The halftime talk that works (coaches)
+Most halftime talks make the second half worse.
+
+Yelling spikes anxiety and narrows focus when players need clarity. The talk that works: one emotional reset, one or two specific adjustments, one belief statement. Calm, clear, short beats loud and long.
+
+🎯 Free chapter for coaches → thementalsport.com/free
+
+`#coaching #sportspsychology #halftime #teamsport #coach`
+
+### 36 · short-036.mp4 — Rebuild after a losing streak (coaches)
+Five losses in a row. The belief is gone. Here's how you rebuild it.
+
+Confidence is built on evidence — manufacture some. Shrink goals to controllable wins (effort, small executions) and stack them. Praise process, take result-pressure off. Win the rep before you win the game.
+
+🎯 Free chapter for coaches → thementalsport.com/free
+
+`#coaching #sportspsychology #teamconfidence #losingstreak #coach`
+
+---
+
 ## After this batch — so you're never empty again
 Pick ONE when you're ready and I'll set it up:
 - **Keep it simple:** I refill this pack with fresh videos + captions every week; you spend
