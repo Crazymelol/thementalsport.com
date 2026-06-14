@@ -146,22 +146,25 @@ async function main() {
     ab('wait', '--timeout', '2500');
     const boardSnap = ab('snapshot', '-i');
     console.error('=== PINTEREST BOARD DROPDOWN ===\n' + boardSnap + '\n=== END ===');
-    const boardOpt =
-      findRef(boardSnap, ['option']) || findRef(boardSnap, ['button', /save to|board/i]);
-    if (boardOpt) {
-      ab('click', boardOpt);
-      ab('wait', '--timeout', '1500');
+    // Boards show as buttons in the dropdown; click the first real board
+    // (skip the "Create board" entry and the dropdown toggle).
+    const boardOptLine = boardSnap
+      .split('\n')
+      .find((l) => /- button "/.test(l) && !/create board|choose a board/i.test(l) && /ref=e/.test(l));
+    if (boardOptLine) {
+      ab('click', '@' + boardOptLine.match(/ref=(e\d+)/)[1]);
+      ab('wait', '--timeout', '2000');
     }
   }
 
-  // Publish — the button is "Create new Pin". Don't click it while it's
-  // disabled (that would false-positive mark the item posted), and verify we
-  // actually left the create page afterward.
+  // Publish — the button reads "Publish" once a draft is ready ("Create new
+  // Pin" only shows on the empty form). Don't click while disabled (that would
+  // false-positive mark the item posted), and verify we left the page after.
   snap = ab('snapshot', '-i');
-  const pubLine = snap.split('\n').find((l) => /button "create new pin/i.test(l));
-  if (!pubLine) fail('Could not find the "Create new Pin" button', snap);
+  const pubLine = snap.split('\n').find((l) => /- button "(publish|create new pin)"/i.test(l));
+  if (!pubLine) fail('Could not find the Publish button', snap);
   if (/disabled/i.test(pubLine)) {
-    fail('"Create new Pin" still disabled (board not chosen or upload incomplete)', snap);
+    fail('Publish button is disabled (board not chosen or upload incomplete)', snap);
   }
   ab('click', '@' + pubLine.match(/ref=(e\d+)/)[1]);
   ab('wait', '--timeout', '12000');
