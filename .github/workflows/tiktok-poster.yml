@@ -26,6 +26,10 @@ jobs:
         with:
           node-version: 20
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install Remotion dependencies
         working-directory: remotion
         run: npm install
@@ -37,10 +41,14 @@ jobs:
       - name: Install browser dependencies for Remotion render
         run: npx --yes playwright install-deps chromium
 
-      - name: Install agent-browser
+      - name: Set up TiktokAutoUploader
         run: |
-          npm install -g agent-browser
-          agent-browser install
+          git clone --depth 1 https://github.com/makiisthenes/TiktokAutoUploader.git "$HOME/TiktokAutoUploader"
+          cd "$HOME/TiktokAutoUploader"
+          pip install -r requirements.txt
+          # The signature module is a Node app + a headless browser used only
+          # to sign the upload API requests (not to click the UI).
+          (cd tiktok_uploader/tiktok-signature && npm install && npx playwright install --with-deps chromium)
 
       - name: Render + post next item to TikTok
         env:

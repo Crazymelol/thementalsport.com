@@ -1,37 +1,29 @@
 #!/usr/bin/env node
 // Posts the next tiktok-pending item from social/youtube-queue/queue.json to
-// TikTok via agent-browser, tracked independently via `tiktok_status` (same
-// pattern as Pinterest's `pinterest_status` — see post-pinterest-pin.mjs).
+// TikTok, tracked via `tiktok_status` (same pattern as the other posters).
+//
+// Posting goes through TiktokAutoUploader (scripts/ci/tiktok_upload.py), which
+// uploads via TikTok's API using the session cookies. We switched to this from
+// agent-browser UI automation because TikTok guards the web "Post" button
+// against automation (login + upload + caption all worked, but the final
+// publish click was always ignored) — the API path has no such button.
 //
 // Auth: TIKTOK_COOKIES_JSON — a Cookie-Editor JSON export of a logged-in
-// tiktok.com session (array of cookie objects), converted to Playwright
-// storage state and loaded via `agent-browser state load`. If unset, this
-// script logs and exits 0 so the scheduled run doesn't show as failed while
-// credentials are still being set up.
-//
-// NOTE: TikTok's upload page uses hashed/obfuscated class names that change
-// often, so the caption box and Post button are found by scanning an
-// `agent-browser snapshot -i` for role/text hints rather than fixed CSS
-// selectors. If either lookup fails, the snapshot is dumped to stderr so the
-// selectors in findRef() below can be fixed from the dump — expect this to
-// need at least one follow-up pass once a real session is available
-// (the Pinterest poster took several iterations too).
+// tiktok.com session. If unset, this logs and exits 0 so the run isn't marked
+// failed while credentials are being set up.
 
-import fs from 'node:fs';
-import os from 'node:os';
+import {execFileSync} from 'node:child_process';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {
-  ab,
   advanceRotation,
-  cookiesToStorageState,
   ensureRendered,
-  findFileInputRef,
-  findRef,
-  isLoginWall,
   loadQueue,
   pickRotation,
   saveQueue,
 } from './social-post-helpers.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const CAPTION_HOOKS = [
   'Most athletes choke under pressure for this one reason 👇',
@@ -43,15 +35,8 @@ const CAPTION_HOOKS = [
   'This 60-second protocol drops heart rate before any competition.',
 ];
 
-function fail(message, snapshot) {
-  if (snapshot) console.error(`--- agent-browser snapshot ---\n${snapshot}\n--- end snapshot ---`);
-  ab('close', '--all');
-  throw new Error(message);
-}
-
 async function main() {
-  const cookiesJson = process.env.TIKTOK_COOKIES_JSON;
-  if (!cookiesJson) {
+  if (!process.env.TIKTOK_COOKIES_JSON) {
     console.log('TikTok: TIKTOK_COOKIES_JSON not set — skipping (credentials not configured yet).');
     return;
   }
@@ -72,103 +57,11 @@ async function main() {
     `#sportpsychology #mentalcoach #athletemindset #mentaltoughness #peakperformance`
   ).slice(0, 2200);
 
-  const stateFile = path.join(os.tmpdir(), 'tiktok_ab_state.json');
-  fs.writeFileSync(stateFile, JSON.stringify(cookiesToStorageState(cookiesJson)));
-
-  // Diagnostic (names only, no values): confirms whether the secret actually
-  // contains the login cookies. If sessionid/sid_guard are present but we
-  // still hit the login wall, TikTok is rejecting the replayed session
-  // (datacenter IP / device binding) rather than the export being incomplete.
-  const cookieNames = JSON.parse(cookiesJson).map((c) => c.name);
-  const hasSession = ['sessionid', 'sid_guard', 'sid_tt'].filter((n) => cookieNames.includes(n));
-  console.log(`TikTok cookies in secret: ${cookieNames.length} cookies; login cookies present: [${hasSession.join(', ') || 'NONE'}]`);
-
   console.log(`Posting to TikTok — ${item.title}`);
-
-  ab('close', '--all');
-  ab('state', 'load', stateFile);
-  // Warm-up: load the homepage first so TikTok issues fresh anti-bot tokens
-  // and the session settles, then go to the upload page (navigating straight
-  // to the studio upload is treated more suspiciously).
-  ab('open', 'https://www.tiktok.com');
-  ab('wait', '--load', 'networkidle');
-  ab('wait', '--timeout', '4000');
-  ab('open', 'https://www.tiktok.com/tiktokstudio/upload');
-  ab('wait', '--load', 'networkidle');
-  ab('wait', '--timeout', '4000');
-
-  let snap = ab('snapshot', '-i');
-  if (isLoginWall(snap)) {
-    fail(
-      'TikTok session not authenticated (landed on the login page). The ' +
-        'TIKTOK_COOKIES_JSON secret is missing/expired — re-export tiktok.com ' +
-        'with Cookie-Editor (JSON) from a logged-in tab and update the secret.',
-      snap,
-    );
-  }
-  // TikTok hides the real <input type=file> behind a "Select video" button;
-  // target the input directly (uploading to the button leaves it stuck on the
-  // "Select video to upload" screen, so the caption editor never appears).
-  ab('upload', 'input[type="file"]', videoPath);
-  console.log(`  Attached: ${path.basename(videoPath)}`);
-
-  // Wait for TikTok to upload + process the video — the caption editor only
-  // becomes interactive once that's done, which can take 30-90s for a short
-  // vertical clip.
-  ab('wait', '--timeout', '60000');
-
-  snap = ab('snapshot', '-i');
-  // Dismiss any onboarding tooltip that can overlay the editor.
-  const gotIt = findRef(snap, ['button', /got it/i]);
-  if (gotIt) {
-    ab('click', gotIt);
-    ab('wait', '--timeout', '1000');
-    snap = ab('snapshot', '-i');
-  }
-  // The caption editor is the first combobox (a contenteditable); TikTok
-  // pre-fills it with the video filename, so clear it and type our caption.
-  const capLine = snap.split('\n').find((l) => /- combobox/i.test(l) && /ref=e/.test(l));
-  if (!capLine) fail('Could not find TikTok caption input', snap);
-  const captionRef = '@' + capLine.match(/ref=(e\d+)/)[1];
-  ab('click', captionRef);
-  ab('fill', captionRef, caption);
-
-  // TikTok ignores the Post click until the upload + auto-generated cover are
-  // fully processed, and the first click is often a no-op. Retry the click,
-  // waiting between attempts, until the editor actually closes.
-  const onEditor = (s) => /- button "Post"/i.test(s) && /- button "Discard"/i.test(s);
-  let submitted = false;
-  for (let attempt = 0; attempt < 6 && !submitted; attempt++) {
-    ab('wait', '--timeout', '15000');
-    snap = ab('snapshot', '-i');
-    if (!onEditor(snap)) {
-      submitted = true;
-      break;
-    }
-    // Dismiss any tooltip / notice that could intercept the click.
-    const dismiss = findRef(snap, ['button', /got it|^ok$|dismiss|not now/i]);
-    if (dismiss) {
-      ab('click', dismiss);
-      ab('wait', '--timeout', '1000');
-      snap = ab('snapshot', '-i');
-    }
-    const postRef = findRef(snap, ['button', /^(?!.*schedule).*\bpost\b/i]);
-    if (postRef) ab('click', postRef);
-    ab('wait', '--timeout', '8000');
-    // Handle a confirmation step if one appears.
-    const conf = findRef(ab('snapshot', '-i'), ['button', /post now|post anyway|^continue$|^confirm$/i]);
-    if (conf) {
-      ab('click', conf);
-      ab('wait', '--timeout', '5000');
-    }
-    if (!onEditor(ab('snapshot', '-i'))) submitted = true;
-  }
-  if (!submitted) {
-    fail('TikTok did not submit after multiple Post attempts (Post button may be guarded)', ab('snapshot', '-i'));
-  }
-
-  console.log('  Posted to TikTok');
-  ab('close', '--all');
+  // Throws on non-zero exit, so a failed upload leaves the item un-posted.
+  execFileSync('python3', [path.join(__dirname, 'tiktok_upload.py'), videoPath, caption], {
+    stdio: 'inherit',
+  });
 
   advanceRotation(queue, 'tiktok', CAPTION_HOOKS);
   item.tiktok_status = 'posted';
