@@ -75,6 +75,14 @@ async function main() {
   const stateFile = path.join(os.tmpdir(), 'tiktok_ab_state.json');
   fs.writeFileSync(stateFile, JSON.stringify(cookiesToStorageState(cookiesJson)));
 
+  // Diagnostic (names only, no values): confirms whether the secret actually
+  // contains the login cookies. If sessionid/sid_guard are present but we
+  // still hit the login wall, TikTok is rejecting the replayed session
+  // (datacenter IP / device binding) rather than the export being incomplete.
+  const cookieNames = JSON.parse(cookiesJson).map((c) => c.name);
+  const hasSession = ['sessionid', 'sid_guard', 'sid_tt'].filter((n) => cookieNames.includes(n));
+  console.log(`TikTok cookies in secret: ${cookieNames.length} cookies; login cookies present: [${hasSession.join(', ') || 'NONE'}]`);
+
   console.log(`Posting to TikTok — ${item.title}`);
 
   ab('close', '--all');
