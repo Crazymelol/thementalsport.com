@@ -20,7 +20,7 @@
     },
     {
       "id": "short-002",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "You Finally Won — So Why Do You Feel Empty? #Shorts",
       "hook": "You finally won... so why do you feel empty?",
@@ -32,7 +32,8 @@
         "athlete mindset",
         "sports psychology"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-13T23:26:59.000Z",
+      "youtube_id": "3xVGjOFmCoM"
     },
     {
       "id": "short-003",

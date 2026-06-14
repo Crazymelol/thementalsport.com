@@ -47,4 +47,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add social/youtube-queue/queue.json
           git diff --staged --quiet || git commit -m "bot: mark YouTube Short as posted"
+          git pull --rebase origin master
           git push
