@@ -19,9 +19,11 @@ this runs in GitHub Actions (full network), not the egress-restricted dev
 sandbox.
 """
 import json
+import os
 import re
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -50,6 +52,26 @@ def segments_for(item):
         segs.append((f"caption-{i}", chunk))
     segs.append(("cta", item["cta"]))
     return segs
+
+
+def commit_item(item_id):
+    """Commit + push one item's audio so a long multi-item run keeps its
+    progress if it dies partway. Enabled by VOICEOVER_COMMIT=1 (set by the
+    workflow); a no-op locally. Pull-rebase + retry tolerates concurrent
+    pushes from the poster workflows."""
+    if os.environ.get("VOICEOVER_COMMIT") != "1":
+        return
+    branch = os.environ.get("GITHUB_REF_NAME", "")
+    subprocess.run(["git", "add", f"remotion/public/audio/{item_id}"], check=True)
+    if subprocess.run(["git", "diff", "--staged", "--quiet"]).returncode == 0:
+        return
+    subprocess.run(["git", "commit", "-m", f"bot: voiceover for {item_id}"], check=True)
+    for attempt in range(4):
+        subprocess.run(["git", "pull", "--rebase", "origin", branch], check=False)
+        if subprocess.run(["git", "push", "origin", f"HEAD:{branch}"]).returncode == 0:
+            return
+        time.sleep(2 ** attempt)
+    print(f"   WARNING: could not push {item_id} after retries; continuing")
 
 
 def main():
@@ -101,6 +123,7 @@ def main():
                 capture_output=True,
             )
             wav_path.unlink()
+        commit_item(item["id"])
 
     print("Done.")
 
