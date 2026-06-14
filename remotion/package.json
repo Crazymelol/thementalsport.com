@@ -13,7 +13,8 @@
     "remotion": "4.0.476",
     "@remotion/cli": "4.0.476",
     "@remotion/bundler": "4.0.476",
-    "@remotion/renderer": "4.0.476"
+    "@remotion/renderer": "4.0.476",
+    "music-metadata": "^11.13.0"
   },
   "devDependencies": {
     "@types/react": "19.0.0",

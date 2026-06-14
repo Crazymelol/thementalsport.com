@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Audio,
   Sequence,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
   interpolate,
@@ -10,6 +12,7 @@ import {
 } from 'remotion';
 import {splitIntoCaptions} from './splitScript';
 import {COLORS, FONT_FAMILY, audienceLabel} from './theme';
+import type {ShortAudio} from './types';
 
 const fontFamily = FONT_FAMILY;
 
@@ -19,6 +22,9 @@ export type ShortVideoProps = {
   cta: string;
   bookTitle: string;
   audience: string;
+  // Optional per-segment narration (see voiceover.ts). When omitted, the
+  // video falls back to the silent, text-timed layout below.
+  audio?: ShortAudio;
 };
 
 export const FPS = 30;
@@ -27,13 +33,18 @@ const CTA_FRAMES = 100; // ~3.3s
 const WORDS_PER_SECOND = 2.3;
 const MIN_CAPTION_FRAMES = 55;
 
-export const getCaptionTimings = (script: string) => {
+// When `audio` is provided, each caption's duration matches its narration
+// clip exactly (so the <Audio> for that Sequence never gets cut off);
+// otherwise it falls back to the WORDS_PER_SECOND heuristic.
+export const getCaptionTimings = (script: string, audio?: ShortAudio) => {
   const captions = splitIntoCaptions(script);
-  const durations = captions.map((c) =>
-    Math.max(
-      MIN_CAPTION_FRAMES,
-      Math.round((c.split(' ').length / WORDS_PER_SECOND) * FPS),
-    ),
+  const durations = captions.map(
+    (c, i) =>
+      audio?.captions[i]?.durationInFrames ??
+      Math.max(
+        MIN_CAPTION_FRAMES,
+        Math.round((c.split(' ').length / WORDS_PER_SECOND) * FPS),
+      ),
   );
   return {captions, durations};
 };
@@ -43,9 +54,10 @@ export const calculateShortMetadata = ({
 }: {
   props: ShortVideoProps;
 }) => {
-  const {durations} = getCaptionTimings(props.script);
-  const total =
-    HOOK_FRAMES + durations.reduce((a, b) => a + b, 0) + CTA_FRAMES;
+  const {durations} = getCaptionTimings(props.script, props.audio);
+  const hookFrames = props.audio?.hook.durationInFrames ?? HOOK_FRAMES;
+  const ctaFrames = props.audio?.cta.durationInFrames ?? CTA_FRAMES;
+  const total = hookFrames + durations.reduce((a, b) => a + b, 0) + ctaFrames;
   return {durationInFrames: total, fps: FPS, width: 1080, height: 1920};
 };
 
@@ -265,13 +277,18 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
   cta,
   bookTitle,
   audience,
+  audio,
 }) => {
-  const {captions, durations} = getCaptionTimings(script);
-  let from = HOOK_FRAMES;
+  const {captions, durations} = getCaptionTimings(script, audio);
+  const hookFrames = audio?.hook.durationInFrames ?? HOOK_FRAMES;
+  const ctaFrames = audio?.cta.durationInFrames ?? CTA_FRAMES;
+  let from = hookFrames;
   const captionSequences = captions.map((caption, i) => {
+    const captionAudio = audio?.captions[i];
     const seq = (
       <Sequence key={i} from={from} durationInFrames={durations[i]}>
         <CaptionScreen text={caption} />
+        {captionAudio && <Audio src={staticFile(captionAudio.src)} />}
       </Sequence>
     );
     from += durations[i];
@@ -280,12 +297,14 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
 
   return (
     <AbsoluteFill style={{backgroundColor: COLORS.background}}>
-      <Sequence from={0} durationInFrames={HOOK_FRAMES}>
+      <Sequence from={0} durationInFrames={hookFrames}>
         <HookScreen audience={audience} hook={hook} />
+        {audio && <Audio src={staticFile(audio.hook.src)} />}
       </Sequence>
       {captionSequences}
-      <Sequence from={from} durationInFrames={CTA_FRAMES}>
+      <Sequence from={from} durationInFrames={ctaFrames}>
         <CTAScreen cta={cta} bookTitle={bookTitle} />
+        {audio && <Audio src={staticFile(audio.cta.src)} />}
       </Sequence>
     </AbsoluteFill>
   );

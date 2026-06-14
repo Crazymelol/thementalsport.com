@@ -2,9 +2,14 @@ import path from 'path';
 import fs from 'fs';
 import {bundle} from '@remotion/bundler';
 import {renderMedia, selectComposition} from '@remotion/renderer';
+import {FPS} from './ShortVideo';
+import {splitIntoCaptions} from './splitScript';
+import {getOrCreateSegment, voiceoverEnabled} from './voiceover';
+import type {ShortAudio} from './types';
 
 const QUEUE_PATH = path.join(__dirname, '../../social/youtube-queue/queue.json');
 const OUT_DIR = path.join(__dirname, '../out');
+const PUBLIC_DIR = path.join(__dirname, '../public');
 const ENTRY = path.join(__dirname, 'index.ts');
 
 type QueueItem = {
@@ -39,6 +44,25 @@ async function main() {
 
   fs.mkdirSync(OUT_DIR, {recursive: true});
 
+  // Generate (or reuse cached) narration before bundling, so the new clips
+  // land in remotion/public and get picked up by bundle()'s static copy.
+  const audioByItem = new Map<string, ShortAudio>();
+  if (voiceoverEnabled) {
+    for (const item of items) {
+      console.log(`Generating voiceover for ${item.id}...`);
+      const captions = splitIntoCaptions(item.script);
+      audioByItem.set(item.id, {
+        hook: await getOrCreateSegment(item.id, 'hook', item.hook, PUBLIC_DIR, FPS),
+        captions: await Promise.all(
+          captions.map((text, i) =>
+            getOrCreateSegment(item.id, `caption-${i}`, text, PUBLIC_DIR, FPS),
+          ),
+        ),
+        cta: await getOrCreateSegment(item.id, 'cta', item.cta, PUBLIC_DIR, FPS),
+      });
+    }
+  }
+
   console.log('Bundling Remotion project...');
   const bundleLocation = await bundle({entryPoint: ENTRY});
 
@@ -49,6 +73,7 @@ async function main() {
       cta: item.cta,
       bookTitle: item.title.replace(/\s*#Shorts$/i, ''),
       audience: item.audience,
+      audio: audioByItem.get(item.id),
     };
 
     console.log(`Rendering ${item.id}...`);
