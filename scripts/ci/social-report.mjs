@@ -34,47 +34,54 @@ function progressRows(items) {
 
 async function youtubeSection(items) {
   const ytIds = items.filter((i) => i.status === 'posted' && i.youtube_id).map((i) => i.youtube_id);
-  const {YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN} = process.env;
-  if (!YT_CLIENT_ID || !YT_CLIENT_SECRET || !YT_REFRESH_TOKEN) {
-    return '\n## 🎥 YouTube performance\n_YouTube API credentials not set — stats unavailable._\n';
+  // A YouTube Data API key reads public channel + video stats without the
+  // OAuth read scope (the poster's token is upload-only). Free to create.
+  const key = process.env.YT_API_KEY;
+  if (!key) {
+    return '\n## 🎥 YouTube performance\n_Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._\n';
   }
-
-  const auth = new google.auth.OAuth2(YT_CLIENT_ID, YT_CLIENT_SECRET);
-  auth.setCredentials({refresh_token: YT_REFRESH_TOKEN});
-  const youtube = google.youtube({version: 'v3', auth});
+  const youtube = google.youtube({version: 'v3', auth: key});
 
   let out = '\n## 🎥 YouTube performance (monetization tracking)\n';
-  try {
-    const ch = await youtube.channels.list({part: ['statistics'], mine: true});
-    const s = ch.data.items?.[0]?.statistics;
-    if (s) {
-      const subs = Number(s.subscriberCount);
-      out +=
-        `\n**Channel:** ${subs.toLocaleString()} subscribers · ` +
-        `${Number(s.viewCount).toLocaleString()} total views · ${s.videoCount} videos\n` +
-        `**Toward monetization:** ${subs}/1,000 subscribers (${((subs / 1000) * 100).toFixed(1)}%)\n`;
-    }
-  } catch (e) {
-    out += `\n_(channel stats error: ${e.message})_\n`;
-  }
-
+  let channelId = null;
+  let views = 0;
+  let likes = 0;
+  const rows = [];
   if (ytIds.length) {
     try {
       const vids = await youtube.videos.list({part: ['statistics', 'snippet'], id: ytIds});
-      let views = 0;
-      let likes = 0;
-      const rows = (vids.data.items || []).map((v) => {
+      for (const v of vids.data.items || []) {
         const st = v.statistics || {};
+        channelId = channelId || v.snippet.channelId;
         views += Number(st.viewCount || 0);
         likes += Number(st.likeCount || 0);
-        return `| ${clip(v.snippet.title.replace(/\s*#Shorts$/i, ''), 38)} | ${Number(st.viewCount || 0).toLocaleString()} | ${st.likeCount || 0} | ${st.commentCount || 0} |`;
-      });
-      out +=
-        `\n| Video | Views | Likes | Comments |\n|---|---|---|---|\n${rows.join('\n')}\n` +
-        `\n**Totals:** ${views.toLocaleString()} views · ${likes.toLocaleString()} likes across ${rows.length} Shorts\n`;
+        rows.push(
+          `| ${clip(v.snippet.title.replace(/\s*#Shorts$/i, ''), 38)} | ${Number(st.viewCount || 0).toLocaleString()} | ${st.likeCount || 0} | ${st.commentCount || 0} |`,
+        );
+      }
     } catch (e) {
       out += `\n_(video stats error: ${e.message})_\n`;
     }
+  }
+  if (channelId) {
+    try {
+      const ch = await youtube.channels.list({part: ['statistics'], id: [channelId]});
+      const s = ch.data.items?.[0]?.statistics;
+      if (s) {
+        const subs = Number(s.subscriberCount);
+        out +=
+          `\n**Channel:** ${subs.toLocaleString()} subscribers · ` +
+          `${Number(s.viewCount).toLocaleString()} total views · ${s.videoCount} videos\n` +
+          `**Toward monetization:** ${subs}/1,000 subscribers (${((subs / 1000) * 100).toFixed(1)}%)\n`;
+      }
+    } catch (e) {
+      out += `\n_(channel stats error: ${e.message})_\n`;
+    }
+  }
+  if (rows.length) {
+    out +=
+      `\n| Video | Views | Likes | Comments |\n|---|---|---|---|\n${rows.join('\n')}\n` +
+      `\n**Totals:** ${views.toLocaleString()} views · ${likes.toLocaleString()} likes across ${rows.length} Shorts\n`;
   }
   return out;
 }

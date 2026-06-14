@@ -31,9 +31,9 @@ jobs:
 
       - name: Build report
         env:
-          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          # A YouTube Data API key (read-only, public stats). Create one at
+          # console.cloud.google.com → Credentials → API key.
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
         run: node scripts/ci/social-report.mjs
 
       - name: Commit report
