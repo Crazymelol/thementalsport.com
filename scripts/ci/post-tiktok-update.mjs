@@ -133,25 +133,38 @@ async function main() {
   ab('click', captionRef);
   ab('fill', captionRef, caption);
 
-  // Let TikTok finish processing the upload before posting (the Post button
-  // is present but inert until processing completes).
-  ab('wait', '--timeout', '20000');
-  snap = ab('snapshot', '-i');
-  const postRef = findRef(snap, ['button', /^(?!.*schedule).*\bpost\b/i]);
-  if (!postRef) fail('Could not find TikTok Post button', snap);
-  ab('click', postRef);
-  ab('wait', '--timeout', '8000');
-  // TikTok can show a confirmation step ("Post now" / "Continue" / "Post anyway").
-  const confirmRef = findRef(ab('snapshot', '-i'), ['button', /post now|post anyway|continue|^confirm$/i]);
-  if (confirmRef) {
-    ab('click', confirmRef);
-    ab('wait', '--timeout', '5000');
+  // TikTok ignores the Post click until the upload + auto-generated cover are
+  // fully processed, and the first click is often a no-op. Retry the click,
+  // waiting between attempts, until the editor actually closes.
+  const onEditor = (s) => /- button "Post"/i.test(s) && /- button "Discard"/i.test(s);
+  let submitted = false;
+  for (let attempt = 0; attempt < 6 && !submitted; attempt++) {
+    ab('wait', '--timeout', '15000');
+    snap = ab('snapshot', '-i');
+    if (!onEditor(snap)) {
+      submitted = true;
+      break;
+    }
+    // Dismiss any tooltip / notice that could intercept the click.
+    const dismiss = findRef(snap, ['button', /got it|^ok$|dismiss|not now/i]);
+    if (dismiss) {
+      ab('click', dismiss);
+      ab('wait', '--timeout', '1000');
+      snap = ab('snapshot', '-i');
+    }
+    const postRef = findRef(snap, ['button', /^(?!.*schedule).*\bpost\b/i]);
+    if (postRef) ab('click', postRef);
+    ab('wait', '--timeout', '8000');
+    // Handle a confirmation step if one appears.
+    const conf = findRef(ab('snapshot', '-i'), ['button', /post now|post anyway|^continue$|^confirm$/i]);
+    if (conf) {
+      ab('click', conf);
+      ab('wait', '--timeout', '5000');
+    }
+    if (!onEditor(ab('snapshot', '-i'))) submitted = true;
   }
-  // Success = the editor is gone (TikTok redirects to the content manager).
-  ab('wait', '--timeout', '15000');
-  const after = ab('snapshot', '-i');
-  if (/- button "Post"/i.test(after) && /- button "Discard"/i.test(after)) {
-    fail('TikTok did not submit — still on the editor after clicking Post', after);
+  if (!submitted) {
+    fail('TikTok did not submit after multiple Post attempts (Post button may be guarded)', ab('snapshot', '-i'));
   }
 
   console.log('  Posted to TikTok');
