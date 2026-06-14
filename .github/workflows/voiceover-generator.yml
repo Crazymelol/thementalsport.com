@@ -13,6 +13,15 @@ on:
         description: 'Space-separated queue item ids (blank = all missing audio)'
         required: false
         default: ''
+  # TEMPORARY (validation only): auto-run on this feature branch when the
+  # generator changes, so the pipeline can be proven before merging to master
+  # (workflow_dispatch isn't available until the file is on the default
+  # branch). Remove this push trigger after validation.
+  push:
+    branches: [claude/sleepy-gauss-CyGUG]
+    paths:
+      - 'scripts/voiceover/**'
+      - '.github/workflows/voiceover-generator.yml'
 
 permissions:
   contents: write
@@ -46,7 +55,8 @@ jobs:
         run: pip install -r scripts/voiceover/requirements.txt
 
       - name: Generate narration
-        run: python scripts/voiceover/generate.py ${{ github.event.inputs.ids }}
+        # Validation default: short-001 when triggered by push (no inputs).
+        run: python scripts/voiceover/generate.py ${{ github.event.inputs.ids || 'short-001' }}
 
       - name: Commit generated audio
         run: |
