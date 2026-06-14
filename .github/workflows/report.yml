@@ -1,0 +1,46 @@
+name: Social Report
+
+# Compiles each agent's progress + the latest posts' stats into STATUS.md.
+# Runs twice a day and on demand. Staggered from the poster crons.
+
+on:
+  schedule:
+    - cron: '0 7,19 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install report dependencies
+        working-directory: scripts/ci
+        run: npm install
+
+      - name: Build report
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: node scripts/ci/social-report.mjs
+
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add STATUS.md
+          git diff --staged --quiet || git commit -m "bot: update social report"
+          git pull --rebase origin master || true
+          git push origin HEAD:master
