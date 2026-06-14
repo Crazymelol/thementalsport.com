@@ -118,19 +118,17 @@ async function main() {
     }
   }
   if (!titleRef) fail('Pinterest form never became editable — upload/transcode likely failed', snap);
+  console.error('=== PINTEREST ENABLED FORM ===\n' + snap + '\n=== END ===');
 
   ab('click', titleRef);
   ab('fill', titleRef, title);
 
-  // Description (optional): a button reveals the textbox.
-  const descBtn = findRef(snap, ['button', /detailed description|add a description/i]);
-  if (descBtn) {
-    ab('click', descBtn);
-    const descBox = findRef(ab('snapshot', '-i'), ['textbox', /description/i]);
-    if (descBox) ab('fill', descBox, description);
-  }
+  // IMPORTANT: agent-browser refs are snapshot-specific and go stale after
+  // interactions, so re-snapshot before every lookup. (Reusing the poll-loop
+  // snapshot pointed a stale ref at the account-menu button and opened it.)
 
   // Destination link → /free (drives signup clicks).
+  snap = ab('snapshot', '-i');
   const linkRef = findRef(snap, ['textbox', /\blink\b/i]);
   if (linkRef) {
     ab('click', linkRef);
@@ -139,17 +137,17 @@ async function main() {
     console.warn('  (destination-link field not found — posting without it)');
   }
 
-  // Pinterest requires a board before it will publish. Best-effort: open the
-  // board dropdown and pick the first board.
+  // Pinterest requires a board before it will publish. Open the board
+  // dropdown (fresh snapshot) and pick the first real board.
+  snap = ab('snapshot', '-i');
   const boardBtn = findRef(snap, ['button', /choose a board|select board/i]);
   if (boardBtn) {
     ab('click', boardBtn);
     ab('wait', '--timeout', '2500');
     const boardSnap = ab('snapshot', '-i');
+    console.error('=== PINTEREST BOARD DROPDOWN ===\n' + boardSnap + '\n=== END ===');
     const boardOpt =
-      findRef(boardSnap, ['option']) ||
-      findRef(boardSnap, [/listitem|cell|row/i, /ref=e/]) ||
-      findRef(boardSnap, ['button', /board/i]);
+      findRef(boardSnap, ['option']) || findRef(boardSnap, ['button', /save to|board/i]);
     if (boardOpt) {
       ab('click', boardOpt);
       ab('wait', '--timeout', '1500');
