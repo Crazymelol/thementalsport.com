@@ -16,7 +16,9 @@
         "mental toughness kids"
       ],
       "posted_at": "2026-06-13T22:26:55.812Z",
-      "youtube_id": "sY5sqa1JPKo"
+      "youtube_id": "sY5sqa1JPKo",
+      "x_status": "posted",
+      "x_posted_at": "2026-06-14T16:49:39.024Z"
     },
     {
       "id": "short-002",
@@ -54,7 +56,7 @@
     },
     {
       "id": "short-004",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "LeBron Doesn't Calm Down. He Slows Down. #Shorts",
       "hook": "LeBron doesn't calm down under pressure. He slows down. Different thing.",
@@ -66,7 +68,8 @@
         "athlete breathing",
         "sports psychology"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-14T16:33:59.586Z",
+      "youtube_id": "YbNKybP5jR8"
     },
     {
       "id": "short-005",
@@ -580,5 +583,8 @@
       ],
       "posted_at": null
     }
-  ]
+  ],
+  "caption_rotation": {
+    "x": 1
+  }
 }
