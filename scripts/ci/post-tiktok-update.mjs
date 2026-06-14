@@ -106,8 +106,10 @@ async function main() {
       snap,
     );
   }
-  const fileRef = findFileInputRef(snap);
-  ab('upload', fileRef || 'input[type="file"]', videoPath);
+  // TikTok hides the real <input type=file> behind a "Select video" button;
+  // target the input directly (uploading to the button leaves it stuck on the
+  // "Select video to upload" screen, so the caption editor never appears).
+  ab('upload', 'input[type="file"]', videoPath);
   console.log(`  Attached: ${path.basename(videoPath)}`);
 
   // Wait for TikTok to upload + process the video — the caption editor only
