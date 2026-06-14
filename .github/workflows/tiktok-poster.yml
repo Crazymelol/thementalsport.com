@@ -1,11 +1,12 @@
 name: TikTok Auto-Poster
 
 on:
-  schedule:
-    # Once/day (matches the old post-tiktok-daily.py's daily-lock intent).
-    # Staggered from YouTube (8,16,23), Pinterest (4,11,19) and X (1) to
-    # avoid concurrent pushes to social/youtube-queue/queue.json.
-    - cron: '0 13 * * *'
+  # Schedule disabled: TikTok guards the final "Post"/publish action against
+  # automation (auth + upload + caption all work, but the publish click is
+  # ignored). Left as manual-only to avoid daily failed runs and draft clutter
+  # until a working path (official Content Posting API, audited) exists.
+  # schedule:
+  #   - cron: '0 13 * * *'
   workflow_dispatch: {}
 
 permissions:
