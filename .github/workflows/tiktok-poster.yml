@@ -1,0 +1,56 @@
+name: TikTok Auto-Poster
+
+on:
+  schedule:
+    # Once/day (matches the old post-tiktok-daily.py's daily-lock intent).
+    # Staggered from YouTube (8,16,23), Pinterest (4,11,19) and X (1) to
+    # avoid concurrent pushes to social/youtube-queue/queue.json.
+    - cron: '0 13 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tiktok-poster
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Remotion dependencies
+        working-directory: remotion
+        run: npm install
+
+      - name: Install poster dependencies
+        working-directory: scripts/ci
+        run: npm install
+
+      - name: Install browser dependencies for Remotion render
+        run: npx --yes playwright install-deps chromium
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install
+
+      - name: Render + post next item to TikTok
+        env:
+          TIKTOK_COOKIES_JSON: ${{ secrets.TIKTOK_COOKIES_JSON }}
+        run: node scripts/ci/post-tiktok-update.mjs
+
+      - name: Commit updated queue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add social/youtube-queue/queue.json
+          git diff --staged --quiet || git commit -m "bot: mark TikTok post as posted"
+          git pull --rebase origin master
+          git push
