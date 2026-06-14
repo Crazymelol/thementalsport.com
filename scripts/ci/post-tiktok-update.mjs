@@ -27,6 +27,7 @@ import {
   ensureRendered,
   findFileInputRef,
   findRef,
+  isLoginWall,
   loadQueue,
   pickRotation,
   saveQueue,
@@ -83,6 +84,14 @@ async function main() {
   ab('wait', '--timeout', '3000');
 
   let snap = ab('snapshot', '-i');
+  if (isLoginWall(snap)) {
+    fail(
+      'TikTok session not authenticated (landed on the login page). The ' +
+        'TIKTOK_COOKIES_JSON secret is missing/expired — re-export tiktok.com ' +
+        'with Cookie-Editor (JSON) from a logged-in tab and update the secret.',
+      snap,
+    );
+  }
   const fileRef = findFileInputRef(snap);
   ab('upload', fileRef || 'input[type="file"]', videoPath);
   console.log(`  Attached: ${path.basename(videoPath)}`);

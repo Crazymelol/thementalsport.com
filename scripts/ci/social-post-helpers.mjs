@@ -102,6 +102,16 @@ export function findFileInputRef(snapshot) {
   return null;
 }
 
+// True if an agent-browser snapshot looks like a logged-out login wall
+// rather than the expected app page — i.e. the *_COOKIES_JSON session is
+// missing/expired. Lets posters fail with a clear "re-export cookies"
+// message instead of a misleading "element not found".
+export function isLoginWall(snapshot) {
+  return /log in to (tiktok|pinterest)|welcome to pinterest|continue with (google|apple|facebook)/i.test(
+    snapshot,
+  );
+}
+
 // Finds the first ref whose line matches ALL given substrings/regexes
 // (case-insensitive for strings). Used for TikTok's caption box / Post
 // button, whose class names are hashed and change often.
