@@ -118,8 +118,18 @@ async function main() {
   ab('wait', '--timeout', '60000');
 
   snap = ab('snapshot', '-i');
-  const captionRef = findRef(snap, [/textbox|caption/i]);
-  if (!captionRef) fail('Could not find TikTok caption input', snap);
+  // Dismiss any onboarding tooltip that can overlay the editor.
+  const gotIt = findRef(snap, ['button', /got it/i]);
+  if (gotIt) {
+    ab('click', gotIt);
+    ab('wait', '--timeout', '1000');
+    snap = ab('snapshot', '-i');
+  }
+  // The caption editor is the first combobox (a contenteditable); TikTok
+  // pre-fills it with the video filename, so clear it and type our caption.
+  const capLine = snap.split('\n').find((l) => /- combobox/i.test(l) && /ref=e/.test(l));
+  if (!capLine) fail('Could not find TikTok caption input', snap);
+  const captionRef = '@' + capLine.match(/ref=(e\d+)/)[1];
   ab('click', captionRef);
   ab('fill', captionRef, caption);
 
@@ -127,7 +137,12 @@ async function main() {
   const postRef = findRef(snap, ['button', /^(?!.*schedule).*\bpost\b/i]);
   if (!postRef) fail('Could not find TikTok Post button', snap);
   ab('click', postRef);
-  ab('wait', '--timeout', '10000');
+  ab('wait', '--timeout', '12000');
+  // Verify submission — the editor (and its Post button) goes away on success.
+  const after = ab('snapshot', '-i');
+  if (/- button "Post"/i.test(after)) {
+    fail('TikTok did not submit — Post button still present after clicking', after);
+  }
 
   console.log('  Posted to TikTok');
   ab('close', '--all');
