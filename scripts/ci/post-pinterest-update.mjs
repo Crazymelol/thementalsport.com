@@ -118,7 +118,6 @@ async function main() {
     }
   }
   if (!titleRef) fail('Pinterest form never became editable — upload/transcode likely failed', snap);
-  console.error('=== PINTEREST ENABLED FORM ===\n' + snap + '\n=== END ===');
 
   ab('click', titleRef);
   ab('fill', titleRef, title);
@@ -145,7 +144,6 @@ async function main() {
     ab('click', boardBtn);
     ab('wait', '--timeout', '2500');
     const boardSnap = ab('snapshot', '-i');
-    console.error('=== PINTEREST BOARD DROPDOWN ===\n' + boardSnap + '\n=== END ===');
     // Boards show as buttons in the dropdown; click the first real board
     // (skip the "Create board" entry and the dropdown toggle).
     const boardOptLine = boardSnap
@@ -168,9 +166,13 @@ async function main() {
   }
   ab('click', '@' + pubLine.match(/ref=(e\d+)/)[1]);
   ab('wait', '--timeout', '12000');
-  const afterUrl = ab('eval', 'location.href');
-  if (/pin-creation-tool|pin-builder/i.test(afterUrl)) {
-    fail('Pin did not publish (still on the create page after clicking)', ab('snapshot', '-i'));
+  // Pinterest stays on /pin-creation-tool/ after publishing but resets the
+  // form (the Title field goes back to disabled/blank). Treat that reset as
+  // success rather than relying on a URL change.
+  const after = ab('snapshot', '-i');
+  const titleAfter = after.split('\n').find((l) => /textbox "title"/i.test(l));
+  if (titleAfter && !/disabled/i.test(titleAfter) && titleAfter.includes(title.slice(0, 20))) {
+    fail('Pin may not have published (form still shows the filled draft)', after);
   }
 
   console.log('  Posted to Pinterest');
