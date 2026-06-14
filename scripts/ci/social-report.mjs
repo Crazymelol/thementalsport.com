@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {google} from 'googleapis';
 import {loadQueue, ROOT} from './social-post-helpers.mjs';
+import {pinterestStats, tiktokStats, xStats} from './social-stats.mjs';
 
 const PLATFORMS = [
   {name: '🎥 YouTube', status: 'status', at: 'posted_at'},
@@ -86,6 +87,23 @@ async function youtubeSection(items) {
   return out;
 }
 
+// Renders a stats table for X / TikTok / Pinterest (social-stats.mjs), which
+// all share the {rows: [{title, ...metrics}]} | {error} | null shape.
+function statsSection(emoji, name, envVar, result, columns) {
+  if (!result) {
+    return `\n## ${emoji} ${name} performance\n_Set the \`${envVar}\` secret to show post stats._\n`;
+  }
+  if (result.error) {
+    return `\n## ${emoji} ${name} performance\n_${result.error}_\n`;
+  }
+  if (!result.rows.length) return '';
+  const header = `| Post | ${columns.map((c) => c.label).join(' | ')} |\n|---|${columns.map(() => '---').join('|')}|`;
+  const body = result.rows
+    .map((r) => `| ${clip(r.title, 34)} | ${columns.map((c) => r[c.key] ?? '—').join(' | ')} |`)
+    .join('\n');
+  return `\n## ${emoji} ${name} performance\n${header}\n${body}\n`;
+}
+
 async function main() {
   const queue = loadQueue();
   const items = queue.items;
@@ -93,13 +111,32 @@ async function main() {
     ? fs.readdirSync(path.join(ROOT, 'remotion/public/audio')).filter((d) => /^short-/.test(d)).length
     : 0;
 
+  const yt = await youtubeSection(items);
+  const x = statsSection('🐦', 'X', 'X_COOKIES_JSON', await xStats(queue), [
+    {key: 'views', label: 'Views'},
+    {key: 'likes', label: 'Likes'},
+    {key: 'replies', label: 'Replies'},
+    {key: 'reposts', label: 'Reposts'},
+  ]);
+  const pinterest = statsSection('📌', 'Pinterest', 'PINTEREST_COOKIES_JSON', await pinterestStats(queue), [
+    {key: 'saves', label: 'Saves'},
+  ]);
+  const tiktok = statsSection('🎵', 'TikTok', 'TIKTOK_COOKIES_JSON', await tiktokStats(queue), [
+    {key: 'views', label: 'Views'},
+    {key: 'likes', label: 'Likes'},
+    {key: 'comments', label: 'Comments'},
+  ]);
+
   const report =
     `# 📊 thementalsport.com — Social Report\n\n` +
     `_Updated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC_\n\n` +
     `## Progress\n\n` +
     `| Platform | Posted | Last post | When (UTC) |\n|---|---|---|---|\n` +
     `${progressRows(items)}\n` +
-    (await youtubeSection(items)) +
+    yt +
+    x +
+    pinterest +
+    tiktok +
     `\n## 🔊 Voiceover\n${voiced}/${items.length} shorts narrated in cloned voice` +
     `${voiced >= items.length ? ' ✅' : ''}\n`;
 

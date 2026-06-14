@@ -110,7 +110,7 @@ export function findFileInputRef(snapshot) {
 // missing/expired. Lets posters fail with a clear "re-export cookies"
 // message instead of a misleading "element not found".
 export function isLoginWall(snapshot) {
-  return /log in to (tiktok|pinterest)|welcome to pinterest|continue with (google|apple|facebook)/i.test(
+  return /log in to (tiktok|pinterest|x|twitter)|sign in to x|welcome to pinterest|continue with (google|apple|facebook)/i.test(
     snapshot,
   );
 }

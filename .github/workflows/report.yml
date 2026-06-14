@@ -29,11 +29,24 @@ jobs:
         working-directory: scripts/ci
         run: npm install
 
+      - name: Install browser dependencies
+        run: npx --yes playwright install-deps chromium
+
+      - name: Install agent-browser
+        run: |
+          npm install -g agent-browser
+          agent-browser install
+
       - name: Build report
         env:
           # A YouTube Data API key (read-only, public stats). Create one at
           # console.cloud.google.com → Credentials → API key.
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          # Same Cookie-Editor exports the posters use — read-only profile
+          # views for engagement stats (views/likes/comments per post).
+          X_COOKIES_JSON: ${{ secrets.X_COOKIES_JSON }}
+          TIKTOK_COOKIES_JSON: ${{ secrets.TIKTOK_COOKIES_JSON }}
+          PINTEREST_COOKIES_JSON: ${{ secrets.PINTEREST_COOKIES_JSON }}
         run: node scripts/ci/social-report.mjs
 
       - name: Commit report
