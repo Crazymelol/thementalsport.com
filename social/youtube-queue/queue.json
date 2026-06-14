@@ -77,7 +77,7 @@
     },
     {
       "id": "short-005",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "Anxious Before Games? Good. Here's Why. #Shorts",
       "hook": "If you're anxious before competition — good. Let me explain.",
@@ -89,7 +89,8 @@
         "pre game nerves",
         "performance anxiety"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-14T23:30:17.059Z",
+      "youtube_id": "r2RrpZoL8wM"
     },
     {
       "id": "short-006",
