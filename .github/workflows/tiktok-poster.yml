@@ -44,9 +44,6 @@ jobs:
       - name: Render + post next item to TikTok
         env:
           TIKTOK_COOKIES_JSON: ${{ secrets.TIKTOK_COOKIES_JSON }}
-          # Voiceover (optional): if unset, renders fall back to silent.
-          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
         run: node scripts/ci/post-tiktok-update.mjs
 
       - name: Commit updated queue
@@ -54,7 +51,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add social/youtube-queue/queue.json
-          git add remotion/public 2>/dev/null || true
           git diff --staged --quiet || git commit -m "bot: mark TikTok post as posted"
           git pull --rebase origin master
           git push

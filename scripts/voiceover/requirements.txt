@@ -1,0 +1,3 @@
+# Chatterbox (Resemble AI, MIT) — zero-shot voice cloning TTS.
+# Pulls in torch/torchaudio transitively; CPU wheels are fine on CI runners.
+chatterbox-tts

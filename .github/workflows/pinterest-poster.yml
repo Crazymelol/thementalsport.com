@@ -45,9 +45,6 @@ jobs:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           # Optional: leave unset to auto-pick/create a board.
           PINTEREST_BOARD_ID: ${{ secrets.PINTEREST_BOARD_ID }}
-          # Voiceover (optional): if unset, renders fall back to silent.
-          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
         run: node scripts/ci/post-pinterest-pin.mjs
 
       - name: Commit updated queue
@@ -55,7 +52,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add social/youtube-queue/queue.json
-          git add remotion/public 2>/dev/null || true
           git diff --staged --quiet || git commit -m "bot: mark Pinterest pin as posted"
           git pull --rebase origin master
           git push

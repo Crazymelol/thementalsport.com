@@ -1,0 +1,62 @@
+name: Voiceover Generator
+
+# Generates narration for queued shorts in Giannis's cloned voice (Chatterbox)
+# and commits the audio to remotion/public/audio/. Run once per new batch of
+# queue items — the poster workflows then reuse the committed clips, so they
+# stay lightweight (no ML deps). Manual-only: voiceover is expensive to
+# generate and rarely needs regenerating.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: 'Space-separated queue item ids (blank = all missing audio)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voiceover-generator
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Chatterbox downloads its weights from HuggingFace on first use; cache
+      # them so re-runs don't re-download ~2GB.
+      - name: Cache model weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: chatterbox-hf-cache-v1
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/voiceover/requirements.txt
+
+      - name: Generate narration
+        run: python scripts/voiceover/generate.py ${{ github.event.inputs.ids }}
+
+      - name: Commit generated audio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add remotion/public/audio
+          if git diff --staged --quiet; then
+            echo "No new audio generated."
+          else
+            git commit -m "bot: generate voiceover narration"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
