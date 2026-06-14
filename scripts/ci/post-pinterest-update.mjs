@@ -98,30 +98,40 @@ async function main() {
       snap,
     );
   }
-  const fileRef = findFileInputRef(snap);
-  ab('upload', fileRef || 'input[type="file"]', videoPath);
+  // Pinterest hides the real <input type=file> behind a styled "File Upload"
+  // button; target the input directly. (Uploading to the button leaves the
+  // form disabled with "No file chosen".)
+  ab('upload', 'input[type="file"]', videoPath);
   console.log(`  Attached: ${path.basename(videoPath)}`);
 
-  // Pinterest transcodes the uploaded video before the form is fully usable;
-  // for a short vertical clip this is typically 30-90s.
-  ab('wait', '--timeout', '60000');
+  // The whole form stays disabled until Pinterest finishes transcoding the
+  // video. Poll until the Title field becomes editable (up to ~2.5 min).
+  let titleRef = null;
+  for (let i = 0; i < 15; i++) {
+    ab('wait', '--timeout', '10000');
+    snap = ab('snapshot', '-i');
+    const line = snap.split('\n').find((l) => /textbox "title"/i.test(l));
+    if (line && !/disabled/i.test(line)) {
+      const m = line.match(/ref=(e\d+)/);
+      titleRef = m && '@' + m[1];
+      break;
+    }
+  }
+  if (!titleRef) fail('Pinterest form never became editable — upload/transcode likely failed', snap);
 
-  snap = ab('snapshot', '-i');
-  const titleRef = findRef(snap, [/title/i]);
-  if (!titleRef) fail('Could not find Pinterest title field', snap);
   ab('click', titleRef);
   ab('fill', titleRef, title);
 
-  const descRef = findRef(snap, [/description|tell everyone|about your pin/i]);
-  if (descRef) {
-    ab('click', descRef);
-    ab('fill', descRef, description);
-  } else {
-    console.warn('  (description field not found — posting without it)');
+  // Description (optional): a button reveals the textbox.
+  const descBtn = findRef(snap, ['button', /detailed description|add a description/i]);
+  if (descBtn) {
+    ab('click', descBtn);
+    const descBox = findRef(ab('snapshot', '-i'), ['textbox', /description/i]);
+    if (descBox) ab('fill', descBox, description);
   }
 
-  // Destination link drives signups (outbound clicks → /free).
-  const linkRef = findRef(snap, [/destination link|add a destination|add a link/i]);
+  // Destination link → /free (drives signup clicks).
+  const linkRef = findRef(snap, ['textbox', /\blink\b/i]);
   if (linkRef) {
     ab('click', linkRef);
     ab('fill', linkRef, FREE_GUIDE_URL);
@@ -129,11 +139,38 @@ async function main() {
     console.warn('  (destination-link field not found — posting without it)');
   }
 
+  // Pinterest requires a board before it will publish. Best-effort: open the
+  // board dropdown and pick the first board.
+  const boardBtn = findRef(snap, ['button', /choose a board|select board/i]);
+  if (boardBtn) {
+    ab('click', boardBtn);
+    ab('wait', '--timeout', '2500');
+    const boardSnap = ab('snapshot', '-i');
+    const boardOpt =
+      findRef(boardSnap, ['option']) ||
+      findRef(boardSnap, [/listitem|cell|row/i, /ref=e/]) ||
+      findRef(boardSnap, ['button', /board/i]);
+    if (boardOpt) {
+      ab('click', boardOpt);
+      ab('wait', '--timeout', '1500');
+    }
+  }
+
+  // Publish — the button is "Create new Pin". Don't click it while it's
+  // disabled (that would false-positive mark the item posted), and verify we
+  // actually left the create page afterward.
   snap = ab('snapshot', '-i');
-  const publishRef = findRef(snap, ['button', /publish|save/i]);
-  if (!publishRef) fail('Could not find Pinterest Publish button', snap);
-  ab('click', publishRef);
-  ab('wait', '--timeout', '10000');
+  const pubLine = snap.split('\n').find((l) => /button "create new pin/i.test(l));
+  if (!pubLine) fail('Could not find the "Create new Pin" button', snap);
+  if (/disabled/i.test(pubLine)) {
+    fail('"Create new Pin" still disabled (board not chosen or upload incomplete)', snap);
+  }
+  ab('click', '@' + pubLine.match(/ref=(e\d+)/)[1]);
+  ab('wait', '--timeout', '12000');
+  const afterUrl = ab('eval', 'location.href');
+  if (/pin-creation-tool|pin-builder/i.test(afterUrl)) {
+    fail('Pin did not publish (still on the create page after clicking)', ab('snapshot', '-i'));
+  }
 
   console.log('  Posted to Pinterest');
   ab('close', '--all');
