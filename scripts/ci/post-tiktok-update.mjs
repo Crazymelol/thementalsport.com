@@ -87,9 +87,15 @@ async function main() {
 
   ab('close', '--all');
   ab('state', 'load', stateFile);
+  // Warm-up: load the homepage first so TikTok issues fresh anti-bot tokens
+  // and the session settles, then go to the upload page (navigating straight
+  // to the studio upload is treated more suspiciously).
+  ab('open', 'https://www.tiktok.com');
+  ab('wait', '--load', 'networkidle');
+  ab('wait', '--timeout', '4000');
   ab('open', 'https://www.tiktok.com/tiktokstudio/upload');
   ab('wait', '--load', 'networkidle');
-  ab('wait', '--timeout', '3000');
+  ab('wait', '--timeout', '4000');
 
   let snap = ab('snapshot', '-i');
   if (isLoginWall(snap)) {

@@ -72,7 +72,10 @@ export function cookiesToStorageState(cookiesJson) {
         path: c.path || '/',
         secure: !!c.secure,
         httpOnly: !!c.httpOnly,
-        sameSite: SAME_SITE[c.sameSite] || 'None',
+        // Default unset sameSite to 'Lax' (the browser default) rather than
+        // 'None' — a 'None' cookie that isn't Secure is silently dropped,
+        // which can thin out a session (e.g. TikTok's many device cookies).
+        sameSite: SAME_SITE[c.sameSite] || 'Lax',
       };
       if (c.expirationDate) cookie.expires = Math.floor(c.expirationDate);
       return cookie;
