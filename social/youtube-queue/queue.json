@@ -138,7 +138,7 @@
     },
     {
       "id": "short-008",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "The Crowd Is Gone. You Just Lost. Now What? #Shorts",
       "hook": "The crowd is gone. You just lost. Now what?",
@@ -150,7 +150,8 @@
         "athlete resilience",
         "bounce back"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-15T23:35:53.381Z",
+      "youtube_id": "Nsn3mkC31E4"
     },
     {
       "id": "short-009",
