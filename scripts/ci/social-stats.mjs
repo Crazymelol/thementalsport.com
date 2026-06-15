@@ -82,18 +82,8 @@ export async function xStats(queue, limit = 3) {
     replies: a.querySelector('[data-testid="reply"]')?.textContent || '0',
     reposts: a.querySelector('[data-testid="retweet"]')?.textContent || '0',
     likes: a.querySelector('[data-testid="like"]')?.textContent || '0',
-    views: a.querySelector('a[href$="/analytics"]')?.textContent || '',
+    views: (a.querySelector('a[href$="/analytics"]')?.getAttribute('aria-label') || '').match(/^[\\d.,]+[kmb]?/i)?.[0] || '',
   })))`);
-  const {value: debugTweet} = evalJson(`JSON.stringify((() => {
-    const a = document.querySelector('[data-testid="tweet"]');
-    if (!a) return null;
-    return {
-      analyticsHtml: a.querySelector('a[href*="analytics"]')?.outerHTML?.slice(0, 300) || null,
-      groupText: a.querySelector('[role="group"]')?.textContent?.slice(0, 300) || null,
-      ariaLabels: [...a.querySelectorAll('[aria-label]')].map((x) => x.getAttribute('aria-label')).slice(0, 12),
-    };
-  })())`);
-  console.error('X_STATS_DEBUG', debugTweet);
   ab('close', '--all');
 
   if (error) return {error: 'unexpected response from X profile timeline', debug: error.slice(0, 2000)};
@@ -144,17 +134,12 @@ export async function tiktokStats(queue, limit = 3) {
     href: el.querySelector('a')?.getAttribute('href') || '',
     views: el.querySelector('[data-e2e="video-views"]')?.textContent || el.querySelector('strong')?.textContent || '',
   })))`);
-  const {value: debugGrid} = evalJson(`JSON.stringify((() => {
-    const el = document.querySelector('[data-e2e="user-post-item"]');
-    if (!el) return null;
-    return {
-      tag: el.tagName,
-      selfHref: el.getAttribute('href'),
-      childAnchorHref: el.querySelector('a')?.getAttribute('href') || null,
-      closestAnchorHref: el.closest('a')?.getAttribute('href') || null,
-      html: el.outerHTML.slice(0, 500),
-    };
-  })())`);
+  const {value: debugGrid} = evalJson(`JSON.stringify({
+    url: location.href,
+    title: document.title,
+    e2e: [...new Set([...document.querySelectorAll('[data-e2e]')].map((x) => x.getAttribute('data-e2e')))],
+    videoLinks: document.querySelectorAll('a[href*="/video/"]').length,
+  })`);
   console.error('TIKTOK_GRID_DEBUG', debugGrid);
   if (gridError) {
     ab('close', '--all');
@@ -234,11 +219,11 @@ export async function pinterestStats(queue, limit = 3) {
     href: el.querySelector('a')?.getAttribute('href') || '',
     saves: (el.textContent.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved)/i) || [])[1] || '',
   })))`);
-  const {value: debugPin} = evalJson(`JSON.stringify((() => {
-    const el = document.querySelector('[data-test-id="pin"]');
-    if (!el) return null;
-    return {text: el.textContent.slice(0, 300), html: el.outerHTML.slice(0, 500)};
-  })())`);
+  const {value: debugPin} = evalJson(`JSON.stringify({
+    url: location.href,
+    title: document.title,
+    testIds: [...new Set([...document.querySelectorAll('[data-test-id]')].map((x) => x.getAttribute('data-test-id')))],
+  })`);
   console.error('PINTEREST_DEBUG', debugPin);
   ab('close', '--all');
 
