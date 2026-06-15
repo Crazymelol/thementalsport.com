@@ -81,7 +81,9 @@
         "sports psychology"
       ],
       "posted_at": "2026-06-14T16:33:59.586Z",
-      "youtube_id": "YbNKybP5jR8"
+      "youtube_id": "YbNKybP5jR8",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-15T20:15:16.473Z"
     },
     {
       "id": "short-005",
@@ -601,7 +603,7 @@
   ],
   "caption_rotation": {
     "x": 2,
-    "pinterest": 3,
+    "pinterest": 4,
     "tiktok": 2
   }
 }
