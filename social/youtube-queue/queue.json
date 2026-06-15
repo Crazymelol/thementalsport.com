@@ -39,7 +39,9 @@
         "sports psychology"
       ],
       "posted_at": "2026-06-13T23:26:59.000Z",
-      "youtube_id": "3xVGjOFmCoM"
+      "youtube_id": "3xVGjOFmCoM",
+      "x_status": "posted",
+      "x_posted_at": "2026-06-15T02:02:33.382Z"
     },
     {
       "id": "short-003",
@@ -77,7 +79,7 @@
     },
     {
       "id": "short-005",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "Anxious Before Games? Good. Here's Why. #Shorts",
       "hook": "If you're anxious before competition — good. Let me explain.",
@@ -89,7 +91,8 @@
         "pre game nerves",
         "performance anxiety"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-14T23:30:17.059Z",
+      "youtube_id": "r2RrpZoL8wM"
     },
     {
       "id": "short-006",
@@ -589,7 +592,7 @@
     }
   ],
   "caption_rotation": {
-    "x": 1,
+    "x": 2,
     "pinterest": 1,
     "tiktok": 1
   }
