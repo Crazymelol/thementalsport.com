@@ -101,6 +101,25 @@ The orchestration (n8n pause-step vs. a small approved-queue the owner clears) i
 an implementation detail deferred to phase 2 — it does not change the gate.
 Shorts ship first (§3–6) because three new items are mid-flight and need it now.
 
+## 7a. Transcription backend — deliberately none (2026-06-15)
+
+claude-video-vision's audio analysis needs a backend (Gemini / OpenAI / local
+Whisper). In this cloud environment all three are unreachable — the egress policy
+403s Gemini, OpenAI, and HuggingFace (Whisper's model host) alike — and the MCP
+config is ephemeral ($HOME=/root, reclaimed per session), so configuring one is
+both inert and non-persistent. The options to change that each require human
+infra work (allowlist + `GEMINI_API_KEY`, or an `ANTHROPIC_API_KEY` secret to run
+the review agent in CI), which defeats "autonomous."
+
+**Decision:** run the gate **backend-free**. Caption–voice sync is verified
+structurally — the render mounts narration only when every segment exists and
+sizes each Sequence to its clip (1:1 by construction) — plus the ffmpeg audio-
+health checks (loudness/silence/clipping, which work offline) and visible caption
+legibility. Transcript-level sync was only a backup to that guarantee. If a real
+desync ever surfaces, revisit the CI path (§7-style: local Whisper in Actions),
+accepting its secret cost then. The other three checks (visuals, audio health,
+branding/content-match) are fully functional offline.
+
 ## 8. Rollout
 
 1. Land the flag, helper, agent, command, and poster gating (this commit).

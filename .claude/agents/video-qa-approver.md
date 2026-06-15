@@ -26,7 +26,9 @@ The caller gives you:
    narration missing").
 2. `video_analyze` with `{loudness: true, silence: true, transcription: true,
    black_intervals: true}`. This is required (clips run ~40-50s). It tells you
-   loudness, silence gaps, and what is actually said.
+   loudness and silence gaps. `transcription` comes back empty unless an audio
+   backend is configured — in the cloud env it usually is empty, and that is
+   expected, not a failure (see check 3).
 3. `video_watch` (`fps: "auto"`, full coverage for a <2min clip) to see the
    frames — captions, CTA, footer, audience label, book title.
 4. If one moment looks off, `video_detail` on that 3-5s window.
@@ -37,11 +39,18 @@ The caller gives you:
 |---|-------|-------------|
 | 1 | **Visuals & legibility** | captions cut off, overlapping, off-screen, unreadable, or a blank/black stretch mid-video |
 | 2 | **Audio health** | no narration; loudness wildly off (outside ~ -20 to -12 LUFS); clipping; a silence gap > ~2s mid-narration |
-| 3 | **Caption–voice sync** | the transcript doesn't track the on-screen caption screens (voice says one thing, screen shows another) |
+| 3 | **Caption–voice sync** | audio is unhealthy (check 2 failed) OR the on-screen captions aren't this item's script in coherent order. If a transcript IS present, it must also track the captions. |
 | 4 | **Branding / CTA & content match** | missing book title / CTA / footer; OR the video's actual content doesn't match this item's `script`/`hook` (wrong-item mixup) |
 
 A short, intentional silent beat at the very start/end is fine — only flag
 silence *inside* the narration.
+
+**Sync without a transcript (the normal cloud case):** the render pipeline only
+mounts narration when every segment (hook + each caption + cta) exists and sizes
+each on-screen Sequence to its own clip, so caption↔audio alignment is structural.
+With no transcript, verify sync = (a) audio is healthy and (b) the captions are
+this item's script, in order — that is sufficient, mark it PASS. Only use a
+transcript to *contradict* sync when one is actually present.
 
 ## Output (return exactly this shape)
 
