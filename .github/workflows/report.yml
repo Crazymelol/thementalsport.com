@@ -54,6 +54,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add STATUS.md
-          git diff --staged --quiet || git commit -m "bot: update social report"
-          git pull --rebase origin master || true
-          git push origin HEAD:master
+          if git diff --staged --quiet; then
+            echo "No changes to STATUS.md"
+            exit 0
+          fi
+          git commit -m "bot: update social report"
+          # Other poster workflows push to master concurrently. Retry with
+          # rebase instead of `pull --rebase || true`, which silently
+          # swallowed conflicts and left this run's commit unpushed.
+          for i in 1 2 3 4 5; do
+            if git push origin HEAD:master; then
+              exit 0
+            fi
+            git fetch origin master
+            git rebase origin/master || { echo "Rebase conflict, aborting"; git rebase --abort; exit 1; }
+          done
+          echo "Failed to push after retries"
+          exit 1
