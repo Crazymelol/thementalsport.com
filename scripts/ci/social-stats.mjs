@@ -138,39 +138,22 @@ export async function tiktokStats(queue, limit = 3) {
 
   // `[data-e2e="user-post-item"]` is no longer present on the profile grid
   // (confirmed via debug: e2e list has user/profile attrs but not this one,
-  // while `a[href*="/video/"]` finds 12 links). Fall back to the video links
-  // themselves. The thumbnail and caption/count both link to the same href —
-  // the thumbnail anchor is an empty `StyledLinkVideoCover` cover div with no
-  // text, so when an href appears more than once, keep whichever occurrence
-  // actually has a `<strong>` (TikTok's long-standing convention for grid
-  // counts) rather than just the first one seen.
+  // while `a[href*="/video/"]` finds 12 links). The first such link can be an
+  // inbox/notification anchor (data-e2e="inbox-list-item") rather than a grid
+  // item, with no `<strong>` view count nearby — so views come from the
+  // per-video detail page below instead. Just collect hrefs, deduped, for
+  // navigation.
   const {value: videos, error: gridError} = evalJson(`JSON.stringify((() => {
-    const byHref = new Map();
+    const seen = new Set();
+    const out = [];
     for (const a of document.querySelectorAll('a[href*="/video/"]')) {
       const href = a.getAttribute('href') || '';
-      if (!href) continue;
-      const views = a.querySelector('strong')?.textContent
-        || a.closest('div[class]')?.querySelector('strong')?.textContent
-        || a.parentElement?.querySelector('strong')?.textContent
-        || '';
-      const prev = byHref.get(href);
-      if (!prev || (!prev.views && views)) byHref.set(href, {href, views});
+      if (!href || seen.has(href)) continue;
+      seen.add(href);
+      out.push({href});
     }
-    return [...byHref.values()].slice(0, ${limit});
+    return out.slice(0, ${limit});
   })())`);
-  const {value: debugGrid} = evalJson(`JSON.stringify((() => {
-    const first = document.querySelector('a[href*="/video/"]');
-    const href = first?.getAttribute('href') || '';
-    const matches = [...document.querySelectorAll('a[href*="/video/"]')].filter((a) => a.getAttribute('href') === href);
-    return {
-      url: location.href,
-      href,
-      matchCount: matches.length,
-      htmls: matches.map((a) => (a.outerHTML || '').slice(0, 400)),
-      parentHTML: (first?.parentElement?.outerHTML || '').slice(0, 800),
-    };
-  })())`);
-  console.error('TIKTOK_GRID_DEBUG', debugGrid);
   if (gridError) {
     ab('close', '--all');
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
@@ -181,6 +164,7 @@ export async function tiktokStats(queue, limit = 3) {
   }
 
   // Likes/comments aren't shown on the profile grid — open each video page.
+  // Also try to grab the view count here, since the grid copy is unreliable.
   const details = [];
   for (const v of videos) {
     if (!v.href) {
@@ -192,14 +176,17 @@ export async function tiktokStats(queue, limit = 3) {
     ab('wait', '--selector', '[data-e2e="like-count"]', '--timeout', '15000');
     ab('wait', '--timeout', '1000');
     if (details.length === 0) {
-      const {value: debugDetail} = evalJson(
-        `JSON.stringify({url: location.href, e2eEls: [...document.querySelectorAll('[data-e2e]')].map((x) => x.getAttribute('data-e2e')).slice(0, 40)})`,
-      );
+      const {value: debugDetail} = evalJson(`JSON.stringify({
+        url: location.href,
+        viewIds: [...document.querySelectorAll('[data-e2e]')].map((x) => x.getAttribute('data-e2e')).filter((id) => /view/i.test(id)),
+        strongs: [...document.querySelectorAll('strong')].map((x) => ({e2e: x.getAttribute('data-e2e'), text: (x.textContent || '').slice(0, 20)})).slice(0, 10),
+      })`);
       console.error('TIKTOK_DETAIL_DEBUG', debugDetail);
     }
     const {value: d} = evalJson(`JSON.stringify({
       likes: document.querySelector('[data-e2e="like-count"]')?.textContent || '',
       comments: document.querySelector('[data-e2e="comment-count"]')?.textContent || '',
+      views: document.querySelector('[data-e2e="video-views"], [data-e2e="browse-video-views"]')?.textContent || '',
     })`);
     details.push(d || {});
   }
@@ -207,7 +194,7 @@ export async function tiktokStats(queue, limit = 3) {
 
   const rows = items.map((item, i) => ({
     title: item.title.replace(/\s*#Shorts$/i, ''),
-    views: videos[i]?.views || '—',
+    views: details[i]?.views || '—',
     likes: details[i]?.likes || '—',
     comments: details[i]?.comments || '—',
   }));
@@ -225,6 +212,10 @@ export async function pinterestStats(queue, limit = 3) {
   ab('state', 'load', state.stateFile);
   ab('open', 'https://www.pinterest.com/');
   ab('wait', '--load', 'networkidle');
+  // The business-hub header (with the profile link) hydrates after
+  // networkidle — wait for it explicitly, like X/TikTok wait for their
+  // feed/grid selectors before querying.
+  ab('wait', '--selector', '[data-test-id="header-profile"]', '--timeout', '10000');
 
   let snap = ab('snapshot', '-i');
   if (isLoginWall(snap)) {
@@ -253,7 +244,8 @@ export async function pinterestStats(queue, limit = 3) {
     return {error: 'could not find profile link on Pinterest home (header not loaded)', debug: snap.slice(0, 2000)};
   }
 
-  ab('open', `https://www.pinterest.com${profileHref}_created/`);
+  const handle = profileHref.replace(/\/$/, '');
+  ab('open', `https://www.pinterest.com${handle}/_created/`);
   ab('wait', '--load', 'networkidle');
   ab('wait', '--timeout', '2500');
 
