@@ -2,6 +2,10 @@
   "mcpServers": {
     "metricool": {
       "httpUrl": "https://ai.metricool.com/mcp"
+    },
+    "claude-video-vision": {
+      "command": "npx",
+      "args": ["-y", "claude-video-vision@latest"]
     }
   }
 }
