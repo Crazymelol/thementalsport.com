@@ -140,9 +140,9 @@ export async function tiktokStats(queue, limit = 3) {
   // (confirmed via debug: e2e list has user/profile attrs but not this one,
   // while `a[href*="/video/"]` finds 12 links). The first such link can be an
   // inbox/notification anchor (data-e2e="inbox-list-item") rather than a grid
-  // item, with no `<strong>` view count nearby — so views come from the
-  // per-video detail page below instead. Just collect hrefs, deduped, for
-  // navigation.
+  // item, with no `<strong>` view count nearby. Just collect hrefs, deduped,
+  // for navigation; views (no reliable selector found on the grid or the
+  // detail page — see below) fall back to '—'.
   const {value: videos, error: gridError} = evalJson(`JSON.stringify((() => {
     const seen = new Set();
     const out = [];
@@ -164,7 +164,9 @@ export async function tiktokStats(queue, limit = 3) {
   }
 
   // Likes/comments aren't shown on the profile grid — open each video page.
-  // Also try to grab the view count here, since the grid copy is unreliable.
+  // Also try the view count here (debug showed no data-e2e id containing
+  // "view" on the detail page for this account, so this is best-effort and
+  // currently falls back to '—').
   const details = [];
   for (const v of videos) {
     if (!v.href) {
@@ -175,14 +177,6 @@ export async function tiktokStats(queue, limit = 3) {
     ab('wait', '--load', 'networkidle');
     ab('wait', '--selector', '[data-e2e="like-count"]', '--timeout', '15000');
     ab('wait', '--timeout', '1000');
-    if (details.length === 0) {
-      const {value: debugDetail} = evalJson(`JSON.stringify({
-        url: location.href,
-        viewIds: [...document.querySelectorAll('[data-e2e]')].map((x) => x.getAttribute('data-e2e')).filter((id) => /view/i.test(id)),
-        strongs: [...document.querySelectorAll('strong')].map((x) => ({e2e: x.getAttribute('data-e2e'), text: (x.textContent || '').slice(0, 20)})).slice(0, 10),
-      })`);
-      console.error('TIKTOK_DETAIL_DEBUG', debugDetail);
-    }
     const {value: d} = evalJson(`JSON.stringify({
       likes: document.querySelector('[data-e2e="like-count"]')?.textContent || '',
       comments: document.querySelector('[data-e2e="comment-count"]')?.textContent || '',
@@ -226,20 +220,17 @@ export async function pinterestStats(queue, limit = 3) {
   // The cookie session lands on the business/partner hub
   // (gr.pinterest.com/business/hub/), not the consumer home feed, so the
   // original consumer-UI selectors (header-avatar, simplified-profile,
-  // headerProfileLink) don't exist there. Add hub-specific testIds found via
-  // debug (header-profile, business-hub-profile-header, pro-partner-header).
+  // headerProfileLink) don't exist there. Hub-specific testIds added below
+  // (header-profile, business-hub-profile-header, pro-partner-header) — debug
+  // dumps confirm [data-test-id="header-profile"] does contain an
+  // <a href="/handle/">, but querySelector for it here still comes back empty
+  // even with an explicit wait for that element. Hydration/timing quirk on
+  // this page that needs live access to diagnose further; left as a graceful
+  // error for now.
   const {value: profileHref} = evalJson(
     `JSON.stringify(document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a')?.getAttribute('href') || '')`,
   );
   if (!profileHref) {
-    const {value: debugHome} = evalJson(`JSON.stringify({
-      url: location.href,
-      title: document.title,
-      testIds: [...new Set([...document.querySelectorAll('[data-test-id]')].map((x) => x.getAttribute('data-test-id')))],
-      headerProfileHTML: (document.querySelector('[data-test-id="header-profile"]')?.outerHTML || '').slice(0, 600),
-      hubHeaderHTML: (document.querySelector('[data-test-id="business-hub-profile-header"]')?.outerHTML || '').slice(0, 600),
-    })`);
-    console.error('PINTEREST_HOME_DEBUG', debugHome);
     ab('close', '--all');
     return {error: 'could not find profile link on Pinterest home (header not loaded)', debug: snap.slice(0, 2000)};
   }
@@ -254,12 +245,6 @@ export async function pinterestStats(queue, limit = 3) {
     href: el.querySelector('a')?.getAttribute('href') || '',
     saves: (el.textContent.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved)/i) || [])[1] || '',
   })))`);
-  const {value: debugPin} = evalJson(`JSON.stringify({
-    url: location.href,
-    title: document.title,
-    testIds: [...new Set([...document.querySelectorAll('[data-test-id]')].map((x) => x.getAttribute('data-test-id')))],
-  })`);
-  console.error('PINTEREST_DEBUG', debugPin);
   ab('close', '--all');
 
   if (error) return {error: 'unexpected response from Pinterest profile', debug: error.slice(0, 2000)};
