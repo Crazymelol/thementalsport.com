@@ -60,7 +60,9 @@
         "kids sports psychology"
       ],
       "posted_at": "2026-06-14T09:08:06.590Z",
-      "youtube_id": "pWdfR4ZXnM4"
+      "youtube_id": "pWdfR4ZXnM4",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-15T13:10:23.207Z"
     },
     {
       "id": "short-004",
@@ -596,7 +598,7 @@
   ],
   "caption_rotation": {
     "x": 2,
-    "pinterest": 2,
+    "pinterest": 3,
     "tiktok": 1
   }
 }
