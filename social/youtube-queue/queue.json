@@ -1,5 +1,5 @@
 {
-  "_readme": "YouTube Shorts content queue. The n8n workflow (05-youtube-shorts-queue-poster) picks the FIRST item with status='pending', renders+uploads it, then commits it back as status='posted'. NEVER re-post a 'posted' item. When no items are pending the workflow does NOTHING (no looping old content). Claude refills this queue with fresh scripts; humans can add items too. Cadence cap: 3 posts/day.",
+  "_readme": "YouTube Shorts content queue. The n8n workflow (05-youtube-shorts-queue-poster) picks the FIRST item with status='pending', renders+uploads it, then commits it back as status='posted'. NEVER re-post a 'posted' item. When no items are pending the workflow does NOTHING (no looping old content). Claude refills this queue with fresh scripts; humans can add items too. Cadence cap: 3 posts/day. QA GATE: items created with a `qa_status` field only post once it is \"approved\" (set by the video-qa-approver agent via /qa-shorts); items without the field are legacy and post as before.",
   "items": [
     {
       "id": "short-001",
@@ -604,6 +604,7 @@
     {
       "id": "short-037",
       "status": "pending",
+      "qa_status": "pending",
       "audience": "athletes",
       "title": "Squeeze A Ball In Your Left Hand Before You Compete #Shorts",
       "hook": "There's a ten-second trick that helps stop you choking under pressure — and it's just squeezing a ball.",
@@ -620,6 +621,7 @@
     {
       "id": "short-038",
       "status": "pending",
+      "qa_status": "pending",
       "audience": "athletes",
       "title": "77% Of Athletes Choke. You're Not Broken. #Shorts",
       "hook": "If you've choked under pressure, here's the stat nobody tells you: almost everyone does.",
@@ -636,6 +638,7 @@
     {
       "id": "short-039",
       "status": "pending",
+      "qa_status": "pending",
       "audience": "parents",
       "title": "When Your Kid Freezes Under Pressure, Don't Say 'Relax' #Shorts",
       "hook": "Telling a nervous young athlete to 'just relax' might be the least helpful thing you can say. Here's what works.",

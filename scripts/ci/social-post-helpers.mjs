@@ -29,6 +29,15 @@ export function saveQueue(queue) {
   fs.writeFileSync(QUEUE_PATH, JSON.stringify(queue, null, 2) + '\n');
 }
 
+// Publishing gate: an item may only be posted once it's been QA-approved by the
+// video-qa-approver agent (run via /qa-shorts). Items added before the gate
+// existed have no `qa_status` and post as before (grandfathered), so turning the
+// gate on doesn't silently halt the live queue — only new content, which is
+// created with qa_status:'pending', is held until approved.
+export function isQaCleared(item) {
+  return item.qa_status === undefined || item.qa_status === 'approved';
+}
+
 export function ensureRendered(item) {
   const videoPath = path.join(REMOTION_DIR, 'out', `${item.id}.mp4`);
   if (!fs.existsSync(videoPath)) {

@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {google} from 'googleapis';
+import {isQaCleared} from './social-post-helpers.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '../..');
@@ -26,7 +27,7 @@ function requireEnv(name) {
 
 async function main() {
   const queue = JSON.parse(fs.readFileSync(QUEUE_PATH, 'utf-8'));
-  const item = queue.items.find((i) => i.status === 'pending');
+  const item = queue.items.find((i) => i.status === 'pending' && isQaCleared(i));
 
   if (!item) {
     console.log('No pending items in queue.json. Nothing to post.');

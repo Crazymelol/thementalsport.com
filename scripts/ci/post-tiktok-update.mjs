@@ -18,6 +18,7 @@ import {fileURLToPath} from 'node:url';
 import {
   advanceRotation,
   ensureRendered,
+  isQaCleared,
   loadQueue,
   pickRotation,
   saveQueue,
@@ -42,7 +43,7 @@ async function main() {
   }
 
   const queue = loadQueue();
-  const item = queue.items.find((i) => i.tiktok_status !== 'posted');
+  const item = queue.items.find((i) => i.tiktok_status !== 'posted' && isQaCleared(i));
   if (!item) {
     console.log('No tiktok-pending items in queue.json. Nothing to post.');
     return;

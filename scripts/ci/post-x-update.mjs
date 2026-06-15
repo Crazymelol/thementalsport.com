@@ -26,6 +26,7 @@ import {
   cookiesToStorageState,
   ensureRendered,
   findFileInputRef,
+  isQaCleared,
   loadQueue,
   pickRotation,
   saveQueue,
@@ -50,7 +51,7 @@ async function main() {
   }
 
   const queue = loadQueue();
-  const item = queue.items.find((i) => i.x_status !== 'posted');
+  const item = queue.items.find((i) => i.x_status !== 'posted' && isQaCleared(i));
   if (!item) {
     console.log('No x-pending items in queue.json. Nothing to post.');
     return;
