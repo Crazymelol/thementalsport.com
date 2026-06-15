@@ -12,7 +12,7 @@ import {
 } from 'remotion';
 import {splitIntoCaptions} from './splitScript';
 import {COLORS, FONT_FAMILY, audienceLabel} from './theme';
-import type {ShortAudio} from './types';
+import type {ShortAudio, WordTiming} from './types';
 
 const fontFamily = FONT_FAMILY;
 
@@ -47,6 +47,36 @@ export const getCaptionTimings = (script: string, audio?: ShortAudio) => {
       ),
   );
   return {captions, durations};
+};
+
+// Per-word reveal timing for the caption highlight sweep, in frames relative
+// to the caption's own Sequence. Uses real alignment data from generate.py
+// when available (`audioWords`, in seconds); otherwise distributes the
+// caption's duration across words proportional to character length, which
+// approximates natural speech pacing (short words go quickly, long words
+// linger) far better than revealing the whole chunk at once.
+export const getWordTimings = (
+  caption: string,
+  durationInFrames: number,
+  audioWords?: WordTiming[],
+): {word: string; from: number}[] => {
+  const words = caption.split(' ');
+  if (audioWords && audioWords.length === words.length) {
+    return words.map((word, i) => ({
+      word,
+      from: Math.min(
+        Math.max(durationInFrames - 1, 0),
+        Math.max(0, Math.round(audioWords[i].start * FPS)),
+      ),
+    }));
+  }
+  const totalChars = words.reduce((sum, w) => sum + w.length, 0);
+  let chars = 0;
+  return words.map((word) => {
+    const from = Math.round((chars / totalChars) * durationInFrames);
+    chars += word.length;
+    return {word, from};
+  });
 };
 
 export const calculateShortMetadata = ({
@@ -179,7 +209,10 @@ const HookScreen: React.FC<{audience: string; hook: string}> = ({
   </AbsoluteFill>
 );
 
-const CaptionScreen: React.FC<{text: string}> = ({text}) => {
+const CaptionScreen: React.FC<{text: string; words?: WordTiming[]}> = ({
+  text,
+  words,
+}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const opacity = interpolate(
@@ -193,12 +226,13 @@ const CaptionScreen: React.FC<{text: string}> = ({text}) => {
     extrapolateRight: 'clamp',
     easing: Easing.out(Easing.cubic),
   });
+  const wordTimings = getWordTimings(text, durationInFrames, words);
   return (
     <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding: 90}}>
       <Background />
       <div
         style={{
-          color: COLORS.foreground,
+          color: COLORS.muted,
           fontFamily,
           fontSize: 72,
           fontWeight: 700,
@@ -208,7 +242,14 @@ const CaptionScreen: React.FC<{text: string}> = ({text}) => {
           transform: `translateY(${translateY}px)`,
         }}
       >
-        {text}
+        {wordTimings.map(({word, from}, i) => (
+          <React.Fragment key={i}>
+            <span style={{color: frame >= from ? COLORS.foreground : COLORS.muted}}>
+              {word}
+            </span>
+            {i < wordTimings.length - 1 ? ' ' : ''}
+          </React.Fragment>
+        ))}
       </div>
       <Wordmark />
     </AbsoluteFill>
@@ -287,7 +328,7 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
     const captionAudio = audio?.captions[i];
     const seq = (
       <Sequence key={i} from={from} durationInFrames={durations[i]}>
-        <CaptionScreen text={caption} />
+        <CaptionScreen text={caption} words={captionAudio?.words} />
         {captionAudio && <Audio src={staticFile(captionAudio.src)} />}
       </Sequence>
     );

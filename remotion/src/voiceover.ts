@@ -24,7 +24,20 @@ async function measure(
   if (!format.duration) {
     throw new Error(`Could not determine duration of ${filePath}`);
   }
-  return {src: relPath, durationInFrames: Math.ceil(format.duration * fps)};
+  const segment: AudioSegment = {
+    src: relPath,
+    durationInFrames: Math.ceil(format.duration * fps),
+  };
+
+  // Optional word-level alignment produced alongside the mp3 by generate.py.
+  // Absent for older clips, which fall back to a heuristic word timing.
+  const timingPath = filePath.replace(/\.mp3$/, '.json');
+  if (fs.existsSync(timingPath)) {
+    const {words} = JSON.parse(fs.readFileSync(timingPath, 'utf-8'));
+    if (Array.isArray(words)) segment.words = words;
+  }
+
+  return segment;
 }
 
 export async function loadAudio(
