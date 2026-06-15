@@ -119,7 +119,7 @@
     },
     {
       "id": "short-007",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "Stop Playing For Stats. Here's What To Play For. #Shorts",
       "hook": "Giannis doesn't play for stats. Here's what he plays for instead.",
@@ -131,7 +131,8 @@
         "focus athlete",
         "flow state"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-15T17:41:37.957Z",
+      "youtube_id": "ziyL93hOIhk"
     },
     {
       "id": "short-008",
