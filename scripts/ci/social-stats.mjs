@@ -139,24 +139,37 @@ export async function tiktokStats(queue, limit = 3) {
   // `[data-e2e="user-post-item"]` is no longer present on the profile grid
   // (confirmed via debug: e2e list has user/profile attrs but not this one,
   // while `a[href*="/video/"]` finds 12 links). Fall back to the video links
-  // themselves, deduped by href (thumbnail + caption can share an href), and
-  // look for the view count in a nearby `<strong>` — TikTok's long-standing
-  // convention for grid counts.
+  // themselves. The thumbnail and caption/count both link to the same href —
+  // the thumbnail anchor is an empty `StyledLinkVideoCover` cover div with no
+  // text, so when an href appears more than once, keep whichever occurrence
+  // actually has a `<strong>` (TikTok's long-standing convention for grid
+  // counts) rather than just the first one seen.
   const {value: videos, error: gridError} = evalJson(`JSON.stringify((() => {
-    const seen = new Set();
-    const out = [];
+    const byHref = new Map();
     for (const a of document.querySelectorAll('a[href*="/video/"]')) {
       const href = a.getAttribute('href') || '';
-      if (!href || seen.has(href)) continue;
-      seen.add(href);
-      out.push({href, views: a.querySelector('strong')?.textContent || a.closest('div[class]')?.querySelector('strong')?.textContent || ''});
+      if (!href) continue;
+      const views = a.querySelector('strong')?.textContent
+        || a.closest('div[class]')?.querySelector('strong')?.textContent
+        || a.parentElement?.querySelector('strong')?.textContent
+        || '';
+      const prev = byHref.get(href);
+      if (!prev || (!prev.views && views)) byHref.set(href, {href, views});
     }
-    return out.slice(0, ${limit});
+    return [...byHref.values()].slice(0, ${limit});
   })())`);
-  const {value: debugGrid} = evalJson(`JSON.stringify({
-    url: location.href,
-    firstLinkHTML: (document.querySelector('a[href*="/video/"]')?.outerHTML || '').slice(0, 800),
-  })`);
+  const {value: debugGrid} = evalJson(`JSON.stringify((() => {
+    const first = document.querySelector('a[href*="/video/"]');
+    const href = first?.getAttribute('href') || '';
+    const matches = [...document.querySelectorAll('a[href*="/video/"]')].filter((a) => a.getAttribute('href') === href);
+    return {
+      url: location.href,
+      href,
+      matchCount: matches.length,
+      htmls: matches.map((a) => (a.outerHTML || '').slice(0, 400)),
+      parentHTML: (first?.parentElement?.outerHTML || '').slice(0, 800),
+    };
+  })())`);
   console.error('TIKTOK_GRID_DEBUG', debugGrid);
   if (gridError) {
     ab('close', '--all');
@@ -219,14 +232,21 @@ export async function pinterestStats(queue, limit = 3) {
     return {error: 'Pinterest session not authenticated (login wall) — re-export PINTEREST_COOKIES_JSON'};
   }
 
+  // The cookie session lands on the business/partner hub
+  // (gr.pinterest.com/business/hub/), not the consumer home feed, so the
+  // original consumer-UI selectors (header-avatar, simplified-profile,
+  // headerProfileLink) don't exist there. Add hub-specific testIds found via
+  // debug (header-profile, business-hub-profile-header, pro-partner-header).
   const {value: profileHref} = evalJson(
-    `JSON.stringify(document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"]')?.getAttribute('href') || '')`,
+    `JSON.stringify(document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a')?.getAttribute('href') || '')`,
   );
   if (!profileHref) {
     const {value: debugHome} = evalJson(`JSON.stringify({
       url: location.href,
       title: document.title,
       testIds: [...new Set([...document.querySelectorAll('[data-test-id]')].map((x) => x.getAttribute('data-test-id')))],
+      headerProfileHTML: (document.querySelector('[data-test-id="header-profile"]')?.outerHTML || '').slice(0, 600),
+      hubHeaderHTML: (document.querySelector('[data-test-id="business-hub-profile-header"]')?.outerHTML || '').slice(0, 600),
     })`);
     console.error('PINTEREST_HOME_DEBUG', debugHome);
     ab('close', '--all');
