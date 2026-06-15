@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-15 04:27 UTC_
+_Updated 2026-06-15 04:42 UTC_
 
 ## Progress
 
@@ -24,7 +24,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 _could not find profile link on Pinterest home (header not loaded)_
 
 ## 🎵 TikTok performance
-_no videos found on TikTok profile_
+| Post | Views | Likes | Comments |
+|---|---|---|---|
+| The Car Ride Home Is Where Athlet… | — | 1 | 0 |
 
 ## 🔊 Voiceover
 36/36 shorts narrated in cloned voice ✅
