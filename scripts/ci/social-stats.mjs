@@ -43,9 +43,9 @@ function platformItems(queue, statusKey, atKey, limit) {
 function evalJson(js) {
   const raw = ab('eval', js);
   try {
-    return {value: JSON.parse(raw)};
+    return {value: JSON.parse(raw), raw};
   } catch {
-    return {error: raw};
+    return {error: raw, raw};
   }
 }
 
@@ -77,13 +77,16 @@ export async function xStats(queue, limit = 3) {
   ab('wait', '--selector', '[data-testid="tweet"]', '--timeout', '15000');
   ab('wait', '--timeout', '1500');
 
-  const {value: tweets, error} = evalJson(`JSON.stringify([...document.querySelectorAll('[data-testid="tweet"]')].slice(0, ${limit}).map(a => ({
+  console.error('EVAL_PROBE', JSON.stringify({hello: ab('eval', "JSON.stringify('hello')"), empty: ab('eval', "JSON.stringify('')")}));
+
+  const {value: tweets, error, raw: tweetsRaw} = evalJson(`JSON.stringify([...document.querySelectorAll('[data-testid="tweet"]')].slice(0, ${limit}).map(a => ({
     text: (a.querySelector('[data-testid="tweetText"]')?.textContent || '').slice(0, 100),
     replies: a.querySelector('[data-testid="reply"]')?.textContent || '0',
     reposts: a.querySelector('[data-testid="retweet"]')?.textContent || '0',
     likes: a.querySelector('[data-testid="like"]')?.textContent || '0',
     views: (a.querySelector('a[href$="/analytics"]')?.getAttribute('aria-label') || '').match(/^[\\d.,]+[kmb]?/i)?.[0] || '',
   })))`);
+  console.error('X_VIEWS_DEBUG', JSON.stringify(tweetsRaw?.slice(0, 500)));
   ab('close', '--all');
 
   if (error) return {error: 'unexpected response from X profile timeline', debug: error.slice(0, 2000)};
@@ -117,9 +120,10 @@ export async function tiktokStats(queue, limit = 3) {
     return {error: 'TikTok session not authenticated (login wall) — re-export TIKTOK_COOKIES_JSON'};
   }
 
-  const {value: handleHref} = evalJson(
+  const {value: handleHref, raw: handleRaw} = evalJson(
     `JSON.stringify(document.querySelector('a[data-e2e="nav-profile"]')?.getAttribute('href') || '')`,
   );
+  console.error('TIKTOK_HANDLE_DEBUG', JSON.stringify({handleHref, handleRaw}));
   if (!handleHref) {
     ab('close', '--all');
     return {error: 'could not find profile link on TikTok home (nav not loaded)', debug: snap.slice(0, 2000)};
@@ -202,9 +206,10 @@ export async function pinterestStats(queue, limit = 3) {
     return {error: 'Pinterest session not authenticated (login wall) — re-export PINTEREST_COOKIES_JSON'};
   }
 
-  const {value: profileHref} = evalJson(
+  const {value: profileHref, raw: profileRaw} = evalJson(
     `JSON.stringify(document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"]')?.getAttribute('href') || '')`,
   );
+  console.error('PINTEREST_HANDLE_DEBUG', JSON.stringify({profileHref, profileRaw}));
   if (!profileHref) {
     ab('close', '--all');
     return {error: 'could not find profile link on Pinterest home (header not loaded)', debug: snap.slice(0, 2000)};
