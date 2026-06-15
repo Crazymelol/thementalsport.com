@@ -133,18 +133,29 @@ export async function tiktokStats(queue, limit = 3) {
 
   ab('open', `https://www.tiktok.com${handleHref}`);
   ab('wait', '--load', 'networkidle');
-  ab('wait', '--selector', '[data-e2e="user-post-item"]', '--timeout', '15000');
+  ab('wait', '--selector', 'a[href*="/video/"]', '--timeout', '15000');
   ab('wait', '--timeout', '1500');
 
-  const {value: videos, error: gridError} = evalJson(`JSON.stringify([...document.querySelectorAll('[data-e2e="user-post-item"]')].slice(0, ${limit}).map(el => ({
-    href: el.querySelector('a')?.getAttribute('href') || '',
-    views: el.querySelector('[data-e2e="video-views"]')?.textContent || el.querySelector('strong')?.textContent || '',
-  })))`);
+  // `[data-e2e="user-post-item"]` is no longer present on the profile grid
+  // (confirmed via debug: e2e list has user/profile attrs but not this one,
+  // while `a[href*="/video/"]` finds 12 links). Fall back to the video links
+  // themselves, deduped by href (thumbnail + caption can share an href), and
+  // look for the view count in a nearby `<strong>` — TikTok's long-standing
+  // convention for grid counts.
+  const {value: videos, error: gridError} = evalJson(`JSON.stringify((() => {
+    const seen = new Set();
+    const out = [];
+    for (const a of document.querySelectorAll('a[href*="/video/"]')) {
+      const href = a.getAttribute('href') || '';
+      if (!href || seen.has(href)) continue;
+      seen.add(href);
+      out.push({href, views: a.querySelector('strong')?.textContent || a.closest('div[class]')?.querySelector('strong')?.textContent || ''});
+    }
+    return out.slice(0, ${limit});
+  })())`);
   const {value: debugGrid} = evalJson(`JSON.stringify({
     url: location.href,
-    title: document.title,
-    e2e: [...new Set([...document.querySelectorAll('[data-e2e]')].map((x) => x.getAttribute('data-e2e')))],
-    videoLinks: document.querySelectorAll('a[href*="/video/"]').length,
+    firstLinkHTML: (document.querySelector('a[href*="/video/"]')?.outerHTML || '').slice(0, 800),
   })`);
   console.error('TIKTOK_GRID_DEBUG', debugGrid);
   if (gridError) {
@@ -212,6 +223,12 @@ export async function pinterestStats(queue, limit = 3) {
     `JSON.stringify(document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"]')?.getAttribute('href') || '')`,
   );
   if (!profileHref) {
+    const {value: debugHome} = evalJson(`JSON.stringify({
+      url: location.href,
+      title: document.title,
+      testIds: [...new Set([...document.querySelectorAll('[data-test-id]')].map((x) => x.getAttribute('data-test-id')))],
+    })`);
+    console.error('PINTEREST_HOME_DEBUG', debugHome);
     ab('close', '--all');
     return {error: 'could not find profile link on Pinterest home (header not loaded)', debug: snap.slice(0, 2000)};
   }
