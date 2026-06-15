@@ -175,6 +175,12 @@
       "skillPath": "skills/paywalls/SKILL.md",
       "computedHash": "1f0b8d15770d2e7737b818408dc5877b2eadc4cab072cdfb3529349ab059815f"
     },
+    "ponytail": {
+      "source": "DietrichGebert/ponytail",
+      "sourceType": "github",
+      "skillPath": "skills/ponytail/SKILL.md",
+      "computedHash": "15811786f0277b0b4effe6b72cb9f3eaedefd1fe28f43f20aed3d926c10a88b1"
+    },
     "popups": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
