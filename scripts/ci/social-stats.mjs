@@ -84,6 +84,16 @@ export async function xStats(queue, limit = 3) {
     likes: a.querySelector('[data-testid="like"]')?.textContent || '0',
     views: a.querySelector('a[href$="/analytics"]')?.textContent || '',
   })))`);
+  const {value: debugTweet} = evalJson(`JSON.stringify((() => {
+    const a = document.querySelector('[data-testid="tweet"]');
+    if (!a) return null;
+    return {
+      analyticsHtml: a.querySelector('a[href*="analytics"]')?.outerHTML?.slice(0, 300) || null,
+      groupText: a.querySelector('[role="group"]')?.textContent?.slice(0, 300) || null,
+      ariaLabels: [...a.querySelectorAll('[aria-label]')].map((x) => x.getAttribute('aria-label')).slice(0, 12),
+    };
+  })())`);
+  console.error('X_STATS_DEBUG', debugTweet);
   ab('close', '--all');
 
   if (error) return {error: 'unexpected response from X profile timeline', debug: error.slice(0, 2000)};
@@ -134,6 +144,18 @@ export async function tiktokStats(queue, limit = 3) {
     href: el.querySelector('a')?.getAttribute('href') || '',
     views: el.querySelector('[data-e2e="video-views"]')?.textContent || el.querySelector('strong')?.textContent || '',
   })))`);
+  const {value: debugGrid} = evalJson(`JSON.stringify((() => {
+    const el = document.querySelector('[data-e2e="user-post-item"]');
+    if (!el) return null;
+    return {
+      tag: el.tagName,
+      selfHref: el.getAttribute('href'),
+      childAnchorHref: el.querySelector('a')?.getAttribute('href') || null,
+      closestAnchorHref: el.closest('a')?.getAttribute('href') || null,
+      html: el.outerHTML.slice(0, 500),
+    };
+  })())`);
+  console.error('TIKTOK_GRID_DEBUG', debugGrid);
   if (gridError) {
     ab('close', '--all');
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
@@ -154,6 +176,12 @@ export async function tiktokStats(queue, limit = 3) {
     ab('wait', '--load', 'networkidle');
     ab('wait', '--selector', '[data-e2e="like-count"]', '--timeout', '15000');
     ab('wait', '--timeout', '1000');
+    if (details.length === 0) {
+      const {value: debugDetail} = evalJson(
+        `JSON.stringify({url: location.href, e2eEls: [...document.querySelectorAll('[data-e2e]')].map((x) => x.getAttribute('data-e2e')).slice(0, 40)})`,
+      );
+      console.error('TIKTOK_DETAIL_DEBUG', debugDetail);
+    }
     const {value: d} = evalJson(`JSON.stringify({
       likes: document.querySelector('[data-e2e="like-count"]')?.textContent || '',
       comments: document.querySelector('[data-e2e="comment-count"]')?.textContent || '',
@@ -206,6 +234,12 @@ export async function pinterestStats(queue, limit = 3) {
     href: el.querySelector('a')?.getAttribute('href') || '',
     saves: (el.textContent.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved)/i) || [])[1] || '',
   })))`);
+  const {value: debugPin} = evalJson(`JSON.stringify((() => {
+    const el = document.querySelector('[data-test-id="pin"]');
+    if (!el) return null;
+    return {text: el.textContent.slice(0, 300), html: el.outerHTML.slice(0, 500)};
+  })())`);
+  console.error('PINTEREST_DEBUG', debugPin);
   ab('close', '--all');
 
   if (error) return {error: 'unexpected response from Pinterest profile', debug: error.slice(0, 2000)};
