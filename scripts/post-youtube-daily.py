@@ -89,17 +89,19 @@ def main():
 
     book = m["book_title"]
     book_url = m.get("url", "")
-    gumroad_map = {
-        "The Competition Protocol": "https://notarasio.gumroad.com/l/yfkgwv",
-        "Overcoming Mental Blocks": "https://notarasio.gumroad.com/l/albwf",
-        "Unbreakable": "https://notarasio.gumroad.com/l/lazrca",
-        "Confidence-Building Workbook": "https://notarasio.gumroad.com/l/bknbwi",
-        "Unlocking Resilient Confidence": "https://notarasio.gumroad.com/l/jzzsp",
-        "Nurturing Self-Worth": "https://notarasio.gumroad.com/l/zkkptv",
-        "Physiological Peak Performance Blueprint": "https://notarasio.gumroad.com/l/ryzhc",
-        "The ADHD Athlete's Edge": "https://notarasio.gumroad.com/l/boced",
+    # Shopify cart permalinks (myshopify domain reaches checkout regardless of
+    # custom-domain DNS) — must match src/data/books.ts checkoutUrl values.
+    shopify_checkout_map = {
+        "The Competition Protocol": "https://wzawde-yw.myshopify.com/cart/53608316895575:1",
+        "Overcoming Mental Blocks": "https://wzawde-yw.myshopify.com/cart/53608316272983:1",
+        "Unbreakable": "https://wzawde-yw.myshopify.com/cart/53608316207447:1",
+        "Confidence-Building Workbook": "https://wzawde-yw.myshopify.com/cart/53608315060567:1",
+        "Unlocking Resilient Confidence": "https://wzawde-yw.myshopify.com/cart/53608319713623:1",
+        "Nurturing Self-Worth": "https://wzawde-yw.myshopify.com/cart/53608316240215:1",
+        "Physiological Peak Performance Blueprint": "https://wzawde-yw.myshopify.com/cart/53608316600663:1",
+        "The ADHD Athlete's Edge": "https://wzawde-yw.myshopify.com/cart/53608294383959:1",
     }
-    gumroad = gumroad_map.get(book, "https://notarasio.gumroad.com")
+    checkout_url = shopify_checkout_map.get(book, "https://thementalsport.com")
 
     hooks = {
         "The Competition Protocol": [
@@ -250,8 +252,8 @@ def main():
     title = title[:100]
     description = (
         f"{hook}\n\n"
-        f"📘 Get the full book (PDF instant download): {gumroad}\n"
-        f"🛒 Get it: {book_url}\n\n"
+        f"📘 Get the book: {checkout_url}\n"
+        f"🛒 Full details & reviews: {book_url}\n\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🧠 I'm Giannis Notaras — Sport Psychology expert & author of 8 books on mental performance.\n"
         f"I help athletes, coaches and sports parents master the mental game.\n\n"
