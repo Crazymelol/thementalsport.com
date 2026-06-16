@@ -1,15 +1,15 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-16 09:05 UTC_
+_Updated 2026-06-16 20:12 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
-| 🎥 YouTube | 8 | The Crowd Is Gone. You Just Lost.… | 2026-06-15 23:35 |
+| 🎥 YouTube | 10 | You'd Never Let A Teammate Talk T… | 2026-06-16 17:44 |
 | 🐦 X | 3 | Train Your Kid For Penalty Pressu… | 2026-06-16 02:05 |
-| 📌 Pinterest | 5 | Anxious Before Games? Good. Here'… | 2026-06-16 05:56 |
-| 🎵 TikTok | 2 | You Finally Won — So Why Do You F… | 2026-06-15 15:11 |
+| 📌 Pinterest | 6 | 'You're So Talented' Is Quietly H… | 2026-06-16 12:42 |
+| 🎵 TikTok | 4 | LeBron Doesn't Calm Down. He Slow… | 2026-06-16 14:52 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
@@ -27,8 +27,9 @@ _could not find profile link on Pinterest home (header not loaded)_
 ## 🎵 TikTok performance
 | Post | Views | Likes | Comments |
 |---|---|---|---|
-| You Finally Won — So Why Do You F… | — | 1 | 0 |
-| The Car Ride Home Is Where Athlet… | — | 1 | 0 |
+| LeBron Doesn't Calm Down. He Slow… | — | 1 | 0 |
+| Train Your Kid For Penalty Pressu… | — | 1 | 0 |
+| You Finally Won — So Why Do You F… | — | 2 | 0 |
 
 ## 🔊 Voiceover
 39/39 shorts narrated in cloned voice ✅
