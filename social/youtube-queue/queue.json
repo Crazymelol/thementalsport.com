@@ -159,7 +159,7 @@
     },
     {
       "id": "short-009",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "Cup Final. Legs Like Concrete. Do This. #Shorts",
       "hook": "Cup final. Everything you trained for. And your legs feel like concrete.",
@@ -171,7 +171,8 @@
         "final pressure",
         "clutch performance"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-16T09:50:35.224Z",
+      "youtube_id": "UiyaQcixZIY"
     },
     {
       "id": "short-010",
