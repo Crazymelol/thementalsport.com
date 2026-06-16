@@ -144,7 +144,9 @@
         "flow state"
       ],
       "posted_at": "2026-06-15T17:41:37.957Z",
-      "youtube_id": "ziyL93hOIhk"
+      "youtube_id": "ziyL93hOIhk",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-16T20:08:37.840Z"
     },
     {
       "id": "short-008",
@@ -673,7 +675,7 @@
   ],
   "caption_rotation": {
     "x": 3,
-    "pinterest": 6,
+    "pinterest": 0,
     "tiktok": 4
   }
 }
