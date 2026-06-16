@@ -121,7 +121,9 @@
         "sports parenting"
       ],
       "posted_at": "2026-06-15T10:10:32.637Z",
-      "youtube_id": "g_-8YLmUQYA"
+      "youtube_id": "g_-8YLmUQYA",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-16T12:42:03.890Z"
     },
     {
       "id": "short-007",
@@ -666,7 +668,7 @@
   ],
   "caption_rotation": {
     "x": 3,
-    "pinterest": 5,
+    "pinterest": 6,
     "tiktok": 2
   }
 }
