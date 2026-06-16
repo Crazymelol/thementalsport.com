@@ -16,6 +16,10 @@ import type {ShortAudio, WordTiming} from './types';
 
 const fontFamily = FONT_FAMILY;
 
+// Gold accent — matches the Champion Psychology lion mark. Used sparingly for
+// stop-power in the first seconds (retention prototype).
+const ACCENT = '#f5c518';
+
 export type ShortVideoProps = {
   hook: string;
   script: string;
@@ -167,47 +171,105 @@ const PopIn: React.FC<{children: React.ReactNode; delay?: number}> = ({
   return <div style={{transform: `scale(${scale})`, opacity}}>{children}</div>;
 };
 
+// Retention-reworked hook: words stamp in fast (motion from frame 1, not a
+// static wall fading in), a gold accent bar wipes under once they land, and the
+// whole block keeps a subtle float so the frame is never still — the things that
+// hold a Shorts viewer past the first 2 seconds. Prototype pending owner review.
 const HookScreen: React.FC<{audience: string; hook: string}> = ({
   audience,
   hook,
-}) => (
-  <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding: 80}}>
-    <Background />
-    <PopIn>
+}) => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const words = hook.split(' ');
+  const float = Math.sin(frame / 14) * 6;
+  const wordsDoneAt = words.length * 2 + 6;
+  const underline = interpolate(frame, [wordsDoneAt, wordsDoneAt + 12], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const labelOpacity = interpolate(frame, [0, 6], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  return (
+    <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding: 72}}>
+      <Background />
       <div
         style={{
-          color: COLORS.muted,
+          position: 'absolute',
+          top: 150,
+          left: 0,
+          right: 0,
+          textAlign: 'center',
+          color: ACCENT,
           fontFamily,
-          fontSize: 32,
-          fontWeight: 600,
+          fontSize: 30,
+          fontWeight: 700,
           letterSpacing: 6,
           textTransform: 'uppercase',
-          marginBottom: 40,
-          textAlign: 'center',
+          opacity: labelOpacity,
         }}
       >
         For {audienceLabel(audience)}
       </div>
-    </PopIn>
-    <PopIn delay={5}>
-      <div
-        style={{
-          color: COLORS.foreground,
-          fontFamily,
-          fontSize: 88,
-          fontWeight: 700,
-          lineHeight: 1.15,
-          textAlign: 'center',
-          textTransform: 'uppercase',
-          letterSpacing: -1,
-        }}
-      >
-        {hook}
+      <div style={{transform: `translateY(${float}px)`, textAlign: 'center'}}>
+        <div
+          style={{
+            color: COLORS.foreground,
+            fontFamily,
+            fontSize: 84,
+            fontWeight: 800,
+            lineHeight: 1.12,
+            textTransform: 'uppercase',
+            letterSpacing: -1,
+          }}
+        >
+          {words.map((w, i) => {
+            const at = i * 2;
+            const scale = spring({
+              frame: frame - at,
+              fps,
+              config: {damping: 11, stiffness: 200},
+              from: 0.4,
+              to: 1,
+            });
+            const opacity = interpolate(frame - at, [0, 3], [0, 1], {
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp',
+            });
+            return (
+              <span
+                key={i}
+                style={{
+                  display: 'inline-block',
+                  transform: `scale(${scale})`,
+                  opacity,
+                  marginRight: '0.25em',
+                }}
+              >
+                {w}
+              </span>
+            );
+          })}
+        </div>
+        <div
+          style={{
+            height: 8,
+            marginTop: 28,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            width: `${underline * 55}%`,
+            maxWidth: '70%',
+            backgroundColor: ACCENT,
+            borderRadius: 4,
+          }}
+        />
       </div>
-    </PopIn>
-    <Wordmark />
-  </AbsoluteFill>
-);
+      <Wordmark />
+    </AbsoluteFill>
+  );
+};
 
 const CaptionScreen: React.FC<{text: string; words?: WordTiming[]}> = ({
   text,
