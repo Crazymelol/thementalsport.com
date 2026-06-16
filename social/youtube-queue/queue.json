@@ -201,7 +201,7 @@
     },
     {
       "id": "short-037",
-      "status": "pending",
+      "status": "posted",
       "qa_status": "approved",
       "qa_notes": "Approved — captions legible, word-highlight tracking, FOR ATHLETES label + footer + /free CTA pill all correct; content matches script (left-hand squeeze). Audio clean, -18.9 LUFS (slightly quiet).",
       "qa_reviewed_at": "2026-06-15T23:44:55.654173+00:00",
@@ -216,7 +216,8 @@
         "sports psychology hacks",
         "pre-performance routine"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-16T23:34:01.869Z",
+      "youtube_id": "8j_AR68N09M"
     },
     {
       "id": "short-038",
