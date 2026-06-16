@@ -182,7 +182,7 @@
     },
     {
       "id": "short-010",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "You'd Never Let A Teammate Talk To You Like That #Shorts",
       "hook": "You'd never let a teammate talk to you the way you talk to yourself.",
@@ -194,7 +194,8 @@
         "inner critic sports",
         "mental game"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-16T17:44:57.217Z",
+      "youtube_id": "r9jptFYRVh4"
     },
     {
       "id": "short-011",
