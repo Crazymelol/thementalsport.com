@@ -138,8 +138,8 @@ export default async function SportPage({ params }: PageProps) {
                                     The techniques above are just the beginning. <strong className="text-white">{book.title}</strong> gives you the complete system — step by step — so you perform your best when it matters most.
                                 </p>
                                 <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">
-                                    {book.gumroadUrl && (
-                                        <a href={book.gumroadUrl} target="_blank" rel="noopener noreferrer"
+                                    {book.checkoutUrl && (
+                                        <a href={book.checkoutUrl} target="_blank" rel="noopener noreferrer"
                                             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-zinc-200 transition-colors">
                                             Buy Now — {book.price} <ArrowRight className="w-4 h-4" />
                                         </a>

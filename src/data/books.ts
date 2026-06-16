@@ -1,7 +1,10 @@
 export interface Book {
     id: string; // URL slug
     asin: string;
-    gumroadUrl?: string;
+    // Direct Shopify checkout link (cart permalink on the myshopify domain so it
+    // always reaches Shopify checkout regardless of custom-domain DNS). Format:
+    // https://wzawde-yw.myshopify.com/cart/{variantId}:1
+    checkoutUrl?: string;
     title: string;
     subtitle: string;
     description: string;
@@ -24,7 +27,7 @@ export const books: Book[] = [
     {
         id: "the-competition-protocol",
         asin: "B0GKF5TGMQ",
-        gumroadUrl: "https://notarasio.gumroad.com/l/yfkgwv",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608316895575:1",
         title: "The Competition Protocol",
         subtitle: "A Step-by-Step Guide to Mastering Your Mindset, Crushing Anxiety, and dominating Your Sport",
         description: "Master the art of preparation. This book is a manual for the 7 days leading up to your event, teaching you how to build rituals and standard procedures that automate excellence and eliminate anxiety.",
@@ -47,12 +50,12 @@ export const books: Book[] = [
             primary: "#dc2626", // Red-600 (Intense)
             secondary: "#1c1917" // Stone-900
         },
-        price: "$9.99"
+        price: "$17"
     },
     {
         id: "mental-blocks",
         asin: "B0F87QX82W",
-        gumroadUrl: "https://notarasio.gumroad.com/l/albwf",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608316272983:1",
         title: "Overcoming Mental Blocks",
         subtitle: "A Guide to Peak Performance",
         description: "Your roadmap to silencing inner critics, mastering your mindset, and unlocking the unstoppable version of YOU.",
@@ -85,12 +88,12 @@ export const books: Book[] = [
             primary: "#d97706", // Amber-600
             secondary: "#1c1917" // Stone-900
         },
-        price: "$9.99"
+        price: "$17"
     },
     {
         id: "unbreakable",
         asin: "B0FBRXBBPK",
-        gumroadUrl: "https://notarasio.gumroad.com/l/lazrca",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608316207447:1",
         title: "Unbreakable",
         subtitle: "Leo and Maya's Mental Toughness Adventure",
         description: "Climb Mental Toughness Mountain with Leo and Maya! A powerful and playful journey that teaches children ages 6–9 how to stay strong on the inside—even when life gets tough.",
@@ -115,12 +118,12 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#0ea5e9", secondary: "#1c1917" },
-        price: "$6.99"
+        price: "$12"
     },
     {
         id: "confidence-building",
         asin: "B0F8CT8Z7M",
-        gumroadUrl: "https://notarasio.gumroad.com/l/bknbwi",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608315060567:1",
         title: "Confidence-Building Workbook",
         subtitle: "Overcome Self-Doubt and Cultivate Unshakable Self-Assurance",
         description: "This hands-on, step-by-step guide helps you dismantle limiting beliefs, conquer fear, and build resilient confidence. Packed with actionable exercises, reflective prompts, and science-backed strategies.",
@@ -145,12 +148,12 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#22c55e", secondary: "#1c1917" },
-        price: "$12.99"
+        price: "$17"
     },
     {
         id: "resilient-confidence",
         asin: "B0F87V8WRX",
-        gumroadUrl: "https://notarasio.gumroad.com/l/jzzsp",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608319713623:1",
         title: "Unlocking Resilient Confidence",
         subtitle: "The Key to Consistent High Performance",
         description: "A definitive guide to building an unshakable mindset that thrives under pressure, transforms adversity into advantage, and fuels excellence in sports, business, and life.",
@@ -175,12 +178,12 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#eab308", secondary: "#1c1917" },
-        price: "$9.99"
+        price: "$17"
     },
     {
         id: "nurturing-self-worth",
         asin: "B0F845R96L",
-        gumroadUrl: "https://notarasio.gumroad.com/l/zkkptv",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608316240215:1",
         title: "Nurturing Self-Worth",
         subtitle: "The Complete Parent's Guide to Building Healthy Self-Esteem in Children",
         description: "A comprehensive guide for parents and educators to raise children who believe in themselves, handle setbacks with strength, and thrive socially and academically.",
@@ -205,12 +208,12 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#ef4444", secondary: "#1c1917" },
-        price: "$9.99"
+        price: "$17"
     },
     {
         id: "physiological-performance",
         asin: "B0F87P1H5Y",
-        gumroadUrl: "https://notarasio.gumroad.com/l/ryzhc",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608316600663:1",
         title: "Physiological Peak Performance Blueprint",
         subtitle: "Unlock Your Body's Full Potential: The Science-Driven Guide to Optimizing Physical Performance",
         description: "Dives deep into the science of human physiology, offering a roadmap to harness your body's innate systems for unparalleled strength, endurance, and efficiency.",
@@ -235,12 +238,12 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#8b5cf6", secondary: "#1c1917" },
-        price: "$14.99"
+        price: "$17"
     },
     {
         id: "adhd-athletes-edge",
         asin: "B0F85N8SBQ",
-        gumroadUrl: "https://notarasio.gumroad.com/l/boced",
+        checkoutUrl: "https://wzawde-yw.myshopify.com/cart/53608294383959:1",
         title: "The ADHD Athlete's Edge",
         subtitle: "Turn Your Distraction Into Domination with Daily Routines Designed to Channel Hyperactivity into Peak Performance",
         description: "A practical and motivating guide for athletes with ADHD to unlock their full potential by learning how to train with their brain rather than fighting it.",
@@ -265,6 +268,6 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#ec4899", secondary: "#1c1917" },
-        price: "$14.99"
+        price: "$17"
     }
 ];

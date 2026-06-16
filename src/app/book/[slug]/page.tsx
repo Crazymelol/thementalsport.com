@@ -82,11 +82,13 @@ export default async function BookPage({ params }: PageProps) {
         "isbn": book.asin,
         "offers": {
             "@type": "Offer",
-            "url": AMAZON_LINK,
+            "url": book.checkoutUrl || AMAZON_LINK,
+            "price": book.price.replace(/[^0-9.]/g, ''),
+            "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
             "seller": {
                 "@type": "Organization",
-                "name": "Amazon"
+                "name": "thementalsport.com"
             }
         }
     };
@@ -117,8 +119,8 @@ export default async function BookPage({ params }: PageProps) {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            {book.gumroadUrl && (
-                                <a href={book.gumroadUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-zinc-900 text-white font-black uppercase tracking-widest hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2">
+                            {book.checkoutUrl && (
+                                <a href={book.checkoutUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-zinc-900 text-white font-black uppercase tracking-widest hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2">
                                     <ShoppingCart className="w-5 h-5" /> Buy Now — {book.price}
                                 </a>
                             )}
@@ -223,7 +225,7 @@ export default async function BookPage({ params }: PageProps) {
             {/* STICKY BOTTOM BAR (Mobile) */}
             <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-zinc-200 md:hidden z-50 flex items-center justify-between">
                 <div className="font-black text-zinc-900 text-xs uppercase tracking-widest max-w-[200px] truncate">{book.title}</div>
-                <a href={book.gumroadUrl || AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="bg-zinc-900 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
+                <a href={book.checkoutUrl || AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="bg-zinc-900 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
                     Buy {book.price}
                 </a>
             </div>
