@@ -102,7 +102,9 @@
         "performance anxiety"
       ],
       "posted_at": "2026-06-14T23:30:17.059Z",
-      "youtube_id": "r2RrpZoL8wM"
+      "youtube_id": "r2RrpZoL8wM",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-16T05:56:56.854Z"
     },
     {
       "id": "short-006",
@@ -663,7 +665,7 @@
   ],
   "caption_rotation": {
     "x": 3,
-    "pinterest": 4,
+    "pinterest": 5,
     "tiktok": 2
   }
 }
