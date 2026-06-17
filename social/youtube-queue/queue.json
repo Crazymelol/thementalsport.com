@@ -225,7 +225,7 @@
     },
     {
       "id": "short-038",
-      "status": "pending",
+      "status": "posted",
       "qa_status": "approved",
       "qa_notes": "Approved — clean render, 77%/18x stat + train-the-chaos body + CTA pill correct; content matches script. Audio clean, -20.2 LUFS (quietest of batch, still fine).",
       "qa_reviewed_at": "2026-06-15T23:44:55.654173+00:00",
@@ -240,7 +240,8 @@
         "pressure training",
         "mental toughness"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-17T09:40:20.339Z",
+      "youtube_id": "U4E5owSYDyo"
     },
     {
       "id": "short-039",
