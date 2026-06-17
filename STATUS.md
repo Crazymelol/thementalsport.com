@@ -1,14 +1,14 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-16 20:12 UTC_
+_Updated 2026-06-17 08:54 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
-| 🎥 YouTube | 10 | You'd Never Let A Teammate Talk T… | 2026-06-16 17:44 |
-| 🐦 X | 3 | Train Your Kid For Penalty Pressu… | 2026-06-16 02:05 |
-| 📌 Pinterest | 6 | 'You're So Talented' Is Quietly H… | 2026-06-16 12:42 |
+| 🎥 YouTube | 11 | Squeeze A Ball In Your Left Hand … | 2026-06-16 23:34 |
+| 🐦 X | 4 | LeBron Doesn't Calm Down. He Slow… | 2026-06-17 02:01 |
+| 📌 Pinterest | 8 | The Crowd Is Gone. You Just Lost.… | 2026-06-17 05:45 |
 | 🎵 TikTok | 4 | LeBron Doesn't Calm Down. He Slow… | 2026-06-16 14:52 |
 
 ## 🎥 YouTube performance
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| Train Your Kid For Penalty Pressu… | 5 | 0 | 0 | 0 |
-| You Finally Won — So Why Do You F… | 11 | 0 | 0 | 0 |
-| The Car Ride Home Is Where Athlet… | 14 | 0 | 0 | 0 |
+| LeBron Doesn't Calm Down. He Slow… | 5 | 0 | 0 | 0 |
+| Train Your Kid For Penalty Pressu… | 11 | 0 | 0 | 0 |
+| You Finally Won — So Why Do You F… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 _could not find profile link on Pinterest home (header not loaded)_
