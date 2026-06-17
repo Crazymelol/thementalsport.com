@@ -9,7 +9,7 @@ export default function CourseCTA() {
                 Want the full system?
             </p>
             <p className="text-zinc-700 text-base leading-snug mb-4">
-                The <strong>Mental Performance Masterclass</strong> gives you 36 video lessons, live coaching, and a complete blueprint — built for athletes who are serious about performing when it matters.
+                The <strong>Mental Performance Masterclass</strong> gives you 36 video lessons, lifetime access, and a complete blueprint — built for athletes who are serious about performing when it matters.
             </p>
             <Link
                 href="/course"

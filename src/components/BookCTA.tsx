@@ -12,9 +12,9 @@ export default function BookCTA({ book }: { book: Book }) {
             <div className="grid md:grid-cols-items-center gap-8 md:grid-cols-[1fr_300px] p-8 md:p-12 relative z-10">
                 {/* Content */}
                 <div className="space-y-6">
-                    <div className="inline-flex items-center gap-2 text-yellow-400 font-bold uppercase tracking-widest text-xs">
+                    <div className="inline-flex items-center gap-2 text-red-500 font-bold uppercase tracking-widest text-xs">
                         <Star className="w-4 h-4 fill-current" />
-                        <span>Best Seller</span>
+                        <span>New Release 2026</span>
                     </div>
 
                     <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none">
@@ -28,16 +28,13 @@ export default function BookCTA({ book }: { book: Book }) {
                     <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">
                         <Link
                             href={`/book/${book.id}`}
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-zinc-950 font-black uppercase tracking-widest hover:bg-zinc-200 transition-colors group-hover:px-10 duration-300"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 text-white font-black uppercase tracking-widest hover:bg-red-700 transition-colors group-hover:px-10 duration-300"
                         >
                             <span>Buy Now</span>
-                            <span className="w-px h-4 bg-zinc-300"></span>
+                            <span className="w-px h-4 bg-white/30"></span>
                             <span>{book.price}</span>
                             <ArrowRight className="w-4 h-4" />
                         </Link>
-                        <span className="text-xs text-zinc-500 py-4 font-medium uppercase tracking-wide">
-                            Instant Digital Download
-                        </span>
                     </div>
                 </div>
 
