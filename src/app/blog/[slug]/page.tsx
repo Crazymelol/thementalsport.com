@@ -1,39 +1,17 @@
-import { getArticleBySlug, getAllArticles } from '@/lib/blog';
+import { getArticleBySlug, getAllArticles, pickBook, isSeriesArticle, getSeriesDayNumber } from '@/lib/blog';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Layers } from 'lucide-react';
 import NewsletterInline from '@/components/NewsletterInline';
 import BookCTA from '@/components/BookCTA';
 import CourseCTA from '@/components/CourseCTA';
-import { books, Book } from '@/data/books';
 
 /*
  * Server Component
  */
 interface PageProps {
     params: Promise<{ slug: string }>;
-}
-
-function pickBook(tags: string[]): Book {
-    const t = tags.map(tag => tag.toLowerCase());
-    const has = (...keywords: string[]) =>
-        keywords.some(k => t.some(tag => tag.includes(k)));
-
-    if (has('adhd'))
-        return books.find(b => b.id === 'adhd-athletes-edge') ?? books[0];
-    if (has('nutrition', 'diet', 'hydration', 'supplement', 'caffeine', 'creatine', 'physiology', 'metabolism', 'biohack', 'breathing', 'cortisol', 'cold plunge', 'sauna', 'sleep'))
-        return books.find(b => b.id === 'physiological-performance') ?? books[0];
-    if (has('confidence', 'imposter', 'self-talk', 'affirmation', 'muhammad ali'))
-        return books.find(b => b.id === 'confidence-building') ?? books[0];
-    if (has('identity', 'self-worth', 'purpose', 'legacy', 'nurtur'))
-        return books.find(b => b.id === 'nurturing-self-worth') ?? books[0];
-    if (has('resilience', 'mental tough', 'injury', 'rehab', 'burnout', 'longevity'))
-        return books.find(b => b.id === 'unbreakable') ?? books[0];
-    if (has('anxiety', 'fear', 'mental block', 'pressure', 'mental health'))
-        return books.find(b => b.id === 'mental-blocks') ?? books[0];
-
-    return books.find(b => b.id === 'the-competition-protocol') ?? books[0];
 }
 
 export async function generateStaticParams() {
@@ -63,20 +41,40 @@ export default async function BlogPost({ params }: PageProps) {
         notFound();
     }
 
+    const book = pickBook(article.tags);
+    const accent = book.palette.primary;
+    const seriesDay = isSeriesArticle(article) ? getSeriesDayNumber(article) : null;
+
     return (
         <main className="min-h-screen pt-32 pb-24 bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
             <article className="container mx-auto px-6 max-w-3xl">
+
+                <div className="h-1.5 w-20 mb-12" style={{ backgroundColor: accent }}></div>
 
                 {/* Back Link */}
                 <Link href="/blog" className="inline-flex items-center gap-2 text-zinc-500 font-bold uppercase tracking-widest text-xs hover:text-zinc-900 transition-colors mb-12">
                     <ArrowLeft className="w-4 h-4" /> Back to Articles
                 </Link>
 
+                {seriesDay && (
+                    <Link
+                        href="/blog/series/titans-protocol"
+                        className="flex w-fit items-center gap-2 mb-8 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest hover:underline"
+                        style={{ backgroundColor: `${accent}1A`, color: accent }}
+                    >
+                        <Layers className="w-3 h-3" /> Titans Protocol Series &middot; Day {seriesDay}
+                    </Link>
+                )}
+
                 {/* Header */}
                 <header className="mb-16 space-y-6">
-                    <div className="flex gap-2 mb-4">
-                        {article.tags.map(tag => (
-                            <span key={tag} className="px-3 py-1 bg-zinc-100 text-zinc-600 text-[10px] font-black uppercase tracking-widest">
+                    <div className="flex gap-2 mb-4 flex-wrap">
+                        {article.tags.map((tag, i) => (
+                            <span
+                                key={tag}
+                                className="px-3 py-1 text-[10px] font-black uppercase tracking-widest"
+                                style={i === 0 ? { backgroundColor: `${accent}1A`, color: accent } : { backgroundColor: '#f4f4f5', color: '#52525b' }}
+                            >
                                 {tag}
                             </span>
                         ))}
@@ -84,7 +82,7 @@ export default async function BlogPost({ params }: PageProps) {
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[1.1]">
                         {article.title}
                     </h1>
-                    <time className="block text-zinc-400 font-medium font-mono text-sm border-l-4 border-zinc-200 pl-4">
+                    <time className="block text-zinc-400 font-medium font-mono text-sm pl-4" style={{ borderLeft: `4px solid ${accent}` }}>
                         PUBLISHED: {article.date}
                     </time>
                 </header>
@@ -96,7 +94,7 @@ export default async function BlogPost({ params }: PageProps) {
 
                 {/* Footer / CTA */}
                 <div className="mt-20 pt-12 border-t border-zinc-200">
-                    <BookCTA book={pickBook(article.tags)} />
+                    <BookCTA book={book} />
                     <CourseCTA />
                     <NewsletterInline />
                 </div>
