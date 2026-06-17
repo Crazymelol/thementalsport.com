@@ -52,20 +52,6 @@ export default function AuthorHome() {
                 </div>
             </section>
 
-            {/* TRUST STRIP */}
-            <section className="py-12 bg-zinc-50 border-b border-zinc-200">
-                <div className="container mx-auto px-6 text-center">
-                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-[0.2em] mb-8">Trusted methodologies used by athletes in</p>
-                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-20 opacity-80">
-                        <span className="text-4xl font-black text-zinc-900 tracking-tighter">NBA</span>
-                        <span className="text-4xl font-black text-zinc-900 tracking-tighter">NFL</span>
-                        <span className="text-4xl font-black text-zinc-900 tracking-tighter">MLB</span>
-                        <span className="text-4xl font-black text-zinc-900 tracking-tighter">NCAA</span>
-                        <span className="text-4xl font-black text-zinc-900 tracking-tighter">OLYMPICS</span>
-                    </div>
-                </div>
-            </section>
-
             {/* NEW: LATEST INSIGHTS (Articles) */}
             <section className="py-24 container mx-auto px-6 border-b border-zinc-200">
                 <div className="flex items-center justify-between mb-16">
