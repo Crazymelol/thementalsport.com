@@ -15,8 +15,6 @@ export const metadata: Metadata = {
 };
 
 const CHECKOUT_STANDARD = 'https://wzawde-yw.myshopify.com/cart/53608319811927:1';
-const CHECKOUT_PREMIUM = 'https://wzawde-yw.myshopify.com/cart/53804113494359:1';
-const CHECKOUT_ELITE = 'https://wzawde-yw.myshopify.com/cart/53804113527127:1';
 
 const modules = [
     { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
@@ -141,34 +139,23 @@ export default function CoursePage() {
             </section>
 
             <section className="py-24 bg-zinc-950 text-white">
-                <div className="container mx-auto px-6 max-w-6xl">
+                <div className="container mx-auto px-6 max-w-xl">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter">Choose Your Path</h2>
+                        <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter">Enroll Today</h2>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            { name: 'Standard', price: '$297', features: ['All 8 modules (36 video lessons)', 'All 5 bonuses', 'Lifetime access', 'Self-paced'], cta: 'Get Standard', highlight: false, checkoutUrl: CHECKOUT_STANDARD },
-                            { name: 'Premium', price: '$497', features: ['Everything in Standard', '3× 1-on-1 coaching calls (60 min)', 'Priority email support', 'Custom mental performance plan'], cta: 'Get Premium', highlight: true, checkoutUrl: CHECKOUT_PREMIUM },
-                            { name: 'Elite', price: '$1,497', features: ['Everything in Premium', '90-day group coaching cohort', 'Weekly live group calls', 'Direct access to Giannis'], cta: 'Apply for Elite', highlight: false, checkoutUrl: CHECKOUT_ELITE },
-                        ].map((tier) => (
-                            <div key={tier.name} className={`p-8 border-2 ${tier.highlight ? 'border-red-600 bg-red-950/20' : 'border-zinc-800'} flex flex-col`}>
-                                {tier.highlight && (
-                                    <div className="text-xs font-black uppercase tracking-widest text-red-500 mb-2">Most Popular</div>
-                                )}
-                                <h3 className="text-2xl font-black uppercase tracking-tighter">{tier.name}</h3>
-                                <div className="text-5xl font-black my-6">{tier.price}</div>
-                                <ul className="space-y-3 mb-8 flex-1">
-                                    {tier.features.map((f, i) => (
-                                        <li key={i} className="flex gap-2 text-zinc-300 text-sm">
-                                            <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" /> {f}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <a href={tier.checkoutUrl} target="_blank" rel="noopener noreferrer" className={`w-full py-4 text-center font-black uppercase tracking-widest text-sm transition-all ${tier.highlight ? 'bg-red-600 hover:bg-red-700' : 'bg-white text-zinc-900 hover:bg-zinc-200'}`}>
-                                    {tier.cta}
-                                </a>
-                            </div>
-                        ))}
+                    <div className="p-8 border-2 border-red-600 bg-red-950/20 flex flex-col">
+                        <h3 className="text-2xl font-black uppercase tracking-tighter">Standard</h3>
+                        <div className="text-5xl font-black my-6">$297</div>
+                        <ul className="space-y-3 mb-8 flex-1">
+                            {['All 8 modules (36 video lessons)', 'All 5 bonuses', 'Lifetime access', 'Self-paced'].map((f, i) => (
+                                <li key={i} className="flex gap-2 text-zinc-300 text-sm">
+                                    <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" /> {f}
+                                </li>
+                            ))}
+                        </ul>
+                        <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="w-full py-4 text-center font-black uppercase tracking-widest text-sm transition-all bg-red-600 hover:bg-red-700">
+                            Get Standard
+                        </a>
                     </div>
                 </div>
             </section>
