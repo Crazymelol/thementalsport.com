@@ -107,7 +107,10 @@ export default async function BookPage({ params }: PageProps) {
 
                     {/* Left: Text */}
                     <div className="order-2 lg:order-1 space-y-8 animate-in slide-in-from-left duration-700">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-100 text-zinc-900 text-xs font-black uppercase tracking-[0.2em] border border-zinc-200">
+                        <div
+                            style={{ borderColor: `${book.palette.primary}66`, backgroundColor: `${book.palette.primary}19`, color: book.palette.primary }}
+                            className="inline-flex items-center gap-2 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] border"
+                        >
                             <Star className="w-3 h-3 fill-current" /> New Release 2026
                         </div>
                         <h1 className="text-5xl lg:text-7xl font-black leading-[1.1] text-zinc-900 uppercase tracking-tighter">
@@ -120,7 +123,7 @@ export default async function BookPage({ params }: PageProps) {
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
                             {book.checkoutUrl && (
-                                <a href={book.checkoutUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-zinc-900 text-white font-black uppercase tracking-widest hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2">
+                                <a href={book.checkoutUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-red-600 text-white font-black uppercase tracking-widest hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
                                     <ShoppingCart className="w-5 h-5" /> Buy Now — {book.price}
                                 </a>
                             )}
@@ -133,12 +136,16 @@ export default async function BookPage({ params }: PageProps) {
                     {/* Right: Book Cover Image */}
                     <div className="order-1 lg:order-2 flex justify-center animate-in slide-in-from-right duration-1000">
                         <div className="relative group cursor-pointer transition-transform hover:scale-105 duration-500">
+                            <div
+                                style={{ backgroundColor: book.palette.primary }}
+                                className="absolute inset-0 blur-3xl opacity-20 scale-90 pointer-events-none"
+                            ></div>
                             <Image
                                 src={book.coverImage}
                                 alt={`${book.title} cover`}
                                 width={300}
                                 height={450}
-                                className="w-[300px] h-[450px] object-contain shadow-[20px_20px_60px_rgba(0,0,0,0.3)] border border-zinc-100 bg-zinc-50"
+                                className="relative w-[300px] h-[450px] object-contain shadow-[20px_20px_60px_rgba(0,0,0,0.3)] border border-zinc-100 bg-zinc-50"
                             />
                         </div>
                     </div>
@@ -156,7 +163,7 @@ export default async function BookPage({ params }: PageProps) {
                     {/* Reviews Grid */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                         {book.reviews.map((review, i) => (
-                            <div key={i} className="bg-zinc-50 p-8 border border-zinc-200 hover:border-zinc-900 transition-colors">
+                            <div key={i} style={{ borderTopColor: book.palette.primary }} className="bg-zinc-50 p-8 border border-zinc-200 border-t-4 hover:border-zinc-900 transition-colors">
                                 <Quote className="w-10 h-10 text-zinc-200 mb-4" />
                                 <p className="text-zinc-800 italic mb-6 leading-relaxed font-medium">
                                     &ldquo;{review.quote}&rdquo;
@@ -179,8 +186,8 @@ export default async function BookPage({ params }: PageProps) {
                         <h3 className="text-3xl font-black mb-12 text-center uppercase tracking-tighter">What You&apos;ll Learn</h3>
                         <div className="grid md:grid-cols-2 gap-8">
                             {book.features.map((item, i) => (
-                                <div key={i} className="flex gap-4 items-start border-l-2 border-zinc-800 pl-4">
-                                    <CheckCircle2 className="w-5 h-5 text-white shrink-0 mt-1" />
+                                <div key={i} style={{ borderColor: book.palette.primary }} className="flex gap-4 items-start border-l-2 pl-4">
+                                    <CheckCircle2 style={{ color: book.palette.primary }} className="w-5 h-5 shrink-0 mt-1" />
                                     <p className="text-lg text-zinc-300 font-medium">{item}</p>
                                 </div>
                             ))}
@@ -195,7 +202,12 @@ export default async function BookPage({ params }: PageProps) {
                     <h2 className="text-3xl font-black text-zinc-900 mb-12 text-center uppercase tracking-tighter">You Might Also Like</h2>
                     <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         {books.filter(b => b.id !== book.id).slice(0, 3).map((relatedBook) => (
-                            <a href={`/book/${relatedBook.id}`} key={relatedBook.id} className="group block bg-white border border-zinc-200 hover:border-zinc-900 transition-all">
+                            <a
+                                href={`/book/${relatedBook.id}`}
+                                key={relatedBook.id}
+                                style={{ '--accent': relatedBook.palette.primary } as React.CSSProperties}
+                                className="group block bg-white border border-zinc-200 hover:border-[var(--accent)] transition-all"
+                            >
                                 <div className="aspect-[3/4] bg-zinc-100 relative overflow-hidden border-b border-zinc-100">
                                     <Image
                                         src={relatedBook.coverImage}
@@ -225,7 +237,7 @@ export default async function BookPage({ params }: PageProps) {
             {/* STICKY BOTTOM BAR (Mobile) */}
             <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-zinc-200 md:hidden z-50 flex items-center justify-between">
                 <div className="font-black text-zinc-900 text-xs uppercase tracking-widest max-w-[200px] truncate">{book.title}</div>
-                <a href={book.checkoutUrl || AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="bg-zinc-900 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
+                <a href={book.checkoutUrl || AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="bg-red-600 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
                     Buy {book.price}
                 </a>
             </div>

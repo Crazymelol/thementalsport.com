@@ -2,7 +2,7 @@ import React from 'react';
 import { books } from '@/data/books';
 import { getAllArticles } from '@/lib/blog';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 import Image from 'next/image';
 import NewsletterWrapper from '@/components/NewsletterWrapper';
 import LeadMagnet from '@/components/LeadMagnet';
@@ -18,13 +18,14 @@ export default function AuthorHome() {
 
             {/* 1. AUTHOR HERO */}
             <section className="bg-zinc-950 text-white py-24 lg:py-32 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_rgba(220,38,38,0.15),_transparent_50%)] pointer-events-none"></div>
                 <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-zinc-950/40 to-zinc-950 pointer-events-none"></div>
                 <div className="container mx-auto px-6 max-w-5xl text-center space-y-8 relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 text-zinc-300 text-xs font-black uppercase tracking-[0.2em] mb-4">
-                        8 Books · Mental Performance Masterclass
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-600/20 border border-red-600/40 text-red-400 text-xs font-black uppercase tracking-[0.2em] mb-4">
+                        <Star className="w-3 h-3 fill-current" /> 8 Books · Mental Performance Masterclass
                     </div>
                     <h1 className="text-6xl lg:text-8xl font-black mb-6 uppercase tracking-tighter leading-none">
-                        Win The<br/>Inner Game
+                        Win The<br/><span className="text-red-500">Inner Game</span>
                     </h1>
                     <p className="text-xl lg:text-2xl text-zinc-400 font-medium max-w-2xl mx-auto leading-relaxed">
                         The mental performance system used by elite athletes — built by Giannis Notaras.
@@ -102,7 +103,8 @@ export default function AuthorHome() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {books.map((book) => (
                         <Link href={`/book/${book.id}`} key={book.id} className="group block">
-                            <div className="bg-white rounded-none border border-zinc-200 hover:border-zinc-900 transition-all duration-300 group-hover:shadow-xl">
+                            <div className="bg-white rounded-none border border-zinc-200 hover:border-zinc-900 transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
+                                <div style={{ backgroundColor: book.palette.primary }} className="h-1.5 w-full"></div>
                                 {/* Card Image Area */}
                                 <div className="aspect-[3/4] bg-zinc-100 relative flex items-center justify-center p-8 group-hover:bg-zinc-50 transition-colors overflow-hidden border-b border-zinc-100">
                                     <Image
@@ -165,8 +167,8 @@ export default function AuthorHome() {
                             <h2 className="text-5xl md:text-6xl font-black text-zinc-900 leading-none uppercase tracking-tighter">
                                 More than <br /> just a coach.
                             </h2>
-                            <div className="w-24 h-2 bg-zinc-900"></div>
-                            <p className="text-xl text-zinc-700 leading-relaxed font-medium">
+                            <div className="w-24 h-2 bg-red-600"></div>
+                            <p className="text-xl text-zinc-700 leading-relaxed font-medium border-l-4 border-red-600 pl-6">
                                 &quot;My mission isn&apos;t just to help you win a game. It&apos;s to help you dominate the inner battles that define your life.&quot;
                             </p>
                             <p className="text-zinc-600 leading-relaxed text-lg">
