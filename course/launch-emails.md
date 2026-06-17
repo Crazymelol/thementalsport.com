@@ -1,6 +1,6 @@
 # THE MENTAL PERFORMANCE PROTOCOL — Launch Email Sequence
 *5 emails over 7 days. Send via Kit Broadcast or paste into n8n.*
-*Buy link: https://notarasio0.gumroad.com/l/qvikid*
+*Buy link: https://wzawde-yw.myshopify.com/cart/53608319811927:1*
 
 ---
 

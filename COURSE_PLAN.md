@@ -2,7 +2,7 @@
 
 **Price:** $297 (with $497 premium tier)
 **Format:** 8-week self-paced video course
-**Platform:** Gumroad (easiest) or Teachable
+**Platform:** Shopify
 **Sales target:** 50 sales in 60 days = $14,850
 
 ---
