@@ -14,7 +14,9 @@ export const metadata: Metadata = {
     },
 };
 
-const GUMROAD_URL = 'https://notarasio0.gumroad.com/l/qvikid';
+const CHECKOUT_STANDARD = 'https://wzawde-yw.myshopify.com/cart/53608319811927:1';
+const CHECKOUT_PREMIUM = 'https://wzawde-yw.myshopify.com/cart/53804113494359:1';
+const CHECKOUT_ELITE = 'https://wzawde-yw.myshopify.com/cart/53804113527127:1';
 
 const modules = [
     { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
@@ -52,7 +54,7 @@ export default function CoursePage() {
                         The 8-week system elite athletes use to <strong className="text-white">build unshakable confidence, eliminate competition anxiety, and dominate their sport.</strong>
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                        <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2">
+                        <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2">
                             Enroll Now — $297 <ArrowRight className="w-4 h-4" />
                         </a>
                         <a href="#curriculum" className="px-10 py-5 border-2 border-zinc-700 hover:border-white text-white font-black uppercase tracking-widest text-sm transition-all">
@@ -145,9 +147,9 @@ export default function CoursePage() {
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
-                            { name: 'Standard', price: '$297', features: ['All 8 modules (36 video lessons)', 'All 5 bonuses', 'Lifetime access', 'Self-paced'], cta: 'Get Standard', highlight: false },
-                            { name: 'Premium', price: '$497', features: ['Everything in Standard', '3× 1-on-1 coaching calls (60 min)', 'Priority email support', 'Custom mental performance plan'], cta: 'Get Premium', highlight: true },
-                            { name: 'Elite', price: '$1,497', features: ['Everything in Premium', '90-day group coaching cohort', 'Weekly live group calls', 'Direct access to Giannis'], cta: 'Apply for Elite', highlight: false },
+                            { name: 'Standard', price: '$297', features: ['All 8 modules (36 video lessons)', 'All 5 bonuses', 'Lifetime access', 'Self-paced'], cta: 'Get Standard', highlight: false, checkoutUrl: CHECKOUT_STANDARD },
+                            { name: 'Premium', price: '$497', features: ['Everything in Standard', '3× 1-on-1 coaching calls (60 min)', 'Priority email support', 'Custom mental performance plan'], cta: 'Get Premium', highlight: true, checkoutUrl: CHECKOUT_PREMIUM },
+                            { name: 'Elite', price: '$1,497', features: ['Everything in Premium', '90-day group coaching cohort', 'Weekly live group calls', 'Direct access to Giannis'], cta: 'Apply for Elite', highlight: false, checkoutUrl: CHECKOUT_ELITE },
                         ].map((tier) => (
                             <div key={tier.name} className={`p-8 border-2 ${tier.highlight ? 'border-red-600 bg-red-950/20' : 'border-zinc-800'} flex flex-col`}>
                                 {tier.highlight && (
@@ -162,7 +164,7 @@ export default function CoursePage() {
                                         </li>
                                     ))}
                                 </ul>
-                                <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer" className={`w-full py-4 text-center font-black uppercase tracking-widest text-sm transition-all ${tier.highlight ? 'bg-red-600 hover:bg-red-700' : 'bg-white text-zinc-900 hover:bg-zinc-200'}`}>
+                                <a href={tier.checkoutUrl} target="_blank" rel="noopener noreferrer" className={`w-full py-4 text-center font-black uppercase tracking-widest text-sm transition-all ${tier.highlight ? 'bg-red-600 hover:bg-red-700' : 'bg-white text-zinc-900 hover:bg-zinc-200'}`}>
                                     {tier.cta}
                                 </a>
                             </div>
@@ -191,7 +193,7 @@ export default function CoursePage() {
                     <p className="text-xl text-zinc-400 mb-10">
                         Build the mental system that holds when everything else falls apart.
                     </p>
-                    <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-12 py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-base transition-all">
+                    <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-12 py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-base transition-all">
                         Enroll Now — $297 <ArrowRight className="w-5 h-5" />
                     </a>
                     <p className="text-zinc-500 text-sm mt-6">Lifetime access • 30-day guarantee • Start today</p>
