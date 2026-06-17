@@ -9,9 +9,14 @@ import LeadMagnet from '@/components/LeadMagnet';
 
 export const revalidate = 0; // Ensure homepage always shows latest articles
 
+const HOMEPAGE_BOOK_IDS = ['the-competition-protocol', 'mental-blocks', 'confidence-building'];
+
 export default function AuthorHome() {
     // Fetch latest 3 articles
     const latestArticles = getAllArticles().slice(0, 3);
+    const homepageBooks = HOMEPAGE_BOOK_IDS
+        .map((id) => books.find((b) => b.id === id))
+        .filter((b): b is NonNullable<typeof b> => Boolean(b));
 
     return (
         <main className="min-h-screen bg-white selection:bg-zinc-900 selection:text-white">
@@ -96,14 +101,22 @@ export default function AuthorHome() {
             {/* 2. BOOK CATALOG */}
             <section id="books" className="py-24 container mx-auto px-6 bg-white">
                 <div className="flex items-center justify-between mb-16">
-                    <h2 className="text-4xl font-black text-zinc-900 uppercase tracking-tighter">Latest Releases</h2>
-                    <div className="h-px bg-zinc-200 flex-1 ml-12"></div>
+                    <h2 className="text-4xl font-black text-zinc-900 uppercase tracking-tighter">Where To Start</h2>
+                    <div className="hidden md:flex h-px bg-zinc-200 flex-1 ml-12 mr-8"></div>
+                    <Link href="/books" className="text-sm font-bold uppercase tracking-widest hover:text-zinc-600 transition-colors flex items-center gap-2">
+                        View All 8 Books <ArrowRight className="w-4 h-4" />
+                    </Link>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {books.map((book) => (
-                        <Link href={`/book/${book.id}`} key={book.id} className="group block">
-                            <div className="bg-white rounded-none border border-zinc-200 hover:border-zinc-900 transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
+                    {homepageBooks.map((book) => (
+                        <Link
+                            href={`/book/${book.id}`}
+                            key={book.id}
+                            style={{ '--accent': book.palette.primary } as React.CSSProperties}
+                            className="group block"
+                        >
+                            <div className="bg-white rounded-none border border-zinc-200 hover:border-[var(--accent)] transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
                                 <div style={{ backgroundColor: book.palette.primary }} className="h-1.5 w-full"></div>
                                 {/* Card Image Area */}
                                 <div className="aspect-[3/4] bg-zinc-100 relative flex items-center justify-center p-8 group-hover:bg-zinc-50 transition-colors overflow-hidden border-b border-zinc-100">
@@ -117,9 +130,9 @@ export default function AuthorHome() {
                                 </div>
 
                                 <div className="p-8 space-y-6">
-                                    <div className="text-zinc-500 text-xs font-bold uppercase tracking-[0.2em]">
-                                        New Release
-                                    </div>
+                                    {book.reviews[0] && (
+                                        <p className="text-zinc-500 text-sm italic line-clamp-2">&ldquo;{book.reviews[0].quote}&rdquo;</p>
+                                    )}
                                     <h3 className="text-2xl font-black text-zinc-900 group-hover:underline decoration-2 underline-offset-4">
                                         {book.title}
                                     </h3>

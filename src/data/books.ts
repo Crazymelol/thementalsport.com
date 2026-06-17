@@ -21,6 +21,7 @@ export interface Book {
         secondary: string;
     };
     price: string;
+    category: 'athletes' | 'mindset' | 'parents-kids';
 }
 
 export const books: Book[] = [
@@ -50,7 +51,8 @@ export const books: Book[] = [
             primary: "#dc2626", // Red-600 (Intense)
             secondary: "#1c1917" // Stone-900
         },
-        price: "$17"
+        price: "$17",
+        category: "athletes"
     },
     {
         id: "mental-blocks",
@@ -88,7 +90,8 @@ export const books: Book[] = [
             primary: "#d97706", // Amber-600
             secondary: "#1c1917" // Stone-900
         },
-        price: "$17"
+        price: "$17",
+        category: "mindset"
     },
     {
         id: "unbreakable",
@@ -118,7 +121,8 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#0ea5e9", secondary: "#1c1917" },
-        price: "$12"
+        price: "$12",
+        category: "parents-kids"
     },
     {
         id: "confidence-building",
@@ -148,7 +152,8 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#22c55e", secondary: "#1c1917" },
-        price: "$17"
+        price: "$17",
+        category: "mindset"
     },
     {
         id: "resilient-confidence",
@@ -178,7 +183,8 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#eab308", secondary: "#1c1917" },
-        price: "$17"
+        price: "$17",
+        category: "athletes"
     },
     {
         id: "nurturing-self-worth",
@@ -208,7 +214,8 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#ef4444", secondary: "#1c1917" },
-        price: "$17"
+        price: "$17",
+        category: "parents-kids"
     },
     {
         id: "physiological-performance",
@@ -238,7 +245,8 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#8b5cf6", secondary: "#1c1917" },
-        price: "$17"
+        price: "$17",
+        category: "athletes"
     },
     {
         id: "adhd-athletes-edge",
@@ -268,6 +276,7 @@ export const books: Book[] = [
             }
         ],
         palette: { primary: "#ec4899", secondary: "#1c1917" },
-        price: "$17"
+        price: "$17",
+        category: "athletes"
     }
 ];
