@@ -251,7 +251,7 @@
     },
     {
       "id": "short-039",
-      "status": "pending",
+      "status": "posted",
       "qa_status": "approved",
       "qa_notes": "Approved — FOR SPORTS PARENTS hook, name-it + one-controllable-job script renders faithfully, CTA pill correct. Audio clean, -18.5 LUFS.",
       "qa_reviewed_at": "2026-06-15T23:44:55.654173+00:00",
@@ -266,7 +266,8 @@
         "youth sports pressure",
         "what to say to young athletes"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-17T23:34:53.265Z",
+      "youtube_id": "goZoti1w08E"
     },
     {
       "id": "short-011",
