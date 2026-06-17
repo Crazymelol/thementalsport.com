@@ -30,7 +30,7 @@ General-purpose browser automation skill. I'll write custom Playwright code for 
 
 2. **Write scripts to /tmp** - NEVER write test files to skill directory; always use `/tmp/playwright-test-*.js`
 
-3. **Use visible browser by default** - Always use `headless: false` unless user specifically requests headless mode
+3. **Use headless mode** - This sandbox has no display server (`DISPLAY` is unset, no Xvfb running). Always use `headless: true` (already the default in `lib/helpers.js`); `headless: false` fails here with no visible-browser fallback
 
 4. **Parameterize URLs** - Always make URLs configurable via environment variable or constant at top of script
 
@@ -40,7 +40,7 @@ General-purpose browser automation skill. I'll write custom Playwright code for 
 2. I auto-detect running dev servers (or ask for URL if testing external site)
 3. I write custom Playwright code in `/tmp/playwright-test-*.js` (won't clutter your project)
 4. I execute it via: `cd $SKILL_DIR && node run.js /tmp/playwright-test-*.js`
-5. Results displayed in real-time, browser window visible for debugging
+5. Results displayed in real-time via console output and saved screenshots (no visible browser window — this sandbox is headless-only)
 6. Test files auto-cleaned from /tmp by your OS
 
 ## Setup (First Time)
@@ -70,7 +70,7 @@ const { chromium } = require('playwright');
 const TARGET_URL = 'http://localhost:3001'; // <-- Auto-detected or from user
 
 (async () => {
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.goto(TARGET_URL);
@@ -100,7 +100,7 @@ const { chromium } = require('playwright');
 const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 
 (async () => {
-  const browser = await chromium.launch({ headless: false, slowMo: 100 });
+  const browser = await chromium.launch({ headless: true, slowMo: 100 });
   const page = await browser.newPage();
 
   // Desktop test
@@ -126,7 +126,7 @@ const { chromium } = require('playwright');
 const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 
 (async () => {
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.goto(`${TARGET_URL}/login`);
@@ -152,7 +152,7 @@ const { chromium } = require('playwright');
 const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 
 (async () => {
-  const browser = await chromium.launch({ headless: false, slowMo: 50 });
+  const browser = await chromium.launch({ headless: true, slowMo: 50 });
   const page = await browser.newPage();
 
   await page.goto(`${TARGET_URL}/contact`);
@@ -176,7 +176,7 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 const { chromium } = require('playwright');
 
 (async () => {
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.goto('http://localhost:3000');
@@ -211,7 +211,7 @@ const { chromium } = require('playwright');
 const { chromium } = require('playwright');
 
 (async () => {
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
@@ -243,7 +243,7 @@ const { chromium } = require('playwright');
 const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 
 (async () => {
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
   const viewports = [
@@ -283,7 +283,7 @@ For quick one-off tasks, you can execute code inline without creating files:
 ```bash
 # Take a quick screenshot
 cd $SKILL_DIR && node run.js "
-const browser = await chromium.launch({ headless: false });
+const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
 await page.goto('http://localhost:3001');
 await page.screenshot({ path: '/tmp/quick-screenshot.png', fullPage: true });
@@ -387,8 +387,7 @@ For comprehensive Playwright API documentation, see [API_REFERENCE.md](API_REFER
 - **Custom headers** - Use `PW_HEADER_NAME`/`PW_HEADER_VALUE` env vars to identify automated traffic to your backend
 - **Use /tmp for test files** - Write to `/tmp/playwright-test-*.js`, never to skill directory or user's project
 - **Parameterize URLs** - Put detected/provided URL in a `TARGET_URL` constant at the top of every script
-- **DEFAULT: Visible browser** - Always use `headless: false` unless user explicitly asks for headless mode
-- **Headless mode** - Only use `headless: true` when user specifically requests "headless" or "background" execution
+- **Headless only** - This sandbox has no display server. Always use `headless: true`; `headless: false` will fail with no fallback
 - **Slow down:** Use `slowMo: 100` to make actions visible and easier to follow
 - **Wait strategies:** Use `waitForURL`, `waitForSelector`, `waitForLoadState` instead of fixed timeouts
 - **Error handling:** Always use try-catch for robust automation
@@ -405,8 +404,8 @@ cd $SKILL_DIR && npm run setup
 **Module not found:**
 Ensure running from skill directory via `run.js` wrapper
 
-**Browser doesn't open:**
-Check `headless: false` and ensure display available
+**Browser doesn't open (headed mode):**
+This sandbox has no display server — `headless: false` always fails here. Use `headless: true`.
 
 **Element not found:**
 Add wait: `await page.waitForSelector('.element', { timeout: 10000 })`
