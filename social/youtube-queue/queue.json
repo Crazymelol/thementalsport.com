@@ -184,7 +184,9 @@
         "clutch performance"
       ],
       "posted_at": "2026-06-16T09:50:35.224Z",
-      "youtube_id": "UiyaQcixZIY"
+      "youtube_id": "UiyaQcixZIY",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-17T12:31:23.157Z"
     },
     {
       "id": "short-010",
@@ -681,7 +683,7 @@
   ],
   "caption_rotation": {
     "x": 4,
-    "pinterest": 1,
+    "pinterest": 2,
     "tiktok": 4
   }
 }
