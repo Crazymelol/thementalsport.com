@@ -110,7 +110,11 @@
       "posted_at": "2026-06-14T23:30:17.059Z",
       "youtube_id": "r2RrpZoL8wM",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-16T05:56:56.854Z"
+      "pinterest_posted_at": "2026-06-16T05:56:56.854Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-06-17T14:20:05.797Z",
+      "x_status": "posted",
+      "x_posted_at": "2026-06-18T02:02:54.576Z"
     },
     {
       "id": "short-006",
@@ -129,7 +133,9 @@
       "posted_at": "2026-06-15T10:10:32.637Z",
       "youtube_id": "g_-8YLmUQYA",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-16T12:42:03.890Z"
+      "pinterest_posted_at": "2026-06-16T12:42:03.890Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-06-18T14:09:45.352Z"
     },
     {
       "id": "short-007",
@@ -203,7 +209,9 @@
         "mental game"
       ],
       "posted_at": "2026-06-16T17:44:57.217Z",
-      "youtube_id": "r9jptFYRVh4"
+      "youtube_id": "r9jptFYRVh4",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-17T19:47:58.241Z"
     },
     {
       "id": "short-037",
@@ -223,7 +231,9 @@
         "pre-performance routine"
       ],
       "posted_at": "2026-06-16T23:34:01.869Z",
-      "youtube_id": "8j_AR68N09M"
+      "youtube_id": "8j_AR68N09M",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-18T05:42:27.011Z"
     },
     {
       "id": "short-038",
@@ -243,11 +253,13 @@
         "mental toughness"
       ],
       "posted_at": "2026-06-17T09:40:20.339Z",
-      "youtube_id": "U4E5owSYDyo"
+      "youtube_id": "U4E5owSYDyo",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-18T12:14:18.933Z"
     },
     {
       "id": "short-039",
-      "status": "pending",
+      "status": "posted",
       "qa_status": "approved",
       "qa_notes": "Approved — FOR SPORTS PARENTS hook, name-it + one-controllable-job script renders faithfully, CTA pill correct. Audio clean, -18.5 LUFS.",
       "qa_reviewed_at": "2026-06-15T23:44:55.654173+00:00",
@@ -262,11 +274,12 @@
         "youth sports pressure",
         "what to say to young athletes"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-17T23:34:53.265Z",
+      "youtube_id": "goZoti1w08E"
     },
     {
       "id": "short-011",
-      "status": "pending",
+      "status": "posted",
       "audience": "parents",
       "title": "Yamal Started At 16. Your Kid Didn't. That's Fine. #Shorts",
       "hook": "Yamal was starting at 16. Your kid isn't. That is NOT a problem.",
@@ -278,7 +291,8 @@
         "youth development",
         "sports parents"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-18T09:33:10.628Z",
+      "youtube_id": "Gnq8Wl-0gGU"
     },
     {
       "id": "short-012",
@@ -682,8 +696,8 @@
     }
   ],
   "caption_rotation": {
-    "x": 4,
-    "pinterest": 2,
-    "tiktok": 4
+    "x": 5,
+    "pinterest": 5,
+    "tiktok": 6
   }
 }

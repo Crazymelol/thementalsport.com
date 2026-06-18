@@ -1,10 +1,13 @@
 {
   "_readme": "Long-form / hero video RENDER + upload LOOP. The youtube-hero-poster workflow (1) generates cloned-voice narration with Chatterbox, (2) RENDERS the 1920x1080 HeroVideo Remotion composition for the first item with status='pending', (3) uploads it to YouTube, then marks the item 'posted'. Same proven engine as the daily Shorts, just long-form. To queue a new hero video, add an item with id / hook / script / cta / title / description / tags and status='pending'. The script is split into on-screen captions and narrated segment-by-segment, so write it as natural spoken sentences and keep most of them short (<= ~9 words) for clean caption splits. NEVER re-post a 'posted' item.",
-  "cadence": {"per_run": 1, "schedule": "weekly (Sundays 17:00 UTC) + manual Run workflow"},
+  "cadence": {
+    "per_run": 1,
+    "schedule": "weekly (Sundays 17:00 UTC) + manual Run workflow"
+  },
   "items": [
     {
       "id": "hero-001",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "book_title": "The Competition Protocol",
       "title": "Win The Inner Game: The Mental System Elite Athletes Use Under Pressure",
@@ -28,7 +31,8 @@
       ],
       "category_id": "22",
       "privacy": "public",
-      "posted_at": null
+      "posted_at": "2026-06-18T14:14:58.107Z",
+      "youtube_id": "FNxSHtIvcQo"
     }
   ]
 }
