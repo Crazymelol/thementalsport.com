@@ -111,6 +111,20 @@ const Background: React.FC = () => {
           background: `radial-gradient(circle at 50% ${30 + progress * 25}%, ${COLORS.backgroundAlt} 0%, ${COLORS.background} 70%)`,
         }}
       />
+      {/* Filmic texture: a static (frame-independent, so it costs nothing
+          per-frame to compute) grain dot screen plus a corner vignette, so
+          the full-screen text layouts pick up the same printed-comic
+          texture the character panel already has. */}
+      <AbsoluteFill
+        style={{
+          backgroundImage: [
+            'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.5px)',
+            'radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,0.45) 100%)',
+          ].join(', '),
+          backgroundSize: '13px 13px, auto',
+          backgroundRepeat: 'repeat, no-repeat',
+        }}
+      />
       <div
         style={{
           position: 'absolute',
@@ -185,14 +199,15 @@ const PopIn: React.FC<{children: React.ReactNode; delay?: number}> = ({
 const ScreenFrame: React.FC<{
   scene?: CharacterScene;
   hair?: HairType;
+  audioSrc?: string;
   padding: number;
   children: React.ReactNode;
-}> = ({scene, hair, padding, children}) => {
+}> = ({scene, hair, audioSrc, padding, children}) => {
   if (scene && hair) {
     return (
       <AbsoluteFill>
         <Background />
-        <CharacterPanel scene={scene} hair={hair} />
+        <CharacterPanel scene={scene} hair={hair} audioSrc={audioSrc} />
         <AbsoluteFill
           style={{
             top: '58%',
@@ -227,7 +242,8 @@ const HookScreen: React.FC<{
   hook: string;
   scene?: CharacterScene;
   hair?: HairType;
-}> = ({audience, hook, scene, hair}) => {
+  audioSrc?: string;
+}> = ({audience, hook, scene, hair, audioSrc}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const words = hook.split(' ');
@@ -302,7 +318,7 @@ const HookScreen: React.FC<{
 
   if (hasCharacter) {
     return (
-      <ScreenFrame scene={scene} hair={hair} padding={72}>
+      <ScreenFrame scene={scene} hair={hair} audioSrc={audioSrc} padding={72}>
         <div
           style={{
             color: ACCENT,
@@ -361,7 +377,8 @@ const CaptionScreen: React.FC<{
   words?: WordTiming[];
   scene?: CharacterScene;
   hair?: HairType;
-}> = ({text, words, scene, hair}) => {
+  audioSrc?: string;
+}> = ({text, words, scene, hair, audioSrc}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const opacity = interpolate(
@@ -403,7 +420,7 @@ const CaptionScreen: React.FC<{
 
   if (scene && hair) {
     return (
-      <ScreenFrame scene={scene} hair={hair} padding={72}>
+      <ScreenFrame scene={scene} hair={hair} audioSrc={audioSrc} padding={72}>
         {captionText(54)}
       </ScreenFrame>
     );
@@ -423,7 +440,8 @@ const CTAScreen: React.FC<{
   bookTitle: string;
   scene?: CharacterScene;
   hair?: HairType;
-}> = ({cta, bookTitle, scene, hair}) => {
+  audioSrc?: string;
+}> = ({cta, bookTitle, scene, hair, audioSrc}) => {
   const ctaContent = (ctaFontSize: number) => (
     <>
       <PopIn>
@@ -478,7 +496,7 @@ const CTAScreen: React.FC<{
 
   if (scene && hair) {
     return (
-      <ScreenFrame scene={scene} hair={hair} padding={80}>
+      <ScreenFrame scene={scene} hair={hair} audioSrc={audioSrc} padding={80}>
         {ctaContent(44)}
       </ScreenFrame>
     );
@@ -515,6 +533,7 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
           words={captionAudio?.words}
           scene={character?.scenes[i]}
           hair={character?.hair}
+          audioSrc={captionAudio && staticFile(captionAudio.src)}
         />
         {captionAudio && <Audio src={staticFile(captionAudio.src)} />}
       </Sequence>
@@ -531,6 +550,7 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
           hook={hook}
           scene={character?.hook}
           hair={character?.hair}
+          audioSrc={audio && staticFile(audio.hook.src)}
         />
         {audio && <Audio src={staticFile(audio.hook.src)} />}
       </Sequence>
@@ -541,6 +561,7 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
           bookTitle={bookTitle}
           scene={character?.cta}
           hair={character?.hair}
+          audioSrc={audio && staticFile(audio.cta.src)}
         />
         {audio && <Audio src={staticFile(audio.cta.src)} />}
       </Sequence>

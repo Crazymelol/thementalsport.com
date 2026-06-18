@@ -10,6 +10,9 @@
   "dependencies": {
     "@remotion/bundler": "4.0.476",
     "@remotion/cli": "4.0.476",
+    "@remotion/media-utils": "4.0.476",
+    "@remotion/motion-blur": "4.0.476",
+    "@remotion/noise": "4.0.476",
     "@remotion/renderer": "4.0.476",
     "music-metadata": "^11.13.0",
     "react": "19.0.0",
