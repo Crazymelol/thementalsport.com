@@ -275,7 +275,7 @@
     },
     {
       "id": "short-011",
-      "status": "pending",
+      "status": "posted",
       "audience": "parents",
       "title": "Yamal Started At 16. Your Kid Didn't. That's Fine. #Shorts",
       "hook": "Yamal was starting at 16. Your kid isn't. That is NOT a problem.",
@@ -287,7 +287,8 @@
         "youth development",
         "sports parents"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-18T09:33:10.628Z",
+      "youtube_id": "Gnq8Wl-0gGU"
     },
     {
       "id": "short-012",
