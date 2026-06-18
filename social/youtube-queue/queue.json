@@ -112,7 +112,9 @@
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-16T05:56:56.854Z",
       "tiktok_status": "posted",
-      "tiktok_posted_at": "2026-06-17T14:20:05.797Z"
+      "tiktok_posted_at": "2026-06-17T14:20:05.797Z",
+      "x_status": "posted",
+      "x_posted_at": "2026-06-18T02:02:54.576Z"
     },
     {
       "id": "short-006",
@@ -687,7 +689,7 @@
     }
   ],
   "caption_rotation": {
-    "x": 4,
+    "x": 5,
     "pinterest": 3,
     "tiktok": 5
   }
