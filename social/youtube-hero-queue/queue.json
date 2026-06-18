@@ -1,0 +1,29 @@
+{
+  "_readme": "Long-form / hero video upload LOOP. The youtube-hero-poster workflow picks the FIRST item with status='pending' that has a real source_url, downloads it, uploads it to YouTube via post-hero-video.mjs, then commits it back as status='posted'. NEVER re-post a 'posted' item. A placeholder/empty source_url (starts with PASTE_) makes the workflow wait and do nothing. Unlike the Shorts queue (which RENDERS its own videos), these are already produced elsewhere (Higgsfield/ElevenLabs/etc.) and supplied as a download link — a Google Drive 'Anyone with the link' URL works. Cadence: weekly (Sundays) plus manual Run. Add one item per new long-form video.",
+  "items": [
+    {
+      "id": "hero-001",
+      "status": "pending",
+      "source_url": "PASTE_VIDEO_LINK_HERE",
+      "title": "Win The Inner Game: The Mental System Elite Athletes Use Under Pressure",
+      "description": "Pressure doesn't build character — it reveals it.\n\nThis is the mental performance system elite athletes use to control pressure, build real confidence, and perform when it counts most. Built by Giannis Notaras, author of The Competition Protocol and the 8-book Mental Performance Library.\n\n🎯 Free 7-day system → https://thementalsport.com/free\n📖 Start with the book → https://thementalsport.com/products/the-competition-protocol\n📚 The full 8-book library → https://thementalsport.com\n\n00:00 — Hook\n00:20 — Why talent isn't enough\n01:10 — The inner-game framework\n02:10 — What changes when you train it\n02:40 — Start here\n\n#MentalPerformance #SportsPsychology #AthleteMindset #InnerGame #PerformanceUnderPressure",
+      "tags": [
+        "mental performance",
+        "sports psychology",
+        "athlete mindset",
+        "mental toughness",
+        "confidence training",
+        "performance anxiety",
+        "elite athlete mindset",
+        "pressure performance",
+        "Giannis Notaras",
+        "the competition protocol",
+        "mental training for athletes",
+        "sports mindset coaching"
+      ],
+      "category_id": "22",
+      "privacy": "public",
+      "posted_at": null
+    }
+  ]
+}
