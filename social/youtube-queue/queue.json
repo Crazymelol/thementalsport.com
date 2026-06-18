@@ -251,7 +251,9 @@
         "mental toughness"
       ],
       "posted_at": "2026-06-17T09:40:20.339Z",
-      "youtube_id": "U4E5owSYDyo"
+      "youtube_id": "U4E5owSYDyo",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-18T12:14:18.933Z"
     },
     {
       "id": "short-039",
@@ -693,7 +695,7 @@
   ],
   "caption_rotation": {
     "x": 5,
-    "pinterest": 4,
+    "pinterest": 5,
     "tiktok": 5
   }
 }
