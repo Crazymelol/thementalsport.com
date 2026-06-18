@@ -1,15 +1,15 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-18 08:38 UTC_
+_Updated 2026-06-18 19:53 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
-| 🎥 YouTube | 13 | When Your Kid Freezes Under Press… | 2026-06-17 23:34 |
+| 🎥 YouTube | 15 | One Early Mistake Is Unraveling Y… | 2026-06-18 17:08 |
 | 🐦 X | 5 | Anxious Before Games? Good. Here'… | 2026-06-18 02:02 |
-| 📌 Pinterest | 11 | Squeeze A Ball In Your Left Hand … | 2026-06-18 05:42 |
-| 🎵 TikTok | 5 | Anxious Before Games? Good. Here'… | 2026-06-17 14:20 |
+| 📌 Pinterest | 12 | 77% Of Athletes Choke. You're Not… | 2026-06-18 12:14 |
+| 🎵 TikTok | 6 | 'You're So Talented' Is Quietly H… | 2026-06-18 14:09 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
