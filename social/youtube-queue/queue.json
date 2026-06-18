@@ -313,7 +313,7 @@
     },
     {
       "id": "short-013",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "Why Your Brain Sabotages You In Competition #Shorts",
       "hook": "You didn't lose because you weren't ready. Your brain hijacked your body — and it's predictable.",
@@ -325,7 +325,8 @@
         "choking under pressure",
         "sports science"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-18T23:35:49.061Z",
+      "youtube_id": "A2krqvHWuEw"
     },
     {
       "id": "short-014",
