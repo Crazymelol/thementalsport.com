@@ -2,6 +2,72 @@
   "_readme": "YouTube Shorts content queue. The n8n workflow (05-youtube-shorts-queue-poster) picks the FIRST item with status='pending', renders+uploads it, then commits it back as status='posted'. NEVER re-post a 'posted' item. When no items are pending the workflow does NOTHING (no looping old content). Claude refills this queue with fresh scripts; humans can add items too. Cadence cap: 3 posts/day. QA GATE: items created with a `qa_status` field only post once it is \"approved\" (set by the video-qa-approver agent via /qa-shorts); items without the field are legacy and post as before.",
   "items": [
     {
+      "id": "short-040",
+      "status": "pending",
+      "qa_status": "pending",
+      "audience": "athletes",
+      "title": "The Voice In Your Head After You Mess Up #Shorts",
+      "hook": "There's a voice in your head after every mistake, and you've been listening to the wrong part of it.",
+      "script": "You miss the easy one. Instantly, the voice shows up. It says you always do this. That voice is not the truth. It's just a scared old habit. So stop arguing with it. Name it, then name your next job. One pass, one rep, one breath. That's how real confidence comes back.",
+      "cta": "The full self-talk script is free — Chapter 1, link in description.",
+      "description": "What that inner voice after a mistake actually is — and the two-step way to quiet it.\n\n🎯 FREE: Chapter 1 of The Competition Protocol → https://thementalsport.com/free\n📚 8-week course → https://thementalsport.com/course\n\n#sportspsychology #selftalk #mentaltoughness",
+      "tags": [
+        "self-talk for athletes",
+        "inner critic",
+        "sports psychology"
+      ],
+      "posted_at": null,
+      "character": {
+        "hair": "Short",
+        "hook": {
+          "pose": "CrossedArmsWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RoboDanceWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RoboDanceWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          }
+        ],
+        "cta": {
+          "pose": "WalkingWB",
+          "face": "Smile"
+        }
+      }
+    },
+    {
       "id": "short-001",
       "status": "posted",
       "audience": "parents",

@@ -23,3 +23,20 @@ export type ShortAudio = {
   captions: AudioSegment[];
   cta: AudioSegment;
 };
+
+// Optional recurring illustrated character (react-peeps), opted into per
+// queue item via a `character` field. `scenes` is one entry per caption, in
+// the same order as splitIntoCaptions(script).
+import type {StandingPoseType, FaceType, HairType} from 'react-peeps';
+
+export type CharacterScene = {
+  pose: StandingPoseType;
+  face: FaceType;
+};
+
+export type CharacterConfig = {
+  hair: HairType;
+  hook: CharacterScene;
+  scenes: CharacterScene[];
+  cta: CharacterScene;
+};

@@ -12,7 +12,9 @@ import {
 } from 'remotion';
 import {splitIntoCaptions} from './splitScript';
 import {COLORS, FONT_FAMILY, audienceLabel} from './theme';
-import type {ShortAudio, WordTiming} from './types';
+import {CharacterPanel} from './Character';
+import type {ShortAudio, WordTiming, CharacterConfig, CharacterScene} from './types';
+import type {HairType} from 'react-peeps';
 
 const fontFamily = FONT_FAMILY;
 
@@ -29,6 +31,9 @@ export type ShortVideoProps = {
   // Optional per-segment narration (see voiceover.ts). When omitted, the
   // video falls back to the silent, text-timed layout below.
   audio?: ShortAudio;
+  // Optional recurring illustrated character (see Character.tsx). When
+  // omitted, every screen renders the original full-screen text layout.
+  character?: CharacterConfig;
 };
 
 export const FPS = 30;
@@ -171,14 +176,58 @@ const PopIn: React.FC<{children: React.ReactNode; delay?: number}> = ({
   return <div style={{transform: `scale(${scale})`, opacity}}>{children}</div>;
 };
 
+// Wraps a screen's content in either the original full-screen centered
+// layout, or — when a character scene is supplied — a top character panel +
+// bottom content band. Kept as two distinct branches (not one ternary-laden
+// layout) so the no-character path stays byte-for-byte the original render,
+// guaranteeing zero visual change for the 25+ legacy/posted queue items that
+// don't carry a `character` field.
+const ScreenFrame: React.FC<{
+  scene?: CharacterScene;
+  hair?: HairType;
+  padding: number;
+  children: React.ReactNode;
+}> = ({scene, hair, padding, children}) => {
+  if (scene && hair) {
+    return (
+      <AbsoluteFill>
+        <Background />
+        <CharacterPanel scene={scene} hair={hair} />
+        <AbsoluteFill
+          style={{
+            top: '58%',
+            bottom: 0,
+            height: 'auto',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: `0 ${padding}px`,
+          }}
+        >
+          {children}
+        </AbsoluteFill>
+        <Wordmark />
+      </AbsoluteFill>
+    );
+  }
+  return (
+    <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding}}>
+      <Background />
+      {children}
+      <Wordmark />
+    </AbsoluteFill>
+  );
+};
+
 // Retention-reworked hook: words stamp in fast (motion from frame 1, not a
 // static wall fading in), a gold accent bar wipes under once they land, and the
 // whole block keeps a subtle float so the frame is never still — the things that
 // hold a Shorts viewer past the first 2 seconds. Prototype pending owner review.
-const HookScreen: React.FC<{audience: string; hook: string}> = ({
-  audience,
-  hook,
-}) => {
+const HookScreen: React.FC<{
+  audience: string;
+  hook: string;
+  scene?: CharacterScene;
+  hair?: HairType;
+}> = ({audience, hook, scene, hair}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const words = hook.split(' ');
@@ -192,6 +241,91 @@ const HookScreen: React.FC<{audience: string; hook: string}> = ({
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
+  const hasCharacter = Boolean(scene && hair);
+
+  const hookWords = (fontSize: number) => (
+    <div
+      style={{
+        color: COLORS.foreground,
+        fontFamily,
+        fontSize,
+        fontWeight: 800,
+        lineHeight: 1.12,
+        textTransform: 'uppercase',
+        letterSpacing: -1,
+      }}
+    >
+      {words.map((w, i) => {
+        const at = i * 2;
+        const scale = spring({
+          frame: frame - at,
+          fps,
+          config: {damping: 11, stiffness: 200},
+          from: 0.4,
+          to: 1,
+        });
+        const opacity = interpolate(frame - at, [0, 3], [0, 1], {
+          extrapolateLeft: 'clamp',
+          extrapolateRight: 'clamp',
+        });
+        return (
+          <span
+            key={i}
+            style={{
+              display: 'inline-block',
+              transform: `scale(${scale})`,
+              opacity,
+              marginRight: '0.25em',
+            }}
+          >
+            {w}
+          </span>
+        );
+      })}
+    </div>
+  );
+
+  const underlineBar = (
+    <div
+      style={{
+        height: 8,
+        marginTop: 28,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: `${underline * 55}%`,
+        maxWidth: '70%',
+        backgroundColor: ACCENT,
+        borderRadius: 4,
+      }}
+    />
+  );
+
+  if (hasCharacter) {
+    return (
+      <ScreenFrame scene={scene} hair={hair} padding={72}>
+        <div
+          style={{
+            color: ACCENT,
+            fontFamily,
+            fontSize: 24,
+            fontWeight: 700,
+            letterSpacing: 6,
+            textTransform: 'uppercase',
+            opacity: labelOpacity,
+            marginBottom: 16,
+            textAlign: 'center',
+          }}
+        >
+          For {audienceLabel(audience)}
+        </div>
+        <div style={{transform: `translateY(${float}px)`, textAlign: 'center'}}>
+          {hookWords(56)}
+          {underlineBar}
+        </div>
+      </ScreenFrame>
+    );
+  }
+
   return (
     <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding: 72}}>
       <Background />
@@ -214,67 +348,20 @@ const HookScreen: React.FC<{audience: string; hook: string}> = ({
         For {audienceLabel(audience)}
       </div>
       <div style={{transform: `translateY(${float}px)`, textAlign: 'center'}}>
-        <div
-          style={{
-            color: COLORS.foreground,
-            fontFamily,
-            fontSize: 84,
-            fontWeight: 800,
-            lineHeight: 1.12,
-            textTransform: 'uppercase',
-            letterSpacing: -1,
-          }}
-        >
-          {words.map((w, i) => {
-            const at = i * 2;
-            const scale = spring({
-              frame: frame - at,
-              fps,
-              config: {damping: 11, stiffness: 200},
-              from: 0.4,
-              to: 1,
-            });
-            const opacity = interpolate(frame - at, [0, 3], [0, 1], {
-              extrapolateLeft: 'clamp',
-              extrapolateRight: 'clamp',
-            });
-            return (
-              <span
-                key={i}
-                style={{
-                  display: 'inline-block',
-                  transform: `scale(${scale})`,
-                  opacity,
-                  marginRight: '0.25em',
-                }}
-              >
-                {w}
-              </span>
-            );
-          })}
-        </div>
-        <div
-          style={{
-            height: 8,
-            marginTop: 28,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            width: `${underline * 55}%`,
-            maxWidth: '70%',
-            backgroundColor: ACCENT,
-            borderRadius: 4,
-          }}
-        />
+        {hookWords(84)}
+        {underlineBar}
       </div>
       <Wordmark />
     </AbsoluteFill>
   );
 };
 
-const CaptionScreen: React.FC<{text: string; words?: WordTiming[]}> = ({
-  text,
-  words,
-}) => {
+const CaptionScreen: React.FC<{
+  text: string;
+  words?: WordTiming[];
+  scene?: CharacterScene;
+  hair?: HairType;
+}> = ({text, words, scene, hair}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const opacity = interpolate(
@@ -289,90 +376,122 @@ const CaptionScreen: React.FC<{text: string; words?: WordTiming[]}> = ({
     easing: Easing.out(Easing.cubic),
   });
   const wordTimings = getWordTimings(text, durationInFrames, words);
+
+  const captionText = (fontSize: number) => (
+    <div
+      style={{
+        color: COLORS.muted,
+        fontFamily,
+        fontSize,
+        fontWeight: 700,
+        lineHeight: 1.25,
+        textAlign: 'center',
+        opacity,
+        transform: `translateY(${translateY}px)`,
+      }}
+    >
+      {wordTimings.map(({word, from}, i) => (
+        <React.Fragment key={i}>
+          <span style={{color: frame >= from ? COLORS.foreground : COLORS.muted}}>
+            {word}
+          </span>
+          {i < wordTimings.length - 1 ? ' ' : ''}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+
+  if (scene && hair) {
+    return (
+      <ScreenFrame scene={scene} hair={hair} padding={72}>
+        {captionText(54)}
+      </ScreenFrame>
+    );
+  }
+
   return (
     <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding: 90}}>
       <Background />
-      <div
-        style={{
-          color: COLORS.muted,
-          fontFamily,
-          fontSize: 72,
-          fontWeight: 700,
-          lineHeight: 1.25,
-          textAlign: 'center',
-          opacity,
-          transform: `translateY(${translateY}px)`,
-        }}
-      >
-        {wordTimings.map(({word, from}, i) => (
-          <React.Fragment key={i}>
-            <span style={{color: frame >= from ? COLORS.foreground : COLORS.muted}}>
-              {word}
-            </span>
-            {i < wordTimings.length - 1 ? ' ' : ''}
-          </React.Fragment>
-        ))}
-      </div>
+      {captionText(72)}
       <Wordmark />
     </AbsoluteFill>
   );
 };
 
-const CTAScreen: React.FC<{cta: string; bookTitle: string}> = ({
-  cta,
-  bookTitle,
-}) => (
-  <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding: 80}}>
-    <Background />
-    <PopIn>
-      <div
-        style={{
-          color: COLORS.muted,
-          fontFamily,
-          fontSize: 30,
-          fontWeight: 600,
-          textTransform: 'uppercase',
-          letterSpacing: 4,
-          marginBottom: 32,
-          textAlign: 'center',
-        }}
-      >
-        {bookTitle}
-      </div>
-    </PopIn>
-    <PopIn delay={6}>
-      <div
-        style={{
-          color: COLORS.foreground,
-          fontFamily,
-          fontSize: 64,
-          fontWeight: 700,
-          textAlign: 'center',
-          lineHeight: 1.3,
-          marginBottom: 48,
-        }}
-      >
-        {cta}
-      </div>
-    </PopIn>
-    <PopIn delay={12}>
-      <div
-        style={{
-          color: COLORS.background,
-          backgroundColor: COLORS.foreground,
-          fontFamily,
-          fontSize: 36,
-          fontWeight: 700,
-          padding: '20px 48px',
-          borderRadius: 999,
-          letterSpacing: 1,
-        }}
-      >
-        thementalsport.com/free
-      </div>
-    </PopIn>
-  </AbsoluteFill>
-);
+const CTAScreen: React.FC<{
+  cta: string;
+  bookTitle: string;
+  scene?: CharacterScene;
+  hair?: HairType;
+}> = ({cta, bookTitle, scene, hair}) => {
+  const ctaContent = (ctaFontSize: number) => (
+    <>
+      <PopIn>
+        <div
+          style={{
+            color: COLORS.muted,
+            fontFamily,
+            fontSize: 30,
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: 4,
+            marginBottom: 32,
+            textAlign: 'center',
+          }}
+        >
+          {bookTitle}
+        </div>
+      </PopIn>
+      <PopIn delay={6}>
+        <div
+          style={{
+            color: COLORS.foreground,
+            fontFamily,
+            fontSize: ctaFontSize,
+            fontWeight: 700,
+            textAlign: 'center',
+            lineHeight: 1.3,
+            marginBottom: 48,
+          }}
+        >
+          {cta}
+        </div>
+      </PopIn>
+      <PopIn delay={12}>
+        <div
+          style={{
+            color: COLORS.background,
+            backgroundColor: COLORS.foreground,
+            fontFamily,
+            fontSize: 36,
+            fontWeight: 700,
+            padding: '20px 48px',
+            borderRadius: 999,
+            letterSpacing: 1,
+          }}
+        >
+          thementalsport.com/free
+        </div>
+      </PopIn>
+    </>
+  );
+
+  if (scene && hair) {
+    return (
+      <ScreenFrame scene={scene} hair={hair} padding={80}>
+        {ctaContent(44)}
+      </ScreenFrame>
+    );
+  }
+
+  return (
+    <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', padding: 80}}>
+      <Background />
+      {ctaContent(64)}
+      <Wordmark />
+    </AbsoluteFill>
+  );
+};
 
 export const ShortVideo: React.FC<ShortVideoProps> = ({
   hook,
@@ -381,6 +500,7 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
   bookTitle,
   audience,
   audio,
+  character,
 }) => {
   const {captions, durations} = getCaptionTimings(script, audio);
   const hookFrames = audio?.hook.durationInFrames ?? HOOK_FRAMES;
@@ -390,7 +510,12 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
     const captionAudio = audio?.captions[i];
     const seq = (
       <Sequence key={i} from={from} durationInFrames={durations[i]}>
-        <CaptionScreen text={caption} words={captionAudio?.words} />
+        <CaptionScreen
+          text={caption}
+          words={captionAudio?.words}
+          scene={character?.scenes[i]}
+          hair={character?.hair}
+        />
         {captionAudio && <Audio src={staticFile(captionAudio.src)} />}
       </Sequence>
     );
@@ -401,12 +526,22 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
   return (
     <AbsoluteFill style={{backgroundColor: COLORS.background}}>
       <Sequence from={0} durationInFrames={hookFrames}>
-        <HookScreen audience={audience} hook={hook} />
+        <HookScreen
+          audience={audience}
+          hook={hook}
+          scene={character?.hook}
+          hair={character?.hair}
+        />
         {audio && <Audio src={staticFile(audio.hook.src)} />}
       </Sequence>
       {captionSequences}
       <Sequence from={from} durationInFrames={ctaFrames}>
-        <CTAScreen cta={cta} bookTitle={bookTitle} />
+        <CTAScreen
+          cta={cta}
+          bookTitle={bookTitle}
+          scene={character?.cta}
+          hair={character?.hair}
+        />
         {audio && <Audio src={staticFile(audio.cta.src)} />}
       </Sequence>
     </AbsoluteFill>

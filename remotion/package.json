@@ -8,18 +8,19 @@
     "render-queue": "tsx src/render-queue.ts"
   },
   "dependencies": {
+    "@remotion/bundler": "4.0.476",
+    "@remotion/cli": "4.0.476",
+    "@remotion/renderer": "4.0.476",
+    "music-metadata": "^11.13.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "remotion": "4.0.476",
-    "@remotion/cli": "4.0.476",
-    "@remotion/bundler": "4.0.476",
-    "@remotion/renderer": "4.0.476",
-    "music-metadata": "^11.13.0"
+    "react-peeps": "^0.1.10",
+    "remotion": "4.0.476"
   },
   "devDependencies": {
-    "@types/react": "19.0.0",
     "@types/node": "22.0.0",
-    "typescript": "5.8.2",
-    "tsx": "4.19.2"
+    "@types/react": "19.0.0",
+    "tsx": "4.19.2",
+    "typescript": "5.8.2"
   }
 }

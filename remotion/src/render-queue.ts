@@ -4,6 +4,7 @@ import {bundle} from '@remotion/bundler';
 import {renderMedia, selectComposition} from '@remotion/renderer';
 import {FPS} from './ShortVideo';
 import {loadAudio} from './voiceover';
+import type {CharacterConfig} from './types';
 
 const QUEUE_PATH = path.join(__dirname, '../../social/youtube-queue/queue.json');
 const OUT_DIR = path.join(__dirname, '../out');
@@ -18,6 +19,7 @@ type QueueItem = {
   hook: string;
   script: string;
   cta: string;
+  character?: CharacterConfig;
 };
 
 // Override via env on machines without Remotion's default headless-shell
@@ -57,6 +59,7 @@ async function main() {
       bookTitle: item.title.replace(/\s*#Shorts$/i, ''),
       audience: item.audience,
       audio,
+      character: item.character,
     };
 
     console.log(`Rendering ${item.id}...`);
