@@ -229,7 +229,9 @@
         "pre-performance routine"
       ],
       "posted_at": "2026-06-16T23:34:01.869Z",
-      "youtube_id": "8j_AR68N09M"
+      "youtube_id": "8j_AR68N09M",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-18T05:42:27.011Z"
     },
     {
       "id": "short-038",
@@ -690,7 +692,7 @@
   ],
   "caption_rotation": {
     "x": 5,
-    "pinterest": 3,
+    "pinterest": 4,
     "tiktok": 5
   }
 }
