@@ -296,7 +296,7 @@
     },
     {
       "id": "short-012",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "One Early Mistake Is Unraveling Your Whole Game #Shorts",
       "hook": "One early mistake. And now your whole game is unraveling.",
@@ -308,7 +308,8 @@
         "mistake spiral",
         "mental reset"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-18T17:08:24.145Z",
+      "youtube_id": "RWJDElG8SxA"
     },
     {
       "id": "short-013",
