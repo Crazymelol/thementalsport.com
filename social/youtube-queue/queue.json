@@ -4,9 +4,9 @@
     {
       "id": "short-040",
       "status": "pending",
-      "qa_status": "pending",
-      "qa_notes": "Pending re-review — character visuals upgraded (motion blur, noise-driven bob/sway, audio-reactive glow, grain/vignette) and pose/face rotation fixed to avoid back-to-back repeats; prior approval was for the old static visuals.",
-      "qa_reviewed_at": null,
+      "qa_status": "approved",
+      "qa_notes": "Re-approved after character visual upgrade (motion blur, noise-driven bob/sway, audio-reactive glow, grain/vignette) and pose rotation fix. New effects read clean with no legibility regressions: grain/vignette only textures the dark background, glow stays confined to the card. Audio -19.5 LUFS, no silence/black gaps. Captions match script verbatim in order. Title, CTA, /free link, and footer all match. Minor cosmetic-only note: wider poses' shoulders bleed past the card edge by design.",
+      "qa_reviewed_at": "2026-06-18T22:10:35Z",
       "audience": "athletes",
       "title": "The Voice In Your Head After You Mess Up #Shorts",
       "hook": "There's a voice in your head after every mistake, and you've been listening to the wrong part of it.",
