@@ -1,0 +1,34 @@
+{
+  "_readme": "Long-form / hero video RENDER + upload LOOP. The youtube-hero-poster workflow (1) generates cloned-voice narration with Chatterbox, (2) RENDERS the 1920x1080 HeroVideo Remotion composition for the first item with status='pending', (3) uploads it to YouTube, then marks the item 'posted'. Same proven engine as the daily Shorts, just long-form. To queue a new hero video, add an item with id / hook / script / cta / title / description / tags and status='pending'. The script is split into on-screen captions and narrated segment-by-segment, so write it as natural spoken sentences and keep most of them short (<= ~9 words) for clean caption splits. NEVER re-post a 'posted' item.",
+  "cadence": {"per_run": 1, "schedule": "weekly (Sundays 17:00 UTC) + manual Run workflow"},
+  "items": [
+    {
+      "id": "hero-001",
+      "status": "pending",
+      "audience": "athletes",
+      "book_title": "The Competition Protocol",
+      "title": "Win The Inner Game: The Mental System Elite Athletes Use Under Pressure",
+      "hook": "Pressure doesn't build character. It reveals it.",
+      "script": "Every athlete trains the body. The sprint, the lift, the reps. But the deciding moment is never physical. It is the silence before the shot. The breath before the start. The voice in your head under pressure. That voice is the inner game. And almost nobody trains it. You have felt it. The legs turn heavy when it matters. The hands tighten. The talent vanishes under the lights. That is not weakness. That is an untrained mind meeting pressure. Here is what elite performers know. Confidence is not something you are born with. It is something you build on purpose. They do not wait to feel ready. They train focus like a muscle. They rehearse pressure before it arrives. They control the one thing they can. Their response. It comes down to three moves. Awareness. Catch the thought before it controls you. Reframe. Turn threat into challenge. Turn nerves into readiness. Anchor. A routine that returns you to now. Awareness. Reframe. Anchor. Simple enough to use under pressure. Strong enough to hold on the line. Train the inner game and the noise quiets. The big moment slows down. You stop fearing the outcome. You start trusting your preparation. You play free. Not because the pressure is gone. Because you have learned to perform inside it. This is the work the scoreboard never shows. The work that separates the talented from the unstoppable. You already have the body. Now train the mind that drives it.",
+      "cta": "Start your free seven-day mental performance system today. Win the inner game.",
+      "description": "Pressure doesn't build character — it reveals it.\n\nThis is the mental performance system elite athletes use to control pressure, build real confidence, and perform when it counts most. Built by Giannis Notaras, author of The Competition Protocol and the 8-book Mental Performance Library.\n\nThe inner game comes down to three moves: Awareness, Reframe, Anchor. Train them and the noise goes quiet, the big moment slows down, and you play free — not because the pressure is gone, but because you've learned to perform inside it.\n\n🎯 Free 7-day system → https://thementalsport.com/free\n📖 Start with the book → https://thementalsport.com/products/the-competition-protocol\n📚 The full 8-book library → https://thementalsport.com\n\n#MentalPerformance #SportsPsychology #AthleteMindset #InnerGame #PerformanceUnderPressure",
+      "tags": [
+        "mental performance",
+        "sports psychology",
+        "athlete mindset",
+        "mental toughness",
+        "confidence training",
+        "performance anxiety",
+        "elite athlete mindset",
+        "pressure performance",
+        "Giannis Notaras",
+        "the competition protocol",
+        "mental training for athletes",
+        "sports mindset coaching"
+      ],
+      "category_id": "22",
+      "privacy": "public",
+      "posted_at": null
+    }
+  ]
+}

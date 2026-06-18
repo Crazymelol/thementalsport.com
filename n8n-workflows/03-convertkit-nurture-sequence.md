@@ -89,6 +89,10 @@ Your nervous system, sleep architecture, and nutrition timing directly affect me
 📘 Nurturing Self-Worth ($9.99) → amazon.com/dp/B0F845R96L
 📗 Unbreakable ($6.99) → amazon.com/dp/B0FBRXBBPK
 
+**Want all 8 in one go?** Get the complete library for $67 (vs $131 buying separately): https://thementalsport.com/products/the-complete-mental-performance-library-all-8-books — first order? Code **WELCOME15** takes another 15% off.
+
+**Or go all-in on coaching:** The Mental Performance Protocol course — Standard, Premium, or Elite tiers: https://thementalsport.com/course
+
 Reply and tell me which one you picked. I read every reply.
 
 — Giannis

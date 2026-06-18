@@ -1,4 +1,19 @@
 # Email Nurture Sequence — The Mental Sport
+
+> **STATUS: Superseded — not wired to any live automation.** The active welcome
+> sequence is `n8n-workflows/04-email-nurture-sequence.json` (doc:
+> `n8n-workflows/03-convertkit-nurture-sequence.md`), trigger tag
+> `lead-magnet-free-chapter` — the tag the live signup form
+> (`src/components/LeadMagnet.tsx`) actually applies. This file's trigger tag
+> (`competition-protocol`) isn't applied anywhere in code, and its links
+> (`/resources/competition-protocol`, `/book/mental-blocks`,
+> `/book/the-competition-protocol`, `/books`) are Next.js-app routes that
+> don't exist on the live Shopify storefront — written before this session's
+> discovery that Shopify, not this repo's Next.js app, is the real
+> thementalsport.com. Kept for its copy (the Djokovic and athlete-story angles
+> are stronger than the active sequence's) — don't activate as-is; rewrite
+> the links to real Shopify/Amazon URLs first.
+
 # Set up in ConvertKit as an automated sequence, tagged "competition-protocol"
 # Trigger: subscriber downloads the free Competition Protocol
 # Delay between emails shown below each header

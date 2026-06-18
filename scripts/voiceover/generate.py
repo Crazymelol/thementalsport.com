@@ -27,9 +27,22 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+# Both the Shorts queue and the long-form / hero queue use the same
+# hook/script/cta shape, so the same generator narrates both. Audio is keyed by
+# item id (output to remotion/public/audio/<id>/), so unique ids stay separate.
 QUEUE = ROOT / "social" / "youtube-queue" / "queue.json"
+HERO_QUEUE = ROOT / "social" / "youtube-hero-queue" / "queue.json"
 REF = ROOT / "remotion" / "voice-reference" / "giannis.wav"
 PUBLIC_AUDIO = ROOT / "remotion" / "public" / "audio"
+
+
+def load_items():
+    """All queue items across the Shorts and hero queues."""
+    items = []
+    for queue_file in (QUEUE, HERO_QUEUE):
+        if queue_file.exists():
+            items.extend(json.loads(queue_file.read_text()).get("items", []))
+    return items
 
 
 def split_into_captions(script: str, max_words: int = 9):
@@ -76,8 +89,7 @@ def commit_item(item_id):
 
 def main():
     ids = [a for a in sys.argv[1:] if a.strip()]
-    queue = json.loads(QUEUE.read_text())
-    items = queue["items"]
+    items = load_items()
     if ids:
         items = [i for i in items if i["id"] in ids]
 
