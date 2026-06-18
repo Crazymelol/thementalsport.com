@@ -4,7 +4,9 @@
     {
       "id": "short-040",
       "status": "pending",
-      "qa_status": "pending",
+      "qa_status": "approved",
+      "qa_notes": "Approved — captions fully on-screen and legible, no cutoff/overlap or black stretches; character card pops/bobs cleanly. Audio clean, -19.5 LUFS, no silence gaps. Captions reproduce the script verbatim in order. Hook, FOR ATHLETES label, title, CTA text, and /free link/footer all match.",
+      "qa_reviewed_at": "2026-06-18T20:39:51Z",
       "audience": "athletes",
       "title": "The Voice In Your Head After You Mess Up #Shorts",
       "hook": "There's a voice in your head after every mistake, and you've been listening to the wrong part of it.",
