@@ -1,4 +1,9 @@
-name: YouTube Hero / Long-form Uploader
+name: YouTube Hero / Long-form Poster
+
+# Renders + posts ONE long-form / hero video end to end: generate cloned-voice
+# narration (Chatterbox) -> render the 1920x1080 HeroVideo with Remotion ->
+# upload to YouTube -> mark it posted. Same proven pieces as the daily Shorts,
+# stitched into one run so a single dispatch produces and publishes the video.
 
 on:
   schedule:
@@ -23,22 +28,57 @@ jobs:
         with:
           node-version: 20
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Chatterbox downloads ~2GB of weights from HuggingFace on first use;
+      # cache them so re-runs don't re-download. Shared key with the Shorts
+      # voiceover workflow.
+      - name: Cache model weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: chatterbox-hf-cache-v1
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/voiceover/requirements.txt
+
+      - name: Generate narration (cloned voice) for pending hero videos
+        # Scope generation to the hero queue's pending ids only, so we never
+        # kick off narration for the whole Shorts backlog. Already-generated
+        # clips are skipped, so re-runs are cheap.
+        run: |
+          IDS=$(jq -r '.items[] | select(.status=="pending") | .id' social/youtube-hero-queue/queue.json | tr '\n' ' ')
+          echo "Hero ids needing narration: $IDS"
+          if [ -n "$IDS" ]; then python scripts/voiceover/generate.py $IDS; fi
+
+      - name: Install Remotion dependencies
+        working-directory: remotion
+        run: npm install
+
       - name: Install poster dependencies
         working-directory: scripts/ci
         run: npm install
 
-      - name: Upload next hero video
+      - name: Install browser dependencies for Remotion render
+        run: npx --yes playwright install-deps chromium
+
+      - name: Render + upload next hero video
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: node scripts/ci/post-hero-video.mjs
 
-      - name: Commit updated queue
+      - name: Commit narration + updated queue
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add social/youtube-hero-queue/queue.json
-          git diff --staged --quiet || git commit -m "bot: mark hero video as posted"
+          git add social/youtube-hero-queue/queue.json remotion/public/audio
+          git diff --staged --quiet || git commit -m "bot: render + post hero video"
           git pull --rebase origin master
           git push
