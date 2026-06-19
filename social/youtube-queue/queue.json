@@ -296,7 +296,9 @@
         "sports parents"
       ],
       "posted_at": "2026-06-18T09:33:10.628Z",
-      "youtube_id": "Gnq8Wl-0gGU"
+      "youtube_id": "Gnq8Wl-0gGU",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-19T12:27:08.735Z"
     },
     {
       "id": "short-012",
@@ -704,7 +706,7 @@
   ],
   "caption_rotation": {
     "x": 6,
-    "pinterest": 6,
+    "pinterest": 0,
     "tiktok": 6
   }
 }
