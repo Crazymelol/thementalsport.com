@@ -277,7 +277,9 @@
         "what to say to young athletes"
       ],
       "posted_at": "2026-06-17T23:34:53.265Z",
-      "youtube_id": "goZoti1w08E"
+      "youtube_id": "goZoti1w08E",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-19T05:52:42.044Z"
     },
     {
       "id": "short-011",
@@ -701,7 +703,7 @@
   ],
   "caption_rotation": {
     "x": 6,
-    "pinterest": 5,
+    "pinterest": 6,
     "tiktok": 6
   }
 }
