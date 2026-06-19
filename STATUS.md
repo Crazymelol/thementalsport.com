@@ -1,14 +1,14 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-18 19:53 UTC_
+_Updated 2026-06-19 08:53 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
-| 🎥 YouTube | 15 | One Early Mistake Is Unraveling Y… | 2026-06-18 17:08 |
-| 🐦 X | 5 | Anxious Before Games? Good. Here'… | 2026-06-18 02:02 |
-| 📌 Pinterest | 12 | 77% Of Athletes Choke. You're Not… | 2026-06-18 12:14 |
+| 🎥 YouTube | 16 | Why Your Brain Sabotages You In C… | 2026-06-18 23:35 |
+| 🐦 X | 6 | 'You're So Talented' Is Quietly H… | 2026-06-19 02:07 |
+| 📌 Pinterest | 13 | When Your Kid Freezes Under Press… | 2026-06-19 05:52 |
 | 🎵 TikTok | 6 | 'You're So Talented' Is Quietly H… | 2026-06-18 14:09 |
 
 ## 🎥 YouTube performance
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| Anxious Before Games? Good. Here'… | 5 | 0 | 0 | 0 |
-| LeBron Doesn't Calm Down. He Slow… | 11 | 0 | 0 | 0 |
-| Train Your Kid For Penalty Pressu… | 14 | 0 | 0 | 0 |
+| 'You're So Talented' Is Quietly H… | 5 | 0 | 0 | 0 |
+| Anxious Before Games? Good. Here'… | 11 | 0 | 0 | 0 |
+| LeBron Doesn't Calm Down. He Slow… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 _could not find profile link on Pinterest home (header not loaded)_
