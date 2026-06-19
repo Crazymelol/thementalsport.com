@@ -159,9 +159,22 @@ export async function tiktokStats(queue, limit = 3) {
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
   }
   if (!videos.length) {
+    // First debug capture (a prior run) landed on the suggested-creators
+    // rail, not the profile's own grid — gather concrete signals (current
+    // URL, page title, an empty-state message if any) instead of guessing
+    // another selector blind.
+    const {value: diag} = evalJson(`JSON.stringify({
+      url: location.href,
+      title: document.title,
+      videoLinkCount: document.querySelectorAll('a[href*="/video/"]').length,
+      emptyState: (document.body.innerText.match(/no (videos|content|posts)[^.\\n]{0,80}/i) || [])[0] || '',
+    })`);
     const gridSnap = ab('snapshot', '-i');
     ab('close', '--all');
-    return {error: 'no videos found on TikTok profile', debug: gridSnap.slice(0, 2000)};
+    return {
+      error: 'no videos found on TikTok profile',
+      debug: `${JSON.stringify(diag)}\n\n${gridSnap.slice(0, 3000)}`,
+    };
   }
 
   // Likes/comments aren't shown on the profile grid — open each video page.
@@ -210,7 +223,7 @@ export async function pinterestStats(queue, limit = 3) {
   // The business-hub header (with the profile link) hydrates after
   // networkidle — wait for it explicitly, like X/TikTok wait for their
   // feed/grid selectors before querying.
-  ab('wait', '--selector', '[data-test-id="header-profile"]', '--timeout', '10000');
+  ab('wait', '--selector', 'nav[aria-label="Primary navigation header" i]', '--timeout', '10000');
 
   let snap = ab('snapshot', '-i');
   if (isLoginWall(snap)) {
@@ -221,13 +234,20 @@ export async function pinterestStats(queue, limit = 3) {
   // The cookie session lands on the business/partner hub
   // (gr.pinterest.com/business/hub/), not the consumer home feed, so the
   // original consumer-UI selectors (header-avatar, simplified-profile,
-  // headerProfileLink) don't exist there, and a live debug dump showed none
-  // of the data-test-id guesses matched either. The same dump did show an
-  // accessible "Your profile" nav link and a profile-card link/heading with
-  // the handle text, so try those first and fall back to the old testIds.
-  // One retry (extra wait + re-query) covers the hydration race the
-  // data-test-id selectors were already suspected of hitting.
-  const PROFILE_HREF_JS = `JSON.stringify(document.querySelector('a[aria-label="Your profile" i], a[href*="/giannisnotaras/" i], [data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a')?.getAttribute('href') || '')`;
+  // headerProfileLink) don't exist there. A live debug dump confirmed there's
+  // no usable data-test-id at all, but a `link "Your profile"` does render in
+  // the primary nav — its accessible name turned out to come from inner text
+  // (likely a visually-hidden span), not an aria-label attribute, which is
+  // why matching on `a[aria-label="Your profile"]` still missed it. Match by
+  // textContent instead. Old testIds kept as a last-resort fallback in case a
+  // session ever lands on the consumer UI instead.
+  const PROFILE_HREF_JS = `JSON.stringify((() => {
+    const links = [...document.querySelectorAll('a')];
+    const byName = links.find(a => /your profile/i.test(a.getAttribute('aria-label') || a.getAttribute('title') || a.textContent || ''));
+    if (byName) return byName.getAttribute('href') || '';
+    const legacy = document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a');
+    return legacy ? legacy.getAttribute('href') || '' : '';
+  })())`;
   let {value: profileHref} = evalJson(PROFILE_HREF_JS);
   if (!profileHref) {
     ab('wait', '--timeout', '2000');
