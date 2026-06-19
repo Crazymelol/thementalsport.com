@@ -175,11 +175,17 @@ export async function tiktokStats(queue, limit = 3) {
   }
 
   if (!videos.length) {
-    // Still empty after the Refresh retry — capture the failing network
-    // call(s) alongside the DOM/text probes, so this round's log shows *why*
-    // (status code / blocked request) instead of just the generic error
-    // text, which is all the previous two debug rounds had to go on.
-    const {value: diag} = evalJson(`JSON.stringify({
+    // Run #27 debug: Refresh didn't help (consistently empty, not a
+    // one-off), and the xhr/fetch network dump was a red herring — every
+    // captured request showed status 200, but the dump was sliced to the
+    // last 2000 chars and TikTok's own request URLs (msToken/X-Bogus/
+    // X-Gnarly anti-bot params) run 800-1500 chars each, so that slice never
+    // even reached the actual post-list call. Filter by URL instead of
+    // slicing blindly, and pull the matched request's response body — a
+    // 200 with an empty/error JSON body (TikTok's API often encodes soft
+    // failures in the body, not the HTTP status) would explain the UI error
+    // without any non-200 ever showing up.
+    const diag = evalJson(`JSON.stringify({
       url: location.href,
       title: document.title,
       videoLinkCount: document.querySelectorAll('a[href*="/video/"]').length,
@@ -188,8 +194,28 @@ export async function tiktokStats(queue, limit = 3) {
       postCountText: (document.body.innerText.match(/\\d+\\s*(posts|videos)\\b/i) || [])[0] || '',
       emptyState: (document.body.innerText.match(/no (videos|content|posts)[^.\\n]{0,80}/i) || [])[0] || '',
       errorBanner: (document.body.innerText.match(/something went wrong[^.\\n]{0,80}|verify (you'?re|to continue)[^.\\n]{0,80}|captcha[^.\\n]{0,80}/i) || [])[0] || '',
-    })`);
-    const netDump = ab('network', 'requests', '--type', 'xhr,fetch').slice(-2000);
+    })`).value;
+
+    let netDump = '';
+    for (const filter of ['item_list', 'api/post', 'api/user']) {
+      const raw = ab('network', 'requests', '--filter', filter, '--type', 'xhr,fetch', '--json');
+      let reqs;
+      try {
+        reqs = JSON.parse(raw);
+      } catch {
+        continue;
+      }
+      if (!Array.isArray(reqs) || !reqs.length) continue;
+      netDump = reqs.map((r) => `${r.status ?? '?'} ${r.method ?? ''} ${(r.url || '').slice(0, 200)} (id=${r.id ?? r.requestId ?? '?'})`).join('\n');
+      const last = reqs[reqs.length - 1];
+      const reqId = last?.id ?? last?.requestId;
+      if (reqId != null) {
+        netDump += `\n\nbody of last "${filter}" match:\n${ab('network', 'request', String(reqId)).slice(0, 1500)}`;
+      }
+      break;
+    }
+    if (!netDump) netDump = `(no item_list/api/post/api/user match)\n${ab('network', 'requests', '--type', 'xhr,fetch', '--json').slice(0, 3000)}`;
+
     const gridSnap = ab('snapshot', '-i');
     const lines = gridSnap.split('\n');
     const tabIdx = lines.findIndex((l) => /\b(videos|reposts|liked)\b/i.test(l));
@@ -197,7 +223,7 @@ export async function tiktokStats(queue, limit = 3) {
     ab('close', '--all');
     return {
       error: 'no videos found on TikTok profile',
-      debug: `${JSON.stringify(diag)}\n\nnetwork (xhr/fetch, most recent last):\n${netDump}\n\n${relevantSnap}`,
+      debug: `${JSON.stringify(diag)}\n\nnetwork:\n${netDump}\n\n${relevantSnap}`,
     };
   }
 
@@ -315,22 +341,37 @@ export async function pinterestStats(queue, limit = 3) {
       ariaLabels: [...document.querySelectorAll('[data-test-id="pin"] [aria-label]')].map(el => el.getAttribute('aria-label')).slice(0, 20),
     })`);
 
-    let closeupSample = '';
+    let closeupDebug = null;
     for (const pin of pins) {
       if (!pin.href) continue;
       ab('open', `https://www.pinterest.com${pin.href}`);
       ab('wait', '--load', 'networkidle');
       ab('wait', '--timeout', '1500');
-      const {value: detail} = evalJson(`JSON.stringify({
-        saves: (document.body.innerText.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved|people saved this)/i) || [])[1] || '',
-        sample: document.body.innerText.slice(0, 800),
-      })`);
+      // Run #27 debug: the closeup page's analytics widget shows three
+      // dashes next to Impressions/Saves/Pin clicks labels (no number
+      // anywhere in innerText) — likely "real-time estimates" not yet
+      // populated for low-traffic pins, but don't assume position; anchor
+      // directly on the "Saves" label element and read its sibling, rather
+      // than matching free-floating "N saves" text that may not exist here.
+      const {value: detail} = evalJson(`JSON.stringify((() => {
+        const leaf = [...document.querySelectorAll('body *')].find(
+          el => el.childElementCount === 0 && /^saves$/i.test((el.textContent || '').trim()),
+        );
+        const sibVal = leaf && (leaf.nextElementSibling?.textContent?.trim() || leaf.previousElementSibling?.textContent?.trim());
+        const freeText = (document.body.innerText.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved|people saved this)/i) || [])[1];
+        return {
+          saves: (sibVal && /^[\\d.,]+[KMB]?$/i.test(sibVal) ? sibVal : '') || freeText || '',
+          matchedSavesLabel: !!leaf,
+          siblingText: sibVal || '',
+          sample: document.body.innerText.slice(0, 800),
+        };
+      })())`);
       if (detail?.saves) pin.saves = detail.saves;
-      else if (!closeupSample) closeupSample = detail?.sample || '';
+      else if (!closeupDebug) closeupDebug = detail || {};
     }
 
     if (!pins.some((p) => p.saves)) {
-      console.error(`[Pinterest saves debug]\ngrid probe: ${JSON.stringify(probe)}\ncloseup sample: ${closeupSample}\n`);
+      console.error(`[Pinterest saves debug]\ngrid probe: ${JSON.stringify(probe)}\ncloseup probe: ${JSON.stringify(closeupDebug)}\n`);
     }
   }
   ab('close', '--all');
