@@ -222,6 +222,12 @@ def main():
 
     if pending:
         print("Loading IP-Adapter...")
+        # load_ip_adapter() reinstantiates each existing UNet attn processor
+        # with no args to preserve non-cross-attention layers; that crashes
+        # against SlicedAttnProcessor (requires slice_size), so slicing must
+        # be off here and stays off afterward -- re-enabling it would itself
+        # overwrite the IP-Adapter's own cross-attention processors.
+        pipe.disable_attention_slicing()
         pipe.load_ip_adapter(
             "h94/IP-Adapter", subfolder="sdxl_models", weight_name="ip-adapter_sdxl.bin",
         )
