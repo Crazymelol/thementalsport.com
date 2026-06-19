@@ -355,7 +355,7 @@
     },
     {
       "id": "short-015",
-      "status": "pending",
+      "status": "posted",
       "audience": "parents",
       "title": "Six Words That Build Fearless Young Athletes #Shorts",
       "hook": "Six words. Before every game. That's it.",
@@ -367,7 +367,8 @@
         "sports parent",
         "young athlete confidence"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-19T16:51:23.212Z",
+      "youtube_id": "AmTlBCVyAYw"
     },
     {
       "id": "short-016",
