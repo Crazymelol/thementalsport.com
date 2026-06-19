@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-19 19:45 UTC_
+_Updated 2026-06-19 19:56 UTC_
 
 ## Progress
 
@@ -22,7 +22,11 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 | Train Your Kid For Penalty Pressu… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
-_could not find profile link on Pinterest home (header not loaded)_
+| Post | Saves |
+|---|---|
+| 77% Of Athletes Choke. You're Not… | — |
+| Squeeze A Ball In Your Left Hand … | — |
+| You'd Never Let A Teammate Talk T… | — |
 
 ## 🎵 TikTok performance
 _no videos found on TikTok profile_
