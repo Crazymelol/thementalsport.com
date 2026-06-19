@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-19 22:40 UTC_
+_Updated 2026-06-19 23:04 UTC_
 
 ## Progress
 
@@ -29,7 +29,7 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 | You'd Never Let A Teammate Talk T… | — |
 
 ## 🎵 TikTok performance
-_no videos found on TikTok profile_
+_TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
