@@ -374,7 +374,7 @@
     },
     {
       "id": "short-016",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "The 60-Second Reset Elite Athletes Use #Shorts",
       "hook": "Heart pounding, mind racing, two minutes before you compete. Do this.",
@@ -386,7 +386,8 @@
         "calm nerves fast",
         "pre game routine"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-19T23:25:20.714Z",
+      "youtube_id": "uIwHY6ac9Yo"
     },
     {
       "id": "short-017",
