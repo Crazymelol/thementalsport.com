@@ -143,7 +143,7 @@ export async function tiktokStats(queue, limit = 3) {
   // item, with no `<strong>` view count nearby. Just collect hrefs, deduped,
   // for navigation; views (no reliable selector found on the grid or the
   // detail page — see below) fall back to '—'.
-  const {value: videos, error: gridError} = evalJson(`JSON.stringify((() => {
+  const GRID_VIDEOS_JS = `JSON.stringify((() => {
     const seen = new Set();
     const out = [];
     for (const a of document.querySelectorAll('a[href*="/video/"]')) {
@@ -153,19 +153,32 @@ export async function tiktokStats(queue, limit = 3) {
       out.push({href});
     }
     return out.slice(0, ${limit});
-  })())`);
+  })())`;
+  let {value: videos, error: gridError} = evalJson(GRID_VIDEOS_JS);
   if (gridError) {
     ab('close', '--all');
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
   }
+
   if (!videos.length) {
-    // Second debug capture (run #25): the page lands on the right profile
-    // (bio/follower counts confirmed) but the prior fix's 3000-char snapshot
-    // slice still cut off before the grid — the header/bio alone runs past
-    // that budget. Anchor the slice on the "Videos" tab marker instead of
-    // the page top, and check a few more known data-e2e attributes plus
-    // common anti-bot error text in the same pass, so this doesn't need a
-    // third blind round-trip.
+    // Run #26 debug: url/title land on the right profile, but
+    // videoLinkCount/postItemCount/postListCount are all 0 and the page
+    // shows a literal "Something went wrong" banner with a Refresh button —
+    // an anti-bot/API failure, not a selector miss. TikTok's item_list call
+    // sometimes fails on the first request after a fresh cookie-session nav
+    // and succeeds on retry, so try clicking Refresh once before concluding
+    // it's unrecoverable.
+    ab('find', 'text', 'Refresh', 'click');
+    ab('wait', '--timeout', '3000');
+    const retry = evalJson(GRID_VIDEOS_JS);
+    if (!retry.error && retry.value?.length) videos = retry.value;
+  }
+
+  if (!videos.length) {
+    // Still empty after the Refresh retry — capture the failing network
+    // call(s) alongside the DOM/text probes, so this round's log shows *why*
+    // (status code / blocked request) instead of just the generic error
+    // text, which is all the previous two debug rounds had to go on.
     const {value: diag} = evalJson(`JSON.stringify({
       url: location.href,
       title: document.title,
@@ -176,6 +189,7 @@ export async function tiktokStats(queue, limit = 3) {
       emptyState: (document.body.innerText.match(/no (videos|content|posts)[^.\\n]{0,80}/i) || [])[0] || '',
       errorBanner: (document.body.innerText.match(/something went wrong[^.\\n]{0,80}|verify (you'?re|to continue)[^.\\n]{0,80}|captcha[^.\\n]{0,80}/i) || [])[0] || '',
     })`);
+    const netDump = ab('network', 'requests', '--type', 'xhr,fetch').slice(-2000);
     const gridSnap = ab('snapshot', '-i');
     const lines = gridSnap.split('\n');
     const tabIdx = lines.findIndex((l) => /\b(videos|reposts|liked)\b/i.test(l));
@@ -183,7 +197,7 @@ export async function tiktokStats(queue, limit = 3) {
     ab('close', '--all');
     return {
       error: 'no videos found on TikTok profile',
-      debug: `${JSON.stringify(diag)}\n\n${relevantSnap}`,
+      debug: `${JSON.stringify(diag)}\n\nnetwork (xhr/fetch, most recent last):\n${netDump}\n\n${relevantSnap}`,
     };
   }
 
@@ -279,21 +293,47 @@ export async function pinterestStats(queue, limit = 3) {
     saves: (el.textContent.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved)/i) || [])[1] || '',
   })))`);
 
-  if (!error && pins?.length && !pins.some((p) => p.saves)) {
-    // The tile itself is found (titles/hrefs resolve), but nothing matches
-    // the "N saves" text pattern — capture one tile's markup before closing
-    // the browser so the log shows the actual save-count text/markup
-    // instead of guessing another regex blind (same approach as the TikTok
-    // grid diagnostics above).
-    const {value: tileHtml} = evalJson(
-      `JSON.stringify(document.querySelector('[data-test-id="pin"]')?.outerHTML?.slice(0, 1500) || '')`,
-    );
-    console.error(`[Pinterest saves debug]\n${tileHtml}\n`);
+  if (error) {
+    ab('close', '--all');
+    return {error: 'unexpected response from Pinterest profile', debug: error.slice(0, 2000)};
+  }
+  if (!pins.length) {
+    ab('close', '--all');
+    return {error: 'no created pins found on profile'};
+  }
+
+  if (!pins.some((p) => p.saves)) {
+    // Debug confirmed this isn't a truncation artifact: the regex above runs
+    // against each tile's *full* textContent (no slicing), and still found
+    // no "N saves" text on any tile — the "Created" grid just doesn't render
+    // a save count at all. Grab a probe of the grid tile before navigating
+    // away, then try each pin's own closeup page instead, the same
+    // grid-gives-links / detail-page-gives-numbers shape as TikTok's
+    // per-video loop above.
+    const {value: probe} = evalJson(`JSON.stringify({
+      tileText: document.querySelector('[data-test-id="pin"]')?.textContent?.slice(0, 500) || '',
+      ariaLabels: [...document.querySelectorAll('[data-test-id="pin"] [aria-label]')].map(el => el.getAttribute('aria-label')).slice(0, 20),
+    })`);
+
+    let closeupSample = '';
+    for (const pin of pins) {
+      if (!pin.href) continue;
+      ab('open', `https://www.pinterest.com${pin.href}`);
+      ab('wait', '--load', 'networkidle');
+      ab('wait', '--timeout', '1500');
+      const {value: detail} = evalJson(`JSON.stringify({
+        saves: (document.body.innerText.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved|people saved this)/i) || [])[1] || '',
+        sample: document.body.innerText.slice(0, 800),
+      })`);
+      if (detail?.saves) pin.saves = detail.saves;
+      else if (!closeupSample) closeupSample = detail?.sample || '';
+    }
+
+    if (!pins.some((p) => p.saves)) {
+      console.error(`[Pinterest saves debug]\ngrid probe: ${JSON.stringify(probe)}\ncloseup sample: ${closeupSample}\n`);
+    }
   }
   ab('close', '--all');
-
-  if (error) return {error: 'unexpected response from Pinterest profile', debug: error.slice(0, 2000)};
-  if (!pins.length) return {error: 'no created pins found on profile'};
 
   const rows = items.map((item, i) => ({
     title: item.title.replace(/\s*#Shorts$/i, ''),
