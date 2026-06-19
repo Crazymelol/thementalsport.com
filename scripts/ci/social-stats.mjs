@@ -159,8 +159,9 @@ export async function tiktokStats(queue, limit = 3) {
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
   }
   if (!videos.length) {
+    const gridSnap = ab('snapshot', '-i');
     ab('close', '--all');
-    return {error: 'no videos found on TikTok profile'};
+    return {error: 'no videos found on TikTok profile', debug: gridSnap.slice(0, 2000)};
   }
 
   // Likes/comments aren't shown on the profile grid — open each video page.
@@ -220,16 +221,18 @@ export async function pinterestStats(queue, limit = 3) {
   // The cookie session lands on the business/partner hub
   // (gr.pinterest.com/business/hub/), not the consumer home feed, so the
   // original consumer-UI selectors (header-avatar, simplified-profile,
-  // headerProfileLink) don't exist there. Hub-specific testIds added below
-  // (header-profile, business-hub-profile-header, pro-partner-header) — debug
-  // dumps confirm [data-test-id="header-profile"] does contain an
-  // <a href="/handle/">, but querySelector for it here still comes back empty
-  // even with an explicit wait for that element. Hydration/timing quirk on
-  // this page that needs live access to diagnose further; left as a graceful
-  // error for now.
-  const {value: profileHref} = evalJson(
-    `JSON.stringify(document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a')?.getAttribute('href') || '')`,
-  );
+  // headerProfileLink) don't exist there, and a live debug dump showed none
+  // of the data-test-id guesses matched either. The same dump did show an
+  // accessible "Your profile" nav link and a profile-card link/heading with
+  // the handle text, so try those first and fall back to the old testIds.
+  // One retry (extra wait + re-query) covers the hydration race the
+  // data-test-id selectors were already suspected of hitting.
+  const PROFILE_HREF_JS = `JSON.stringify(document.querySelector('a[aria-label="Your profile" i], a[href*="/giannisnotaras/" i], [data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a')?.getAttribute('href') || '')`;
+  let {value: profileHref} = evalJson(PROFILE_HREF_JS);
+  if (!profileHref) {
+    ab('wait', '--timeout', '2000');
+    ({value: profileHref} = evalJson(PROFILE_HREF_JS));
+  }
   if (!profileHref) {
     ab('close', '--all');
     return {error: 'could not find profile link on Pinterest home (header not loaded)', debug: snap.slice(0, 2000)};
