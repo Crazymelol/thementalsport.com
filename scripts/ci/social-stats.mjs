@@ -159,21 +159,31 @@ export async function tiktokStats(queue, limit = 3) {
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
   }
   if (!videos.length) {
-    // First debug capture (a prior run) landed on the suggested-creators
-    // rail, not the profile's own grid — gather concrete signals (current
-    // URL, page title, an empty-state message if any) instead of guessing
-    // another selector blind.
+    // Second debug capture (run #25): the page lands on the right profile
+    // (bio/follower counts confirmed) but the prior fix's 3000-char snapshot
+    // slice still cut off before the grid — the header/bio alone runs past
+    // that budget. Anchor the slice on the "Videos" tab marker instead of
+    // the page top, and check a few more known data-e2e attributes plus
+    // common anti-bot error text in the same pass, so this doesn't need a
+    // third blind round-trip.
     const {value: diag} = evalJson(`JSON.stringify({
       url: location.href,
       title: document.title,
       videoLinkCount: document.querySelectorAll('a[href*="/video/"]').length,
+      postItemCount: document.querySelectorAll('[data-e2e="user-post-item"]').length,
+      postListCount: document.querySelectorAll('[data-e2e="user-post-item-list"]').length,
+      postCountText: (document.body.innerText.match(/\\d+\\s*(posts|videos)\\b/i) || [])[0] || '',
       emptyState: (document.body.innerText.match(/no (videos|content|posts)[^.\\n]{0,80}/i) || [])[0] || '',
+      errorBanner: (document.body.innerText.match(/something went wrong[^.\\n]{0,80}|verify (you'?re|to continue)[^.\\n]{0,80}|captcha[^.\\n]{0,80}/i) || [])[0] || '',
     })`);
     const gridSnap = ab('snapshot', '-i');
+    const lines = gridSnap.split('\n');
+    const tabIdx = lines.findIndex((l) => /\b(videos|reposts|liked)\b/i.test(l));
+    const relevantSnap = tabIdx >= 0 ? lines.slice(tabIdx, tabIdx + 80).join('\n') : gridSnap.slice(0, 3000);
     ab('close', '--all');
     return {
       error: 'no videos found on TikTok profile',
-      debug: `${JSON.stringify(diag)}\n\n${gridSnap.slice(0, 3000)}`,
+      debug: `${JSON.stringify(diag)}\n\n${relevantSnap}`,
     };
   }
 
@@ -268,6 +278,18 @@ export async function pinterestStats(queue, limit = 3) {
     href: el.querySelector('a')?.getAttribute('href') || '',
     saves: (el.textContent.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved)/i) || [])[1] || '',
   })))`);
+
+  if (!error && pins?.length && !pins.some((p) => p.saves)) {
+    // The tile itself is found (titles/hrefs resolve), but nothing matches
+    // the "N saves" text pattern — capture one tile's markup before closing
+    // the browser so the log shows the actual save-count text/markup
+    // instead of guessing another regex blind (same approach as the TikTok
+    // grid diagnostics above).
+    const {value: tileHtml} = evalJson(
+      `JSON.stringify(document.querySelector('[data-test-id="pin"]')?.outerHTML?.slice(0, 1500) || '')`,
+    );
+    console.error(`[Pinterest saves debug]\n${tileHtml}\n`);
+  }
   ab('close', '--all');
 
   if (error) return {error: 'unexpected response from Pinterest profile', debug: error.slice(0, 2000)};
