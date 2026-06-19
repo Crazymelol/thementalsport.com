@@ -5,4 +5,9 @@ invent -- see docs/superpowers/specs/2026-06-18-custom-character-art-design.md
 (section 4). generate.py refuses to run real generation while this is still
 the placeholder below.
 """
-MASTER_PROMPT = "REPLACE_BEFORE_REAL_RUN"
+MASTER_PROMPT = (
+    "flat-color comic illustration of a confident young woman mental-performance "
+    "coach, short dark brown hair, athletic build, bold black ink outlines, "
+    "cel-shaded screen-printed poster style, charcoal and navy clothing with one "
+    "bold gold accent stripe, clean vector illustration, plain background"
+)
