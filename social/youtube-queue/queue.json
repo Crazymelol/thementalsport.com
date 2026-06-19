@@ -334,7 +334,7 @@
     },
     {
       "id": "short-014",
-      "status": "pending",
+      "status": "posted",
       "audience": "parents",
       "title": "The 24-Hour Rule Every Sports Parent Needs #Shorts",
       "hook": "Your kid just played terribly. Say nothing about it for 24 hours.",
@@ -346,7 +346,8 @@
         "after bad game",
         "youth sports"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-19T09:37:52.649Z",
+      "youtube_id": "q-thkyzB6nA"
     },
     {
       "id": "short-015",
