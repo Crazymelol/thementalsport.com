@@ -317,7 +317,9 @@
         "mental reset"
       ],
       "posted_at": "2026-06-18T17:08:24.145Z",
-      "youtube_id": "RWJDElG8SxA"
+      "youtube_id": "RWJDElG8SxA",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-19T19:38:50.883Z"
     },
     {
       "id": "short-013",
@@ -709,7 +711,7 @@
   ],
   "caption_rotation": {
     "x": 6,
-    "pinterest": 0,
+    "pinterest": 1,
     "tiktok": 0
   }
 }
