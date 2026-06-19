@@ -6,4 +6,4 @@ diffusers
 transformers
 accelerate
 controlnet-aux
-rembg
+rembg[cpu]
