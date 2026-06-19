@@ -154,77 +154,24 @@ export async function tiktokStats(queue, limit = 3) {
     }
     return out.slice(0, ${limit});
   })())`;
-  let {value: videos, error: gridError} = evalJson(GRID_VIDEOS_JS);
+  const {value: videos, error: gridError} = evalJson(GRID_VIDEOS_JS);
   if (gridError) {
     ab('close', '--all');
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
   }
 
   if (!videos.length) {
-    // Run #26 debug: url/title land on the right profile, but
-    // videoLinkCount/postItemCount/postListCount are all 0 and the page
-    // shows a literal "Something went wrong" banner with a Refresh button —
-    // an anti-bot/API failure, not a selector miss. TikTok's item_list call
-    // sometimes fails on the first request after a fresh cookie-session nav
-    // and succeeds on retry, so try clicking Refresh once before concluding
-    // it's unrecoverable.
-    ab('find', 'text', 'Refresh', 'click');
-    ab('wait', '--timeout', '3000');
-    const retry = evalJson(GRID_VIDEOS_JS);
-    if (!retry.error && retry.value?.length) videos = retry.value;
-  }
-
-  if (!videos.length) {
-    // Run #27 debug: Refresh didn't help (consistently empty, not a
-    // one-off), and the xhr/fetch network dump was a red herring — every
-    // captured request showed status 200, but the dump was sliced to the
-    // last 2000 chars and TikTok's own request URLs (msToken/X-Bogus/
-    // X-Gnarly anti-bot params) run 800-1500 chars each, so that slice never
-    // even reached the actual post-list call. Filter by URL instead of
-    // slicing blindly, and pull the matched request's response body — a
-    // 200 with an empty/error JSON body (TikTok's API often encodes soft
-    // failures in the body, not the HTTP status) would explain the UI error
-    // without any non-200 ever showing up.
-    const diag = evalJson(`JSON.stringify({
-      url: location.href,
-      title: document.title,
-      videoLinkCount: document.querySelectorAll('a[href*="/video/"]').length,
-      postItemCount: document.querySelectorAll('[data-e2e="user-post-item"]').length,
-      postListCount: document.querySelectorAll('[data-e2e="user-post-item-list"]').length,
-      postCountText: (document.body.innerText.match(/\\d+\\s*(posts|videos)\\b/i) || [])[0] || '',
-      emptyState: (document.body.innerText.match(/no (videos|content|posts)[^.\\n]{0,80}/i) || [])[0] || '',
-      errorBanner: (document.body.innerText.match(/something went wrong[^.\\n]{0,80}|verify (you'?re|to continue)[^.\\n]{0,80}|captcha[^.\\n]{0,80}/i) || [])[0] || '',
-    })`).value;
-
-    let netDump = '';
-    for (const filter of ['item_list', 'api/post', 'api/user']) {
-      const raw = ab('network', 'requests', '--filter', filter, '--type', 'xhr,fetch', '--json');
-      let reqs;
-      try {
-        reqs = JSON.parse(raw);
-      } catch {
-        continue;
-      }
-      if (!Array.isArray(reqs) || !reqs.length) continue;
-      netDump = reqs.map((r) => `${r.status ?? '?'} ${r.method ?? ''} ${(r.url || '').slice(0, 200)} (id=${r.id ?? r.requestId ?? '?'})`).join('\n');
-      const last = reqs[reqs.length - 1];
-      const reqId = last?.id ?? last?.requestId;
-      if (reqId != null) {
-        netDump += `\n\nbody of last "${filter}" match:\n${ab('network', 'request', String(reqId)).slice(0, 1500)}`;
-      }
-      break;
-    }
-    if (!netDump) netDump = `(no item_list/api/post/api/user match)\n${ab('network', 'requests', '--type', 'xhr,fetch', '--json').slice(0, 3000)}`;
-
-    const gridSnap = ab('snapshot', '-i');
-    const lines = gridSnap.split('\n');
-    const tabIdx = lines.findIndex((l) => /\b(videos|reposts|liked)\b/i.test(l));
-    const relevantSnap = tabIdx >= 0 ? lines.slice(tabIdx, tabIdx + 80).join('\n') : gridSnap.slice(0, 3000);
+    // Confirmed across multiple CI runs (network capture filtered by
+    // item_list/api/post/api/user, response bodies inspected): the profile
+    // shell loads fine, but TikTok's video-list API call is never issued at
+    // all — only anti-bot fingerprinting beacons fire, all status 200. The
+    // page shows a literal "Something went wrong" + Refresh banner, and a
+    // programmatic Refresh click doesn't recover it (tested live, still
+    // empty after). This is a permanent platform-level anti-automation wall
+    // against headless sessions, not a selector bug — no retry is going to
+    // fix it, so don't spend every cron run re-diagnosing the same wall.
     ab('close', '--all');
-    return {
-      error: 'no videos found on TikTok profile',
-      debug: `${JSON.stringify(diag)}\n\nnetwork:\n${netDump}\n\n${relevantSnap}`,
-    };
+    return {error: 'TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts'};
   }
 
   // Likes/comments aren't shown on the profile grid — open each video page.
