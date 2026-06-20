@@ -416,7 +416,7 @@
     },
     {
       "id": "short-018",
-      "status": "pending",
+      "status": "posted",
       "audience": "athletes",
       "title": "Boring Routines Win Championships #Shorts",
       "hook": "Your pre-game routine should be so boring it's automatic. Here's why.",
@@ -428,7 +428,8 @@
         "competition ritual",
         "game day"
       ],
-      "posted_at": null
+      "posted_at": "2026-06-20T16:33:49.355Z",
+      "youtube_id": "ky_aP6HUaOY"
     },
     {
       "id": "short-019",
