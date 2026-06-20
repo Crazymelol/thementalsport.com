@@ -1,15 +1,15 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-20 08:20 UTC_
+_Updated 2026-06-20 19:42 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
-| 🎥 YouTube | 19 | The 60-Second Reset Elite Athlete… | 2026-06-19 23:25 |
+| 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
 | 🐦 X | 7 | Stop Playing For Stats. Here's Wh… | 2026-06-20 01:53 |
-| 📌 Pinterest | 16 | Why Your Brain Sabotages You In C… | 2026-06-20 05:36 |
-| 🎵 TikTok | 7 | Stop Playing For Stats. Here's Wh… | 2026-06-19 14:13 |
+| 📌 Pinterest | 17 | The 24-Hour Rule Every Sports Par… | 2026-06-20 11:44 |
+| 🎵 TikTok | 8 | The Crowd Is Gone. You Just Lost.… | 2026-06-20 13:42 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
@@ -24,12 +24,12 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 📌 Pinterest performance
 | Post | Saves |
 |---|---|
+| The 24-Hour Rule Every Sports Par… | — |
 | Why Your Brain Sabotages You In C… | — |
 | One Early Mistake Is Unraveling Y… | — |
-| Yamal Started At 16. Your Kid Did… | — |
 
 ## 🎵 TikTok performance
 _TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
 
 ## 🔊 Voiceover
-39/39 shorts narrated in cloned voice ✅
+40/40 shorts narrated in cloned voice ✅
