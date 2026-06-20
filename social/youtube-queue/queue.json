@@ -4,9 +4,9 @@
     {
       "id": "short-040",
       "status": "pending",
-      "qa_status": "pending",
-      "qa_notes": "Reset to pending: character re-rendered with Tier 3 custom art (replacing react-peeps) — needs fresh visual QA.",
-      "qa_reviewed_at": null,
+      "qa_status": "approved",
+      "qa_notes": "Re-approved after Tier 3 character art swap (SVG react-peeps to generated webp stills). All four checks passed: visuals/legibility, audio health, caption-voice sync, branding/CTA/content-match. New character stills hold up well at this resolution/compression with no clipping, artifacts, or legibility regressions introduced by the raster swap.",
+      "qa_reviewed_at": "2026-06-20T19:04:52Z",
       "audience": "athletes",
       "title": "The Voice In Your Head After You Mess Up #Shorts",
       "hook": "There's a voice in your head after every mistake, and you've been listening to the wrong part of it.",
