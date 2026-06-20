@@ -357,7 +357,9 @@
         "youth sports"
       ],
       "posted_at": "2026-06-19T09:37:52.649Z",
-      "youtube_id": "q-thkyzB6nA"
+      "youtube_id": "q-thkyzB6nA",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-20T11:44:59.445Z"
     },
     {
       "id": "short-015",
@@ -717,7 +719,7 @@
   ],
   "caption_rotation": {
     "x": 7,
-    "pinterest": 2,
+    "pinterest": 3,
     "tiktok": 0
   }
 }
