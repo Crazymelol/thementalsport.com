@@ -1,35 +1,19 @@
 import React from 'react';
-import Peep from 'react-peeps';
-import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {CameraMotionBlur} from '@remotion/motion-blur';
 import {noise2D} from '@remotion/noise';
 import {useAudioData, visualizeAudio} from '@remotion/media-utils';
 import {COLORS} from './theme';
 import type {CharacterScene} from './types';
-import type {HairType} from 'react-peeps';
-
-// Two-tone gold instead of a flat fill so the character reads as
-// screen-printed comic ink rather than a flat brand swatch. Degree 135
-// points the highlight at the same corner as the panel's glow below, so
-// the figure looks lit from one consistent source.
-const ACCENT_GRADIENT = {
-  type: 'LinearGradient' as const,
-  degree: 135,
-  firstColor: '#ffe27a',
-  secondColor: '#d99f00',
-};
 
 // Renders the posed figure itself. Kept as its own component (rather than
-// computing the transform in CharacterPanel and passing a Peep element down)
-// because CameraMotionBlur works by Freeze-ing its children at several
+// computing the transform in CharacterPanel and passing an element down)
+// because CameraMotionBlur works by freeze-ing its children at several
 // nearby-but-different frames and compositing them — that only produces a
 // blur trail if something inside actually calls useCurrentFrame() per copy.
 // If the transform were computed in the parent and handed down as a fixed
 // style, every copy would freeze on the same already-resolved pose.
-const AnimatedPeep: React.FC<{scene: CharacterScene; hair: HairType}> = ({
-  scene,
-  hair,
-}) => {
+const AnimatedCharacter: React.FC<{scene: CharacterScene}> = ({scene}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
@@ -48,17 +32,8 @@ const AnimatedPeep: React.FC<{scene: CharacterScene; hair: HairType}> = ({
   const sway = noise2D('character-sway', frame * 0.037, 0) * 1.4;
 
   return (
-    <Peep
-      body={scene.pose}
-      face={scene.face}
-      hair={hair}
-      strokeColor={COLORS.foreground}
-      backgroundColor={ACCENT_GRADIENT}
-      // The SVG has a viewBox but no width/height attribute, so headless
-      // Chrome doesn't reliably derive width from height + intrinsic ratio
-      // (some poses render wide enough to clip against the panel's
-      // overflow:hidden). Capping maxWidth guarantees it never exceeds the
-      // panel regardless.
+    <Img
+      src={staticFile(`character/${scene.pose}-${scene.face}.webp`)}
       style={{
         height: '94%',
         width: 'auto',
@@ -76,10 +51,7 @@ const AnimatedPeep: React.FC<{scene: CharacterScene; hair: HairType}> = ({
 // CameraMotionBlur's children. CameraMotionBlur renders each sample in its
 // own full-bleed AbsoluteFill (no alignment of its own), so without this the
 // figure would stretch to fill the frame instead of sitting bottom-center.
-const PeepStage: React.FC<{scene: CharacterScene; hair: HairType}> = ({
-  scene,
-  hair,
-}) => (
+const CharacterStage: React.FC<{scene: CharacterScene}> = ({scene}) => (
   <div
     style={{
       height: '100%',
@@ -89,7 +61,7 @@ const PeepStage: React.FC<{scene: CharacterScene; hair: HairType}> = ({
       justifyContent: 'center',
     }}
   >
-    <AnimatedPeep scene={scene} hair={hair} />
+    <AnimatedCharacter scene={scene} />
   </div>
 );
 
@@ -136,10 +108,9 @@ const AudioPulseGlow: React.FC<{src: string}> = ({src}) => {
 // silent-layout path never passes one).
 export const CharacterPanel: React.FC<{
   scene: CharacterScene;
-  hair: HairType;
   audioSrc?: string;
   style?: React.CSSProperties;
-}> = ({scene, hair, audioSrc, style}) => {
+}> = ({scene, audioSrc, style}) => {
   return (
     <div
       style={{
@@ -168,7 +139,7 @@ export const CharacterPanel: React.FC<{
     >
       {audioSrc && <AudioPulseGlow src={audioSrc} />}
       <CameraMotionBlur samples={6} shutterAngle={150}>
-        <PeepStage scene={scene} hair={hair} />
+        <CharacterStage scene={scene} />
       </CameraMotionBlur>
     </div>
   );

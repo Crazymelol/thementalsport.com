@@ -24,18 +24,27 @@ export type ShortAudio = {
   cta: AudioSegment;
 };
 
-// Optional recurring illustrated character (react-peeps), opted into per
-// queue item via a `character` field. `scenes` is one entry per caption, in
-// the same order as splitIntoCaptions(script).
-import type {StandingPoseType, FaceType, HairType} from 'react-peeps';
+// Optional recurring illustrated character (custom Tier 3 art, generated
+// once by scripts/character/generate.py), opted into per queue item via a
+// `character` field. `scenes` is one entry per caption, in the same order
+// as splitIntoCaptions(script).
+export type CharacterPose =
+  | 'BlazerWB'
+  | 'CrossedArmsWB'
+  | 'EasingWB'
+  | 'PointingFingerWB'
+  | 'RestingWB'
+  | 'RoboDanceWB'
+  | 'ShirtWB'
+  | 'WalkingWB';
+export type CharacterExpression = 'Driven' | 'Calm' | 'Smile';
 
 export type CharacterScene = {
-  pose: StandingPoseType;
-  face: FaceType;
+  pose: CharacterPose;
+  face: CharacterExpression;
 };
 
 export type CharacterConfig = {
-  hair: HairType;
   hook: CharacterScene;
   scenes: CharacterScene[];
   cta: CharacterScene;

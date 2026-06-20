@@ -17,7 +17,6 @@
     "music-metadata": "^11.13.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-peeps": "^0.1.10",
     "remotion": "4.0.476"
   },
   "devDependencies": {

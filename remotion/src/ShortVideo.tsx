@@ -14,7 +14,6 @@ import {splitIntoCaptions} from './splitScript';
 import {COLORS, FONT_FAMILY, audienceLabel} from './theme';
 import {CharacterPanel} from './Character';
 import type {ShortAudio, WordTiming, CharacterConfig, CharacterScene} from './types';
-import type {HairType} from 'react-peeps';
 
 const fontFamily = FONT_FAMILY;
 
@@ -198,16 +197,15 @@ const PopIn: React.FC<{children: React.ReactNode; delay?: number}> = ({
 // don't carry a `character` field.
 const ScreenFrame: React.FC<{
   scene?: CharacterScene;
-  hair?: HairType;
   audioSrc?: string;
   padding: number;
   children: React.ReactNode;
-}> = ({scene, hair, audioSrc, padding, children}) => {
-  if (scene && hair) {
+}> = ({scene, audioSrc, padding, children}) => {
+  if (scene) {
     return (
       <AbsoluteFill>
         <Background />
-        <CharacterPanel scene={scene} hair={hair} audioSrc={audioSrc} />
+        <CharacterPanel scene={scene} audioSrc={audioSrc} />
         <AbsoluteFill
           style={{
             top: '58%',
@@ -241,9 +239,8 @@ const HookScreen: React.FC<{
   audience: string;
   hook: string;
   scene?: CharacterScene;
-  hair?: HairType;
   audioSrc?: string;
-}> = ({audience, hook, scene, hair, audioSrc}) => {
+}> = ({audience, hook, scene, audioSrc}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const words = hook.split(' ');
@@ -257,7 +254,7 @@ const HookScreen: React.FC<{
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const hasCharacter = Boolean(scene && hair);
+  const hasCharacter = Boolean(scene);
 
   const hookWords = (fontSize: number) => (
     <div
@@ -318,7 +315,7 @@ const HookScreen: React.FC<{
 
   if (hasCharacter) {
     return (
-      <ScreenFrame scene={scene} hair={hair} audioSrc={audioSrc} padding={72}>
+      <ScreenFrame scene={scene} audioSrc={audioSrc} padding={72}>
         <div
           style={{
             color: ACCENT,
@@ -376,9 +373,8 @@ const CaptionScreen: React.FC<{
   text: string;
   words?: WordTiming[];
   scene?: CharacterScene;
-  hair?: HairType;
   audioSrc?: string;
-}> = ({text, words, scene, hair, audioSrc}) => {
+}> = ({text, words, scene, audioSrc}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const opacity = interpolate(
@@ -418,9 +414,9 @@ const CaptionScreen: React.FC<{
     </div>
   );
 
-  if (scene && hair) {
+  if (scene) {
     return (
-      <ScreenFrame scene={scene} hair={hair} audioSrc={audioSrc} padding={72}>
+      <ScreenFrame scene={scene} audioSrc={audioSrc} padding={72}>
         {captionText(54)}
       </ScreenFrame>
     );
@@ -439,9 +435,8 @@ const CTAScreen: React.FC<{
   cta: string;
   bookTitle: string;
   scene?: CharacterScene;
-  hair?: HairType;
   audioSrc?: string;
-}> = ({cta, bookTitle, scene, hair, audioSrc}) => {
+}> = ({cta, bookTitle, scene, audioSrc}) => {
   const ctaContent = (ctaFontSize: number) => (
     <>
       <PopIn>
@@ -494,9 +489,9 @@ const CTAScreen: React.FC<{
     </>
   );
 
-  if (scene && hair) {
+  if (scene) {
     return (
-      <ScreenFrame scene={scene} hair={hair} audioSrc={audioSrc} padding={80}>
+      <ScreenFrame scene={scene} audioSrc={audioSrc} padding={80}>
         {ctaContent(44)}
       </ScreenFrame>
     );
@@ -532,7 +527,6 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
           text={caption}
           words={captionAudio?.words}
           scene={character?.scenes[i]}
-          hair={character?.hair}
           audioSrc={captionAudio && staticFile(captionAudio.src)}
         />
         {captionAudio && <Audio src={staticFile(captionAudio.src)} />}
@@ -549,7 +543,6 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
           audience={audience}
           hook={hook}
           scene={character?.hook}
-          hair={character?.hair}
           audioSrc={audio && staticFile(audio.hook.src)}
         />
         {audio && <Audio src={staticFile(audio.hook.src)} />}
@@ -560,7 +553,6 @@ export const ShortVideo: React.FC<ShortVideoProps> = ({
           cta={cta}
           bookTitle={bookTitle}
           scene={character?.cta}
-          hair={character?.hair}
           audioSrc={audio && staticFile(audio.cta.src)}
         />
         {audio && <Audio src={staticFile(audio.cta.src)} />}
