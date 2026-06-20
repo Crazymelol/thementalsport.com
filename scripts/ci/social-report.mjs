@@ -94,6 +94,7 @@ function statsSection(emoji, name, envVar, result, columns) {
     return `\n## ${emoji} ${name} performance\n_Set the \`${envVar}\` secret to show post stats._\n`;
   }
   if (result.error) {
+    if (result.debug) console.error(`[${name} debug]\n${result.debug}\n`);
     return `\n## ${emoji} ${name} performance\n_${result.error}_\n`;
   }
   if (!result.rows.length) return '';

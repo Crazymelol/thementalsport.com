@@ -143,7 +143,7 @@ export async function tiktokStats(queue, limit = 3) {
   // item, with no `<strong>` view count nearby. Just collect hrefs, deduped,
   // for navigation; views (no reliable selector found on the grid or the
   // detail page — see below) fall back to '—'.
-  const {value: videos, error: gridError} = evalJson(`JSON.stringify((() => {
+  const GRID_VIDEOS_JS = `JSON.stringify((() => {
     const seen = new Set();
     const out = [];
     for (const a of document.querySelectorAll('a[href*="/video/"]')) {
@@ -153,14 +153,25 @@ export async function tiktokStats(queue, limit = 3) {
       out.push({href});
     }
     return out.slice(0, ${limit});
-  })())`);
+  })())`;
+  const {value: videos, error: gridError} = evalJson(GRID_VIDEOS_JS);
   if (gridError) {
     ab('close', '--all');
     return {error: 'unexpected response from TikTok profile grid', debug: gridError.slice(0, 2000)};
   }
+
   if (!videos.length) {
+    // Confirmed across multiple CI runs (network capture filtered by
+    // item_list/api/post/api/user, response bodies inspected): the profile
+    // shell loads fine, but TikTok's video-list API call is never issued at
+    // all — only anti-bot fingerprinting beacons fire, all status 200. The
+    // page shows a literal "Something went wrong" + Refresh banner, and a
+    // programmatic Refresh click doesn't recover it (tested live, still
+    // empty after). This is a permanent platform-level anti-automation wall
+    // against headless sessions, not a selector bug — no retry is going to
+    // fix it, so don't spend every cron run re-diagnosing the same wall.
     ab('close', '--all');
-    return {error: 'no videos found on TikTok profile'};
+    return {error: 'TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts'};
   }
 
   // Likes/comments aren't shown on the profile grid — open each video page.
@@ -209,7 +220,7 @@ export async function pinterestStats(queue, limit = 3) {
   // The business-hub header (with the profile link) hydrates after
   // networkidle — wait for it explicitly, like X/TikTok wait for their
   // feed/grid selectors before querying.
-  ab('wait', '--selector', '[data-test-id="header-profile"]', '--timeout', '10000');
+  ab('wait', '--selector', 'nav[aria-label="Primary navigation header" i]', '--timeout', '10000');
 
   let snap = ab('snapshot', '-i');
   if (isLoginWall(snap)) {
@@ -220,16 +231,25 @@ export async function pinterestStats(queue, limit = 3) {
   // The cookie session lands on the business/partner hub
   // (gr.pinterest.com/business/hub/), not the consumer home feed, so the
   // original consumer-UI selectors (header-avatar, simplified-profile,
-  // headerProfileLink) don't exist there. Hub-specific testIds added below
-  // (header-profile, business-hub-profile-header, pro-partner-header) — debug
-  // dumps confirm [data-test-id="header-profile"] does contain an
-  // <a href="/handle/">, but querySelector for it here still comes back empty
-  // even with an explicit wait for that element. Hydration/timing quirk on
-  // this page that needs live access to diagnose further; left as a graceful
-  // error for now.
-  const {value: profileHref} = evalJson(
-    `JSON.stringify(document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a')?.getAttribute('href') || '')`,
-  );
+  // headerProfileLink) don't exist there. A live debug dump confirmed there's
+  // no usable data-test-id at all, but a `link "Your profile"` does render in
+  // the primary nav — its accessible name turned out to come from inner text
+  // (likely a visually-hidden span), not an aria-label attribute, which is
+  // why matching on `a[aria-label="Your profile"]` still missed it. Match by
+  // textContent instead. Old testIds kept as a last-resort fallback in case a
+  // session ever lands on the consumer UI instead.
+  const PROFILE_HREF_JS = `JSON.stringify((() => {
+    const links = [...document.querySelectorAll('a')];
+    const byName = links.find(a => /your profile/i.test(a.getAttribute('aria-label') || a.getAttribute('title') || a.textContent || ''));
+    if (byName) return byName.getAttribute('href') || '';
+    const legacy = document.querySelector('[data-test-id="header-avatar"] a, [data-test-id="simplified-profile"] a, a[data-test-id="headerProfileLink"], [data-test-id="header-profile"] a, a[data-test-id="header-profile"], [data-test-id="business-hub-profile-header"] a, [data-test-id="pro-partner-header"] a');
+    return legacy ? legacy.getAttribute('href') || '' : '';
+  })())`;
+  let {value: profileHref} = evalJson(PROFILE_HREF_JS);
+  if (!profileHref) {
+    ab('wait', '--timeout', '2000');
+    ({value: profileHref} = evalJson(PROFILE_HREF_JS));
+  }
   if (!profileHref) {
     ab('close', '--all');
     return {error: 'could not find profile link on Pinterest home (header not loaded)', debug: snap.slice(0, 2000)};
@@ -245,10 +265,63 @@ export async function pinterestStats(queue, limit = 3) {
     href: el.querySelector('a')?.getAttribute('href') || '',
     saves: (el.textContent.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved)/i) || [])[1] || '',
   })))`);
-  ab('close', '--all');
 
-  if (error) return {error: 'unexpected response from Pinterest profile', debug: error.slice(0, 2000)};
-  if (!pins.length) return {error: 'no created pins found on profile'};
+  if (error) {
+    ab('close', '--all');
+    return {error: 'unexpected response from Pinterest profile', debug: error.slice(0, 2000)};
+  }
+  if (!pins.length) {
+    ab('close', '--all');
+    return {error: 'no created pins found on profile'};
+  }
+
+  if (!pins.some((p) => p.saves)) {
+    // Debug confirmed this isn't a truncation artifact: the regex above runs
+    // against each tile's *full* textContent (no slicing), and still found
+    // no "N saves" text on any tile — the "Created" grid just doesn't render
+    // a save count at all. Grab a probe of the grid tile before navigating
+    // away, then try each pin's own closeup page instead, the same
+    // grid-gives-links / detail-page-gives-numbers shape as TikTok's
+    // per-video loop above.
+    const {value: probe} = evalJson(`JSON.stringify({
+      tileText: document.querySelector('[data-test-id="pin"]')?.textContent?.slice(0, 500) || '',
+      ariaLabels: [...document.querySelectorAll('[data-test-id="pin"] [aria-label]')].map(el => el.getAttribute('aria-label')).slice(0, 20),
+    })`);
+
+    let closeupDebug = null;
+    for (const pin of pins) {
+      if (!pin.href) continue;
+      ab('open', `https://www.pinterest.com${pin.href}`);
+      ab('wait', '--load', 'networkidle');
+      ab('wait', '--timeout', '1500');
+      // Run #27 debug: the closeup page's analytics widget shows three
+      // dashes next to Impressions/Saves/Pin clicks labels (no number
+      // anywhere in innerText) — likely "real-time estimates" not yet
+      // populated for low-traffic pins, but don't assume position; anchor
+      // directly on the "Saves" label element and read its sibling, rather
+      // than matching free-floating "N saves" text that may not exist here.
+      const {value: detail} = evalJson(`JSON.stringify((() => {
+        const leaf = [...document.querySelectorAll('body *')].find(
+          el => el.childElementCount === 0 && /^saves$/i.test((el.textContent || '').trim()),
+        );
+        const sibVal = leaf && (leaf.nextElementSibling?.textContent?.trim() || leaf.previousElementSibling?.textContent?.trim());
+        const freeText = (document.body.innerText.match(/([\\d.,]+[KMB]?)\\s*(saves?|saved|people saved this)/i) || [])[1];
+        return {
+          saves: (sibVal && /^[\\d.,]+[KMB]?$/i.test(sibVal) ? sibVal : '') || freeText || '',
+          matchedSavesLabel: !!leaf,
+          siblingText: sibVal || '',
+          sample: document.body.innerText.slice(0, 800),
+        };
+      })())`);
+      if (detail?.saves) pin.saves = detail.saves;
+      else if (!closeupDebug) closeupDebug = detail || {};
+    }
+
+    if (!pins.some((p) => p.saves)) {
+      console.error(`[Pinterest saves debug]\ngrid probe: ${JSON.stringify(probe)}\ncloseup probe: ${JSON.stringify(closeupDebug)}\n`);
+    }
+  }
+  ab('close', '--all');
 
   const rows = items.map((item, i) => ({
     title: item.title.replace(/\s*#Shorts$/i, ''),
