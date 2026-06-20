@@ -1,0 +1,9 @@
+# SDXL + ControlNet + IP-Adapter (CreativeML Open RAIL++-M / Apache-2.0) for
+# one-time custom character art generation, plus rembg (MIT) for background
+# removal. Pulls in torch/transformers/Pillow/opencv-python-headless
+# transitively; CPU wheels are fine on CI runners.
+diffusers
+transformers
+accelerate
+controlnet-aux
+rembg[cpu]

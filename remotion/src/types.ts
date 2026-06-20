@@ -23,3 +23,29 @@ export type ShortAudio = {
   captions: AudioSegment[];
   cta: AudioSegment;
 };
+
+// Optional recurring illustrated character (custom Tier 3 art, generated
+// once by scripts/character/generate.py), opted into per queue item via a
+// `character` field. `scenes` is one entry per caption, in the same order
+// as splitIntoCaptions(script).
+export type CharacterPose =
+  | 'BlazerWB'
+  | 'CrossedArmsWB'
+  | 'EasingWB'
+  | 'PointingFingerWB'
+  | 'RestingWB'
+  | 'RoboDanceWB'
+  | 'ShirtWB'
+  | 'WalkingWB';
+export type CharacterExpression = 'Driven' | 'Calm' | 'Smile';
+
+export type CharacterScene = {
+  pose: CharacterPose;
+  face: CharacterExpression;
+};
+
+export type CharacterConfig = {
+  hook: CharacterScene;
+  scenes: CharacterScene[];
+  cta: CharacterScene;
+};
