@@ -468,7 +468,9 @@
         "pre game routine"
       ],
       "posted_at": "2026-06-19T23:25:20.714Z",
-      "youtube_id": "uIwHY6ac9Yo"
+      "youtube_id": "uIwHY6ac9Yo",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-21T12:01:10.764Z"
     },
     {
       "id": "short-017",
@@ -795,7 +797,7 @@
   ],
   "caption_rotation": {
     "x": 0,
-    "pinterest": 5,
+    "pinterest": 6,
     "tiktok": 1
   }
 }
