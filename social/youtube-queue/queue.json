@@ -68,7 +68,9 @@
         }
       },
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-20T19:47:42.400Z"
+      "pinterest_posted_at": "2026-06-20T19:47:42.400Z",
+      "x_status": "posted",
+      "x_posted_at": "2026-06-21T02:12:04.606Z"
     },
     {
       "id": "short-001",
@@ -790,7 +792,7 @@
     }
   ],
   "caption_rotation": {
-    "x": 7,
+    "x": 0,
     "pinterest": 4,
     "tiktok": 1
   }
