@@ -510,7 +510,9 @@
         "game day"
       ],
       "posted_at": "2026-06-20T16:33:49.355Z",
-      "youtube_id": "ky_aP6HUaOY"
+      "youtube_id": "ky_aP6HUaOY",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-22T05:57:47.522Z"
     },
     {
       "id": "short-019",
@@ -803,7 +805,7 @@
   ],
   "caption_rotation": {
     "x": 1,
-    "pinterest": 0,
+    "pinterest": 1,
     "tiktok": 2
   }
 }
