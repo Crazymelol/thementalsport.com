@@ -548,7 +548,9 @@
         "comparison trap",
         "athlete mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-22T20:09:26.529Z"
     },
     {
       "id": "short-021",
@@ -809,7 +811,7 @@
   ],
   "caption_rotation": {
     "x": 1,
-    "pinterest": 2,
+    "pinterest": 3,
     "tiktok": 3
   }
 }
