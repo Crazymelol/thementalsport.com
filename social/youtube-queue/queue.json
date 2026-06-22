@@ -528,7 +528,9 @@
         "pre game nerves",
         "athlete sleep"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-22T13:08:48.164Z"
     },
     {
       "id": "short-020",
@@ -805,7 +807,7 @@
   ],
   "caption_rotation": {
     "x": 1,
-    "pinterest": 1,
+    "pinterest": 2,
     "tiktok": 2
   }
 }
