@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-23 08:22 UTC_
+_Updated 2026-06-23 19:46 UTC_
 
 ## Progress
 
@@ -8,8 +8,8 @@ _Updated 2026-06-23 08:22 UTC_
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
 | 🐦 X | 10 | Cup Final. Legs Like Concrete. Do… | 2026-06-23 01:52 |
-| 📌 Pinterest | 25 | You Used To Do This In Your Sleep… | 2026-06-23 05:29 |
-| 🎵 TikTok | 10 | Cup Final. Legs Like Concrete. Do… | 2026-06-22 15:03 |
+| 📌 Pinterest | 26 | Playing Not To Lose Is Why You're… | 2026-06-23 12:08 |
+| 🎵 TikTok | 11 | You'd Never Let A Teammate Talk T… | 2026-06-23 13:58 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
@@ -24,9 +24,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 📌 Pinterest performance
 | Post | Saves |
 |---|---|
+| Playing Not To Lose Is Why You're… | — |
 | You Used To Do This In Your Sleep… | — |
 | Instagram Is Making You A Worse A… | — |
-| Can't Sleep The Night Before The … | — |
 
 ## 🎵 TikTok performance
 _TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
