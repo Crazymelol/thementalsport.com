@@ -139,7 +139,13 @@ function main() {
   fs.writeFileSync(QUEUE_PATH, JSON.stringify(queue, null, 2) + '\n');
 }
 
-main();
+// Entry-point guard: `main()` must only run on direct CLI invocation, not when
+// another module (e.g. the smoke test, or a future caller) imports `assignScenes`.
+// Without this, importing this file for its named export would also trigger the
+// CLI's argv parsing and process.exit(1) as a side effect.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main();
+}
 ```
 
 - [ ] **Step 2: Typecheck**
