@@ -568,7 +568,9 @@
         "lost skill sport",
         "explicit monitoring"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-23T05:29:14.252Z"
     },
     {
       "id": "short-022",
@@ -813,7 +815,7 @@
   ],
   "caption_rotation": {
     "x": 2,
-    "pinterest": 3,
+    "pinterest": 4,
     "tiktok": 3
   }
 }
