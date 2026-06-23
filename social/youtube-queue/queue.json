@@ -534,7 +534,60 @@
       ],
       "posted_at": null,
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-22T13:08:48.164Z"
+      "pinterest_posted_at": "2026-06-22T13:08:48.164Z",
+      "character": {
+        "hook": {
+          "pose": "CrossedArmsWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-020",
@@ -552,7 +605,52 @@
       ],
       "posted_at": null,
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-22T20:09:26.529Z"
+      "pinterest_posted_at": "2026-06-22T20:09:26.529Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-021",
@@ -570,7 +668,56 @@
       ],
       "posted_at": null,
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-23T05:29:14.252Z"
+      "pinterest_posted_at": "2026-06-23T05:29:14.252Z",
+      "character": {
+        "hook": {
+          "pose": "CrossedArmsWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "PointingFingerWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "PointingFingerWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          }
+        ],
+        "cta": {
+          "pose": "CrossedArmsWB",
+          "face": "Driven"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-022",
@@ -586,7 +733,56 @@
         "protecting a lead",
         "competitive mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "CrossedArmsWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-023",
@@ -602,7 +798,56 @@
         "pre game anxiety",
         "game day mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-024",
@@ -618,7 +863,60 @@
         "i get to",
         "challenge mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "CrossedArmsWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-025",
@@ -634,7 +932,60 @@
         "re injury fear",
         "return to sport"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-026",
@@ -650,7 +1001,60 @@
         "not getting playing time",
         "athlete mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-027",
@@ -666,7 +1070,60 @@
         "trash talk",
         "focus under pressure"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-028",
@@ -682,7 +1139,52 @@
         "fear of mistakes",
         "excellence not perfection"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-029",
@@ -698,7 +1200,60 @@
         "youth sports",
         "sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RoboDanceWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RoboDanceWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "PointingFingerWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RoboDanceWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-030",
@@ -714,7 +1269,60 @@
         "sports parent mistakes",
         "youth sports"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-031",
@@ -730,7 +1338,52 @@
         "youth sports burnout",
         "sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-032",
@@ -746,7 +1399,56 @@
         "multi sport kids",
         "youth development"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-033",
@@ -762,7 +1464,56 @@
         "sibling comparison",
         "youth sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "CrossedArmsWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-034",
@@ -778,7 +1529,60 @@
         "youth sports emotions",
         "sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-035",
@@ -794,7 +1598,64 @@
         "coaching psychology",
         "team sport"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "WalkingWB",
+          "face": "Smile"
+        },
+        "scenes": [
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     },
     {
       "id": "short-036",
@@ -810,7 +1671,56 @@
         "losing streak",
         "coaching mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "CrossedArmsWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "PointingFingerWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "pending"
     }
   ],
   "caption_rotation": {
