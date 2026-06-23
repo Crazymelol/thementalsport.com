@@ -586,7 +586,9 @@
         "protecting a lead",
         "competitive mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-23T12:08:49.495Z"
     },
     {
       "id": "short-023",
@@ -815,7 +817,7 @@
   ],
   "caption_rotation": {
     "x": 2,
-    "pinterest": 4,
+    "pinterest": 5,
     "tiktok": 3
   }
 }
