@@ -606,7 +606,9 @@
         "pre game anxiety",
         "game day mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-23T19:44:04.386Z"
     },
     {
       "id": "short-024",
@@ -819,7 +821,7 @@
   ],
   "caption_rotation": {
     "x": 2,
-    "pinterest": 5,
+    "pinterest": 6,
     "tiktok": 4
   }
 }
