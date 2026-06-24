@@ -18,13 +18,17 @@ type QueueItem = {
 type Rule = {test: RegExp; pose: CharacterPose; face: CharacterExpression};
 
 // Tone-to-pose convention. See docs/superpowers/specs/2026-06-23-character-rollout-design.md §4-5.
+// CrossedArmsWB, PointingFingerWB and BlazerWB render as a visibly different
+// character than the other 5 poses (pre-existing art-asset inconsistency, confirmed
+// by direct comparison of remotion/public/character/*.webp) -- remapped to the
+// closest safe pose below until the art grid itself is regenerated.
 const RULES: Rule[] = [
   {test: /\b(stop (it|arguing|doing)|drop it|let it go|quit|cut it out|enough)\b/i,
    pose: 'RoboDanceWB', face: 'Driven'},
   {test: /\b(afraid|scared|fear|doubt|spiral(ing)?|anxious|anxiety|nervous|pressure|stuck|can'?t|won'?t|losing|lost|fail(s|ed|ure)?|wrong|hurts?|broken|stress(ed)?)\b/i,
-   pose: 'CrossedArmsWB', face: 'Driven'},
+   pose: 'EasingWB', face: 'Driven'},
   {test: /^(name|say|ask|try|do|pick|choose|focus|breathe|repeat|remember|notice)\b/i,
-   pose: 'PointingFingerWB', face: 'Driven'},
+   pose: 'RestingWB', face: 'Driven'},
   {test: /\b(always|every time|again|habit|used to|usually)\b/i,
    pose: 'ShirtWB', face: 'Driven'},
   {test: /\b(truth|actually|really|isn'?t|not the|just an?|simply|normal|okay|fine)\b/i,
@@ -32,12 +36,12 @@ const RULES: Rule[] = [
   {test: /\b(now|next|ahead|forward|better|improve|growth|confiden(t|ce)|comes back)\b/i,
    pose: 'WalkingWB', face: 'Smile'},
   {test: /^(you|it|that|this) (is|are|was|were|miss(ed)?|do(es)?n'?t)\b/i,
-   pose: 'BlazerWB', face: 'Driven'},
+   pose: 'WalkingWB', face: 'Driven'},
 ];
 
 const DEFAULT: CharacterScene = {pose: 'RestingWB', face: 'Calm'};
 const SECONDARY_DEFAULT: CharacterScene = {pose: 'EasingWB', face: 'Calm'};
-const CTA_DEFAULT: CharacterScene = {pose: 'PointingFingerWB', face: 'Smile'};
+const CTA_DEFAULT: CharacterScene = {pose: 'RoboDanceWB', face: 'Smile'};
 
 function sameScene(a: CharacterScene, b: CharacterScene | null): boolean {
   return !!b && a.pose === b.pose && a.face === b.face;
