@@ -1,5 +1,5 @@
 {
-  "_readme": "YouTube Shorts content queue. The n8n workflow (05-youtube-shorts-queue-poster) picks the FIRST item with status='pending', renders+uploads it, then commits it back as status='posted'. NEVER re-post a 'posted' item. When no items are pending the workflow does NOTHING (no looping old content). Claude refills this queue with fresh scripts; humans can add items too. Cadence cap: 3 posts/day. QA GATE: items created with a `qa_status` field only post once it is \"approved\" (set by the video-qa-approver agent via /qa-shorts); items without the field are legacy and post as before.",
+  "_readme": "YouTube Shorts content queue. The n8n workflow (05-youtube-shorts-queue-poster) picks the FIRST item with status='pending', renders+uploads it, then commits it back as status='posted'. NEVER re-post a 'posted' item. When no items are pending the workflow does NOTHING (no looping old content). Claude refills this queue with fresh scripts; humans can add items too. Cadence cap: 3 posts/day. QA GATE: items created with a `qa_status` field only post once it is \"approved\" (set by the video-qa-approver agent via /qa-shorts); items without the field are legacy and post as before. New items should include a `character` block — run `npx tsx src/assignScenes.ts <id>` from `remotion/` after adding the item to generate one, then skim the printed sequence before QA.",
   "items": [
     {
       "id": "short-040",
@@ -540,7 +540,62 @@
       ],
       "posted_at": null,
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-22T13:08:48.164Z"
+      "pinterest_posted_at": "2026-06-22T13:08:48.164Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Brief sub-second word-overlap during the typewriter build-in animation before settling to correctly spaced text — cosmetic, not a legibility failure.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-020",
@@ -558,7 +613,54 @@
       ],
       "posted_at": null,
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-22T20:09:26.529Z"
+      "pinterest_posted_at": "2026-06-22T20:09:26.529Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits near the quiet edge of the acceptable band (-19.3 LUFS) but is within range, so no action needed.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-021",
@@ -576,7 +678,58 @@
       ],
       "posted_at": null,
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-23T05:29:14.252Z"
+      "pinterest_posted_at": "2026-06-23T05:29:14.252Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          }
+        ],
+        "cta": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits at -19.9 LUFS, right at the low edge of the acceptable band — fine to post, but worth a touch more gain on future renders if margin is a concern.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-022",
@@ -593,6 +746,57 @@
         "competitive mindset"
       ],
       "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-23T12:08:49.495Z"
     },
@@ -611,6 +815,57 @@
         "game day mindset"
       ],
       "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-23T19:44:04.386Z"
     },
@@ -629,6 +884,61 @@
         "challenge mindset"
       ],
       "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "A cosmetic word-spacing glitch appears for under a second during the opening typewriter-reveal animation before self-correcting — not visible long enough to harm legibility, but worth a look if the reveal animation is ever revisited.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-24T05:27:52.726Z"
     },
@@ -647,6 +957,61 @@
         "return to sport"
       ],
       "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-24T12:00:52.119Z"
     },
@@ -665,6 +1030,61 @@
         "athlete mindset"
       ],
       "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits at the quiet boundary of the acceptable range (-19.8 LUFS) — fine to ship, but worth a small gain bump on future renders if it trends lower.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-24T19:39:34.976Z"
     },
@@ -682,7 +1102,62 @@
         "trash talk",
         "focus under pressure"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-028",
@@ -698,7 +1173,54 @@
         "fear of mistakes",
         "excellence not perfection"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-029",
@@ -714,7 +1236,62 @@
         "youth sports",
         "sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RoboDanceWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RoboDanceWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RoboDanceWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-030",
@@ -730,7 +1307,62 @@
         "sports parent mistakes",
         "youth sports"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-031",
@@ -746,7 +1378,54 @@
         "youth sports burnout",
         "sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-032",
@@ -762,7 +1441,58 @@
         "multi sport kids",
         "youth development"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-033",
@@ -778,7 +1508,58 @@
         "sibling comparison",
         "youth sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-034",
@@ -794,7 +1575,62 @@
         "youth sports emotions",
         "sports parenting"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits near the quiet end of the acceptable band (-19.5 LUFS) but still within tolerance, no action needed.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-035",
@@ -810,7 +1646,66 @@
         "coaching psychology",
         "team sport"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "WalkingWB",
+          "face": "Smile"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-036",
@@ -826,7 +1721,58 @@
         "losing streak",
         "coaching mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits near the quiet end of the acceptable range (-19.3 LUFS) but is not a rejection-level issue.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     }
   ],
   "caption_rotation": {
