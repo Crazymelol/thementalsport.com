@@ -587,7 +587,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "Brief sub-second word-overlap during the typewriter build-in animation before settling to correctly spaced text — cosmetic, not a legibility failure.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-020",
@@ -650,7 +652,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits near the quiet edge of the acceptable band (-19.3 LUFS) but is within range, so no action needed.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-021",
@@ -717,7 +721,9 @@
           "face": "Driven"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits at -19.9 LUFS, right at the low edge of the acceptable band — fine to post, but worth a touch more gain on future renders if margin is a concern.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-022",
@@ -782,7 +788,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-023",
@@ -847,7 +855,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-024",
@@ -916,7 +926,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "A cosmetic word-spacing glitch appears for under a second during the opening typewriter-reveal animation before self-correcting — not visible long enough to harm legibility, but worth a look if the reveal animation is ever revisited.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-025",
@@ -985,7 +997,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-026",
@@ -1054,7 +1068,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits at the quiet boundary of the acceptable range (-19.8 LUFS) — fine to ship, but worth a small gain bump on future renders if it trends lower.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-027",
@@ -1123,7 +1139,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-028",
@@ -1184,7 +1202,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-029",
@@ -1253,7 +1273,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-030",
@@ -1322,7 +1344,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-031",
@@ -1383,7 +1407,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-032",
@@ -1448,7 +1474,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-033",
@@ -1513,7 +1541,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-034",
@@ -1582,7 +1612,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits near the quiet end of the acceptable band (-19.5 LUFS) but still within tolerance, no action needed.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-035",
@@ -1655,7 +1687,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     },
     {
       "id": "short-036",
@@ -1720,7 +1754,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending"
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits near the quiet end of the acceptable range (-19.3 LUFS) but is not a rejection-level issue.",
+      "qa_reviewed_at": "2026-06-24T07:53:43Z"
     }
   ],
   "caption_rotation": {
