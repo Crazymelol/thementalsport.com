@@ -626,7 +626,9 @@
         "i get to",
         "challenge mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-24T05:27:52.726Z"
     },
     {
       "id": "short-025",
@@ -823,7 +825,7 @@
   ],
   "caption_rotation": {
     "x": 3,
-    "pinterest": 6,
+    "pinterest": 0,
     "tiktok": 4
   }
 }
