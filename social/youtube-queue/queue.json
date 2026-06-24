@@ -664,7 +664,9 @@
         "not getting playing time",
         "athlete mindset"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-24T19:39:34.976Z"
     },
     {
       "id": "short-027",
@@ -829,7 +831,7 @@
   ],
   "caption_rotation": {
     "x": 3,
-    "pinterest": 1,
+    "pinterest": 2,
     "tiktok": 5
   }
 }
