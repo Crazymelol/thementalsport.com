@@ -644,7 +644,9 @@
         "re injury fear",
         "return to sport"
       ],
-      "posted_at": null
+      "posted_at": null,
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-24T12:00:52.119Z"
     },
     {
       "id": "short-026",
@@ -825,7 +827,7 @@
   ],
   "caption_rotation": {
     "x": 3,
-    "pinterest": 0,
+    "pinterest": 1,
     "tiktok": 4
   }
 }
