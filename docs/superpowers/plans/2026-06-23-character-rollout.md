@@ -25,7 +25,7 @@ exactly as specified there — nothing in this plan invents new scope.
 - Create: `remotion/src/assignScenes.ts`
 - Create (temporary, deleted in Step 5): `remotion/src/assignScenes.smoketest.ts`
 
-- [ ] **Step 1: Write `remotion/src/assignScenes.ts`**
+- [x] **Step 1: Write `remotion/src/assignScenes.ts`**
 
 ```ts
 import path from 'path';
@@ -148,12 +148,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 }
 ```
 
-- [ ] **Step 2: Typecheck**
+- [x] **Step 2: Typecheck**
 
 Run: `cd remotion && npx tsc --noEmit`
 Expected: exits 0, no output.
 
-- [ ] **Step 3: Write a throwaway smoke-test file to verify the matching logic by hand**
+- [x] **Step 3: Write a throwaway smoke-test file to verify the matching logic by hand**
 
 Create `remotion/src/assignScenes.smoketest.ts`:
 
@@ -175,7 +175,7 @@ console.log(JSON.stringify(assignScenes(
 ), null, 2));
 ```
 
-- [ ] **Step 4: Run it and verify exact output**
+- [x] **Step 4: Run it and verify exact output**
 
 Run: `cd remotion && npx tsx src/assignScenes.smoketest.ts`
 
@@ -248,11 +248,11 @@ land exactly on `short-040`'s real hand-curated choices. Case 2's second scene
 default). If output differs from the above, the rule table or guard logic has a
 bug — fix before proceeding.
 
-- [ ] **Step 5: Delete the smoke-test file**
+- [x] **Step 5: Delete the smoke-test file**
 
 Run: `rm remotion/src/assignScenes.smoketest.ts`
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add remotion/src/assignScenes.ts
@@ -266,7 +266,7 @@ git commit -m "Add tone-to-pose matching script for Shorts character blocks"
 **Files:**
 - Modify: `social/youtube-queue/queue.json` (data only, written by the Task 1 CLI — no manual edits)
 
-- [ ] **Step 1: Run the batch CLI**
+- [x] **Step 1: Run the batch CLI**
 
 Run: `cd remotion && npx tsx src/assignScenes.ts --all-missing`
 
@@ -277,7 +277,7 @@ count may differ slightly by execution time if the live posting cron has moved
 some of them out of `pending` — that's expected and fine, the script's filter is
 live.
 
-- [ ] **Step 2: Skim the printed sequences for anything obviously wrong**
+- [x] **Step 2: Skim the printed sequences for anything obviously wrong**
 
 Per the design doc §8 step 2: look for a single pose dominating an entire item's
 sequence, or a sequence that reads as flatly mismatched to the item's title/tone.
@@ -289,7 +289,7 @@ lacking a `character` block are touched, but a fix means deleting the bad item's
 `character` field first, or just re-running for that one id directly:
 `npx tsx src/assignScenes.ts <id>`).
 
-- [ ] **Step 3: Verify every pending item now has a character block**
+- [x] **Step 3: Verify every pending item now has a character block**
 
 Run:
 ```bash
@@ -304,7 +304,7 @@ console.log("pending items still without a character block:", withoutCharacter.m
 ```
 Expected output: `pending items still without a character block: []` (an empty array).
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add social/youtube-queue/queue.json
@@ -318,7 +318,7 @@ git commit -m "Backfill character blocks into pending Shorts queue items"
 **Files:**
 - Modify: `social/youtube-queue/queue.json` (the `_readme` field only)
 
-- [ ] **Step 1: Append the convention sentence**
+- [x] **Step 1: Append the convention sentence**
 
 Run (single-quoted shell wrapper — the appended sentence contains literal
 backticks, which must NOT be interpreted by the shell; only the inner JS string
@@ -334,14 +334,14 @@ fs.writeFileSync(p, JSON.stringify(queue, null, 2) + "\n");
 '
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `node -e 'console.log(JSON.parse(require("fs").readFileSync("social/youtube-queue/queue.json", "utf-8"))._readme)'`
 
 Expected: prints the full `_readme` string, ending with `...then skim the printed
 sequence before QA.`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add social/youtube-queue/queue.json
@@ -364,13 +364,13 @@ executed directly rather than delegated.
 **Files:** none directly — `qa-shorts` modifies `social/youtube-queue/queue.json`
 itself (per-item `qa_status`/`qa_notes`/`qa_reviewed_at`) and commits.
 
-- [ ] **Step 1: Invoke the qa-shorts skill with no arguments**
+- [x] **Step 1: Invoke the qa-shorts skill with no arguments**
 
 This auto-selects every item where `qa_status === "pending"` and narration audio
 already exists under `remotion/public/audio/<id>/` — confirmed all of the backfilled
 items already have audio committed, so none should be skipped for missing narration.
 
-- [ ] **Step 2: Verify every previously-pending item now has a final verdict**
+- [x] **Step 2: Verify every previously-pending item now has a final verdict**
 
 Run:
 ```bash
@@ -386,7 +386,7 @@ Expected output: `items with a character block still stuck at qa_status=pending:
 If any remain `"pending"`, they were skipped by the skill for missing narration —
 investigate before continuing; do not treat this as done if the array is non-empty.
 
-- [ ] **Step 3: Confirm the skill's own commit landed**
+- [x] **Step 3: Confirm the skill's own commit landed**
 
 Run: `git log --oneline -3`
 Expected: top commit message starts with `QA:` (the `qa-shorts` skill's own commit
@@ -396,13 +396,13 @@ convention).
 
 ### Task 5: Push
 
-- [ ] **Step 1: Push to the dev branch**
+- [x] **Step 1: Push to the dev branch**
 
 ```bash
 git push -u origin claude/sleepy-gauss-CyGUG
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `git status`
 Expected: `Your branch is up to date with 'origin/claude/sleepy-gauss-CyGUG'.` and

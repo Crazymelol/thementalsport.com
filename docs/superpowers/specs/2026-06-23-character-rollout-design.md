@@ -84,6 +84,20 @@ the other 3 based on how `short-040` actually used them:
 
 Approved by the owner as-is, including the 3 proposed rows.
 
+> **Erratum (added during rollout, see plan §implementation):** direct
+> comparison of the rendered `.webp` assets found that `CrossedArmsWB`,
+> `PointingFingerWB`, and `BlazerWB` render as a visibly different character
+> than the other 5 poses — a pre-existing art-asset inconsistency in the
+> 24-combo grid, not a flaw in this mapping. `remotion/src/assignScenes.ts`'s
+> rule table was patched to drop those 3 rows and remap their concepts onto
+> the closest safe pose among the remaining 5 (`Tense/defensive`→`EasingWB`,
+> `Pointing/direct address`→`RestingWB`, `Blunt/matter-of-fact`→`WalkingWB`,
+> and the CTA default→`RoboDanceWB`). This is a temporary workaround, not a
+> revision of the approved convention above — the table is left as originally
+> approved for when the art grid is regenerated with consistent character
+> identity across all 8 poses. `short-040`, authored before this fix, still
+> uses all 8 poses and is unaffected.
+
 ## 5. Matching script — `remotion/src/assignScenes.ts`
 
 A pure function, plus a thin CLI in the same style as `render-queue.ts`
