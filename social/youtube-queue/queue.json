@@ -1163,7 +1163,9 @@
       },
       "qa_status": "approved",
       "qa_notes": "",
-      "qa_reviewed_at": "2026-06-24T07:53:43Z"
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
+      "pinterest_status": "posted",
+      "pinterest_posted_at": "2026-06-24T22:33:19.546Z"
     },
     {
       "id": "short-028",
@@ -1783,7 +1785,7 @@
   ],
   "caption_rotation": {
     "x": 5,
-    "pinterest": 2,
+    "pinterest": 3,
     "tiktok": 6
   }
 }
