@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-25 08:19 UTC_
+_Updated 2026-06-25 19:44 UTC_
 
 ## Progress
 
@@ -9,7 +9,7 @@ _Updated 2026-06-25 08:19 UTC_
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
 | 🐦 X | 13 | 77% Of Athletes Choke. You're Not… | 2026-06-25 01:52 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
-| 🎵 TikTok | 13 | 77% Of Athletes Choke. You're Not… | 2026-06-24 22:14 |
+| 🎵 TikTok | 14 | When Your Kid Freezes Under Press… | 2026-06-25 13:51 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
