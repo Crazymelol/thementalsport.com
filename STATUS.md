@@ -1,15 +1,15 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-24 19:43 UTC_
+_Updated 2026-06-25 08:19 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 11 | You'd Never Let A Teammate Talk T… | 2026-06-24 01:49 |
-| 📌 Pinterest | 29 | The Mental Side Of Coming Back Fr… | 2026-06-24 12:00 |
-| 🎵 TikTok | 12 | Squeeze A Ball In Your Left Hand … | 2026-06-24 13:51 |
+| 🐦 X | 13 | 77% Of Athletes Choke. You're Not… | 2026-06-25 01:52 |
+| 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
+| 🎵 TikTok | 13 | 77% Of Athletes Choke. You're Not… | 2026-06-24 22:14 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
@@ -17,16 +17,16 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| You'd Never Let A Teammate Talk T… | 5 | 0 | 0 | 0 |
-| Cup Final. Legs Like Concrete. Do… | 11 | 0 | 0 | 0 |
-| The Crowd Is Gone. You Just Lost.… | 14 | 0 | 0 | 0 |
+| 77% Of Athletes Choke. You're Not… | 5 | 0 | 0 | 0 |
+| Squeeze A Ball In Your Left Hand … | 11 | 0 | 0 | 0 |
+| You'd Never Let A Teammate Talk T… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
 |---|---|
+| Get Your Opponent Out Of Your Head | — |
+| Stuck On The Bench? Read This. | — |
 | The Mental Side Of Coming Back Fr… | — |
-| Stop Saying 'I Have To.' Say This… | — |
-| Warm-Up Nerves Are Lying To You | — |
 
 ## 🎵 TikTok performance
 _TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
