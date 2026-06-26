@@ -399,7 +399,9 @@
       "posted_at": "2026-06-18T09:33:10.628Z",
       "youtube_id": "Gnq8Wl-0gGU",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-19T12:27:08.735Z"
+      "pinterest_posted_at": "2026-06-19T12:27:08.735Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-06-26T04:55:25.105Z"
     },
     {
       "id": "short-012",
@@ -1790,6 +1792,6 @@
   "caption_rotation": {
     "x": 6,
     "pinterest": 3,
-    "tiktok": 0
+    "tiktok": 1
   }
 }
