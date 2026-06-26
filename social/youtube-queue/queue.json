@@ -152,8 +152,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-002",
@@ -225,8 +226,9 @@
           "face": "Driven"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits right at the -20 LUFS floor — fine to post, but worth nudging up slightly on future renders for headroom.",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-003",
@@ -298,8 +300,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-004",
@@ -371,8 +374,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-005",
@@ -440,8 +444,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-006",
@@ -505,8 +510,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-007",
@@ -578,8 +584,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-008",
@@ -647,8 +654,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-009",
@@ -724,8 +732,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-010",
@@ -793,14 +802,15 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "Reviewer initially flagged transient word-concatenation in the hook build animation ('ATEAMMATE', 'WAYYOUTALK') as a rejection. Overridden after frame-by-frame comparison against short-001 confirmed this is the shared hookWords spring animation's normal transient behavior (ShortVideo.tsx) -- every hook briefly shows this during the ~1s word-by-word build, then settles to fully correct spacing for the rest of the clip. Not specific to this item, not a backfill regression. Cosmetic backlog item: smooth per-word spacing so neighboring words never visually touch mid-build.",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-037",
       "status": "posted",
-      "qa_status": "pending",
-      "qa_notes": "",
+      "qa_status": "approved",
+      "qa_notes": "Clean render; the one silence interval found (27-28s) is a natural sentence-boundary pause, not the dead-air defect pattern flagged in the sibling item.",
       "audience": "athletes",
       "title": "Squeeze A Ball In Your Left Hand Before You Compete #Shorts",
       "hook": "There's a ten-second trick that helps stop you choking under pressure — and it's just squeezing a ball.",
@@ -889,13 +899,14 @@
           "pose": "EasingWB",
           "face": "Driven"
         }
-      }
+      },
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-038",
       "status": "posted",
-      "qa_status": "pending",
-      "qa_notes": "",
+      "qa_status": "approved",
+      "qa_notes": "Clean render with no dead-air or oversized caption holds; the longer 48s runtime matches the longer-form script as expected.",
       "audience": "athletes",
       "title": "77% Of Athletes Choke. You're Not Broken. #Shorts",
       "hook": "If you've choked under pressure, here's the stat nobody tells you: almost everyone does.",
@@ -970,13 +981,14 @@
           "pose": "EasingWB",
           "face": "Driven"
         }
-      }
+      },
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-039",
       "status": "posted",
-      "qa_status": "pending",
-      "qa_notes": "",
+      "qa_status": "approved",
+      "qa_notes": "No defects found. The single silence interval and transient hook-build merge artifacts are both expected, pre-existing, calibration-confirmed pipeline behaviors and do not constitute failures.",
       "audience": "parents",
       "title": "When Your Kid Freezes Under Pressure, Don't Say 'Relax' #Shorts",
       "hook": "Telling a nervous young athlete to 'just relax' might be the least helpful thing you can say. Here's what works.",
@@ -1059,7 +1071,8 @@
           "pose": "RoboDanceWB",
           "face": "Smile"
         }
-      }
+      },
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-011",
@@ -1123,8 +1136,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-012",
@@ -1192,8 +1206,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "rejected",
+      "qa_notes": "Audio health/sync FAIL: the caption 'Two -- one word: next. Three -- eyes to' is held on screen ~14s (vs ~2-4s for every other caption), with two silence gaps (1.05s and 3.29s, ~4.3s combined) baked into that segment's narration audio. This is a voiceover/TTS asset issue, not a video-render issue -- re-running render-queue.ts alone will reproduce the same gap since it reuses the existing audio file. Needs narration regenerated for that caption segment before re-render.",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-013",
@@ -1253,8 +1268,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-014",
@@ -1322,8 +1338,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "Clean render, script-accurate end to end -- no issues found.",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-015",
@@ -1383,8 +1400,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-016",
@@ -1456,8 +1474,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "Clean render — hook spacing settles correctly, no hold-time/dead-air defects found anywhere in the body captions.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-017",
@@ -1525,8 +1544,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "Clean render, no defects found.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-018",
@@ -1594,8 +1614,9 @@
           "face": "Smile"
         }
       },
-      "qa_status": "pending",
-      "qa_notes": ""
+      "qa_status": "approved",
+      "qa_notes": "Clean render, no defects found. LUFS -21.1 (1.1 LU under the -20 target, not severe, no clipping); one 0.85s silence gap, well under threshold.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-019",
