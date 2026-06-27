@@ -1,13 +1,13 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-26 19:43 UTC_
+_Updated 2026-06-27 08:10 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 14 | When Your Kid Freezes Under Press… | 2026-06-26 01:55 |
+| 🐦 X | 15 | Yamal Started At 16. Your Kid Did… | 2026-06-27 01:50 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
 | 🎵 TikTok | 16 | One Early Mistake Is Unraveling Y… | 2026-06-26 13:50 |
 
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| When Your Kid Freezes Under Press… | 5 | 0 | 0 | 0 |
-| 77% Of Athletes Choke. You're Not… | 11 | 0 | 0 | 0 |
-| Squeeze A Ball In Your Left Hand … | 14 | 0 | 0 | 0 |
+| Yamal Started At 16. Your Kid Did… | 5 | 0 | 0 | 0 |
+| When Your Kid Freezes Under Press… | 11 | 0 | 0 | 0 |
+| 77% Of Athletes Choke. You're Not… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
@@ -29,7 +29,11 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 | The Mental Side Of Coming Back Fr… | — |
 
 ## 🎵 TikTok performance
-_TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
+| Post | Views | Likes | Comments |
+|---|---|---|---|
+| One Early Mistake Is Unraveling Y… | — | 0 | 0 |
+| Yamal Started At 16. Your Kid Did… | — | 0 | 0 |
+| When Your Kid Freezes Under Press… | — | 0 | 0 |
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
