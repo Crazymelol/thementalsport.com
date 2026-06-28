@@ -1,15 +1,15 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-06-27 19:41 UTC_
+_Updated 2026-06-28 08:24 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 15 | Yamal Started At 16. Your Kid Did… | 2026-06-27 01:50 |
+| 🐦 X | 17 | Why Your Brain Sabotages You In C… | 2026-06-28 03:25 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
-| 🎵 TikTok | 17 | Why Your Brain Sabotages You In C… | 2026-06-27 13:41 |
+| 🎵 TikTok | 18 | The 24-Hour Rule Every Sports Par… | 2026-06-28 03:23 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| Yamal Started At 16. Your Kid Did… | 5 | 0 | 0 | 0 |
-| When Your Kid Freezes Under Press… | 11 | 0 | 0 | 0 |
-| 77% Of Athletes Choke. You're Not… | 14 | 0 | 0 | 0 |
+| Why Your Brain Sabotages You In C… | 5 | 0 | 0 | 0 |
+| One Early Mistake Is Unraveling Y… | 11 | 0 | 0 | 0 |
+| Yamal Started At 16. Your Kid Did… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
@@ -29,7 +29,11 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 | The Mental Side Of Coming Back Fr… | — |
 
 ## 🎵 TikTok performance
-_TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
+| Post | Views | Likes | Comments |
+|---|---|---|---|
+| The 24-Hour Rule Every Sports Par… | — | 0 | 0 |
+| Why Your Brain Sabotages You In C… | — | 0 | 0 |
+| One Early Mistake Is Unraveling Y… | — | 0 | 0 |
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
