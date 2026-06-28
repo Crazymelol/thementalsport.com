@@ -95,7 +95,66 @@
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-14T21:19:06.207Z",
       "tiktok_status": "posted",
-      "tiktok_posted_at": "2026-06-14T22:38:59.403Z"
+      "tiktok_posted_at": "2026-06-14T22:38:59.403Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-002",
@@ -118,7 +177,58 @@
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-15T05:54:22.678Z",
       "tiktok_status": "posted",
-      "tiktok_posted_at": "2026-06-15T15:11:40.724Z"
+      "tiktok_posted_at": "2026-06-15T15:11:40.724Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Loudness sits right at the -20 LUFS floor — fine to post, but worth nudging up slightly on future renders for headroom.",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-003",
@@ -141,7 +251,58 @@
       "x_status": "posted",
       "x_posted_at": "2026-06-16T02:05:30.221Z",
       "tiktok_status": "posted",
-      "tiktok_posted_at": "2026-06-16T14:48:39.781Z"
+      "tiktok_posted_at": "2026-06-16T14:48:39.781Z",
+      "character": {
+        "hook": {
+          "pose": "WalkingWB",
+          "face": "Smile"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-004",
@@ -164,7 +325,58 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-16T14:52:12.430Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-17T02:01:34.677Z"
+      "x_posted_at": "2026-06-17T02:01:34.677Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-005",
@@ -187,7 +399,54 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-17T14:20:05.797Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-18T02:02:54.576Z"
+      "x_posted_at": "2026-06-18T02:02:54.576Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:12:02Z"
     },
     {
       "id": "short-006",
@@ -210,7 +469,50 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-18T14:09:45.352Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-19T02:07:12.242Z"
+      "x_posted_at": "2026-06-19T02:07:12.242Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-007",
@@ -233,7 +535,58 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-19T14:13:00.289Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-20T01:53:45.440Z"
+      "x_posted_at": "2026-06-20T01:53:45.440Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-008",
@@ -256,7 +609,54 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-20T13:42:34.690Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-22T02:02:54.516Z"
+      "x_posted_at": "2026-06-22T02:02:54.516Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-009",
@@ -279,7 +679,62 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-22T15:03:18.603Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-23T01:52:50.633Z"
+      "x_posted_at": "2026-06-23T01:52:50.633Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-010",
@@ -302,14 +757,61 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-23T13:58:46.807Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-24T01:49:56.229Z"
+      "x_posted_at": "2026-06-24T01:49:56.229Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Reviewer initially flagged transient word-concatenation in the hook build animation ('ATEAMMATE', 'WAYYOUTALK') as a rejection. Overridden after frame-by-frame comparison against short-001 confirmed this is the shared hookWords spring animation's normal transient behavior (ShortVideo.tsx) -- every hook briefly shows this during the ~1s word-by-word build, then settles to fully correct spacing for the rest of the clip. Not specific to this item, not a backfill regression. Cosmetic backlog item: smooth per-word spacing so neighboring words never visually touch mid-build.",
+      "qa_reviewed_at": "2026-06-26T07:17:51Z"
     },
     {
       "id": "short-037",
       "status": "posted",
       "qa_status": "approved",
-      "qa_notes": "Approved — captions legible, word-highlight tracking, FOR ATHLETES label + footer + /free CTA pill all correct; content matches script (left-hand squeeze). Audio clean, -18.9 LUFS (slightly quiet).",
-      "qa_reviewed_at": "2026-06-15T23:44:55.654173+00:00",
+      "qa_notes": "Clean render; the one silence interval found (27-28s) is a natural sentence-boundary pause, not the dead-air defect pattern flagged in the sibling item.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z",
       "audience": "athletes",
       "title": "Squeeze A Ball In Your Left Hand Before You Compete #Shorts",
       "hook": "There's a ten-second trick that helps stop you choking under pressure — and it's just squeezing a ball.",
@@ -328,14 +830,86 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-24T13:51:49.378Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-24T22:19:58.977Z"
+      "x_posted_at": "2026-06-24T22:19:58.977Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        }
+      }
     },
     {
       "id": "short-038",
       "status": "posted",
       "qa_status": "approved",
-      "qa_notes": "Approved — clean render, 77%/18x stat + train-the-chaos body + CTA pill correct; content matches script. Audio clean, -20.2 LUFS (quietest of batch, still fine).",
-      "qa_reviewed_at": "2026-06-15T23:44:55.654173+00:00",
+      "qa_notes": "Clean render with no dead-air or oversized caption holds; the longer 48s runtime matches the longer-form script as expected.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z",
       "audience": "athletes",
       "title": "77% Of Athletes Choke. You're Not Broken. #Shorts",
       "hook": "If you've choked under pressure, here's the stat nobody tells you: almost everyone does.",
@@ -354,14 +928,74 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-24T22:14:11.959Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-25T01:52:44.014Z"
+      "x_posted_at": "2026-06-25T01:52:44.014Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        }
+      }
     },
     {
       "id": "short-039",
       "status": "posted",
       "qa_status": "approved",
-      "qa_notes": "Approved — FOR SPORTS PARENTS hook, name-it + one-controllable-job script renders faithfully, CTA pill correct. Audio clean, -18.5 LUFS.",
-      "qa_reviewed_at": "2026-06-15T23:44:55.654173+00:00",
+      "qa_notes": "No defects found. The single silence interval and transient hook-build merge artifacts are both expected, pre-existing, calibration-confirmed pipeline behaviors and do not constitute failures.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z",
       "audience": "parents",
       "title": "When Your Kid Freezes Under Pressure, Don't Say 'Relax' #Shorts",
       "hook": "Telling a nervous young athlete to 'just relax' might be the least helpful thing you can say. Here's what works.",
@@ -380,7 +1014,75 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-25T13:51:15.507Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-26T01:55:47.569Z"
+      "x_posted_at": "2026-06-26T01:55:47.569Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Driven"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      }
     },
     {
       "id": "short-011",
@@ -403,7 +1105,54 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-26T04:55:25.105Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-27T01:50:30.712Z"
+      "x_posted_at": "2026-06-27T01:50:30.712Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-012",
@@ -426,7 +1175,58 @@
       "tiktok_status": "posted",
       "tiktok_posted_at": "2026-06-26T13:50:45.777Z",
       "x_status": "posted",
-      "x_posted_at": "2026-06-28T01:53:39.001Z"
+      "x_posted_at": "2026-06-28T01:53:39.001Z",
+      "character": {
+        "hook": {
+          "pose": "WalkingWB",
+          "face": "Smile"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RoboDanceWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "rejected",
+      "qa_notes": "Audio health/sync FAIL: the caption 'Two -- one word: next. Three -- eyes to' is held on screen ~14s (vs ~2-4s for every other caption), with two silence gaps (1.05s and 3.29s, ~4.3s combined) baked into that segment's narration audio. This is a voiceover/TTS asset issue, not a video-render issue -- re-running render-queue.ts alone will reproduce the same gap since it reuses the existing audio file. Needs narration regenerated for that caption segment before re-render.",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-013",
@@ -447,7 +1247,50 @@
       "pinterest_status": "posted",
       "pinterest_posted_at": "2026-06-20T05:36:56.961Z",
       "tiktok_status": "posted",
-      "tiktok_posted_at": "2026-06-27T13:41:04.213Z"
+      "tiktok_posted_at": "2026-06-27T13:41:04.213Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-014",
@@ -466,7 +1309,58 @@
       "posted_at": "2026-06-19T09:37:52.649Z",
       "youtube_id": "q-thkyzB6nA",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-20T11:44:59.445Z"
+      "pinterest_posted_at": "2026-06-20T11:44:59.445Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Clean render, script-accurate end to end -- no issues found.",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-015",
@@ -485,7 +1379,50 @@
       "posted_at": "2026-06-19T16:51:23.212Z",
       "youtube_id": "AmTlBCVyAYw",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-21T05:45:08.309Z"
+      "pinterest_posted_at": "2026-06-21T05:45:08.309Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "",
+      "qa_reviewed_at": "2026-06-26T07:20:39Z"
     },
     {
       "id": "short-016",
@@ -504,7 +1441,62 @@
       "posted_at": "2026-06-19T23:25:20.714Z",
       "youtube_id": "uIwHY6ac9Yo",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-21T12:01:10.764Z"
+      "pinterest_posted_at": "2026-06-21T12:01:10.764Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "ShirtWB",
+            "face": "Driven"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Clean render — hook spacing settles correctly, no hold-time/dead-air defects found anywhere in the body captions.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-017",
@@ -523,7 +1515,58 @@
       "posted_at": "2026-06-20T09:05:51.214Z",
       "youtube_id": "M4o2ZhRzb0s",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-21T19:39:00.520Z"
+      "pinterest_posted_at": "2026-06-21T19:39:00.520Z",
+      "character": {
+        "hook": {
+          "pose": "EasingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Driven"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Clean render, no defects found.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-018",
@@ -542,7 +1585,58 @@
       "posted_at": "2026-06-20T16:33:49.355Z",
       "youtube_id": "ky_aP6HUaOY",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-22T05:57:47.522Z"
+      "pinterest_posted_at": "2026-06-22T05:57:47.522Z",
+      "character": {
+        "hook": {
+          "pose": "RestingWB",
+          "face": "Calm"
+        },
+        "scenes": [
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "WalkingWB",
+            "face": "Smile"
+          },
+          {
+            "pose": "RestingWB",
+            "face": "Calm"
+          },
+          {
+            "pose": "EasingWB",
+            "face": "Calm"
+          }
+        ],
+        "cta": {
+          "pose": "RoboDanceWB",
+          "face": "Smile"
+        }
+      },
+      "qa_status": "approved",
+      "qa_notes": "Clean render, no defects found. LUFS -21.1 (1.1 LU under the -20 target, not severe, no clipping); one 0.85s silence gap, well under threshold.",
+      "qa_reviewed_at": "2026-06-26T07:28:36Z"
     },
     {
       "id": "short-019",
