@@ -1504,7 +1504,9 @@
       },
       "qa_status": "approved",
       "qa_notes": "Clean render — hook spacing settles correctly, no hold-time/dead-air defects found anywhere in the body captions.",
-      "qa_reviewed_at": "2026-06-26T07:28:36Z"
+      "qa_reviewed_at": "2026-06-26T07:28:36Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-06-29T14:43:37.594Z"
     },
     {
       "id": "short-017",
@@ -2902,6 +2904,6 @@
   "caption_rotation": {
     "x": 2,
     "pinterest": 3,
-    "tiktok": 5
+    "tiktok": 6
   }
 }
