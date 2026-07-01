@@ -1652,7 +1652,9 @@
       },
       "qa_status": "approved",
       "qa_notes": "Clean render, no defects found. LUFS -21.1 (1.1 LU under the -20 target, not severe, no clipping); one 0.85s silence gap, well under threshold.",
-      "qa_reviewed_at": "2026-06-26T07:28:36Z"
+      "qa_reviewed_at": "2026-06-26T07:28:36Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-01T14:01:36.711Z"
     },
     {
       "id": "short-019",
@@ -2910,6 +2912,6 @@
   "caption_rotation": {
     "x": 4,
     "pinterest": 3,
-    "tiktok": 0
+    "tiktok": 1
   }
 }
