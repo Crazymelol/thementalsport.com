@@ -1729,7 +1729,9 @@
       },
       "qa_status": "approved",
       "qa_notes": "Brief sub-second word-overlap during the typewriter build-in animation before settling to correctly spaced text — cosmetic, not a legibility failure.",
-      "qa_reviewed_at": "2026-06-24T07:53:43Z"
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-02T13:52:03.071Z"
     },
     {
       "id": "short-020",
@@ -2914,6 +2916,6 @@
   "caption_rotation": {
     "x": 5,
     "pinterest": 3,
-    "tiktok": 1
+    "tiktok": 2
   }
 }
