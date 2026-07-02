@@ -1582,7 +1582,9 @@
       "qa_notes": "Clean render, no defects found.",
       "qa_reviewed_at": "2026-06-26T07:28:36Z",
       "tiktok_status": "posted",
-      "tiktok_posted_at": "2026-06-30T13:56:36.994Z"
+      "tiktok_posted_at": "2026-06-30T13:56:36.994Z",
+      "x_status": "posted",
+      "x_posted_at": "2026-07-02T02:03:06.099Z"
     },
     {
       "id": "short-018",
@@ -2910,7 +2912,7 @@
     }
   ],
   "caption_rotation": {
-    "x": 4,
+    "x": 5,
     "pinterest": 3,
     "tiktok": 1
   }
