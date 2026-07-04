@@ -1871,7 +1871,9 @@
       },
       "qa_status": "approved",
       "qa_notes": "Loudness sits at -19.9 LUFS, right at the low edge of the acceptable band — fine to post, but worth a touch more gain on future renders if margin is a concern.",
-      "qa_reviewed_at": "2026-06-24T07:53:43Z"
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-04T14:55:53.115Z"
     },
     {
       "id": "short-022",
@@ -2922,6 +2924,6 @@
   "caption_rotation": {
     "x": 7,
     "pinterest": 3,
-    "tiktok": 3
+    "tiktok": 4
   }
 }
