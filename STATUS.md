@@ -1,13 +1,13 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-03 20:21 UTC_
+_Updated 2026-07-04 09:29 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 22 | Boring Routines Win Championships | 2026-07-03 05:00 |
+| 🐦 X | 23 | Can't Sleep The Night Before The … | 2026-07-04 04:55 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
 | 🎵 TikTok | 24 | Instagram Is Making You A Worse A… | 2026-07-03 15:29 |
 
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| Boring Routines Win Championships | 5 | 0 | 0 | 0 |
-| Your Face Is Their Scoreboard | 11 | 0 | 0 | 0 |
-| The 60-Second Reset Elite Athlete… | 14 | 0 | 0 | 0 |
+| Can't Sleep The Night Before The … | 5 | 0 | 0 | 0 |
+| Boring Routines Win Championships | 11 | 0 | 0 | 0 |
+| Your Face Is Their Scoreboard | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
