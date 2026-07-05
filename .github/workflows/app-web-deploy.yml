@@ -1,9 +1,11 @@
 name: Training App Web Deploy
 
-# Builds the Expo web export of app/ and publishes it to GitHub Pages:
+# Builds the Expo web export of app/ and publishes it to the gh-pages branch:
 # https://crazymelol.github.io/thementalsport.com/
-# The live-domain path (thementalsport.com/app) is a Shopify URL redirect
-# pointing at that Pages URL.
+# Branch-based Pages is used (not actions/deploy-pages) because the default
+# workflow token can't auto-enable a Pages site; pushing gh-pages can.
+# peaceiris adds .nojekyll by default — required, since the export's assets
+# live under _expo/ and Jekyll drops underscore-prefixed paths.
 
 on:
   push:
@@ -12,16 +14,14 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: app-web-deploy
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,26 +38,8 @@ jobs:
         working-directory: app
         run: npx expo export --platform web
 
-      # enablement:true auto-enables Pages (source: GitHub Actions) on first
-      # run when the token allows it; if this step fails, enable it once by
-      # hand: repo Settings -> Pages -> Source: GitHub Actions, then re-run.
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          enablement: true
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: app/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: app/dist
