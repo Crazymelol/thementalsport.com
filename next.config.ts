@@ -8,6 +8,13 @@ const nextConfig: NextConfig = {
         destination: '/start-here',
         permanent: false,
       },
+      {
+        // Web preview of the training app (static Expo export in public/app).
+        // public/ has no directory-index behavior, so point /app at the file.
+        source: '/app',
+        destination: '/app/index.html',
+        permanent: false,
+      },
     ];
   },
 };
