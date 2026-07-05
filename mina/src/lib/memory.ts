@@ -70,28 +70,38 @@ function parseEntry(raw: unknown): Memory | null {
   return null;
 }
 
-/** Save a durable fact. Newest entries come back first. */
-export async function addMemory(text: string): Promise<Memory> {
+/** Save a durable fact under an arbitrary list key. Newest entries come back first. */
+export async function addMemoryAt(key: string, text: string): Promise<Memory> {
   const mem: Memory = { id: newId(), text: text.trim(), createdAt: new Date().toISOString() };
   if (!memoryConfigured()) return mem;
   try {
-    await redis().lpush(MEMORY_KEY, JSON.stringify(mem));
+    await redis().lpush(key, JSON.stringify(mem));
   } catch (e) {
     console.error("addMemory failed:", e);
   }
   return mem;
 }
 
-/** List memories, newest first. */
-export async function listMemories(limit = INJECT_LIMIT): Promise<Memory[]> {
+/** Save a durable fact in the principal's store. */
+export async function addMemory(text: string): Promise<Memory> {
+  return addMemoryAt(MEMORY_KEY, text);
+}
+
+/** List memories under an arbitrary list key, newest first. */
+export async function listMemoriesAt(key: string, limit = INJECT_LIMIT): Promise<Memory[]> {
   if (!memoryConfigured()) return [];
   try {
-    const raw = await redis().lrange(MEMORY_KEY, 0, limit - 1);
+    const raw = await redis().lrange(key, 0, limit - 1);
     return raw.map(parseEntry).filter((m): m is Memory => m !== null);
   } catch (e) {
     console.error("listMemories failed:", e);
     return [];
   }
+}
+
+/** List the principal's memories, newest first. */
+export async function listMemories(limit = INJECT_LIMIT): Promise<Memory[]> {
+  return listMemoriesAt(MEMORY_KEY, limit);
 }
 
 /**
@@ -110,9 +120,9 @@ export function scoreMemory(text: string, query: string): number {
   return score;
 }
 
-/** Search memories by keyword relevance. */
-export async function searchMemories(query: string): Promise<Memory[]> {
-  const all = await listMemories(200);
+/** Search memories under an arbitrary list key by keyword relevance. */
+export async function searchMemoriesAt(key: string, query: string): Promise<Memory[]> {
+  const all = await listMemoriesAt(key, 200);
   return all
     .map((m) => ({ m, s: scoreMemory(m.text, query) }))
     .filter((x) => x.s > 0)
@@ -120,23 +130,46 @@ export async function searchMemories(query: string): Promise<Memory[]> {
     .map((x) => x.m);
 }
 
-/** Delete a memory by id. */
-export async function deleteMemory(id: string): Promise<{ deleted: boolean; text?: string }> {
+/** Search the principal's memories by keyword relevance. */
+export async function searchMemories(query: string): Promise<Memory[]> {
+  return searchMemoriesAt(MEMORY_KEY, query);
+}
+
+/** Delete a memory by id under an arbitrary list key. */
+export async function deleteMemoryAt(key: string, id: string): Promise<{ deleted: boolean; text?: string }> {
   if (!memoryConfigured()) return { deleted: false };
   try {
-    const all = await listMemories(1000);
+    const all = await listMemoriesAt(key, 1000);
     const target = all.find((m) => m.id === id);
     if (!target) return { deleted: false };
     const kept = all.filter((m) => m.id !== id);
     // Rewrite the list (small N): clear then re-push oldest-first to preserve order.
-    await redis().del(MEMORY_KEY);
+    await redis().del(key);
     for (let i = kept.length - 1; i >= 0; i--) {
-      await redis().lpush(MEMORY_KEY, JSON.stringify(kept[i]));
+      await redis().lpush(key, JSON.stringify(kept[i]));
     }
     return { deleted: true, text: target.text };
   } catch (e) {
     console.error("deleteMemory failed:", e);
     return { deleted: false };
+  }
+}
+
+/** Delete one of the principal's memories by id. */
+export async function deleteMemory(id: string): Promise<{ deleted: boolean; text?: string }> {
+  return deleteMemoryAt(MEMORY_KEY, id);
+}
+
+/** INCR a counter key, setting a TTL on first increment. null = store unconfigured (caller decides). */
+export async function incrDailyCounter(key: string, ttlSeconds = 86_400): Promise<number | null> {
+  if (!memoryConfigured()) return null;
+  try {
+    const n = await redis().incr(key);
+    if (n === 1) await redis().expire(key, ttlSeconds);
+    return n;
+  } catch (e) {
+    console.error("incrDailyCounter failed:", e);
+    return null;
   }
 }
 

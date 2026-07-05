@@ -33,7 +33,7 @@ const IDLE_TIMEOUT_MS = 20_000;
  * If no chunk arrives within IDLE_TIMEOUT_MS, the iterator throws and the
  * caller's try/catch surfaces an error instead of spinning forever.
  */
-async function* withIdleTimeout(
+export async function* withIdleTimeout(
   stream: AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>,
 ): AsyncGenerator<OpenAI.Chat.Completions.ChatCompletionChunk> {
   const it = stream[Symbol.asyncIterator]();
