@@ -6,6 +6,7 @@ import { getDay } from "../../lib/content";
 import { unlockedDayCount } from "../../lib/progress";
 import { getOrInitProgress, markDayComplete, type Progress } from "../../store/progress";
 import { syncDailyReminder } from "../../lib/reminders";
+import { ReminderRow } from "../../ui/ReminderRow";
 import { C } from "../../ui/theme";
 
 export default function Today() {
@@ -43,6 +44,7 @@ export default function Today() {
       >
         <Text style={s.btnText}>{done ? "✓ Day complete" : "Mark day complete"}</Text>
       </Pressable>
+      <ReminderRow progress={p} onChange={setP} />
     </ScrollView>
   );
 }
