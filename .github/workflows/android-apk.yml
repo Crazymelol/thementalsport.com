@@ -1,0 +1,66 @@
+name: Android APK
+
+# Builds an installable Android APK of the training app and attaches it to a
+# GitHub Release, so it can be downloaded and side-loaded straight from a
+# phone browser. Release builds are signed with the debug keystore (Expo
+# prebuild's default) — fine for direct installs; Play Store uploads get
+# proper signing via EAS later.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [master]
+    paths: ['app/**', '.github/workflows/android-apk.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Generate native Android project
+        working-directory: app
+        run: npx expo prebuild --platform android --no-install
+
+      - name: Build release APK
+        working-directory: app/android
+        env:
+          # Baked into the JS bundle at build time. The coach endpoint stays
+          # dormant until COACH_APP_TOKEN is also set on the mina deployment;
+          # the token is rotatable and rate-limited per device.
+          EXPO_PUBLIC_COACH_URL: https://mina.vercel.app
+          EXPO_PUBLIC_COACH_TOKEN: bd27cf00f26cd9e09d673b77706a690a8c5a3601a6a2dc7e104ecfc7d2bc4a81
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Rename APK
+        run: cp app/android/app/build/outputs/apk/release/app-release.apk the-mental-sport.apk
+
+      - name: Attach APK to a release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: app-build-${{ github.run_number }}
+          name: The Mental Sport app — build ${{ github.run_number }}
+          body: |
+            Installable Android APK of the training app (48-day program, tools, streaks, coach).
+            On your phone: download `the-mental-sport.apk`, open it, allow "install from this source" if asked, install.
+          files: the-mental-sport.apk
