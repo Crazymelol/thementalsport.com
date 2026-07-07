@@ -2094,7 +2094,9 @@
       "qa_notes": "A cosmetic word-spacing glitch appears for under a second during the opening typewriter-reveal animation before self-correcting — not visible long enough to harm legibility, but worth a look if the reveal animation is ever revisited.",
       "qa_reviewed_at": "2026-06-24T07:53:43Z",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-24T05:27:52.726Z"
+      "pinterest_posted_at": "2026-06-24T05:27:52.726Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-07T15:59:30.908Z"
     },
     {
       "id": "short-025",
@@ -2934,6 +2936,6 @@
   "caption_rotation": {
     "x": 2,
     "pinterest": 3,
-    "tiktok": 6
+    "tiktok": 0
   }
 }
