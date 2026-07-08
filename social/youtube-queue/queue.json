@@ -2171,7 +2171,9 @@
       "qa_notes": "",
       "qa_reviewed_at": "2026-06-24T07:53:43Z",
       "pinterest_status": "posted",
-      "pinterest_posted_at": "2026-06-24T12:00:52.119Z"
+      "pinterest_posted_at": "2026-06-24T12:00:52.119Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-08T15:42:25.304Z"
     },
     {
       "id": "short-026",
@@ -2938,6 +2940,6 @@
   "caption_rotation": {
     "x": 3,
     "pinterest": 3,
-    "tiktok": 0
+    "tiktok": 1
   }
 }
