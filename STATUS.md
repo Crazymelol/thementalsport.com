@@ -1,13 +1,13 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-08 20:30 UTC_
+_Updated 2026-07-09 10:39 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 27 | Warm-Up Nerves Are Lying To You | 2026-07-08 04:34 |
+| 🐦 X | 28 | Stop Saying 'I Have To.' Say This… | 2026-07-09 05:12 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
 | 🎵 TikTok | 29 | The Mental Side Of Coming Back Fr… | 2026-07-08 15:42 |
 
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| Warm-Up Nerves Are Lying To You | 5 | 0 | 0 | 0 |
-| Playing Not To Lose Is Why You're… | 11 | 0 | 0 | 0 |
-| You Used To Do This In Your Sleep… | 14 | 0 | 0 | 0 |
+| Stop Saying 'I Have To.' Say This… | 5 | 0 | 0 | 0 |
+| Warm-Up Nerves Are Lying To You | 11 | 0 | 0 | 0 |
+| Playing Not To Lose Is Why You're… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
