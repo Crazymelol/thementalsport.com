@@ -2392,7 +2392,9 @@
       },
       "qa_status": "approved",
       "qa_notes": "",
-      "qa_reviewed_at": "2026-06-24T07:53:43Z"
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-11T14:36:55.421Z"
     },
     {
       "id": "short-029",
@@ -2950,6 +2952,6 @@
   "caption_rotation": {
     "x": 6,
     "pinterest": 3,
-    "tiktok": 3
+    "tiktok": 4
   }
 }
