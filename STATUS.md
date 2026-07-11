@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-11 09:00 UTC_
+_Updated 2026-07-11 20:17 UTC_
 
 ## Progress
 
@@ -9,7 +9,7 @@ _Updated 2026-07-11 09:00 UTC_
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
 | 🐦 X | 30 | Stuck On The Bench? Read This. | 2026-07-11 04:32 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
-| 🎵 TikTok | 31 | Get Your Opponent Out Of Your Head | 2026-07-10 15:50 |
+| 🎵 TikTok | 32 | Perfectionism Is Quietly Wrecking… | 2026-07-11 14:36 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
@@ -31,9 +31,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🎵 TikTok performance
 | Post | Views | Likes | Comments |
 |---|---|---|---|
+| Perfectionism Is Quietly Wrecking… | — | 1 | 0 |
 | Get Your Opponent Out Of Your Head | — | 1 | 0 |
-| Stuck On The Bench? Read This. | — | 1 | 0 |
-| The Mental Side Of Coming Back Fr… | — | 2 | 0 |
+| Stuck On The Bench? Read This. | — | 2 | 0 |
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
