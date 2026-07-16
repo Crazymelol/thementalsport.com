@@ -1,13 +1,13 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-15 20:20 UTC_
+_Updated 2026-07-16 09:23 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 34 | The Most Damaging Seat In Youth S… | 2026-07-15 04:25 |
+| 🐦 X | 35 | The Warning Signs Of Athlete Burn… | 2026-07-16 04:28 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
 | 🎵 TikTok | 36 | Why Picking One Sport Too Early B… | 2026-07-15 15:09 |
 
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| The Most Damaging Seat In Youth S… | 5 | 0 | 0 | 0 |
-| Should You Let Your Kid Quit Thei… | 11 | 0 | 0 | 0 |
-| Perfectionism Is Quietly Wrecking… | 14 | 0 | 0 | 0 |
+| The Warning Signs Of Athlete Burn… | 5 | 0 | 0 | 0 |
+| The Most Damaging Seat In Youth S… | 11 | 0 | 0 | 0 |
+| Should You Let Your Kid Quit Thei… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
