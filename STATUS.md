@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-16 09:23 UTC_
+_Updated 2026-07-16 20:15 UTC_
 
 ## Progress
 
@@ -9,7 +9,7 @@ _Updated 2026-07-16 09:23 UTC_
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
 | 🐦 X | 35 | The Warning Signs Of Athlete Burn… | 2026-07-16 04:28 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
-| 🎵 TikTok | 36 | Why Picking One Sport Too Early B… | 2026-07-15 15:09 |
+| 🎵 TikTok | 37 | Stop Comparing Your Kids | 2026-07-16 15:20 |
 
 ## 🎥 YouTube performance
 _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video stats._
@@ -31,9 +31,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🎵 TikTok performance
 | Post | Views | Likes | Comments |
 |---|---|---|---|
+| Stop Comparing Your Kids | — | 1 | 0 |
 | Why Picking One Sport Too Early B… | — | 1 | 0 |
-| The Warning Signs Of Athlete Burn… | — | 1 | 0 |
-| The Most Damaging Seat In Youth S… | — | 2 | 0 |
+| The Warning Signs Of Athlete Burn… | — | 2 | 0 |
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
