@@ -2826,7 +2826,9 @@
       },
       "qa_status": "approved",
       "qa_notes": "Loudness sits near the quiet end of the acceptable band (-19.5 LUFS) but still within tolerance, no action needed.",
-      "qa_reviewed_at": "2026-06-24T07:53:43Z"
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-17T15:03:46.477Z"
     },
     {
       "id": "short-035",
@@ -2974,6 +2976,6 @@
   "caption_rotation": {
     "x": 4,
     "pinterest": 3,
-    "tiktok": 2
+    "tiktok": 3
   }
 }
