@@ -1,13 +1,13 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-17 20:17 UTC_
+_Updated 2026-07-18 09:00 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 36 | Why Picking One Sport Too Early B… | 2026-07-17 04:27 |
+| 🐦 X | 37 | Stop Comparing Your Kids | 2026-07-18 04:18 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
 | 🎵 TikTok | 38 | When Your Kid Cries After Losing | 2026-07-17 15:03 |
 
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| Why Picking One Sport Too Early B… | 5 | 0 | 0 | 0 |
-| The Warning Signs Of Athlete Burn… | 11 | 0 | 0 | 0 |
-| The Most Damaging Seat In Youth S… | 14 | 0 | 0 | 0 |
+| Stop Comparing Your Kids | 5 | 0 | 0 | 0 |
+| Why Picking One Sport Too Early B… | 11 | 0 | 0 | 0 |
+| The Warning Signs Of Athlete Burn… | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
