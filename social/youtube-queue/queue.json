@@ -2976,12 +2976,14 @@
       },
       "qa_status": "approved",
       "qa_notes": "Loudness sits near the quiet end of the acceptable range (-19.3 LUFS) but is not a rejection-level issue.",
-      "qa_reviewed_at": "2026-06-24T07:53:43Z"
+      "qa_reviewed_at": "2026-06-24T07:53:43Z",
+      "tiktok_status": "posted",
+      "tiktok_posted_at": "2026-07-19T14:36:45.659Z"
     }
   ],
   "caption_rotation": {
     "x": 6,
     "pinterest": 3,
-    "tiktok": 4
+    "tiktok": 5
   }
 }
