@@ -1,13 +1,13 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-20 20:33 UTC_
+_Updated 2026-07-21 09:40 UTC_
 
 ## Progress
 
 | Platform | Posted | Last post | When (UTC) |
 |---|---|---|---|
 | 🎥 YouTube | 21 | Boring Routines Win Championships | 2026-06-20 16:33 |
-| 🐦 X | 39 | The Halftime Talk That Actually W… | 2026-07-20 04:54 |
+| 🐦 X | 40 | Rebuilding A Team After A Losing … | 2026-07-21 04:36 |
 | 📌 Pinterest | 31 | Get Your Opponent Out Of Your Head | 2026-06-24 22:33 |
 | 🎵 TikTok | 40 | Rebuilding A Team After A Losing … | 2026-07-19 14:36 |
 
@@ -17,9 +17,9 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| The Halftime Talk That Actually W… | 5 | 0 | 0 | 0 |
-| When Your Kid Cries After Losing | 11 | 0 | 0 | 0 |
-| Stop Comparing Your Kids | 14 | 0 | 0 | 0 |
+| Rebuilding A Team After A Losing … | 5 | 0 | 0 | 0 |
+| The Halftime Talk That Actually W… | 11 | 0 | 0 | 0 |
+| When Your Kid Cries After Losing | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
 | Post | Saves |
