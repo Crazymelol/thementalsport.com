@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-07-23 20:21 UTC_
+_Updated 2026-07-24 09:27 UTC_
 
 ## Progress
 
@@ -29,11 +29,7 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 | The Mental Side Of Coming Back Fr… | — |
 
 ## 🎵 TikTok performance
-| Post | Views | Likes | Comments |
-|---|---|---|---|
-| Rebuilding A Team After A Losing … | — | 1 | 0 |
-| The Halftime Talk That Actually W… | — | 1 | 0 |
-| When Your Kid Cries After Losing | — | 2 | 0 |
+_TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
