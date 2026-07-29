@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { X, Mail, CheckCircle2, AlertCircle, Download } from 'lucide-react';
+import { subscribeEmail } from '../lib/subscribe';
 
 interface NewsletterModalProps {
     isOpen: boolean;
@@ -29,17 +30,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
         setStatus('loading');
 
         try {
-            const res = await fetch('/api/subscribe', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
-            });
-
-            if (!res.ok) {
-                const errorData = await res.json().catch(() => null);
-                console.error('Newsletter subscription failed. Status:', res.status, 'Response:', errorData);
-                throw new Error(errorData?.error || 'Subscription failed');
-            }
+            await subscribeEmail(email);
 
             // Track conversion
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,7 +54,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
         } catch (error) {
             console.error('Newsletter subscription error:', error);
             setStatus('error');
-            setErrorMessage('Something went wrong. Please try again.');
+            setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
         }
     };
 

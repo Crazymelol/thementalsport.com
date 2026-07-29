@@ -10,7 +10,7 @@ on:
   workflow_dispatch: {}
   push:
     branches: [master]
-    paths: ['app/**', '.github/workflows/android-apk.yml']
+    paths: ['mobile/**', '.github/workflows/android-apk.yml']
 
 permissions:
   contents: write
@@ -35,15 +35,15 @@ jobs:
           java-version: 17
 
       - name: Install app dependencies
-        working-directory: app
+        working-directory: mobile
         run: npm ci
 
       - name: Generate native Android project
-        working-directory: app
+        working-directory: mobile
         run: npx expo prebuild --platform android --no-install
 
       - name: Build release APK
-        working-directory: app/android
+        working-directory: mobile/android
         env:
           # Baked into the JS bundle at build time. The coach endpoint stays
           # dormant until COACH_APP_TOKEN is also set on the mina deployment;
@@ -53,7 +53,7 @@ jobs:
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Rename APK
-        run: cp app/android/app/build/outputs/apk/release/app-release.apk the-mental-sport.apk
+        run: cp mobile/android/app/build/outputs/apk/release/app-release.apk the-mental-sport.apk
 
       - name: Attach APK to a release
         uses: softprops/action-gh-release@v2

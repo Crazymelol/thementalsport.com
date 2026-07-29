@@ -1,0 +1,55 @@
+name: Website Deploy (free hosting)
+
+# Builds the static export of the Next.js site and publishes it to the
+# gh-pages branch, served free by GitHub Pages on the custom domain
+# thementalsport.com (CNAME below). This replaces Shopify as the host for the
+# site itself. peaceiris writes .nojekyll automatically so the _next/ assets
+# are served.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'next.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/site-deploy.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Build static export
+        env:
+          STATIC_EXPORT: '1'
+          # Public Kit/ConvertKit form id activates email signups on the static
+          # site. Set it as a repo Actions variable to turn signups on; blank is
+          # fine — the forms show a clear "email us" message until it's set.
+          NEXT_PUBLIC_KIT_FORM_ID: ${{ vars.NEXT_PUBLIC_KIT_FORM_ID }}
+        run: npx next build --webpack
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: out
+          cname: thementalsport.com

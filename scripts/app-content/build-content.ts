@@ -9,7 +9,7 @@ import matter from 'gray-matter';
 const ROOT = process.cwd();
 const SRC_DIR = path.join(ROOT, 'src/content/articles');
 const OUTPUTS = [
-  path.join(ROOT, 'app/assets/content/titans.json'),
+  path.join(ROOT, 'mobile/assets/content/titans.json'),
   path.join(ROOT, 'mina/src/data/coach-content.json'),
 ];
 const TOTAL_DAYS = 48;

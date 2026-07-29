@@ -7,7 +7,6 @@ export const metadata = {
     description: 'A day-by-day mental performance system for competitive athletes — pressure, sleep, nutrition, identity, and competition.',
 };
 
-export const revalidate = 0;
 
 export default function TitansProtocolSeries() {
     const articles = getSeriesArticles();
