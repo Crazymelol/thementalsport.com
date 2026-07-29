@@ -1,1 +1,0 @@
-self.__SSG_MANIFEST=new Set(["\u002Fblog\u002F[slug]","\u002Fbook\u002F[slug]","\u002Fmental-performance\u002F[sport]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
