@@ -9,7 +9,6 @@ export const metadata = {
     description: 'Articles on mental performance, fencing psychology, and high-performance neuroscience.',
 };
 
-export const revalidate = 0; // Disable cache to ensure Latest Articles always show
 
 function ArticleCard({ article }: { article: Article }) {
     const book = pickBook(article.tags);

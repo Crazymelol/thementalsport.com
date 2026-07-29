@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, BookOpen, X } from 'lucide-react';
+import { subscribeEmail } from '../lib/subscribe';
 
 export default function LeadMagnet() {
     const [email, setEmail] = useState('');
@@ -14,16 +15,8 @@ export default function LeadMagnet() {
         e.preventDefault();
         setStatus('loading');
         try {
-            const res = await fetch('/api/subscribe', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, tag: 'lead-magnet-free-chapter' }),
-            });
-            if (res.ok) {
-                setStatus('success');
-            } else {
-                setStatus('error');
-            }
+            await subscribeEmail(email, 'lead-magnet-free-chapter');
+            setStatus('success');
         } catch {
             setStatus('error');
         }

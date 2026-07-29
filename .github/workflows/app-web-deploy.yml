@@ -1,6 +1,6 @@
 name: Training App Web Deploy
 
-# Builds the Expo web export of app/ and publishes it to the gh-pages branch:
+# Builds the Expo web export of mobile/ and publishes it to the gh-pages branch:
 # https://crazymelol.github.io/thementalsport.com/
 # Branch-based Pages is used (not actions/deploy-pages) because the default
 # workflow token can't auto-enable a Pages site; pushing gh-pages can.
@@ -10,7 +10,7 @@ name: Training App Web Deploy
 on:
   push:
     branches: [master]
-    paths: ['app/**', '.github/workflows/app-web-deploy.yml']
+    paths: ['mobile/**', '.github/workflows/app-web-deploy.yml']
   workflow_dispatch: {}
 
 permissions:
@@ -31,15 +31,15 @@ jobs:
           node-version: 20
 
       - name: Install app dependencies
-        working-directory: app
+        working-directory: mobile
         run: npm ci
 
       - name: Export web build
-        working-directory: app
+        working-directory: mobile
         run: npx expo export --platform web
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: app/dist
+          publish_dir: mobile/dist

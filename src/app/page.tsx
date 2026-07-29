@@ -7,7 +7,6 @@ import Image from 'next/image';
 import NewsletterWrapper from '@/components/NewsletterWrapper';
 import LeadMagnet from '@/components/LeadMagnet';
 
-export const revalidate = 0; // Ensure homepage always shows latest articles
 
 const HOMEPAGE_BOOK_IDS = ['the-competition-protocol', 'mental-blocks', 'confidence-building'];
 
