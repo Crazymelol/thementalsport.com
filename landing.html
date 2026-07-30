@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Mental Performance Protocol — Train the mind like you train the body</title>
+<meta name="description" content="The complete mental-training system for athletes: beat pressure, quiet nerves, sharpen focus and build confidence that survives a bad game." />
+<style>
+  /* ---------- Theme tokens ---------- */
+  :root{
+    --bg:#fafafa; --bg2:#ffffff; --surface:#ffffff; --surface2:#f4f4f5;
+    --text:#0a0a0b; --dim:#52525b; --line:#e4e4e7;
+    --accent:#dc2626; --accent-ink:#ffffff; --glow:rgba(220,38,38,.20);
+    --shadow:0 1px 2px rgba(0,0,0,.06),0 12px 40px rgba(0,0,0,.08);
+    --maxw:1120px;
+  }
+  :root[data-theme="dark"]{
+    --bg:#08090c; --bg2:#0d0f13; --surface:#121419; --surface2:#171a20;
+    --text:#f4f5f7; --dim:#9aa3b0; --line:#242832;
+    --accent:#ef4444; --accent-ink:#0a0a0b; --glow:rgba(239,68,68,.28);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 24px 60px rgba(0,0,0,.55);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme]){ --bg:#fafafa; --bg2:#fff; --surface:#fff; --surface2:#f4f4f5; --text:#0a0a0b; --dim:#52525b; --line:#e4e4e7; --accent:#dc2626; --accent-ink:#fff; --glow:rgba(220,38,38,.18); }
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .kicker{font-size:.72rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+  h1,h2,h3{line-height:1.05;letter-spacing:-.02em;margin:0}
+  h1{font-weight:900;font-size:clamp(2.3rem,7vw,4.6rem);text-transform:uppercase}
+  h2{font-weight:900;font-size:clamp(1.8rem,4.4vw,3rem);text-transform:uppercase}
+  h3{font-weight:800;font-size:1.12rem}
+  p{margin:0}
+  .muted{color:var(--dim)}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;justify-content:center;
+    font-weight:800;font-size:.95rem;letter-spacing:.02em;text-transform:uppercase;
+    padding:16px 26px;border-radius:12px;border:1px solid transparent;cursor:pointer;
+    text-decoration:none;transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+    background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 30px var(--glow);
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 44px var(--glow)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:transparent;color:var(--text);border-color:var(--line);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.sm{padding:10px 16px;font-size:.8rem;border-radius:10px}
+  .btn svg{width:1.05em;height:1.05em}
+  @media (prefers-reduced-motion: reduce){ .btn:hover{transform:none} }
+
+  /* ---------- Header ---------- */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:color-mix(in srgb, var(--bg) 78%, transparent);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;font-size:.95rem;text-decoration:none}
+  .logo .mark{width:30px;height:30px;border-radius:8px;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);flex:none}
+  .logo .mark svg{width:18px;height:18px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{text-decoration:none;font-size:.9rem;font-weight:600;color:var(--dim)}
+  .nav-links a:hover{color:var(--text)}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .iconbtn{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer;display:grid;place-items:center}
+  .iconbtn:hover{border-color:var(--accent)}
+  .iconbtn svg{width:18px;height:18px}
+  @media(max-width:820px){ .nav-links{display:none} }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:clamp(56px,9vw,120px) 0 60px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:-30% 0 auto;height:620px;z-index:0;
+    background:radial-gradient(60% 60% at 70% 20%, var(--glow), transparent 70%);
+    animation:float 14s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(26px)}}
+  @media (prefers-reduced-motion: reduce){ .hero::before{animation:none} }
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  @media(max-width:900px){ .hero .wrap{grid-template-columns:1fr;gap:34px} }
+  .hero h1{margin:18px 0 0}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .lead{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--dim);margin:20px 0 30px;max-width:38ch}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .price-note{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:.9rem;color:var(--dim)}
+  .price-note b{color:var(--text)}
+  .trust{display:flex;flex-wrap:wrap;gap:18px 26px;margin-top:34px;font-size:.82rem;color:var(--dim)}
+  .trust span{display:inline-flex;align-items:center;gap:8px}
+  .trust svg{width:16px;height:16px;color:var(--accent);flex:none}
+
+  /* Hero visual card */
+  .cover{position:relative;border-radius:20px;border:1px solid var(--line);background:
+      linear-gradient(180deg, color-mix(in srgb,var(--accent) 16%, var(--surface)), var(--surface));
+    box-shadow:var(--shadow);padding:26px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:space-between}
+  .cover::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,var(--glow),transparent 65%)}
+  .cover .tag{align-self:flex-start;font-size:.68rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+    padding:7px 12px;border-radius:999px;background:var(--accent);color:var(--accent-ink);position:relative;z-index:1}
+  .cover .title{position:relative;z-index:1}
+  .cover .title small{display:block;color:var(--dim);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;margin-bottom:8px}
+  .cover .title strong{display:block;font-size:1.9rem;font-weight:900;line-height:1.02;text-transform:uppercase;letter-spacing:-.01em}
+  .cover .rings{position:absolute;left:-40px;bottom:-40px;opacity:.5;z-index:0}
+  .cover ul{list-style:none;margin:14px 0 0;padding:0;position:relative;z-index:1;display:grid;gap:8px}
+  .cover ul li{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--text)}
+  .cover ul li svg{width:16px;height:16px;color:var(--accent);flex:none}
+
+  /* ---------- Marquee stat band ---------- */
+  .band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden}
+  .band .row{display:flex;gap:0;white-space:nowrap;animation:slide 26s linear infinite}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){ .band .row{animation:none;flex-wrap:wrap;white-space:normal} }
+  .band .item{padding:16px 30px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:.85rem;display:flex;align-items:center;gap:12px}
+  .band .item b{color:var(--accent);font-size:1.05rem}
+  .band .item::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+  /* ---------- Sections ---------- */
+  section{padding:clamp(56px,8vw,96px) 0}
+  .head{max-width:640px;margin-bottom:44px}
+  .head h2{margin-top:12px}
+  .head p{margin-top:16px;color:var(--dim);font-size:1.05rem}
+
+  .grid{display:grid;gap:18px}
+  .cols-3{grid-template-columns:repeat(3,1fr)}
+  .cols-2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:860px){ .cols-3{grid-template-columns:1fr 1fr} }
+  @media(max-width:620px){ .cols-3,.cols-2{grid-template-columns:1fr} }
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+  .card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 50%, var(--line));box-shadow:var(--shadow)}
+  @media (prefers-reduced-motion: reduce){ .card:hover{transform:none} }
+  .card .num{font-weight:900;font-size:.8rem;letter-spacing:.2em;color:var(--accent)}
+  .card h3{margin:12px 0 8px}
+  .card p{color:var(--dim);font-size:.95rem}
+  .ic{width:44px;height:44px;border-radius:12px;background:var(--surface2);display:grid;place-items:center;color:var(--accent);margin-bottom:14px}
+  .ic svg{width:22px;height:22px}
+
+  /* pain / for-you lists */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:760px){ .split{grid-template-columns:1fr} }
+  .list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  .list li{display:flex;gap:12px;align-items:flex-start;font-size:1rem}
+  .list li svg{width:20px;height:20px;flex:none;margin-top:2px}
+  .yes svg{color:var(--accent)} .no svg{color:var(--dim)}
+
+  /* includes */
+  .includes{display:grid;gap:12px}
+  .inc{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .inc .l{display:flex;align-items:center;gap:14px}
+  .inc .l svg{width:20px;height:20px;color:var(--accent);flex:none}
+  .inc .v{color:var(--dim);font-weight:700;font-size:.85rem;white-space:nowrap}
+  .inc .v s{opacity:.6;margin-right:8px;font-weight:500}
+
+  /* coach */
+  .coach{display:grid;grid-template-columns:180px 1fr;gap:30px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px}
+  @media(max-width:640px){ .coach{grid-template-columns:1fr;text-align:center} }
+  .avatar{width:180px;height:180px;border-radius:18px;background:linear-gradient(160deg,var(--accent),#7f1d1d);display:grid;place-items:center;color:#fff;font-weight:900;font-size:3rem;letter-spacing:-.02em;box-shadow:var(--shadow);margin:0 auto}
+
+  /* pricing */
+  .pricing{max-width:560px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+  .pricing .top{padding:30px 30px 8px;text-align:center}
+  .pricing .amount{font-weight:900;font-size:3.6rem;letter-spacing:-.03em;line-height:1;margin:10px 0 6px}
+  .pricing .body{padding:6px 30px 30px}
+  .pricing .body .list{margin:18px 0 24px}
+  .pricing .foot{padding:16px 30px;border-top:1px solid var(--line);text-align:center;color:var(--dim);font-size:.82rem}
+  .full{width:100%}
+
+  /* guarantee */
+  .guarantee{display:flex;gap:20px;align-items:center;border:1px dashed color-mix(in srgb,var(--accent) 50%,var(--line));border-radius:18px;padding:26px;background:color-mix(in srgb,var(--accent) 6%, var(--surface))}
+  .guarantee .seal{width:64px;height:64px;flex:none;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+  .guarantee .seal svg{width:32px;height:32px}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto;display:grid;gap:12px}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  details[open]{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+  summary{list-style:none;cursor:pointer;padding:20px 22px;font-weight:700;display:flex;justify-content:space-between;gap:16px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary .chev{transition:transform .2s ease;color:var(--accent);flex:none}
+  details[open] summary .chev{transform:rotate(180deg)}
+  .faq .ans{padding:0 22px 22px;color:var(--dim)}
+
+  /* final cta */
+  .final{position:relative;text-align:center;border-radius:26px;padding:clamp(40px,7vw,72px) 26px;overflow:hidden;
+    background:linear-gradient(160deg, color-mix(in srgb,var(--accent) 22%, var(--surface)), var(--surface));border:1px solid var(--line)}
+  .final::before{content:"";position:absolute;inset:auto 0 -50% 0;height:400px;background:radial-gradient(50% 60% at 50% 100%,var(--glow),transparent 70%)}
+  .final .wrap2{position:relative;z-index:1;max-width:640px;margin:0 auto}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--dim);font-size:.85rem}
+  .foot-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+  .foot-links a{text-decoration:none}
+  .foot-links a:hover{color:var(--accent)}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1;transform:none;transition:none} }
+
+  .center{text-align:center}
+  .mt{margin-top:26px}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="The Mental Sport home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4 0-7 3-7 7 0 3 2 5 2 7h10c0-2 2-4 2-7 0-4-3-7-7-7Z"/><path d="M9 21h6"/></svg>
+      </span>
+      The Mental Sport
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#system">The System</a>
+      <a href="#included">What's Included</a>
+      <a href="#coach">Coach</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <button class="iconbtn" id="theme" type="button" aria-label="Toggle light and dark mode">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+      </button>
+      <a class="btn sm" data-gumroad-action="buy" href="#enroll">Enroll — <span data-gumroad-field="price">$297</span></a>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker" data-gumroad-field="name">The Mental Performance Protocol</span>
+      <h1>Train the mind<br>like you train<br>the <em>body.</em></h1>
+      <p class="lead">The complete mental-training system for athletes. Beat pressure, quiet the nerves, lock in focus, and build the kind of confidence that survives a bad game.</p>
+      <div class="cta-row">
+        <a class="btn" data-gumroad-action="buy" href="#enroll">
+          Get instant access
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn ghost" href="#system">See what's inside</a>
+      </div>
+      <div class="price-note">
+        <b style="font-size:1.05rem"><span data-gumroad-field="price">$297</span></b>
+        <span>· one-time · lifetime access</span>
+      </div>
+      <div class="trust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 30-day guarantee</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z"/></svg> Trained on real athletes</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg> Learn at your pace</span>
+      </div>
+    </div>
+
+    <aside class="cover" aria-hidden="true">
+      <svg class="rings" width="180" height="180" viewBox="0 0 180 180" fill="none" stroke="currentColor" opacity=".18">
+        <circle cx="90" cy="90" r="80" stroke-width="1"/><circle cx="90" cy="90" r="58" stroke-width="1"/><circle cx="90" cy="90" r="36" stroke-width="1"/>
+      </svg>
+      <span class="tag">Video course</span>
+      <div class="title">
+        <small>The Mental Sport presents</small>
+        <strong>The Mental<br>Performance<br>Protocol</strong>
+      </div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 8 modules of video lessons</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Step-by-step protocols</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Worksheets + the full book library</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= STAT BAND ================= -->
+<div class="band" aria-label="Why the mental game matters">
+  <div class="row">
+    <span class="item"><b>77%</b> of athletes choke under pressure</span>
+    <span class="item"><b>90 sec</b> to reset after a mistake</span>
+    <span class="item">Pressure reveals trained skills — <b>it doesn't build them</b></span>
+    <span class="item"><b>1 exhale</b> longer than the inhale flips the switch</span>
+    <span class="item">Confidence built on applause <b>dies in silence</b></span>
+    <!-- duplicate for seamless marquee -->
+    <span class="item"><b>77%</b> of athletes choke under pressure</span>
+    <span class="item"><b>90 sec</b> to reset after a mistake</span>
+    <span class="item">Pressure reveals trained skills — <b>it doesn't build them</b></span>
+    <span class="item"><b>1 exhale</b> longer than the inhale flips the switch</span>
+    <span class="item">Confidence built on applause <b>dies in silence</b></span>
+  </div>
+</div>
+
+<!-- ================= PROBLEM ================= -->
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">The gap nobody trains</span>
+      <h2>Talent gets you to the start line. Your mind decides the finish.</h2>
+      <p>You've put in the reps. But when it matters most, the nerves take over, the head gets loud, one mistake spirals into three — and all that training never shows up. That gap isn't a talent problem. It's an untrained skill.</p>
+    </div>
+    <div class="split">
+      <ul class="list no reveal">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Freezing or rushing the moment it counts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> One early error unraveling the whole game</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Confidence that vanishes after a bad result</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Overthinking mechanics until they break</li>
+      </ul>
+      <ul class="list yes reveal">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> A routine that drops your heart rate on command</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> An error-recovery protocol so the spiral never starts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Confidence built on evidence, not outcomes</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Focus cues that put attention where it belongs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE SYSTEM ================= -->
+<section id="system">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Inside the protocol</span>
+      <h2>Eight modules. One trainable mental game.</h2>
+      <p>Each module is a short video lesson plus an exact, repeatable protocol you can run before, during, and after competition — no fluff, no theory for theory's sake.</p>
+    </div>
+    <div class="grid cols-3">
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M5 8s2-2 7-2 7 2 7 2"/></svg></div><div class="num">01</div><h3>The Physiological Reset</h3><p>The double-inhale sigh and box breathing — the fastest evidence-backed way to drop arousal in 60 seconds.</p></div>
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m12 2 2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13 3 9l6.5-.5Z"/></svg></div><div class="num">02</div><h3>The Anchor</h3><p>Condition one physical gesture to a calm, focused state — then trigger flow on demand under real pressure.</p></div>
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div class="num">03</div><h3>Error Recovery</h3><p>Reset gesture, one word, eyes to the next task in three seconds. Practiced enough, the spiral never starts.</p></div>
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div class="num">04</div><h3>The 90-Second Rule</h3><p>The window to feel a setback and let it pass — so emotion never hijacks the next play.</p></div>
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><div class="num">05</div><h3>The 5-Win Protocol</h3><p>Daily confidence reps that build belief from evidence — the kind that holds up when the applause stops.</p></div>
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div><div class="num">06</div><h3>External Focus Cues</h3><p>Target, not technique. Where the ball goes, not how the arm moves — the antidote to choking under the lights.</p></div>
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3v7a6 6 0 0 0 12 0V3M4 3h16M9 21h6M12 16v5"/></svg></div><div class="num">07</div><h3>The Taper Ritual</h3><p>A boring-on-purpose pre-game routine that becomes a circuit breaker when the nerves spike.</p></div>
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a9 9 0 1 0 9 9M12 3v9l6-3"/></svg></div><div class="num">08</div><h3>Competition Day</h3><p>Put it together: warm-up, focus, reset and recovery stacked into one repeatable game-day system.</p></div>
+    </div>
+    <div class="center mt reveal"><a class="btn" data-gumroad-action="buy" href="#enroll">Start the protocol — <span data-gumroad-field="price">$297</span></a></div>
+  </div>
+</section>
+
+<!-- ================= WHAT'S INCLUDED ================= -->
+<section id="included">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Everything you get</span>
+      <h2>A complete toolkit, not just videos.</h2>
+    </div>
+    <div class="includes reveal">
+      <div class="inc"><div class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m10 8 6 4-6 4V8Z"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg><div><h3>8 modules of video lessons</h3><p class="muted" style="font-size:.9rem">The full protocol, taught step by step.</p></div></div><div class="v">Core</div></div>
+      <div class="inc"><div class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v16H4zM8 4v16"/></svg><div><h3>The complete book library (8 titles)</h3><p class="muted" style="font-size:.9rem">Every mental-game book, in PDF.</p></div></div><div class="v"><s>$89</s> Included</div></div>
+      <div class="inc"><div class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg><div><h3>30-day Mental Performance Journal</h3><p class="muted" style="font-size:.9rem">Turn the protocols into daily habits.</p></div></div><div class="v"><s>$29</s> Included</div></div>
+      <div class="inc"><div class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 10v4h4l5 5V5L7 10H3Z"/><path d="M16 8a5 5 0 0 1 0 8"/></svg><div><h3>Audio version of every lesson</h3><p class="muted" style="font-size:.9rem">Train on the commute, in warm-up.</p></div></div><div class="v"><s>$49</s> Included</div></div>
+      <div class="inc"><div class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg><div><h3>Lifetime access &amp; updates</h3><p class="muted" style="font-size:.9rem">Yours to keep, revisit any season.</p></div></div><div class="v">Included</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHO IT'S FOR ================= -->
+<section>
+  <div class="wrap split">
+    <div class="card reveal" style="padding:30px">
+      <span class="kicker">This is for you if</span>
+      <ul class="list yes" style="margin-top:18px">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> You train hard but underperform when it counts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Nerves, doubt or overthinking cost you results</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> You're a coach or parent who wants real tools</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> You'll actually run the protocols, not just watch</li>
+      </ul>
+    </div>
+    <div class="card reveal" style="padding:30px">
+      <span class="kicker">It's not for you if</span>
+      <ul class="list no" style="margin-top:18px">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> You want a magic fix with zero practice</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> You're looking for hype, not a system</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> You won't put in ten focused minutes a day</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COACH ================= -->
+<section id="coach">
+  <div class="wrap">
+    <div class="coach reveal">
+      <div class="avatar" aria-hidden="true">GN</div>
+      <div>
+        <span class="kicker">Your coach</span>
+        <h2 style="font-size:clamp(1.5rem,3vw,2rem);margin:10px 0 12px">Giannis Notaras</h2>
+        <p class="muted">Sport-psychology coach and founder of The Mental Sport. Giannis has spent years turning the research on pressure, focus and confidence into simple protocols athletes can actually run — the same ones taught, module by module, inside this course. No jargon. Just what works when the whistle blows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING / ENROLL ================= -->
+<section id="enroll">
+  <div class="wrap">
+    <div class="head center reveal" style="margin-left:auto;margin-right:auto">
+      <span class="kicker">Enroll today</span>
+      <h2>One decision between you and a trained mind.</h2>
+    </div>
+    <div class="pricing reveal">
+      <div class="top">
+        <span class="kicker" data-gumroad-field="name">The Mental Performance Protocol</span>
+        <div class="amount" data-gumroad-field="price">$297</div>
+        <p class="muted">One-time payment · lifetime access</p>
+      </div>
+      <div class="body">
+        <ul class="list yes">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> All 8 video modules + protocols</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> The complete 8-book library (PDF)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 30-day journal + full audio course</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Lifetime access &amp; every future update</li>
+        </ul>
+        <a class="btn full" data-gumroad-action="buy" href="#enroll">
+          Enroll now — <span data-gumroad-field="price">$297</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="foot">Secure checkout on Gumroad · instant access · 30-day money-back guarantee</div>
+    </div>
+
+    <div class="guarantee reveal mt">
+      <div class="seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <div>
+        <h3>Run it for 30 days, risk-free.</h3>
+        <p class="muted">Go through the protocols. If your mental game isn't sharper, email us within 30 days for a full refund. The risk is on us — because the work works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="head center reveal" style="margin-left:auto;margin-right:auto">
+      <span class="kicker">Questions</span>
+      <h2>Good. Here are answers.</h2>
+    </div>
+    <div class="faq">
+      <details reveal><summary>How is the course delivered? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="ans">The moment you buy, Gumroad unlocks your course content — a set of private video lessons you can watch on any device, at your own pace, forever.</div></details>
+      <details><summary>How much time does it take? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="ans">Lessons are short and practical. Most protocols take ten focused minutes a day to install — the point is reps, not marathons.</div></details>
+      <details><summary>Which sports is it for? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="ans">All of them. Pressure, focus, confidence and recovery are universal — the protocols apply whether you compete individually or on a team, and work just as well for coaches and sports parents.</div></details>
+      <details><summary>Is there really a guarantee? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="ans">Yes. Run the protocols for 30 days. If your mental game isn't sharper, email us for a full refund — no hard feelings.</div></details>
+      <details><summary>Do I keep access? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="ans">Forever. One payment, lifetime access, plus every future update to the protocol at no extra cost.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section>
+  <div class="wrap">
+    <div class="final reveal">
+      <div class="wrap2">
+        <span class="kicker">Your move</span>
+        <h2 style="margin:14px 0 16px">The next big moment is coming. Be ready for it.</h2>
+        <p class="muted" style="font-size:1.05rem;margin-bottom:28px">Stop leaving your best performances to chance. Train the mental game the same way you train everything else — deliberately.</p>
+        <a class="btn" data-gumroad-action="buy" href="#enroll" style="font-size:1.05rem;padding:18px 32px">
+          Get The Mental Performance Protocol — <span data-gumroad-field="price">$297</span>
+        </a>
+        <p class="muted" style="margin-top:16px;font-size:.82rem">Instant access · 30-day guarantee</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-row">
+    <div>© The Mental Sport · by Giannis Notaras</div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="https://notarasio.gumroad.com">All products</a>
+      <a href="https://thementalsport.com" target="_blank" rel="noopener">thementalsport.com</a>
+      <a href="#enroll">Enroll</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    /* ----- Theme toggle (persisted) ----- */
+    var root = document.documentElement, KEY = "tms-theme";
+    try{ var saved = localStorage.getItem(KEY); if(saved){ root.setAttribute("data-theme", saved); } }catch(e){}
+    var btn = document.getElementById("theme");
+    if(btn){
+      btn.addEventListener("click", function(){
+        var cur = root.getAttribute("data-theme");
+        if(!cur){ cur = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; }
+        var next = cur === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try{ localStorage.setItem(KEY, next); }catch(e){}
+      });
+    }
+
+    /* ----- Scroll reveal ----- */
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var els = document.querySelectorAll(".reveal");
+    if(reduce || !("IntersectionObserver" in window)){
+      els.forEach(function(el){ el.classList.add("in"); });
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+      }, { threshold:.12, rootMargin:"0px 0px -8% 0px" });
+      els.forEach(function(el){ io.observe(el); });
+    }
+  })();
+</script>
+</body>
+</html>
