@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     },
 };
 
-const CHECKOUT_STANDARD = 'https://wzawde-yw.myshopify.com/cart/53608319811927:1';
+const CHECKOUT_STANDARD = 'https://notarasio.gumroad.com/l/qjsfty';
 
 const modules = [
     { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
