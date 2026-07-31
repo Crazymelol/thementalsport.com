@@ -7,6 +7,11 @@ const SERIES_SLUG_PREFIX = 'titans-protocol-day-';
 
 const articlesDirectory = path.join(process.cwd(), 'src/content/articles');
 
+export interface FaqItem {
+    q: string;
+    a: string;
+}
+
 export interface Article {
     slug: string;
     title: string;
@@ -14,6 +19,11 @@ export interface Article {
     date: string;
     content: string;
     tags: string[];
+    // Optional structured extras used for SEO/AEO. `faq` renders a visible FAQ
+    // block and emits FAQPage JSON-LD; `keywords` feed <meta keywords> and the
+    // Article schema. Both default to empty when absent from frontmatter.
+    faq: FaqItem[];
+    keywords: string[];
 }
 
 export function getAllArticles(): Article[] {
@@ -36,6 +46,8 @@ export function getAllArticles(): Article[] {
             description: data.description,
             date: data.date,
             tags: data.tags || [],
+            faq: (data.faq as FaqItem[]) || [],
+            keywords: (data.keywords as string[]) || [],
         };
     });
 
@@ -66,6 +78,8 @@ export function getArticleBySlug(slug: string): Article | null {
             description: data.description,
             date: data.date,
             tags: data.tags || [],
+            faq: (data.faq as FaqItem[]) || [],
+            keywords: (data.keywords as string[]) || [],
         };
     } catch {
         return null;

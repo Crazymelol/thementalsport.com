@@ -16,6 +16,11 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/site-deploy.yml'
+  # Daily safety-net rebuild so future-dated articles go live when their date
+  # arrives, and any content committed without a matching push (or via a token
+  # push that skips the push trigger) still ships within a day.
+  schedule:
+    - cron: '30 6 * * *'
   workflow_dispatch: {}
 
 permissions:

@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://thementalsport.com"),
   title: {
     default: "Giannis Notaras - Mental Performance Expert & Author",
     template: "%s | Giannis Notaras"

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getArticleBySlug, getAllArticles, pickBook, isSeriesArticle, getSeriesDayNumber } from '@/lib/blog';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -6,6 +7,8 @@ import { ArrowLeft, Layers } from 'lucide-react';
 import NewsletterInline from '@/components/NewsletterInline';
 import BookCTA from '@/components/BookCTA';
 import CourseCTA from '@/components/CourseCTA';
+import ArticleSchema from '@/components/ArticleSchema';
+import ArticleFaq from '@/components/ArticleFaq';
 
 /*
  * Server Component
@@ -21,15 +24,36 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
     const article = getArticleBySlug(slug);
 
     if (!article) return {};
 
+    const url = `https://thementalsport.com/blog/${slug}`;
+    const keywords = article.keywords?.length ? article.keywords : article.tags;
+
     return {
-        title: `${article.title} | The Insight`,
+        title: article.title,
         description: article.description,
+        keywords,
+        alternates: { canonical: url },
+        openGraph: {
+            type: 'article',
+            url,
+            title: article.title,
+            description: article.description,
+            publishedTime: article.date,
+            modifiedTime: article.date,
+            authors: ['Giannis Notaras'],
+            tags: article.tags,
+            siteName: 'The Mental Sport',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: article.title,
+            description: article.description,
+        },
     };
 }
 
@@ -48,6 +72,8 @@ export default async function BlogPost({ params }: PageProps) {
     return (
         <main className="min-h-screen pt-32 pb-24 bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
             <article className="container mx-auto px-6 max-w-3xl">
+
+                <ArticleSchema article={article} />
 
                 <div className="h-1.5 w-20 mb-12" style={{ backgroundColor: accent }}></div>
 
@@ -91,6 +117,9 @@ export default async function BlogPost({ params }: PageProps) {
                 <div className="prose prose-zinc prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-a:text-zinc-900 prose-a:font-bold prose-a:no-underline hover:prose-a:underline prose-img:rounded-none">
                     <ReactMarkdown>{article.content}</ReactMarkdown>
                 </div>
+
+                {/* FAQ — visible Q&A that mirrors the FAQPage JSON-LD */}
+                <ArticleFaq items={article.faq} accent={accent} />
 
                 {/* Footer / CTA */}
                 <div className="mt-20 pt-12 border-t border-zinc-200">

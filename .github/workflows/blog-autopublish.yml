@@ -1,0 +1,80 @@
+name: Blog Auto-Publish
+
+# Generates the next queued SEO article(s), commits them to master, then
+# rebuilds and redeploys the static site. Self-contained on purpose: a push made
+# with GITHUB_TOKEN does NOT trigger the site-deploy workflow (GitHub's
+# recursion guard), so this job does its own build + deploy.
+#
+# Activation: set GROQ_API_KEY as a repo secret (free at console.groq.com). With
+# no key the generate step is a clean no-op, nothing changes, and build/deploy
+# are skipped. Tune cadence via the cron below or run manually from the Actions
+# tab (workflow_dispatch) with a custom post count.
+
+on:
+  schedule:
+    - cron: '0 14 * * *'   # daily at 14:00 UTC — generates POSTS_PER_RUN articles
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'How many articles to generate this run'
+        required: false
+        default: '2'
+
+permissions:
+  contents: write
+
+concurrency:
+  # Share the deploy lock so this never races site-deploy's gh-pages push.
+  group: site-deploy
+  cancel-in-progress: false
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Generate queued article(s)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          POSTS_PER_RUN: ${{ github.event.inputs.count || '2' }}
+        run: node scripts/blog/generate.mjs
+
+      - name: Commit new content
+        id: commit
+        run: |
+          git config user.name "The Mental Sport Bot"
+          git config user.email "bot@thementalsport.com"
+          git add src/content/articles content-pipeline/queue.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new articles this run."
+          else
+            git commit -m "content: auto-publish queued blog article(s) [skip ci]"
+            git push origin master
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build static export
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          STATIC_EXPORT: '1'
+          NEXT_PUBLIC_KIT_FORM_ID: ${{ vars.NEXT_PUBLIC_KIT_FORM_ID }}
+        run: npx next build --webpack
+
+      - name: Publish to gh-pages
+        if: steps.commit.outputs.changed == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: out
+          cname: thementalsport.com
