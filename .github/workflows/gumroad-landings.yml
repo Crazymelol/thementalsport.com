@@ -55,11 +55,18 @@ jobs:
             [ -n "$found" ] && echo "$(dirname "$found")" >> "$GITHUB_PATH"
           fi
 
-      - name: Auth check
+      - name: Authenticate
         run: |
-          export PATH="$PATH"
-          gumroad auth status --json --no-input --non-interactive 2>/dev/null \
-            || echo "auth status unavailable — relying on GUMROAD_ACCESS_TOKEN env"
+          umask 077
+          printf '%s' "${GUMROAD_ACCESS_TOKEN}" > "$RUNNER_TEMP/gr_token.txt"
+          # The CLI needs an explicit login; the env var alone returns 401.
+          # Try stdin redirect first, then as a path argument (CLI variants differ).
+          gumroad auth login --with-token < "$RUNNER_TEMP/gr_token.txt" \
+            || gumroad auth login --with-token "$RUNNER_TEMP/gr_token.txt" \
+            || echo "login command returned nonzero"
+          rm -f "$RUNNER_TEMP/gr_token.txt"
+          echo "--- auth status ---"
+          gumroad auth status --json --no-input --non-interactive || echo "auth status: NOT authenticated"
 
       - name: Run (${{ github.event.inputs.mode }})
         run: |
