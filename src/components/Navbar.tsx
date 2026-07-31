@@ -80,6 +80,12 @@ export default function Navbar() {
                     >
                         Articles
                     </Link>
+                    <Link
+                        href="/quiz"
+                        className="text-xs font-black uppercase tracking-[0.2em] text-red-500 hover:text-red-600 transition-colors"
+                    >
+                        Free Quiz
+                    </Link>
                     <button
                         onClick={() => {
                             // Scroll to footer
@@ -128,6 +134,13 @@ export default function Navbar() {
                             className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
                         >
                             Articles
+                        </Link>
+                        <Link
+                            href="/quiz"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-red-500 hover:text-red-400"
+                        >
+                            Free Quiz
                         </Link>
                         <button
                             className="text-left text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
