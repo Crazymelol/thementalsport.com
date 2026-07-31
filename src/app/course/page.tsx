@@ -27,13 +27,20 @@ const modules = [
     { num: 8, title: 'Mastery & Mentorship', lessons: 4, time: '40 min' },
 ];
 
+// Grand Slam value stack. `core` is the course itself; `bonuses` are stacked on
+// top. The page sums them to an anchored total shown struck-through above $297.
+const core = { title: 'The Mental Performance Protocol — 8 modules, 36 video lessons', value: 997 };
 const bonuses = [
-    { title: 'All 8 books (PDF)', value: '$89' },
-    { title: '30-day Mental Performance Journal', value: '$29' },
-    { title: 'Audio version of every lesson', value: '$49' },
-    { title: 'Private Discord community', value: 'Priceless' },
-    { title: 'Monthly live Q&A (6 months)', value: '$297' },
+    { title: 'All 8 books (complete PDF library)', value: 136 },
+    { title: 'AI Coach app — mental training in your pocket', value: 149 },
+    { title: 'The 48-Day Titans Protocol', value: 99 },
+    { title: '30-Day Mental Performance Journal', value: 29 },
+    { title: 'Full audio version of every lesson', value: 49 },
+    { title: 'Private athlete community', value: 79 },
+    { title: '6 months of live Q&A calls', value: 199 },
 ];
+const TOTAL_VALUE = core.value + bonuses.reduce((sum, b) => sum + b.value, 0); // 1737
+const PRICE = 297;
 
 export default function CoursePage() {
     return (
@@ -120,21 +127,37 @@ export default function CoursePage() {
                 </div>
             </section>
 
-            <section className="py-24 container mx-auto px-6 max-w-5xl">
+            <section className="py-24 container mx-auto px-6 max-w-3xl">
                 <div className="text-center mb-16">
-                    <p className="text-xs font-black uppercase tracking-[0.3em] text-red-600 mb-4">$464 in Bonuses Included</p>
-                    <h2 className="text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter">Everything You Need</h2>
+                    <p className="text-xs font-black uppercase tracking-[0.3em] text-red-600 mb-4">Here&apos;s Everything You Get</p>
+                    <h2 className="text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter">The Complete System</h2>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                <div className="space-y-3">
+                    <div className="bg-zinc-950 text-white p-6 flex items-center justify-between gap-4 border-l-4 border-red-600">
+                        <div className="flex items-center gap-3">
+                            <Award className="w-5 h-5 text-red-500 shrink-0" />
+                            <p className="font-bold text-sm md:text-base">{core.title}</p>
+                        </div>
+                        <span className="text-zinc-400 font-mono text-sm whitespace-nowrap">${core.value}</span>
+                    </div>
                     {bonuses.map((b, i) => (
-                        <div key={i} className="bg-zinc-950 text-white p-6 flex items-center justify-between">
+                        <div key={i} className="bg-zinc-900 text-white p-5 flex items-center justify-between gap-4">
                             <div className="flex items-center gap-3">
-                                <Award className="w-5 h-5 text-red-500" />
-                                <p className="font-bold">{b.title}</p>
+                                <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0" />
+                                <p className="font-bold text-sm md:text-base">{b.title}</p>
                             </div>
-                            <span className="text-zinc-400 font-mono text-sm">{b.value}</span>
+                            <span className="text-zinc-400 font-mono text-sm whitespace-nowrap">${b.value}</span>
                         </div>
                     ))}
+                </div>
+                <div className="mt-8 text-center">
+                    <p className="text-zinc-500 text-lg">Total value: <span className="line-through">${TOTAL_VALUE.toLocaleString()}</span></p>
+                    <p className="text-zinc-900 text-2xl font-black uppercase tracking-tight mt-2">Today: <span className="text-red-600">${PRICE}</span></p>
+                    <p className="text-zinc-500 text-sm mt-1">You save ${(TOTAL_VALUE - PRICE).toLocaleString()} ({Math.round((1 - PRICE / TOTAL_VALUE) * 100)}% off)</p>
+                    <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
+                        Enroll Now — ${PRICE} <ArrowRight className="w-4 h-4" />
+                    </a>
+                    <p className="text-zinc-400 text-xs mt-4">Lifetime access • 30-day money-back guarantee</p>
                 </div>
             </section>
 
@@ -144,10 +167,11 @@ export default function CoursePage() {
                         <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter">Enroll Today</h2>
                     </div>
                     <div className="p-8 border-2 border-red-600 bg-red-950/20 flex flex-col">
-                        <h3 className="text-2xl font-black uppercase tracking-tighter">Standard</h3>
-                        <div className="text-5xl font-black my-6">$297</div>
+                        <h3 className="text-2xl font-black uppercase tracking-tighter">Everything, One Price</h3>
+                        <p className="text-zinc-500 line-through mt-4">${TOTAL_VALUE.toLocaleString()} value</p>
+                        <div className="text-5xl font-black mb-6 mt-1">${PRICE}</div>
                         <ul className="space-y-3 mb-8 flex-1">
-                            {['All 8 modules (36 video lessons)', 'All 5 bonuses', 'Lifetime access', 'Self-paced'].map((f, i) => (
+                            {['All 8 modules (36 video lessons)', 'All 7 bonuses (incl. AI Coach app + 8 books)', 'Lifetime access', '30-day money-back guarantee'].map((f, i) => (
                                 <li key={i} className="flex gap-2 text-zinc-300 text-sm">
                                     <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" /> {f}
                                 </li>
