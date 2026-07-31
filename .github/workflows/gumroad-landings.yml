@@ -1,0 +1,111 @@
+name: Gumroad Landing Pages
+
+# Previews / publishes the custom Gumroad landing pages in gumroad-landings/.
+# The sandbox that generates them has no internet, so publishing runs here (GH
+# Actions has full internet) via the Gumroad CLI, authenticated with the
+# GUMROAD_ACCESS_TOKEN repo secret.
+#
+# Activate: add secret GUMROAD_ACCESS_TOKEN (Gumroad → Settings → Advanced →
+# Applications → generate an access token). Then run this workflow from the
+# Actions tab. Leave "only" blank to do all 8 books; set it to one slug (e.g.
+# yfkgwv) to do just that product. mode = publish | preview | clear.
+
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Single product slug (blank = all in gumroad-landings/)'
+        required: false
+        default: ''
+      mode:
+        description: 'publish | preview | clear'
+        required: false
+        default: 'publish'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gumroad-landings
+  cancel-in-progress: false
+
+jobs:
+  gumroad:
+    runs-on: ubuntu-latest
+    env:
+      GUMROAD_ACCESS_TOKEN: ${{ secrets.GUMROAD_ACCESS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Guard token
+        run: |
+          if [ -z "${GUMROAD_ACCESS_TOKEN}" ]; then
+            echo "::error::GUMROAD_ACCESS_TOKEN secret is not set. Add it in repo Settings → Secrets and variables → Actions → Secrets, then re-run."
+            exit 1
+          fi
+
+      - name: Install Gumroad CLI
+        run: |
+          curl -fsSL https://gumroad.com/install-cli.sh | bash || true
+          for d in "$HOME/.gumroad/bin" "$HOME/.local/bin" "/usr/local/bin" "$HOME/bin"; do
+            [ -x "$d/gumroad" ] && echo "$d" >> "$GITHUB_PATH"
+          done
+          if ! command -v gumroad >/dev/null 2>&1; then
+            found=$(find "$HOME" /usr/local -name gumroad -type f 2>/dev/null | head -1 || true)
+            [ -n "$found" ] && echo "$(dirname "$found")" >> "$GITHUB_PATH"
+          fi
+
+      - name: Auth check
+        run: |
+          export PATH="$PATH"
+          gumroad auth status --json --no-input --non-interactive 2>/dev/null \
+            || echo "auth status unavailable — relying on GUMROAD_ACCESS_TOKEN env"
+
+      - name: Run (${{ github.event.inputs.mode }})
+        run: |
+          set -u
+          MODE="${{ github.event.inputs.mode }}"
+          ONLY="${{ github.event.inputs.only }}"
+          FILES=$(ls gumroad-landings/*.html)
+          [ -n "$ONLY" ] && FILES="gumroad-landings/${ONLY}.html"
+          FAIL=0
+          for f in $FILES; do
+            slug=$(basename "$f" .html)
+            echo "::group::${slug} — ${MODE}"
+            if [ "$MODE" = "clear" ]; then
+              gumroad products page clear "$slug" --yes --json --no-input --non-interactive || FAIL=1
+              echo "::endgroup::"; continue
+            fi
+            echo "--- preview (server sanitizer) ---"
+            if gumroad products page preview "$slug" "./$f" --json --no-input --non-interactive > prev.json 2>preverr.txt; then
+              jq '{warning, sanitization_report}' prev.json 2>/dev/null || cat prev.json
+            else
+              FAIL=1; cat preverr.txt; cat prev.json 2>/dev/null || true
+            fi
+            if [ "$MODE" = "publish" ]; then
+              echo "--- publish ---"
+              if gumroad products page publish "$slug" "./$f" --json --no-input --non-interactive > pub.json 2>puberr.txt; then
+                jq '{warning, sanitization_report}' pub.json 2>/dev/null || cat pub.json
+              else
+                FAIL=1; cat puberr.txt; cat pub.json 2>/dev/null || true
+              fi
+              url=$(gumroad products page url "$slug" --json --jq '.product.landing_url' --no-input --non-interactive 2>/dev/null || echo "")
+              echo "LANDING URL: ${url:-<none>}"
+              if [ -n "$url" ]; then
+                code=$(curl -sL -o body.html -w "%{http_code}" "$url" || echo "000")
+                echo "live HTTP: $code"
+                if grep -q 'data-gumroad-action\|gumroad:checkout' body.html; then
+                  echo "buy flow present on live page: YES"
+                else
+                  echo "buy flow present on live page: NO (investigate)"; FAIL=1
+                fi
+              fi
+            fi
+            echo "::endgroup::"
+          done
+          echo "======================================"
+          if [ "$FAIL" = "1" ]; then
+            echo "::warning::One or more products reported an issue — read the grouped logs above."
+          else
+            echo "All requested products processed cleanly."
+          fi
