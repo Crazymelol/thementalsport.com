@@ -61,7 +61,8 @@
         "/blog/athlete-meditation-guide"
       ],
       "protocol": "physiological sigh (2 inhales + long exhale)",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-07-31"
     },
     {
       "slug": "box-breathing-for-athletes",
@@ -81,7 +82,8 @@
         "/blog/athlete-meditation-guide"
       ],
       "protocol": "box breathing 4-4-4-4",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-07-31"
     },
     {
       "slug": "what-to-do-night-before-competition",
