@@ -9,10 +9,18 @@
       "audience": "athletes and coaches who want to understand the mechanism behind choking, not just be told to relax",
       "angle": "Explain choking as a specific brain event: a skill that runs automatically gets hijacked by conscious attention (explicit monitoring / paralysis by analysis). Cover why high stakes trigger it, why elite performers show less prefrontal interference, and the three levers that reduce it (external focus, a pre-shot routine, pressure training). Point readers to the fix-focused companion article.",
       "book": "mental-blocks",
-      "tags": ["Pressure", "Anxiety", "Focus"],
-      "internalLinks": ["/blog/how-to-stop-choking-under-pressure", "/course"],
+      "tags": [
+        "Pressure",
+        "Anxiety",
+        "Focus"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
       "protocol": "external focus, articulatory suppression cue word",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-07-31"
     },
     {
       "slug": "how-to-stop-being-nervous-before-a-game",
@@ -22,10 +30,18 @@
       "audience": "athletes who get anxious, tight, or sick before they compete",
       "angle": "You cannot delete nerves, and trying to makes them worse. Teach reframing arousal as readiness (excited vs calm-down), a fast breathing reset, a fixed pre-game routine, and shrinking attention to the next action. Give a clear numbered pre-game sequence.",
       "book": "mental-blocks",
-      "tags": ["Anxiety", "Pressure", "Pre-Game"],
-      "internalLinks": ["/blog/how-to-stop-choking-under-pressure", "/blog/pre-competition-routine-guide"],
+      "tags": [
+        "Anxiety",
+        "Pressure",
+        "Pre-Game"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/blog/pre-competition-routine-guide"
+      ],
       "protocol": "arousal reappraisal, physiological sigh, fixed routine",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-07-31"
     },
     {
       "slug": "physiological-sigh-for-athletes",
@@ -35,8 +51,15 @@
       "audience": "athletes who need to drop their heart rate in seconds before a start, free throw, or serve",
       "angle": "Explain the double-inhale-then-long-exhale pattern (research popularized by Andrew Huberman at Stanford) and why it calms the body faster than a slow breath. Give exact reps, when to use it, and how to make it a cue. Keep it precise and practical.",
       "book": "physiological-performance",
-      "tags": ["Breathing", "Recovery", "Pre-Game"],
-      "internalLinks": ["/blog/how-to-stop-being-nervous-before-a-game", "/blog/athlete-meditation-guide"],
+      "tags": [
+        "Breathing",
+        "Recovery",
+        "Pre-Game"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-being-nervous-before-a-game",
+        "/blog/athlete-meditation-guide"
+      ],
       "protocol": "physiological sigh (2 inhales + long exhale)",
       "status": "pending"
     },
@@ -48,8 +71,15 @@
       "audience": "athletes who want a simple repeatable way to steady themselves under pressure",
       "angle": "Teach the 4-4-4-4 pattern (inhale, hold, exhale, hold), why the even rhythm steadies the nervous system, and how to use it pre-game and between points. Compare it to the physiological sigh (box breathing to hold steady, the sigh to drop fast). Numbered how-to.",
       "book": "physiological-performance",
-      "tags": ["Breathing", "Focus", "Recovery"],
-      "internalLinks": ["/blog/physiological-sigh-for-athletes", "/blog/athlete-meditation-guide"],
+      "tags": [
+        "Breathing",
+        "Focus",
+        "Recovery"
+      ],
+      "internalLinks": [
+        "/blog/physiological-sigh-for-athletes",
+        "/blog/athlete-meditation-guide"
+      ],
       "protocol": "box breathing 4-4-4-4",
       "status": "pending"
     },
@@ -61,8 +91,15 @@
       "audience": "athletes who lie awake the night before and show up drained",
       "angle": "A calm, boring, repeatable evening beats a hyped one. Cover gear prep the night before, a light visualization, a wind-down routine, phone and food rules, and accepting that a bad night's sleep will not wreck you (the worry does more damage than the lost hour). Numbered checklist.",
       "book": "the-competition-protocol",
-      "tags": ["Pre-Game", "Recovery", "Routine"],
-      "internalLinks": ["/blog/pre-competition-routine-guide", "/blog/elite-athlete-sleep-competition"],
+      "tags": [
+        "Pre-Game",
+        "Recovery",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/blog/pre-competition-routine-guide",
+        "/blog/elite-athlete-sleep-competition"
+      ],
       "protocol": "night-before checklist, taper the mind",
       "status": "pending"
     },
@@ -74,8 +111,15 @@
       "audience": "athletes who want consistency and a way to trigger their best state on demand",
       "angle": "A routine is a switch that tells your brain it is time to perform, and its power comes from being the same every time regardless of stakes. Cover the three layers (physical, visual, mental cue), building an anchor, and keeping it short enough to survive a chaotic warm-up. Give a build-your-own template.",
       "book": "the-competition-protocol",
-      "tags": ["Routine", "Focus", "Pre-Game"],
-      "internalLinks": ["/blog/pre-competition-routine-guide", "/blog/flow-state-how-to-enter"],
+      "tags": [
+        "Routine",
+        "Focus",
+        "Pre-Game"
+      ],
+      "internalLinks": [
+        "/blog/pre-competition-routine-guide",
+        "/blog/flow-state-how-to-enter"
+      ],
       "protocol": "3-layer routine, the anchor",
       "status": "pending"
     },
@@ -87,8 +131,15 @@
       "audience": "athletes and coaches who fixate on winning and tighten up because of it",
       "angle": "Outcome goals (win, place, PR) are outside your control and spike pressure. Process goals (the two or three controllables this rep) keep you loose and actually raise the odds of the outcome. Give a clean method to convert any outcome goal into process goals, with sport examples.",
       "book": "resilient-confidence",
-      "tags": ["Focus", "Mental Toughness", "Pressure"],
-      "internalLinks": ["/blog/why-do-athletes-choke-under-pressure", "/blog/how-to-bounce-back-after-a-bad-game"],
+      "tags": [
+        "Focus",
+        "Mental Toughness",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/blog/why-do-athletes-choke-under-pressure",
+        "/blog/how-to-bounce-back-after-a-bad-game"
+      ],
       "protocol": "outcome-to-process conversion",
       "status": "pending"
     },
@@ -100,8 +151,15 @@
       "audience": "athletes and coaches whose skills fall apart in competition despite great practices",
       "angle": "Skills only choke when they were never truly automated under stress. Show how to add consequences, audiences, fatigue, and scoreboard pressure to practice so the game feels familiar. Give five concrete ways to manufacture pressure in training.",
       "book": "the-competition-protocol",
-      "tags": ["Mental Toughness", "Pressure", "Training"],
-      "internalLinks": ["/blog/why-do-athletes-choke-under-pressure", "/blog/how-to-build-mental-toughness"],
+      "tags": [
+        "Mental Toughness",
+        "Pressure",
+        "Training"
+      ],
+      "internalLinks": [
+        "/blog/why-do-athletes-choke-under-pressure",
+        "/blog/how-to-build-mental-toughness"
+      ],
       "protocol": "manufactured-pressure drills",
       "status": "pending"
     },
@@ -113,8 +171,15 @@
       "audience": "athletes who spiral in their own head during competition",
       "angle": "Research by Ethan Kross shows that using your own name or 'you' instead of 'I' creates distance from the emotion and improves performance under stress. Explain why it works and how to build a third-person cue you can use mid-game. Practical scripts.",
       "book": "confidence-building",
-      "tags": ["Self-Talk", "Confidence", "Pressure"],
-      "internalLinks": ["/blog/positive-self-talk-scripts-athletes", "/blog/how-to-bounce-back-after-a-bad-game"],
+      "tags": [
+        "Self-Talk",
+        "Confidence",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/blog/positive-self-talk-scripts-athletes",
+        "/blog/how-to-bounce-back-after-a-bad-game"
+      ],
       "protocol": "third-person self-talk cue",
       "status": "pending"
     },
@@ -126,8 +191,15 @@
       "audience": "athletes whose confidence rises and falls with results",
       "angle": "Confidence from applause is fragile; confidence from evidence lasts. Teach a daily 5-Win log (three to five small controllable wins logged after every session) that builds a bank of proof your brain can draw on under pressure. Give the exact logging method.",
       "book": "confidence-building",
-      "tags": ["Confidence", "Mental Toughness", "Routine"],
-      "internalLinks": ["/blog/self-distancing-talk-to-yourself-by-name", "/blog/how-to-bounce-back-after-a-bad-game"],
+      "tags": [
+        "Confidence",
+        "Mental Toughness",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/blog/self-distancing-talk-to-yourself-by-name",
+        "/blog/how-to-bounce-back-after-a-bad-game"
+      ],
       "protocol": "5-Win Protocol log",
       "status": "pending"
     },
@@ -139,8 +211,15 @@
       "audience": "parents whose child suddenly wants to quit and who do not know whether to push or allow it",
       "angle": "Separate 'I want to quit' the emotion from 'I want to quit' the decision. Give a framework: never decide right after a bad game, find the real reason (fear, a coach, burnout, social), honor a commitment to the season, then choose together. Warm, practical, no guilt.",
       "book": "nurturing-self-worth",
-      "tags": ["Sports Parents", "Youth Athletes", "Self-Worth"],
-      "internalLinks": ["/blog/sports-parents-playbook", "/blog/what-to-say-to-nervous-young-athlete"],
+      "tags": [
+        "Sports Parents",
+        "Youth Athletes",
+        "Self-Worth"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-to-nervous-young-athlete"
+      ],
       "protocol": "the quit-decision framework",
       "status": "pending"
     },
@@ -152,8 +231,15 @@
       "audience": "sports parents with a concern about playing time, roles, or treatment",
       "angle": "There is a right way and a wrong time. Cover the 24-hour rule before raising anything, never doing it at the field, asking about your child's development not playing time, and the questions that build a partnership with the coach instead of a fight. Give a script.",
       "book": "nurturing-self-worth",
-      "tags": ["Sports Parents", "Youth Athletes", "Self-Worth"],
-      "internalLinks": ["/blog/sideline-behavior-sports-parents", "/blog/sports-parents-playbook"],
+      "tags": [
+        "Sports Parents",
+        "Youth Athletes",
+        "Self-Worth"
+      ],
+      "internalLinks": [
+        "/blog/sideline-behavior-sports-parents",
+        "/blog/sports-parents-playbook"
+      ],
       "protocol": "the coach-conversation script",
       "status": "pending"
     },
@@ -165,8 +251,15 @@
       "audience": "basketball players who lose focus, rush shots, or fade late in games",
       "angle": "Basketball punishes a wandering mind: fast transitions, free throws under silence, momentum swings. Cover a free-throw routine, an error-recovery cue after a turnover, next-play focus, and staying aggressive when behind. Sport-specific and concrete.",
       "book": "the-competition-protocol",
-      "tags": ["Basketball", "Focus", "Pressure"],
-      "internalLinks": ["/blog/how-to-stop-choking-under-pressure", "/blog/how-to-bounce-back-after-a-bad-game"],
+      "tags": [
+        "Basketball",
+        "Focus",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/blog/how-to-bounce-back-after-a-bad-game"
+      ],
       "protocol": "free-throw routine, next-play reset",
       "status": "pending"
     },
@@ -178,8 +271,15 @@
       "audience": "tennis players who tighten up on serve, big points, and tiebreaks",
       "angle": "Tennis is long stretches of thinking time between points, which feeds nerves. Cover a between-point routine (the four stages), a breathing reset on the changeover, a serve ritual, and playing the next point only. Sport-specific.",
       "book": "mental-blocks",
-      "tags": ["Tennis", "Anxiety", "Pre-Game"],
-      "internalLinks": ["/blog/box-breathing-for-athletes", "/blog/how-to-build-a-pre-game-routine"],
+      "tags": [
+        "Tennis",
+        "Anxiety",
+        "Pre-Game"
+      ],
+      "internalLinks": [
+        "/blog/box-breathing-for-athletes",
+        "/blog/how-to-build-a-pre-game-routine"
+      ],
       "protocol": "between-point routine, serve ritual",
       "status": "pending"
     },
@@ -191,8 +291,15 @@
       "audience": "athletes who play not to lose instead of playing to win",
       "angle": "Fear of failure makes you tentative, and tentative is how you actually fail. Cover redefining failure as data, detaching identity from results, playing for process, and a pre-game reframe. Distinct from the existing fear-of-failure piece by focusing on the play-not-to-lose trap and a concrete reframe drill.",
       "book": "resilient-confidence",
-      "tags": ["Fear", "Mental Toughness", "Confidence"],
-      "internalLinks": ["/blog/overcoming-fear-of-failure-sports", "/blog/process-goals-vs-outcome-goals"],
+      "tags": [
+        "Fear",
+        "Mental Toughness",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/overcoming-fear-of-failure-sports",
+        "/blog/process-goals-vs-outcome-goals"
+      ],
       "protocol": "failure reframe drill",
       "status": "pending"
     },
@@ -204,8 +311,15 @@
       "audience": "athletes who let one error snowball into three",
       "angle": "One mistake only costs you if you keep paying for it. Teach a fast in-competition error-recovery routine: a physical trigger (glove tug, deep breath), a release word, and a next-action focus. Give the numbered 3-second reset and how to drill it.",
       "book": "resilient-confidence",
-      "tags": ["Focus", "Mental Toughness", "Pressure"],
-      "internalLinks": ["/blog/how-to-bounce-back-after-a-bad-game", "/blog/self-distancing-talk-to-yourself-by-name"],
+      "tags": [
+        "Focus",
+        "Mental Toughness",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/blog/how-to-bounce-back-after-a-bad-game",
+        "/blog/self-distancing-talk-to-yourself-by-name"
+      ],
       "protocol": "3-second error-recovery reset",
       "status": "pending"
     }
