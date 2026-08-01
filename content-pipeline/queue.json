@@ -326,6 +326,258 @@
       ],
       "protocol": "3-second error-recovery reset",
       "status": "pending"
+    },
+    {
+      "slug": "how-to-beat-the-yips-in-golf",
+      "title": "How to Beat the Yips in Golf (Stop Choking Over the Ball)",
+      "primaryKeyword": "how to beat the yips in golf",
+      "cluster": "Mental Game by Sport",
+      "audience": "golfers whose smooth swing or putting stroke falls apart the moment it counts",
+      "angle": "The yips are explicit monitoring: a grooved motion gets hijacked by conscious control on the tee or the short putt. Explain the mechanism, then give the fixes that work in golf specifically: an external target focus, a quiet-eye pre-shot routine, a hold cue word through impact, and pressure practice on the range. Reference the choking science.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Golf",
+        "Pressure",
+        "Anxiety"
+      ],
+      "internalLinks": [
+        "/mental-performance/golf",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "quiet-eye routine, external target focus, cue word",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-make-free-throws-under-pressure",
+      "title": "How to Make Free Throws Under Pressure",
+      "primaryKeyword": "how to make free throws under pressure",
+      "cluster": "Mental Game by Sport",
+      "audience": "basketball players who shoot great in practice but miss free throws late in games",
+      "angle": "A free throw is the same shot every time, so misses under pressure are mental, not mechanical. Give a fixed free-throw routine (breath, dribble count, target, one cue), why the routine has to be identical regardless of score, and how to rehearse it under simulated pressure. Late-game, high-silence context specific to basketball.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Basketball",
+        "Focus",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/mental-performance/basketball",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "fixed free-throw routine, next-shot reset",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-build-confidence-in-basketball",
+      "title": "How to Build Confidence in Basketball",
+      "primaryKeyword": "how to build confidence in basketball",
+      "cluster": "Mental Game by Sport",
+      "audience": "basketball players who hesitate, pass up open shots, or shrink when the game speeds up",
+      "angle": "Confidence in basketball is built on evidence and reps, not hype. Cover shooting your shot without hesitation, a short memory after a miss, a pre-game confidence routine, and logging small controllable wins. Address the hesitation-to-turnover spiral specific to hoops.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Basketball",
+        "Confidence",
+        "Mindset"
+      ],
+      "internalLinks": [
+        "/mental-performance/basketball",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "5-win log, shoot-your-shot rule, short memory",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-stop-choking-in-tennis",
+      "title": "How to Stop Choking in Tennis (Big Points and Double Faults)",
+      "primaryKeyword": "how to stop choking in tennis",
+      "cluster": "Mental Game by Sport",
+      "audience": "tennis players who tighten up on big points, break points, and second serves",
+      "angle": "Tennis gives you too much time to think between points, which feeds choking on serve and big points. Cover a between-point routine, a serve ritual that survives pressure, external focus on the target not the mechanics, and playing the next point only. Double-fault spiral specific to tennis.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Tennis",
+        "Pressure",
+        "Anxiety"
+      ],
+      "internalLinks": [
+        "/mental-performance/tennis",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "between-point routine, serve ritual, next-point focus",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-handle-penalty-kick-pressure",
+      "title": "How to Handle Penalty Kick Pressure",
+      "primaryKeyword": "penalty kick pressure",
+      "cluster": "Mental Game by Sport",
+      "audience": "soccer players who have to step up and take a penalty with everything on the line",
+      "angle": "A penalty is the purest pressure moment in soccer: you against the keeper, everyone watching. Cover deciding your side early and not changing, a fixed walk-up routine, breath control on the spot, and keeping your eyes off the keeper. The freeze-and-change-your-mind trap specific to penalties.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Soccer",
+        "Focus",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/mental-performance/soccer",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "pick-and-commit, walk-up routine, breath reset",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-bounce-back-after-a-loss-in-soccer",
+      "title": "How to Bounce Back After a Loss in Soccer",
+      "primaryKeyword": "how to bounce back after a loss in soccer",
+      "cluster": "Mental Game by Sport",
+      "audience": "soccer players and teams who let one loss turn into a slump",
+      "angle": "One loss only costs you if you carry it into the next match and training week. Apply the 24-hour rule, extract one lesson, and reset team and individual confidence. Cover the mistake that snowballs during a match too (an error-recovery reset). Team-sport momentum context.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Soccer",
+        "Mental Toughness",
+        "Resilience"
+      ],
+      "internalLinks": [
+        "/mental-performance/soccer",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "24-hour rule, one-lesson debrief, in-match reset",
+      "status": "pending"
+    },
+    {
+      "slug": "gymnastics-mental-blocks-getting-your-skills-back",
+      "title": "Gymnastics Mental Blocks: How to Get Your Skills Back",
+      "primaryKeyword": "gymnastics mental block",
+      "cluster": "Mental Game by Sport",
+      "audience": "gymnasts who suddenly cannot throw a skill they used to do, on beam, floor, or bars",
+      "angle": "A gymnastics mental block (lost move syndrome) is fear plus an overloaded conscious system balking at a skill. Explain why it happens, why forcing it makes it worse, and the ladder back: drills and numbers, breaking the skill down, controlling fear with breathing, and rebuilding trust rep by rep. Beam and vault fear specific to gymnastics.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Gymnastics",
+        "Fear",
+        "Mental Block"
+      ],
+      "internalLinks": [
+        "/mental-performance/gymnastics",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "skill ladder, fear-reset breathing, trust reps",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-calm-pre-race-nerves-in-swimming",
+      "title": "How to Calm Pre-Race Nerves in Swimming",
+      "primaryKeyword": "pre-race nerves swimming",
+      "cluster": "Mental Game by Sport",
+      "audience": "swimmers who get anxious and drained behind the blocks before a race",
+      "angle": "Swimming isolates you: no coach, no crowd, just you and the black line, so nerves have nowhere to go. Cover a behind-the-blocks routine, reframing nerves as readiness, a physiological sigh to drop the heart rate, and a race plan focused on splits not the clock. The isolation problem specific to swimming.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Swimming",
+        "Anxiety",
+        "Pre-Race"
+      ],
+      "internalLinks": [
+        "/mental-performance/swimming",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "behind-the-blocks routine, physiological sigh, split focus",
+      "status": "pending"
+    },
+    {
+      "slug": "mental-training-for-distance-running",
+      "title": "Mental Training for Distance Running (Push Through the Wall)",
+      "primaryKeyword": "mental training for distance running",
+      "cluster": "Mental Game by Sport",
+      "audience": "distance runners who fade mentally when it hurts, in training and on race day",
+      "angle": "Endurance is a mental game once the legs are tired. Cover chunking the distance, associative vs dissociative focus and when to use each, a mantra for the pain cave, and calming race-morning nerves. The wall and the late-race mental fade specific to distance running.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Running",
+        "Mental Toughness",
+        "Endurance"
+      ],
+      "internalLinks": [
+        "/mental-performance/running",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "chunking, mantra, associative focus in the pain cave",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-control-fear-in-boxing",
+      "title": "How to Control Fear in Boxing",
+      "primaryKeyword": "how to control fear in boxing",
+      "cluster": "Mental Game by Sport",
+      "audience": "boxers who feel fear before and during a fight and want to use it, not freeze",
+      "angle": "Fear in boxing is rational and useful if you channel it. Cover reframing fight-night adrenaline as readiness, a walk-out and glove-touch routine, staying composed after getting hit (the panic-and-gas-out trap), and controlled breathing between rounds. Combat-specific fear management.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Boxing",
+        "Fear",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/mental-performance/boxing",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "adrenaline reframe, between-round breathing, get-hit reset",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-calm-nerves-before-a-fight",
+      "title": "How to Calm Nerves Before a Fight (BJJ, MMA, Wrestling)",
+      "primaryKeyword": "how to calm nerves before a fight",
+      "cluster": "Mental Game by Sport",
+      "audience": "grapplers and fighters whose nerves spike in the days and minutes before competing",
+      "angle": "Competition nerves in combat sports peak in the bullpen before you walk out. Cover a warm-up and breathing routine, a game plan that gives the mind a job, reframing the adrenaline dump, and staying present instead of running the what-ifs. Weigh-in and bullpen context specific to combat sports.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Martial Arts",
+        "Anxiety",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/mental-performance/martial-arts",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "bullpen breathing, game-plan focus, adrenaline reframe",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-psych-up-for-a-max-lift",
+      "title": "How to Psych Up for a Max Lift (Without Wrecking Your Nerves)",
+      "primaryKeyword": "how to psych up for a big lift",
+      "cluster": "Mental Game by Sport",
+      "audience": "lifters who either under-arouse or over-hype before a heavy single and miss it",
+      "angle": "A max lift needs the right arousal level: too flat and you are weak, too amped and you lose technique and burn out. Cover finding your arousal sweet spot, a consistent pre-lift routine and cue, controlled aggression, and one focus thought for the lift. The over-hype-and-miss trap specific to lifting.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Weightlifting",
+        "Focus",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/mental-performance/weightlifting",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "arousal sweet spot, pre-lift routine, one cue",
+      "status": "pending"
     }
   ]
 }
