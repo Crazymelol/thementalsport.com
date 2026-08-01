@@ -103,7 +103,8 @@
         "/blog/elite-athlete-sleep-competition"
       ],
       "protocol": "night-before checklist, taper the mind",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "how-to-build-a-pre-game-routine",
@@ -123,7 +124,8 @@
         "/blog/flow-state-how-to-enter"
       ],
       "protocol": "3-layer routine, the anchor",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "process-goals-vs-outcome-goals",
