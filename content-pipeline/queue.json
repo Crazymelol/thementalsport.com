@@ -582,6 +582,258 @@
       ],
       "protocol": "arousal sweet spot, pre-lift routine, one cue",
       "status": "pending"
+    },
+    {
+      "slug": "should-my-child-specialize-in-one-sport",
+      "title": "Should My Child Specialize in One Sport?",
+      "primaryKeyword": "should my child specialize in one sport",
+      "cluster": "Sports Parents",
+      "audience": "parents pressured to pick one sport early for their kid",
+      "angle": "Early specialization raises burnout and injury risk and rarely produces the pro outcome parents imagine. Cover what research says about multi-sport athletes, when specialization makes sense, and how to decide with your kid instead of for them.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Youth Athletes",
+        "Self-Worth"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the specialization decision checklist",
+      "status": "pending"
+    },
+    {
+      "slug": "signs-of-burnout-in-young-athletes",
+      "title": "7 Signs of Burnout in Young Athletes (and What to Do)",
+      "primaryKeyword": "signs of burnout in young athletes",
+      "cluster": "Sports Parents",
+      "audience": "parents worried their kid is losing the love of the game",
+      "angle": "Burnout shows up as dread, dropping performance, physical complaints, and pulling away. List the warning signs, the causes (over-scheduling, outcome pressure), and how to pull a kid back from the edge without making them quit.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Youth Athletes",
+        "Self-Worth"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "burnout warning-sign audit",
+      "status": "pending"
+    },
+    {
+      "slug": "when-your-child-loses-their-starting-spot",
+      "title": "What to Say When Your Child Loses Their Starting Spot",
+      "primaryKeyword": "child lost starting position",
+      "cluster": "Sports Parents",
+      "audience": "parents whose kid got benched or demoted and is crushed",
+      "angle": "A demotion is a chance to build resilience if you handle it right. Cover validating the disappointment without bashing the coach, refocusing on controllables, and the words that help a benched kid come back stronger.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Youth Athletes",
+        "Self-Worth"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the bench-response script",
+      "status": "pending"
+    },
+    {
+      "slug": "imposter-syndrome-in-athletes",
+      "title": "Imposter Syndrome in Athletes: Why You Feel Like a Fraud",
+      "primaryKeyword": "imposter syndrome in athletes",
+      "cluster": "Confidence & Bouncing Back",
+      "audience": "athletes who succeed but feel they do not deserve it and wait to be exposed",
+      "angle": "Imposter syndrome hits high performers hardest. Explain why success can feel like luck, how it drives overtraining and anxiety, and concrete ways to internalize your wins (evidence logging, reframing, separating feeling from fact).",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Confidence",
+        "Imposter",
+        "Mindset"
+      ],
+      "internalLinks": [
+        "/blog/positive-self-talk-scripts-athletes",
+        "/blog/build-confidence-in-young-athletes",
+        "/course"
+      ],
+      "protocol": "evidence log, reframe drill",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-stop-comparing-yourself-to-other-athletes",
+      "title": "How to Stop Comparing Yourself to Other Athletes",
+      "primaryKeyword": "stop comparing yourself to other athletes",
+      "cluster": "Confidence & Bouncing Back",
+      "audience": "athletes who lose confidence scrolling stats, highlights, and teammates",
+      "angle": "Comparison steals confidence and focus. Cover the comparison trap (especially social media), running your own race, competing against your past self, and a cue to redirect when the comparison spiral starts.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Confidence",
+        "Mindset",
+        "Self-Talk"
+      ],
+      "internalLinks": [
+        "/blog/positive-self-talk-scripts-athletes",
+        "/blog/build-confidence-in-young-athletes",
+        "/course"
+      ],
+      "protocol": "run-your-own-race reset",
+      "status": "pending"
+    },
+    {
+      "slug": "perfectionism-in-sports-how-to-let-go",
+      "title": "Perfectionism in Sports: How to Let Go and Play Free",
+      "primaryKeyword": "perfectionism in sports",
+      "cluster": "Choking & Pressure",
+      "audience": "athletes whose fear of a mistake makes them tight and tentative",
+      "angle": "Perfectionism looks like high standards but plays like fear. It makes athletes cautious and unravels them after one error. Cover good vs bad perfectionism, chasing excellence not perfection, and freeing up by focusing on process and effort.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Perfectionism",
+        "Anxiety",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/blog/process-goals-vs-outcome-goals",
+        "/course"
+      ],
+      "protocol": "excellence-not-perfection reframe",
+      "status": "pending"
+    },
+    {
+      "slug": "the-mental-side-of-injury-recovery",
+      "title": "The Mental Side of Injury Recovery for Athletes",
+      "primaryKeyword": "mental side of injury recovery",
+      "cluster": "Confidence & Bouncing Back",
+      "audience": "injured athletes struggling with identity, fear, and coming back",
+      "angle": "Injury is as much a mental battle as a physical one: lost identity, fear of reinjury, isolation. Cover keeping identity beyond sport, staged mental goals during rehab, visualization, and rebuilding trust in the body on return.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Injury",
+        "Resilience",
+        "Mental Toughness"
+      ],
+      "internalLinks": [
+        "/blog/how-to-bounce-back-after-a-bad-game",
+        "/blog/how-to-build-mental-toughness",
+        "/course"
+      ],
+      "protocol": "rehab mental-goal ladder, return visualization",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-be-a-mentally-tough-team-captain",
+      "title": "How to Be a Mentally Tough Team Captain",
+      "primaryKeyword": "how to be a good team captain",
+      "cluster": "Leadership",
+      "audience": "captains and team leaders who set the emotional tone",
+      "angle": "A captain leads the mental game, not just the huddle. Cover staying composed when the team is rattled, holding standards, lifting teammates after mistakes, and being the steady emotional thermostat under pressure.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Leadership",
+        "Mental Toughness",
+        "Teamwork"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-mental-toughness",
+        "/blog/how-to-bounce-back-after-a-bad-game",
+        "/course"
+      ],
+      "protocol": "the composure-and-standards model",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-coach-mental-toughness",
+      "title": "How to Coach Mental Toughness (A Practical Guide)",
+      "primaryKeyword": "how to coach mental toughness",
+      "cluster": "Leadership",
+      "audience": "coaches who want to build the mental game, not just skills",
+      "angle": "Mental toughness is trained, not preached. Give coaches concrete methods: pressure practice, process language, how to debrief mistakes, building team confidence on evidence, and modeling composure.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Coaching",
+        "Mental Toughness",
+        "Leadership"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-mental-toughness",
+        "/blog/pressure-training-drills",
+        "/course"
+      ],
+      "protocol": "pressure practice, process debrief",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-stay-focused-in-soccer",
+      "title": "How to Stay Focused for a Full Soccer Match",
+      "primaryKeyword": "how to stay focused in soccer",
+      "cluster": "Mental Game by Sport",
+      "audience": "soccer players who switch off, lose concentration, and get scored on late",
+      "angle": "A soccer match has long dull stretches that punish a wandering mind. Cover refocus cues after a mistake, staying switched on off the ball, resetting at set pieces, and finishing games mentally strong. Second-half concentration specific to soccer.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Soccer",
+        "Focus",
+        "Concentration"
+      ],
+      "internalLinks": [
+        "/mental-performance/soccer",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "refocus cue, off-the-ball switch-on",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-overcome-a-slump-in-tennis",
+      "title": "How to Overcome a Slump in Tennis",
+      "primaryKeyword": "how to get out of a tennis slump",
+      "cluster": "Mental Game by Sport",
+      "audience": "tennis players stuck in a losing streak or a confidence dip",
+      "angle": "A tennis slump is usually a confidence and focus problem, not a technique one. Cover breaking the losing-streak spiral, going back to process and one point at a time, rebuilding on small wins, and managing the between-match head. Individual-sport isolation specific to tennis.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Tennis",
+        "Mental Toughness",
+        "Resilience"
+      ],
+      "internalLinks": [
+        "/mental-performance/tennis",
+        "/blog/how-to-bounce-back-after-a-bad-game",
+        "/course"
+      ],
+      "protocol": "process reset, small-win rebuild",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-improve-concentration-in-golf",
+      "title": "How to Improve Concentration in Golf",
+      "primaryKeyword": "how to improve concentration in golf",
+      "cluster": "Mental Game by Sport",
+      "audience": "golfers who lose focus over a long round and drop shots late",
+      "angle": "Golf demands focus in short bursts across four-plus hours, then punishes lapses. Cover switching focus on and off between shots (conserve attention), a consistent pre-shot routine, staying present after a bad hole, and finishing the round mentally. Shot-by-shot focus specific to golf.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Golf",
+        "Focus",
+        "Concentration"
+      ],
+      "internalLinks": [
+        "/mental-performance/golf",
+        "/blog/how-to-build-a-pre-game-routine",
+        "/course"
+      ],
+      "protocol": "switch-on/switch-off focus, pre-shot routine",
+      "status": "pending"
     }
   ]
 }

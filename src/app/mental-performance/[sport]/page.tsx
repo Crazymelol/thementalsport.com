@@ -1,5 +1,6 @@
 import { sports } from '@/data/sports';
 import { books } from '@/data/books';
+import { getAllArticles } from '@/lib/blog';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -32,6 +33,17 @@ export default async function SportPage({ params }: PageProps) {
     if (!data) notFound();
 
     const book = books.find(b => b.id === data.bookId) ?? books[0];
+
+    // Sport-specific blog articles for hub-and-spoke internal linking. Matches
+    // articles tagged with the sport (or whose title/keywords name it). Auto-
+    // fills as the auto-blog publishes sport articles; empty until then.
+    const key = data.name.toLowerCase();
+    const sportArticles = getAllArticles()
+        .filter(a =>
+            a.tags.some(t => t.toLowerCase() === key) ||
+            `${a.title} ${(a.keywords ?? []).join(' ')}`.toLowerCase().includes(key),
+        )
+        .slice(0, 6);
 
     return (
         <main className="min-h-screen bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
@@ -174,24 +186,29 @@ export default async function SportPage({ params }: PageProps) {
                 </div>
             </section>
 
-            {/* RELATED ARTICLES */}
+            {/* RELATED ARTICLES — sport-specific when available, generic fallback */}
             <section className="py-16">
                 <div className="container mx-auto px-6 max-w-4xl">
                     <div className="flex items-center justify-between mb-10">
-                        <h3 className="text-2xl font-black uppercase tracking-tighter">Related Articles</h3>
+                        <h3 className="text-2xl font-black uppercase tracking-tighter">
+                            {sportArticles.length > 0 ? `Mental Game Guides for ${data.name}` : 'Related Articles'}
+                        </h3>
                         <Link href="/blog" className="text-xs font-black uppercase tracking-widest hover:underline flex items-center gap-1">
                             All Articles <ArrowRight className="w-3 h-3" />
                         </Link>
                     </div>
                     <div className="grid md:grid-cols-3 gap-6">
-                        {[
-                            { href: '/blog/titans-protocol-day-01-biology-of-choking', title: 'The Biology of Choking', desc: 'Why your body betrays you under pressure — and how to rewire the response.' },
-                            { href: '/blog/titans-protocol-day-06-power-of-rituals', title: 'The Power of Pre-Game Rituals', desc: 'How elite athletes use rituals to trigger peak state on demand.' },
-                            { href: '/blog/titans-protocol-day-05-breath-control', title: 'Breath Control Under Pressure', desc: 'The breathing technique that resets your nervous system in 60 seconds.' },
-                        ].map((a, i) => (
+                        {(sportArticles.length > 0
+                            ? sportArticles.map(a => ({ href: `/blog/${a.slug}`, title: a.title, desc: a.description }))
+                            : [
+                                { href: '/blog/titans-protocol-day-01-biology-of-choking', title: 'The Biology of Choking', desc: 'Why your body betrays you under pressure, and how to rewire the response.' },
+                                { href: '/blog/titans-protocol-day-06-power-of-rituals', title: 'The Power of Pre-Game Rituals', desc: 'How elite athletes use rituals to trigger peak state on demand.' },
+                                { href: '/blog/titans-protocol-day-05-breath-control', title: 'Breath Control Under Pressure', desc: 'The breathing technique that resets your nervous system in 60 seconds.' },
+                            ]
+                        ).map((a, i) => (
                             <Link key={i} href={a.href} className="group border border-zinc-200 hover:border-zinc-900 p-6 transition-colors">
                                 <h4 className="font-black uppercase tracking-tight mb-2 group-hover:underline">{a.title}</h4>
-                                <p className="text-zinc-500 text-sm">{a.desc}</p>
+                                <p className="text-zinc-500 text-sm line-clamp-3">{a.desc}</p>
                             </Link>
                         ))}
                     </div>
