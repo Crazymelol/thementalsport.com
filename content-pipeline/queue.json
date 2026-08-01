@@ -208,7 +208,8 @@
         "/blog/how-to-bounce-back-after-a-bad-game"
       ],
       "protocol": "5-Win Protocol log",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "should-you-let-your-kid-quit-their-sport",
@@ -228,7 +229,8 @@
         "/blog/what-to-say-to-nervous-young-athlete"
       ],
       "protocol": "the quit-decision framework",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "how-to-talk-to-your-kids-coach",
