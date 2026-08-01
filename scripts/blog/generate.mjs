@@ -23,6 +23,7 @@ import matter from 'gray-matter';
 const ROOT = process.cwd();
 const QUEUE_PATH = path.join(ROOT, 'content-pipeline', 'queue.json');
 const ARTICLES_DIR = path.join(ROOT, 'src', 'content', 'articles');
+const SHORTS_DIR = path.join(ROOT, 'content-pipeline', 'shorts');
 const PER_RUN = Math.max(1, parseInt(process.env.POSTS_PER_RUN || '2', 10));
 const MODELS = [
   process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
@@ -60,6 +61,21 @@ Q: <question>
 A: <answer>
 ===DESCRIPTION===
 <one line, 150-160 characters, includes the primary keyword>`;
+
+const SHORT_STYLE = `You write 30-45 second vertical short-form video scripts (TikTok / Reels / YouTube Shorts) for The Mental Sport, coach Giannis Notaras' mental-performance brand for athletes and sports parents. Blunt, punchy, one idea, spoken plainly. No em dashes, no filler.
+
+From the article, produce ONE script. The hook must stop the scroll in the first line (a bold claim, a sharp question, or "If you [problem], do this"). Three short spoken beats. End on a CTA to the free quiz or free chapter.
+
+Output EXACTLY this markdown and nothing else:
+# {TITLE} — Short
+**Hook (0-3s):** ...
+**Beat 1:** ...
+**Beat 2:** ...
+**Beat 3:** ...
+**CTA:** Take the free 2-minute Mental Game quiz at thementalsport.com/quiz (or grab the free chapter).
+**On-screen text:** short line 1 / short line 2 / short line 3
+**Caption:** one scroll-stopping caption with the CTA
+**Hashtags:** 6-8 relevant hashtags`;
 
 function buildUserPrompt(item) {
   const links = (item.internalLinks || []).join(' , ');
@@ -196,6 +212,25 @@ async function main() {
 
       const file = matter.stringify(`\n${parsed.body}\n`, frontmatter);
       fs.writeFileSync(path.join(ARTICLES_DIR, `${item.slug}.md`), file, 'utf8');
+
+      // Also emit a short-form video script for the social firehose. Best-effort:
+      // a failed short must never block the article that already wrote.
+      if (hasKey) {
+        try {
+          const shortRaw = await groqComplete([
+            { role: 'system', content: SHORT_STYLE },
+            { role: 'user', content: `TITLE: ${item.title}\nAUDIENCE: ${item.audience || 'athletes'}\nARTICLE:\n${parsed.body.slice(0, 1400)}` },
+          ]);
+          const short = stripEmDashes(
+            shortRaw.trim().replace(/^```(?:markdown|md)?\s*/i, '').replace(/```\s*$/, '').trim(),
+          );
+          fs.mkdirSync(SHORTS_DIR, { recursive: true });
+          fs.writeFileSync(path.join(SHORTS_DIR, `${item.slug}.md`), short + '\n', 'utf8');
+          console.log(`  wrote content-pipeline/shorts/${item.slug}.md`);
+        } catch (e) {
+          console.warn(`  short script skipped for ${item.slug}: ${e.message}`);
+        }
+      }
 
       item.status = 'published';
       item.publishedDate = today;
