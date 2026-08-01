@@ -145,7 +145,8 @@
         "/blog/how-to-bounce-back-after-a-bad-game"
       ],
       "protocol": "outcome-to-process conversion",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "pressure-training-drills",
@@ -165,7 +166,8 @@
         "/blog/how-to-build-mental-toughness"
       ],
       "protocol": "manufactured-pressure drills",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "self-distancing-talk-to-yourself-by-name",
@@ -185,7 +187,8 @@
         "/blog/how-to-bounce-back-after-a-bad-game"
       ],
       "protocol": "third-person self-talk cue",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "confidence-built-on-evidence-5-win-protocol",
@@ -535,7 +538,8 @@
         "/course"
       ],
       "protocol": "adrenaline reframe, between-round breathing, get-hit reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-01"
     },
     {
       "slug": "how-to-calm-nerves-before-a-fight",
