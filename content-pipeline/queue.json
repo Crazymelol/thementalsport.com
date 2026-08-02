@@ -250,7 +250,8 @@
         "/blog/sports-parents-playbook"
       ],
       "protocol": "the coach-conversation script",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-02"
     },
     {
       "slug": "mental-game-for-basketball",
