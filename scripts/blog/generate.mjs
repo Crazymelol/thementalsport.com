@@ -19,6 +19,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { renderCard } from './card.mjs';
 
 const ROOT = process.cwd();
 const QUEUE_PATH = path.join(ROOT, 'content-pipeline', 'queue.json');
@@ -30,6 +31,18 @@ const MODELS = [
   'openai/gpt-oss-120b',
   'llama-3.1-8b-instant',
 ];
+
+// Card accent per book, matching the book palettes in src/data/books.ts.
+const BOOK_ACCENT = {
+  'The Competition Protocol': '#dc2626',
+  'Overcoming Mental Blocks': '#d97706',
+  'Unbreakable': '#0ea5e9',
+  'Confidence-Building Workbook': '#22c55e',
+  'Unlocking Resilient Confidence': '#eab308',
+  'Nurturing Self-Worth': '#ef4444',
+  'Physiological Peak Performance Blueprint': '#8b5cf6',
+  "The ADHD Athlete's Edge": '#ec4899',
+};
 
 const STYLE = `You are a staff writer for The Mental Sport (thementalsport.com), the mental-performance brand of coach and author Giannis Notaras. Write ONE SEO blog article.
 
@@ -227,6 +240,21 @@ async function main() {
           fs.mkdirSync(SHORTS_DIR, { recursive: true });
           fs.writeFileSync(path.join(SHORTS_DIR, `${item.slug}.md`), short + '\n', 'utf8');
           console.log(`  wrote content-pipeline/shorts/${item.slug}.md`);
+
+          // Branded quote-card image from the hook, ready to upload.
+          try {
+            const hookMatch = short.match(/\*\*Hook[^:]*:\*\*\s*(.+)/i);
+            const hookText = (hookMatch ? hookMatch[1] : item.title).replace(/[*_`]/g, '').trim();
+            renderCard({
+              hook: hookText,
+              label: 'Sport Psychology',
+              accent: BOOK_ACCENT[item.book] || '#dc2626',
+              outPath: path.join(SHORTS_DIR, `${item.slug}.png`),
+            });
+            console.log(`  wrote content-pipeline/shorts/${item.slug}.png`);
+          } catch (e) {
+            console.warn(`  card skipped for ${item.slug}: ${e.message}`);
+          }
         } catch (e) {
           console.warn(`  short script skipped for ${item.slug}: ${e.message}`);
         }
