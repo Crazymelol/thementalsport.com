@@ -15,9 +15,8 @@ export const metadata: Metadata = {
     },
 };
 
-// Where "Apply" points. Email keeps it working today; swap for your Gumroad
-// self-serve affiliate signup link once you enable affiliates on the products.
-const APPLY_URL = 'mailto:hello@thementalsport.com?subject=Affiliate%20Application&body=Hi%20Giannis%2C%20I%27d%20like%20to%20become%20an%20affiliate.%20Here%27s%20where%20I%27ll%20share%20(handle%2Fsite)%3A';
+// Gumroad self-serve affiliate signup. Affiliates join instantly here.
+const APPLY_URL = 'https://notarasio.gumroad.com/affiliates';
 
 export default function AffiliatesPage() {
     return (
@@ -33,7 +32,7 @@ export default function AffiliatesPage() {
                         You already talk to athletes, parents, and coaches. Point them to the mental training they need, and earn <strong className="text-white">up to 40% on every sale</strong>. Tracked automatically. Paid by Gumroad.
                     </p>
                     <div className="pt-4">
-                        <a href={APPLY_URL} className="inline-flex items-center gap-3 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
+                        <a href={APPLY_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
                             Apply to Join <ArrowRight className="w-4 h-4" />
                         </a>
                     </div>
@@ -99,7 +98,7 @@ export default function AffiliatesPage() {
                 <div className="container mx-auto max-w-2xl space-y-6">
                     <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter">Start earning</h2>
                     <p className="text-zinc-400 text-lg">Share tools that actually help people, and get paid for it.</p>
-                    <a href={APPLY_URL} className="inline-flex items-center gap-3 px-12 py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-base transition-all">
+                    <a href={APPLY_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-12 py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-base transition-all">
                         Apply to Join <ArrowRight className="w-5 h-5" />
                     </a>
                     <p className="text-zinc-600 text-sm pt-4">
