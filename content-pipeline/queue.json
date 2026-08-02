@@ -271,7 +271,8 @@
         "/blog/how-to-bounce-back-after-a-bad-game"
       ],
       "protocol": "free-throw routine, next-play reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-02"
     },
     {
       "slug": "how-to-calm-nerves-before-a-tennis-match",
@@ -291,7 +292,8 @@
         "/blog/how-to-build-a-pre-game-routine"
       ],
       "protocol": "between-point routine, serve ritual",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-02"
     },
     {
       "slug": "fear-of-failure-in-sports",
