@@ -313,7 +313,8 @@
         "/blog/process-goals-vs-outcome-goals"
       ],
       "protocol": "failure reframe drill",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-03"
     },
     {
       "slug": "how-to-refocus-after-a-mistake",
@@ -333,7 +334,8 @@
         "/blog/self-distancing-talk-to-yourself-by-name"
       ],
       "protocol": "3-second error-recovery reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-03"
     },
     {
       "slug": "how-to-beat-the-yips-in-golf",
