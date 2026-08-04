@@ -356,7 +356,8 @@
         "/course"
       ],
       "protocol": "quiet-eye routine, external target focus, cue word",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-04"
     },
     {
       "slug": "how-to-make-free-throws-under-pressure",
@@ -377,7 +378,8 @@
         "/course"
       ],
       "protocol": "fixed free-throw routine, next-shot reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-04"
     },
     {
       "slug": "how-to-build-confidence-in-basketball",
