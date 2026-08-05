@@ -400,7 +400,8 @@
         "/course"
       ],
       "protocol": "5-win log, shoot-your-shot rule, short memory",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-05"
     },
     {
       "slug": "how-to-stop-choking-in-tennis",
@@ -421,7 +422,8 @@
         "/course"
       ],
       "protocol": "between-point routine, serve ritual, next-point focus",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-05"
     },
     {
       "slug": "how-to-handle-penalty-kick-pressure",
