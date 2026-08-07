@@ -444,7 +444,8 @@
         "/course"
       ],
       "protocol": "pick-and-commit, walk-up routine, breath reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-07"
     },
     {
       "slug": "how-to-bounce-back-after-a-loss-in-soccer",
@@ -465,7 +466,8 @@
         "/course"
       ],
       "protocol": "24-hour rule, one-lesson debrief, in-match reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-07"
     },
     {
       "slug": "gymnastics-mental-blocks-getting-your-skills-back",
