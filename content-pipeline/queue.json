@@ -488,7 +488,8 @@
         "/course"
       ],
       "protocol": "skill ladder, fear-reset breathing, trust reps",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-08"
     },
     {
       "slug": "how-to-calm-pre-race-nerves-in-swimming",
@@ -509,7 +510,8 @@
         "/course"
       ],
       "protocol": "behind-the-blocks routine, physiological sigh, split focus",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-08"
     },
     {
       "slug": "mental-training-for-distance-running",
