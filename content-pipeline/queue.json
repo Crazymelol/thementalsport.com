@@ -532,7 +532,8 @@
         "/course"
       ],
       "protocol": "chunking, mantra, associative focus in the pain cave",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-09"
     },
     {
       "slug": "how-to-control-fear-in-boxing",
@@ -575,7 +576,8 @@
         "/course"
       ],
       "protocol": "bullpen breathing, game-plan focus, adrenaline reframe",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-09"
     },
     {
       "slug": "how-to-psych-up-for-a-max-lift",
