@@ -598,7 +598,8 @@
         "/course"
       ],
       "protocol": "arousal sweet spot, pre-lift routine, one cue",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-10"
     },
     {
       "slug": "should-my-child-specialize-in-one-sport",
@@ -619,7 +620,8 @@
         "/course"
       ],
       "protocol": "the specialization decision checklist",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-10"
     },
     {
       "slug": "signs-of-burnout-in-young-athletes",
