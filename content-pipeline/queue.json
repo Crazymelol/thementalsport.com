@@ -642,7 +642,8 @@
         "/course"
       ],
       "protocol": "burnout warning-sign audit",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-11"
     },
     {
       "slug": "when-your-child-loses-their-starting-spot",
@@ -663,7 +664,8 @@
         "/course"
       ],
       "protocol": "the bench-response script",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-11"
     },
     {
       "slug": "imposter-syndrome-in-athletes",
