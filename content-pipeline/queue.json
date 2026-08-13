@@ -730,7 +730,8 @@
         "/course"
       ],
       "protocol": "excellence-not-perfection reframe",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-13"
     },
     {
       "slug": "the-mental-side-of-injury-recovery",
@@ -751,7 +752,8 @@
         "/course"
       ],
       "protocol": "rehab mental-goal ladder, return visualization",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-13"
     },
     {
       "slug": "how-to-be-a-mentally-tough-team-captain",
