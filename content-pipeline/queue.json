@@ -250,7 +250,8 @@
         "/blog/sports-parents-playbook"
       ],
       "protocol": "the coach-conversation script",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-02"
     },
     {
       "slug": "mental-game-for-basketball",
@@ -270,7 +271,8 @@
         "/blog/how-to-bounce-back-after-a-bad-game"
       ],
       "protocol": "free-throw routine, next-play reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-02"
     },
     {
       "slug": "how-to-calm-nerves-before-a-tennis-match",
@@ -290,7 +292,8 @@
         "/blog/how-to-build-a-pre-game-routine"
       ],
       "protocol": "between-point routine, serve ritual",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-02"
     },
     {
       "slug": "fear-of-failure-in-sports",
@@ -310,7 +313,8 @@
         "/blog/process-goals-vs-outcome-goals"
       ],
       "protocol": "failure reframe drill",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-03"
     },
     {
       "slug": "how-to-refocus-after-a-mistake",
@@ -330,7 +334,8 @@
         "/blog/self-distancing-talk-to-yourself-by-name"
       ],
       "protocol": "3-second error-recovery reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-03"
     },
     {
       "slug": "how-to-beat-the-yips-in-golf",
@@ -351,7 +356,8 @@
         "/course"
       ],
       "protocol": "quiet-eye routine, external target focus, cue word",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-04"
     },
     {
       "slug": "how-to-make-free-throws-under-pressure",
@@ -372,7 +378,8 @@
         "/course"
       ],
       "protocol": "fixed free-throw routine, next-shot reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-04"
     },
     {
       "slug": "how-to-build-confidence-in-basketball",
@@ -393,7 +400,8 @@
         "/course"
       ],
       "protocol": "5-win log, shoot-your-shot rule, short memory",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-05"
     },
     {
       "slug": "how-to-stop-choking-in-tennis",
@@ -414,7 +422,8 @@
         "/course"
       ],
       "protocol": "between-point routine, serve ritual, next-point focus",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-05"
     },
     {
       "slug": "how-to-handle-penalty-kick-pressure",
@@ -435,7 +444,8 @@
         "/course"
       ],
       "protocol": "pick-and-commit, walk-up routine, breath reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-07"
     },
     {
       "slug": "how-to-bounce-back-after-a-loss-in-soccer",
@@ -456,7 +466,8 @@
         "/course"
       ],
       "protocol": "24-hour rule, one-lesson debrief, in-match reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-07"
     },
     {
       "slug": "gymnastics-mental-blocks-getting-your-skills-back",
@@ -477,7 +488,8 @@
         "/course"
       ],
       "protocol": "skill ladder, fear-reset breathing, trust reps",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-08"
     },
     {
       "slug": "how-to-calm-pre-race-nerves-in-swimming",
@@ -498,7 +510,8 @@
         "/course"
       ],
       "protocol": "behind-the-blocks routine, physiological sigh, split focus",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-08"
     },
     {
       "slug": "mental-training-for-distance-running",
@@ -519,7 +532,8 @@
         "/course"
       ],
       "protocol": "chunking, mantra, associative focus in the pain cave",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-09"
     },
     {
       "slug": "how-to-control-fear-in-boxing",
@@ -562,7 +576,8 @@
         "/course"
       ],
       "protocol": "bullpen breathing, game-plan focus, adrenaline reframe",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-09"
     },
     {
       "slug": "how-to-psych-up-for-a-max-lift",
@@ -583,7 +598,8 @@
         "/course"
       ],
       "protocol": "arousal sweet spot, pre-lift routine, one cue",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-10"
     },
     {
       "slug": "should-my-child-specialize-in-one-sport",
@@ -604,7 +620,8 @@
         "/course"
       ],
       "protocol": "the specialization decision checklist",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-10"
     },
     {
       "slug": "signs-of-burnout-in-young-athletes",
@@ -625,7 +642,8 @@
         "/course"
       ],
       "protocol": "burnout warning-sign audit",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-11"
     },
     {
       "slug": "when-your-child-loses-their-starting-spot",
@@ -646,7 +664,8 @@
         "/course"
       ],
       "protocol": "the bench-response script",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-11"
     },
     {
       "slug": "imposter-syndrome-in-athletes",
@@ -667,7 +686,8 @@
         "/course"
       ],
       "protocol": "evidence log, reframe drill",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-12"
     },
     {
       "slug": "how-to-stop-comparing-yourself-to-other-athletes",
@@ -688,7 +708,8 @@
         "/course"
       ],
       "protocol": "run-your-own-race reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-12"
     },
     {
       "slug": "perfectionism-in-sports-how-to-let-go",
@@ -709,7 +730,8 @@
         "/course"
       ],
       "protocol": "excellence-not-perfection reframe",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-13"
     },
     {
       "slug": "the-mental-side-of-injury-recovery",
@@ -730,7 +752,8 @@
         "/course"
       ],
       "protocol": "rehab mental-goal ladder, return visualization",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-13"
     },
     {
       "slug": "how-to-be-a-mentally-tough-team-captain",
