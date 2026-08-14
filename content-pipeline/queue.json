@@ -774,7 +774,8 @@
         "/course"
       ],
       "protocol": "the composure-and-standards model",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "how-to-coach-mental-toughness",
@@ -795,7 +796,8 @@
         "/course"
       ],
       "protocol": "pressure practice, process debrief",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "how-to-stay-focused-in-soccer",
