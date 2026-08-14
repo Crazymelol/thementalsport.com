@@ -118,14 +118,28 @@ Best openers from your own content:
 Alternate **athlete** and **parent** content so both audiences build. Cards are in
 `content-pipeline/shorts/<slug>.png`, captions in `<slug>.md`.
 
-**Week 1 (biggest hooks first):**
-1. should-you-let-your-kid-quit-their-sport *(parent)*
-2. how-to-make-free-throws-under-pressure *(athlete)*
-3. when-your-child-loses-their-starting-spot *(parent)*
-4. how-to-beat-the-yips-in-golf *(athlete)*
-5. signs-of-burnout-in-young-athletes *(parent)*
-6. how-to-stop-choking-in-tennis *(athlete)*
-7. how-to-talk-to-your-kids-coach *(parent)*
+### Season check: post what is happening THIS WEEK
+
+Mid-August is **preseason and tryouts**, not mid-season. Nobody is searching for
+free-throw pressure in August; they are searching "will my kid make the team".
+Lead with the seasonal cluster while it is live, then return to evergreen.
+
+**Week 1 — Preseason & Tryouts (highest relevance right now):**
+1. the-attitude-that-decides-your-season *(athlete, season opener)*
+2. what-to-say-to-your-child-before-tryouts *(parent)*
+3. how-to-handle-tryout-nerves *(athlete)*
+4. what-if-my-child-doesnt-make-the-team *(parent, highest emotion)*
+5. getting-back-in-shape-after-summer *(athlete)*
+6. how-to-get-mentally-ready-for-preseason *(athlete)*
+7. balancing-school-and-sport *(parent, back-to-school timing)*
+
+Hold `first-practice-with-a-new-coach` for the week teams actually start.
+
+**Week 1b (evergreen, if you post twice a day):**
+- should-you-let-your-kid-quit-their-sport *(parent)*
+- how-to-make-free-throws-under-pressure *(athlete)*
+- when-your-child-loses-their-starting-spot *(parent)*
+- signs-of-burnout-in-young-athletes *(parent)*
 
 **Week 2:**
 8. imposter-syndrome-in-athletes
