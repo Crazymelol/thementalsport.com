@@ -800,6 +800,174 @@
       "publishedDate": "2026-08-14"
     },
     {
+      "slug": "the-attitude-that-decides-your-season",
+      "title": "The Attitude That Decides Your Season (Set It Now)",
+      "primaryKeyword": "attitude for the new season",
+      "cluster": "Preseason & Tryouts",
+      "audience": "athletes heading into a new season who want to start it in the right frame of mind",
+      "angle": "The season is decided by the standard you set in week one, not by talent. Cover choosing your identity for the season, deciding your non-negotiables before it gets hard, expecting the grind, and the difference between motivation and standards. Written as a season-opening manifesto with a clear commitment exercise.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Mindset",
+        "Preseason",
+        "Mental Toughness"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the season standard, non-negotiables list",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-handle-tryout-nerves",
+      "title": "How to Handle Tryout Nerves (and Actually Make the Team)",
+      "primaryKeyword": "how to handle tryout nerves",
+      "cluster": "Preseason & Tryouts",
+      "audience": "athletes facing tryouts who tighten up and underperform in front of selectors",
+      "angle": "Tryouts punish tentative play. Coaches select attitude and effort as much as skill. Cover controlling the controllables, playing aggressive rather than safe, a breathing reset before you step on, and what selectors actually look for. Numbered tryout-day plan.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Tryouts",
+        "Anxiety",
+        "Preseason"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "tryout-day plan, play-aggressive rule",
+      "status": "pending"
+    },
+    {
+      "slug": "what-to-say-to-your-child-before-tryouts",
+      "title": "What to Say to Your Child Before Tryouts",
+      "primaryKeyword": "what to say before tryouts",
+      "cluster": "Preseason & Tryouts",
+      "audience": "parents driving their kid to tryouts and unsure what helps",
+      "angle": "The car before tryouts is as loaded as the car after a game. Cover taking pressure off, focusing on effort not selection, avoiding \"you have to make this team\", and the exact words that settle a nervous kid. Includes what to say if they do not make it.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Tryouts",
+        "Youth Athletes"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the pre-tryout script",
+      "status": "pending"
+    },
+    {
+      "slug": "what-if-my-child-doesnt-make-the-team",
+      "title": "What If My Child Doesn't Make the Team?",
+      "primaryKeyword": "child did not make the team",
+      "cluster": "Preseason & Tryouts",
+      "audience": "parents whose child was cut and is devastated",
+      "angle": "Getting cut is one of the most useful things that can happen if it is handled right. Cover letting them grieve it, not blaming the coach, separating the result from their worth, and turning it into a training plan. Give the first-24-hours script and the week-after plan.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Youth Athletes",
+        "Resilience"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "first-24-hours script, the comeback plan",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-get-mentally-ready-for-preseason",
+      "title": "How to Get Mentally Ready for Preseason",
+      "primaryKeyword": "mentally prepare for preseason",
+      "cluster": "Preseason & Tryouts",
+      "audience": "athletes about to start preseason after an off-season break",
+      "angle": "Preseason is where seasons are won and where most athletes coast. Cover setting a standard before day one, restarting routines gradually, handling the discomfort of being unfit again, and mental goals for the first four weeks.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Preseason",
+        "Routine",
+        "Mental Toughness"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the four-week preseason mental plan",
+      "status": "pending"
+    },
+    {
+      "slug": "getting-back-in-shape-after-summer",
+      "title": "Getting Your Head Back After a Summer Off",
+      "primaryKeyword": "back to training after summer",
+      "cluster": "Preseason & Tryouts",
+      "audience": "athletes who took the summer off and feel unfit, rusty and unmotivated",
+      "angle": "The hardest part of coming back is not fitness, it is the ego hit of being worse than you were. Cover expecting the rust, comparing to yourself not your old self, restarting with tiny consistent reps, and beating the shame spiral that makes people quit in week one.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Preseason",
+        "Motivation",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the two-week restart ladder",
+      "status": "pending"
+    },
+    {
+      "slug": "first-practice-with-a-new-coach",
+      "title": "First Practice With a New Coach: How to Make It Count",
+      "primaryKeyword": "new coach first practice",
+      "cluster": "Preseason & Tryouts",
+      "audience": "athletes joining a new team or coach and wanting to earn trust fast",
+      "angle": "Coaches form an opinion in the first two sessions and it is hard to change. Cover what coaches notice (effort, coachability, body language between drills), asking one good question, and how to handle being the new one without shrinking.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Preseason",
+        "Confidence",
+        "Teamwork"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the first-impression checklist",
+      "status": "pending"
+    },
+    {
+      "slug": "balancing-school-and-sport",
+      "title": "Balancing School and Sport Without Burning Out",
+      "primaryKeyword": "balancing school and sport",
+      "cluster": "Preseason & Tryouts",
+      "audience": "student athletes and their parents heading back to school alongside a full season",
+      "angle": "September collapses school and season into the same weeks and burnout starts here. Cover a realistic weekly structure, protecting sleep, when to drop something, and the warning signs a young athlete is overloaded.",
+      "book": "The ADHD Athlete's Edge",
+      "tags": [
+        "Youth Athletes",
+        "Burnout",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the weekly load plan",
+      "status": "pending"
+    },
+    {
       "slug": "how-to-stay-focused-in-soccer",
       "title": "How to Stay Focused for a Full Soccer Match",
       "primaryKeyword": "how to stay focused in soccer",
