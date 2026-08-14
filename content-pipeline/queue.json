@@ -906,7 +906,8 @@
         "/course"
       ],
       "protocol": "the four-week preseason mental plan",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "getting-back-in-shape-after-summer",
@@ -927,7 +928,8 @@
         "/course"
       ],
       "protocol": "the two-week restart ladder",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "first-practice-with-a-new-coach",
@@ -948,7 +950,8 @@
         "/course"
       ],
       "protocol": "the first-impression checklist",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "balancing-school-and-sport",
