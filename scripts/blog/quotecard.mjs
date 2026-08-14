@@ -62,6 +62,10 @@ export function quoteCardSvg({
     name = 'Giannis Notaras',
     handle = '@thementalsport',
     accent = '#dc2626',
+    // Vertical focal point of the avatar photo: 0 = top, 0.5 = centre, 1 = bottom.
+    // Lets an uncropped photo be aimed at the face without editing the file.
+    avatarFocusY = 0.5,
+    avatarZoom = 1,
 }) {
     const W = 1080, H = 1350;
     const PAD = 84;
@@ -74,9 +78,14 @@ export function quoteCardSvg({
     if (avatarPath) {
         const b64 = fs.readFileSync(avatarPath).toString('base64');
         const mime = avatarPath.endsWith('.png') ? 'png' : 'jpeg';
+        // Oversize the image, then shift it so the chosen focal point lands in
+        // the middle of the circle.
+        const d = r * 2 * avatarZoom;
+        const ax = cx - d / 2;
+        const ay = cy - d / 2 - (avatarFocusY - 0.5) * d;
         avatar = `
   <clipPath id="av"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath>
-  <image x="${cx - r}" y="${cy - r}" width="${r * 2}" height="${r * 2}"
+  <image x="${ax}" y="${ay}" width="${d}" height="${d}"
          preserveAspectRatio="xMidYMid slice" clip-path="url(#av)"
          href="data:image/${mime};base64,${b64}"/>`;
     } else {
