@@ -77,7 +77,18 @@ A: <answer>
 
 const SHORT_STYLE = `You write 30-45 second vertical short-form video scripts (TikTok / Reels / YouTube Shorts) for The Mental Sport, coach Giannis Notaras' mental-performance brand for athletes and sports parents. Blunt, punchy, one idea, spoken plainly. No em dashes, no filler.
 
-From the article, produce ONE script. The hook must stop the scroll in the first line (a bold claim, a sharp question, or "If you [problem], do this"). Three short spoken beats. End on a CTA to the free quiz or free chapter.
+SOUND LIKE A COACH TALKING, NOT A BRAND ADVERTISING. This is the most important rule. Specifically:
+- NO exclamation marks anywhere.
+- Banned hype verbs and phrases: unlock, discover, boost, supercharge, level up, take your game to the next level, don't let X hold you back, are you ready to, it's time to, say goodbye to, game-changer, secret weapon, transform your.
+- No rhetorical hype questions as the hook ("Ready to win this season?"). Open with a flat, confident statement of fact or a specific observation instead.
+- Use contractions and short fragments. Vary sentence length. Speak to ONE person as "you".
+- Take a clear position. A mild opinion beats a safe summary.
+- Prefer concrete specifics (a moment, a number, a thing a coach actually notices) over abstract benefit language.
+- Never claim a personal anecdote, client, or story as though it happened. Do not invent people, messages, or events.
+
+From the article, produce ONE script. The hook must stop the scroll in the first line by being specific or mildly contrarian, not by being loud. Three short spoken beats. Then the CTA.
+
+CAPTION RULES: the caption is NOT a summary plus a link. Write 1-3 short lines that stand on their own and give value even if nobody clicks. Do not put the URL in the caption (it goes in the first comment). Do not start with the title. No hashtag stuffing: 3-5 hashtags maximum, lowercase, specific to the topic.
 
 Output EXACTLY this markdown and nothing else:
 # {TITLE} — Short
@@ -85,10 +96,10 @@ Output EXACTLY this markdown and nothing else:
 **Beat 1:** ...
 **Beat 2:** ...
 **Beat 3:** ...
-**CTA:** Take the free 2-minute Mental Game quiz at thementalsport.com/quiz (or grab the free chapter).
+**CTA:** one short spoken line pointing to the free quiz, no URL read aloud
 **On-screen text:** short line 1 / short line 2 / short line 3
-**Caption:** one scroll-stopping caption with the CTA
-**Hashtags:** 6-8 relevant hashtags`;
+**Caption:** 1-3 short lines of standalone value, no URL, no title restatement
+**Hashtags:** 3-5 lowercase, specific hashtags`;
 
 function buildUserPrompt(item) {
   const links = (item.internalLinks || []).join(' , ');
@@ -127,6 +138,11 @@ async function groqComplete(messages) {
     }
   }
   throw lastErr ?? new Error('all models failed');
+}
+
+// Marketing-voice cleanup: exclamation marks are the loudest AI/ad tell.
+function stripHype(s) {
+  return s.replace(/!+/g, '.').replace(/\.\s*\./g, '.');
 }
 
 function stripEmDashes(s) {
@@ -234,9 +250,9 @@ async function main() {
             { role: 'system', content: SHORT_STYLE },
             { role: 'user', content: `TITLE: ${item.title}\nAUDIENCE: ${item.audience || 'athletes'}\nARTICLE:\n${parsed.body.slice(0, 1400)}` },
           ]);
-          const short = stripEmDashes(
+          const short = stripHype(stripEmDashes(
             shortRaw.trim().replace(/^```(?:markdown|md)?\s*/i, '').replace(/```\s*$/, '').trim(),
-          );
+          ));
           fs.mkdirSync(SHORTS_DIR, { recursive: true });
           fs.writeFileSync(path.join(SHORTS_DIR, `${item.slug}.md`), short + '\n', 'utf8');
           console.log(`  wrote content-pipeline/shorts/${item.slug}.md`);
