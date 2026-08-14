@@ -90,8 +90,10 @@ jobs:
           # Push the generated book covers to Gumroad (gallery cover + thumbnail).
           if [ "$MODE" = "covers" ]; then
             FAILC=0
-            while read -r slug img; do
-              [ -z "$slug" ] && continue
+            PAIRS="yfkgwv:the-competition-protocol albwf:overcoming-mental-blocks lazrca:unbreakable bknbwi:confidence-building jzzsp:resilient-confidence zkkptv:nurturing-self-worth ryzhc:physiological-performance boced:adhd-athletes-edge"
+            for pair in $PAIRS; do
+              slug="${pair%%:*}"
+              img="public/covers/${pair##*:}.png"
               if [ -n "$ONLY" ] && [ "$ONLY" != "$slug" ]; then continue; fi
               echo "::group::$slug <- $img"
               if [ ! -f "$img" ]; then echo "missing $img"; FAILC=1; echo "::endgroup::"; continue; fi
@@ -100,16 +102,7 @@ jobs:
               gumroad products thumbnail set "$slug" --image "$img" --json --no-input --non-interactive \
                 || { echo "thumbnail set failed"; FAILC=1; }
               echo "::endgroup::"
-            done <<'MAP'
-yfkgwv public/covers/the-competition-protocol.png
-albwf public/covers/overcoming-mental-blocks.png
-lazrca public/covers/unbreakable.png
-bknbwi public/covers/confidence-building.png
-jzzsp public/covers/resilient-confidence.png
-zkkptv public/covers/nurturing-self-worth.png
-ryzhc public/covers/physiological-performance.png
-boced public/covers/adhd-athletes-edge.png
-MAP
+            done
             echo "======================================"
             [ "$FAILC" = "1" ] && echo "::warning::Some covers failed — see groups above." || echo "All covers pushed."
             exit 0
