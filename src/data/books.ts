@@ -32,7 +32,7 @@ export const books: Book[] = [
         subtitle: "A Step-by-Step Guide to Mastering Your Mindset, Crushing Anxiety, and dominating Your Sport",
         description: "Master the art of preparation. This book is a manual for the 7 days leading up to your event, teaching you how to build rituals and standard procedures that automate excellence and eliminate anxiety.",
         author: "Giannis Notaras",
-        coverImage: "/covers/final_neon_cover.jpg",
+        coverImage: "/covers/the-competition-protocol.png",
         features: [
             "The T-Minus 7 Day countdown checklist",
             "How to build an 'Anchor' to trigger flow state instantly",

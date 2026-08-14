@@ -1,0 +1,217 @@
+// Book cover generator. Renders 1600x2560 (2:3, Kindle/ebook standard) covers
+// for every title in one consistent brand system: black ground, per-book accent
+// glow, huge Anton display type. Designed to stay legible at thumbnail size,
+// which is how buyers actually see a cover on Gumroad and Amazon.
+//
+// Offline (SVG -> PNG via resvg) with fonts vendored in assets/fonts, so it runs
+// anywhere including CI. Run: node scripts/covers/build-covers.mjs
+
+import { Resvg } from '@resvg/resvg-js';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const ROOT = process.cwd();
+const FONT_DIR = path.join(ROOT, 'assets', 'fonts');
+const OUT_DIR = path.join(ROOT, 'public', 'covers');
+
+const W = 1600, H = 2560;
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// Anton is condensed: roughly 0.42 of font size per character at these weights.
+const ANTON_CHAR_W = 0.44;
+
+function fitLines(words, maxWidth, targetLines) {
+    // Greedy wrap at a given font size; returns lines.
+    const lines = [];
+    let cur = '';
+    for (const w of words) {
+        const test = cur ? cur + ' ' + w : w;
+        if (test.length > maxWidth && cur) { lines.push(cur); cur = w; } else { cur = test; }
+    }
+    if (cur) lines.push(cur);
+    return lines;
+}
+
+// Choose the largest font size where the title fits the box in <= maxLines.
+function layoutTitle(title, boxW, maxLines) {
+    const words = title.toUpperCase().split(/\s+/);
+    for (let size = 230; size >= 70; size -= 2) {
+        const charsPerLine = Math.floor(boxW / (size * ANTON_CHAR_W));
+        if (charsPerLine < 3) continue;
+        const lines = fitLines(words, charsPerLine, maxLines);
+        const longest = Math.max(...lines.map((l) => l.length));
+        if (lines.length <= maxLines && longest * size * ANTON_CHAR_W <= boxW) {
+            return { lines, size };
+        }
+    }
+    const size = 70;
+    return { lines: fitLines(words, Math.floor(boxW / (size * ANTON_CHAR_W)), maxLines), size };
+}
+
+function wrapPlain(text, maxChars) {
+    const words = text.split(/\s+/);
+    const lines = [];
+    let cur = '';
+    for (const w of words) {
+        const t = cur ? cur + ' ' + w : w;
+        if (t.length > maxChars && cur) { lines.push(cur); cur = w; } else { cur = t; }
+    }
+    if (cur) lines.push(cur);
+    return lines;
+}
+
+export function coverSvg(book) {
+    const accent = book.accent;
+    const light = book.theme === 'light';
+    const bg = light ? '#f7f5f1' : '#0a0a0b';
+    const fg = light ? '#14141a' : '#ffffff';
+    const muted = light ? '#4b4b55' : '#a7a7b0';
+
+    const PAD = 110;
+    const boxW = W - PAD * 2;
+    const { lines, size } = layoutTitle(book.displayTitle, boxW, book.maxLines || 4);
+    const lh = size * 1.0;
+
+    const subLines = wrapPlain(book.subtitle, 44).slice(0, 3);
+    const SUB_LH = 70, RULE_GAP = 56, SUB_GAP = 74, BADGE_GAP = 64, BADGE_H = 66;
+
+    // Measure the whole middle block, then center it between the header and the
+    // author footer so short and long titles both sit balanced.
+    const titleH = lines.length * lh;
+    const subH = subLines.length * SUB_LH;
+    const blockH = titleH + RULE_GAP + 4 + SUB_GAP + subH + (book.badge ? BADGE_GAP + BADGE_H : 0);
+    const zoneTop = 420, zoneBottom = H - 400;
+    const start = zoneTop + (zoneBottom - zoneTop - blockH) / 2;
+
+    let y = start + size * 0.82;
+    const titleSvg = lines
+        .map((l) => {
+            const t = `<text x="${PAD}" y="${Math.round(y)}" font-family="Anton" font-size="${size}" fill="${fg}">${esc(l)}</text>`;
+            y += lh;
+            return t;
+        })
+        .join('\n  ');
+
+    const ruleY = Math.round(start + titleH + RULE_GAP);
+    let sy = ruleY + SUB_GAP + 40;
+    const subSvg = subLines
+        .map((l) => {
+            const t = `<text x="${PAD}" y="${Math.round(sy)}" font-family="Oswald" font-size="52" fill="${muted}">${esc(l)}</text>`;
+            sy += SUB_LH;
+            return t;
+        })
+        .join('\n  ');
+
+    const badgeY = Math.round(sy - SUB_LH + BADGE_GAP);
+    const badge = book.badge
+        ? `<rect x="${PAD}" y="${badgeY}" width="${book.badge.length * 24 + 60}" height="${BADGE_H}" fill="${accent}"/>
+  <text x="${PAD + 30}" y="${badgeY + 46}" font-family="Archivo" font-size="30" fill="#ffffff" letter-spacing="3">${esc(book.badge.toUpperCase())}</text>`
+        : '';
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs>
+    <radialGradient id="glow" cx="76%" cy="16%" r="82%">
+      <stop offset="0%" stop-color="${accent}" stop-opacity="${light ? 0.5 : 0.55}"/>
+      <stop offset="60%" stop-color="${bg}" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${bg}" stop-opacity="0"/>
+      <stop offset="100%" stop-color="${bg}" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="${W}" height="${H}" fill="${bg}"/>
+  <rect width="${W}" height="${H}" fill="url(#glow)"/>
+  <rect y="${H * 0.55}" width="${W}" height="${H * 0.45}" fill="url(#fade)"/>
+
+  <!-- accent spine -->
+  <rect x="0" y="0" width="26" height="${H}" fill="${accent}"/>
+
+  <!-- imprint -->
+  <text x="${PAD}" y="220" font-family="Archivo" font-size="36" fill="${fg}" letter-spacing="12">THE MENTAL SPORT</text>
+  <rect x="${PAD}" y="266" width="150" height="10" fill="${accent}"/>
+
+  ${titleSvg}
+
+  <rect x="${PAD}" y="${ruleY}" width="${boxW}" height="4" fill="${accent}" opacity="0.65"/>
+  ${subSvg}
+
+  ${badge}
+
+  <rect x="${PAD}" y="${H - 300}" width="120" height="10" fill="${accent}"/>
+  <text x="${PAD}" y="${H - 190}" font-family="Anton" font-size="88" fill="${fg}">GIANNIS NOTARAS</text>
+</svg>`;
+}
+
+export function renderCover(book, outPath) {
+    const svg = coverSvg(book);
+    const png = new Resvg(svg, {
+        fitTo: { mode: 'width', value: W },
+        font: { fontDirs: [FONT_DIR], loadSystemFonts: true, defaultFontFamily: 'Archivo' },
+    })
+        .render()
+        .asPng();
+    fs.writeFileSync(outPath, png);
+    return outPath;
+}
+
+export const BOOKS = [
+    {
+        id: 'the-competition-protocol', file: 'the-competition-protocol.png', accent: '#dc2626',
+        displayTitle: 'The Competition Protocol', maxLines: 3,
+        subtitle: 'Master your mindset, crush anxiety, and dominate your sport',
+        badge: '7-Day System',
+    },
+    {
+        id: 'mental-blocks', file: 'overcoming-mental-blocks.png', accent: '#f59e0b',
+        displayTitle: 'Overcoming Mental Blocks', maxLines: 3,
+        subtitle: 'A guide to peak performance under pressure',
+        badge: 'Peak Performance',
+    },
+    {
+        id: 'unbreakable', file: 'unbreakable.png', accent: '#0ea5e9', theme: 'light',
+        displayTitle: 'Unbreakable', maxLines: 2,
+        subtitle: "Leo and Maya's mental toughness adventure",
+        badge: 'Ages 6-9',
+    },
+    {
+        id: 'confidence-building', file: 'confidence-building.png', accent: '#22c55e',
+        displayTitle: 'The Confidence Workbook', maxLines: 3,
+        subtitle: 'Overcome self-doubt and build unshakable self-assurance',
+        badge: 'Exercises Inside',
+    },
+    {
+        id: 'resilient-confidence', file: 'resilient-confidence.png', accent: '#eab308',
+        displayTitle: 'Resilient Confidence', maxLines: 2,
+        subtitle: 'The key to consistent high performance',
+        badge: 'Perform Under Pressure',
+    },
+    {
+        id: 'nurturing-self-worth', file: 'nurturing-self-worth.png', accent: '#ef4444',
+        displayTitle: 'Nurturing Self-Worth', maxLines: 2,
+        subtitle: "The complete parent's guide to raising confident children",
+        badge: 'For Parents',
+    },
+    {
+        id: 'physiological-performance', file: 'physiological-performance.png', accent: '#8b5cf6',
+        displayTitle: 'Peak Performance Blueprint', maxLines: 3,
+        subtitle: "The science of unlocking your body's full potential",
+        badge: 'Science-Driven',
+    },
+    {
+        id: 'adhd-athletes-edge', file: 'adhd-athletes-edge.png', accent: '#ec4899',
+        displayTitle: "The ADHD Athlete's Edge", maxLines: 3,
+        subtitle: 'Turn distraction into domination',
+        badge: 'Train With Your Brain',
+    },
+];
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+    const outDir = process.argv[2] || OUT_DIR;
+    fs.mkdirSync(outDir, { recursive: true });
+    for (const b of BOOKS) {
+        renderCover(b, path.join(outDir, b.file));
+        console.log(`  wrote ${path.join(outDir, b.file)}`);
+    }
+    console.log(`Done. ${BOOKS.length} covers.`);
+}
