@@ -105,7 +105,7 @@ export function coverSvg(book) {
     const badgeY = Math.round(sy - SUB_LH + BADGE_GAP);
     const badge = book.badge
         ? `<rect x="${PAD}" y="${badgeY}" width="${book.badge.length * 24 + 60}" height="${BADGE_H}" fill="${accent}"/>
-  <text x="${PAD + 30}" y="${badgeY + 46}" font-family="Archivo" font-size="30" fill="#ffffff" letter-spacing="3">${esc(book.badge.toUpperCase())}</text>`
+  <text x="${PAD + 30}" y="${badgeY + 46}" font-family="Archivo SemiBold" font-size="30" fill="#ffffff" letter-spacing="3">${esc(book.badge.toUpperCase())}</text>`
         : '';
 
     // Optional athlete photography. Embedded as a data URI (renderer has no
@@ -151,7 +151,7 @@ export function coverSvg(book) {
   <rect x="0" y="0" width="26" height="${H}" fill="${accent}"/>
 
   <!-- imprint -->
-  <text x="${PAD}" y="220" font-family="Archivo" font-size="36" fill="${fg}" letter-spacing="12">THE MENTAL SPORT</text>
+  <text x="${PAD}" y="220" font-family="Archivo SemiBold" font-size="36" fill="${fg}" letter-spacing="12">THE MENTAL SPORT</text>
   <rect x="${PAD}" y="266" width="150" height="10" fill="${accent}"/>
 
   ${titleSvg}
@@ -199,7 +199,7 @@ export function thumbSvg(book) {
   <rect width="${S}" height="${S}" fill="${bg}"/>
   <rect width="${S}" height="${S}" fill="url(#g)"/>
   <rect x="0" y="0" width="20" height="${S}" fill="${accent}"/>
-  <text x="${PAD}" y="150" font-family="Archivo" font-size="30" fill="${fg}" letter-spacing="10">THE MENTAL SPORT</text>
+  <text x="${PAD}" y="150" font-family="Archivo SemiBold" font-size="30" fill="${fg}" letter-spacing="10">THE MENTAL SPORT</text>
   <rect x="${PAD}" y="188" width="120" height="8" fill="${accent}"/>
   ${titleSvg}
   <rect x="${PAD}" y="${S - 190}" width="100" height="8" fill="${accent}"/>
@@ -210,7 +210,7 @@ export function thumbSvg(book) {
 export function renderThumb(book, outPath) {
     const png = new Resvg(thumbSvg(book), {
         fitTo: { mode: 'width', value: 1200 },
-        font: { fontDirs: [FONT_DIR], loadSystemFonts: true, defaultFontFamily: 'Archivo' },
+        font: { fontDirs: [FONT_DIR], loadSystemFonts: true, defaultFontFamily: 'Archivo SemiBold' },
     })
         .render()
         .asPng();
@@ -222,7 +222,7 @@ export function renderCover(book, outPath) {
     const svg = coverSvg(book);
     const png = new Resvg(svg, {
         fitTo: { mode: 'width', value: W },
-        font: { fontDirs: [FONT_DIR], loadSystemFonts: true, defaultFontFamily: 'Archivo' },
+        font: { fontDirs: [FONT_DIR], loadSystemFonts: true, defaultFontFamily: 'Archivo SemiBold' },
     })
         .render()
         .asPng();

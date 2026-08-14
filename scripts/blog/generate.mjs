@@ -20,6 +20,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { renderCard } from './card.mjs';
+import { renderQuoteCard } from './quotecard.mjs';
 
 const ROOT = process.cwd();
 const QUEUE_PATH = path.join(ROOT, 'content-pipeline', 'queue.json');
@@ -268,6 +269,17 @@ async function main() {
               outPath: path.join(SHORTS_DIR, `${item.slug}.png`),
             });
             console.log(`  wrote content-pipeline/shorts/${item.slug}.png`);
+
+            // White tweet-style quote card from the same hook. Different format,
+            // different feed placement, no extra model call.
+            const qDir = path.join(SHORTS_DIR, 'quotes');
+            fs.mkdirSync(qDir, { recursive: true });
+            renderQuoteCard({
+              quote: hookText,
+              accent: BOOK_ACCENT[item.book] || '#dc2626',
+              outPath: path.join(qDir, `${item.slug}.png`),
+            });
+            console.log(`  wrote content-pipeline/shorts/quotes/${item.slug}.png`);
           } catch (e) {
             console.warn(`  card skipped for ${item.slug}: ${e.message}`);
           }
