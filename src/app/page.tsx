@@ -147,7 +147,7 @@ export default function AuthorHome() {
                         {/* Image Side - Featured Work */}
                         <div className="aspect-[3/4] bg-zinc-900 rounded-none relative overflow-hidden group shadow-2xl flex items-center justify-center p-12">
                             <Image
-                                src="/covers/the-competition-protocol.png"
+                                src="/covers/the-competition-protocol.png?v=2"
                                 alt="The Competition Protocol — book by Giannis Notaras"
                                 width={800}
                                 height={1280}

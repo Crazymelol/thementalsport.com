@@ -32,7 +32,7 @@ export const books: Book[] = [
         subtitle: "A Step-by-Step Guide to Mastering Your Mindset, Crushing Anxiety, and dominating Your Sport",
         description: "Master the art of preparation. This book is a manual for the 7 days leading up to your event, teaching you how to build rituals and standard procedures that automate excellence and eliminate anxiety.",
         author: "Giannis Notaras",
-        coverImage: "/covers/the-competition-protocol.png",
+        coverImage: "/covers/the-competition-protocol.png?v=2",
         features: [
             "The T-Minus 7 Day countdown checklist",
             "How to build an 'Anchor' to trigger flow state instantly",
@@ -61,7 +61,7 @@ export const books: Book[] = [
         subtitle: "A Guide to Peak Performance",
         description: "Your roadmap to silencing inner critics, mastering your mindset, and unlocking the unstoppable version of YOU.",
         author: "Giannis Notaras",
-        coverImage: "/covers/overcoming-mental-blocks.png",
+        coverImage: "/covers/overcoming-mental-blocks.png?v=2",
         features: [
             "Identify and dismantle mental barriers holding you back.",
             "Tame performance anxiety with proven techniques.",
@@ -100,7 +100,7 @@ export const books: Book[] = [
         subtitle: "Leo and Maya's Mental Toughness Adventure",
         description: "Climb Mental Toughness Mountain with Leo and Maya! A powerful and playful journey that teaches children ages 6–9 how to stay strong on the inside—even when life gets tough.",
         author: "Giannis Notaras",
-        coverImage: "/covers/unbreakable.png",
+        coverImage: "/covers/unbreakable.png?v=2",
         features: [
             "Turn worried thoughts into helpful ones",
             "Stay calm using balloon breaths",
@@ -131,7 +131,7 @@ export const books: Book[] = [
         subtitle: "Overcome Self-Doubt and Cultivate Unshakable Self-Assurance",
         description: "This hands-on, step-by-step guide helps you dismantle limiting beliefs, conquer fear, and build resilient confidence. Packed with actionable exercises, reflective prompts, and science-backed strategies.",
         author: "Giannis Notaras",
-        coverImage: "/covers/confidence-building.png",
+        coverImage: "/covers/confidence-building.png?v=2",
         features: [
             "Identify and challenge barriers like negative self-talk and fear of judgment",
             "Set SMART goals tailored to your confidence journey",
@@ -162,7 +162,7 @@ export const books: Book[] = [
         subtitle: "The Key to Consistent High Performance",
         description: "A definitive guide to building an unshakable mindset that thrives under pressure, transforms adversity into advantage, and fuels excellence in sports, business, and life.",
         author: "Giannis Notaras",
-        coverImage: "/covers/resilient-confidence.png",
+        coverImage: "/covers/resilient-confidence.png?v=2",
         features: [
             "Replace fleeting confidence with deep, intrinsic belief in your abilities",
             "Master mental strategies like visualization and the 'Give Your Best' philosophy",
@@ -193,7 +193,7 @@ export const books: Book[] = [
         subtitle: "The Complete Parent's Guide to Building Healthy Self-Esteem in Children",
         description: "A comprehensive guide for parents and educators to raise children who believe in themselves, handle setbacks with strength, and thrive socially and academically.",
         author: "Giannis Notaras",
-        coverImage: "/covers/nurturing-self-worth.png",
+        coverImage: "/covers/nurturing-self-worth.png?v=2",
         features: [
             "Understand the psychology behind self-esteem development",
             "Everyday strategies to encourage healthy self-talk and emotional intelligence",
@@ -224,7 +224,7 @@ export const books: Book[] = [
         subtitle: "Unlock Your Body's Full Potential: The Science-Driven Guide to Optimizing Physical Performance",
         description: "Dives deep into the science of human physiology, offering a roadmap to harness your body's innate systems for unparalleled strength, endurance, and efficiency.",
         author: "Giannis Notaras",
-        coverImage: "/covers/physiological-performance.png",
+        coverImage: "/covers/physiological-performance.png?v=2",
         features: [
             "Optimize energy systems for explosive power or endurance",
             "Enhance cardiovascular and respiratory efficiency",
@@ -255,7 +255,7 @@ export const books: Book[] = [
         subtitle: "Turn Your Distraction Into Domination with Daily Routines Designed to Channel Hyperactivity into Peak Performance",
         description: "A practical and motivating guide for athletes with ADHD to unlock their full potential by learning how to train with their brain rather than fighting it.",
         author: "Giannis Notaras",
-        coverImage: "/covers/adhd-athletes-edge.png",
+        coverImage: "/covers/adhd-athletes-edge.png?v=2",
         features: [
             "Build mental focus and reduce game-day distractions",
             "Step-by-step tools for managing emotional overwhelm",
