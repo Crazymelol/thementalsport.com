@@ -108,6 +108,22 @@ export function coverSvg(book) {
   <text x="${PAD + 30}" y="${badgeY + 46}" font-family="Archivo" font-size="30" fill="#ffffff" letter-spacing="3">${esc(book.badge.toUpperCase())}</text>`
         : '';
 
+    // Optional athlete photography. Embedded as a data URI (renderer has no
+    // network), desaturated and tinted toward the accent so it reads as one
+    // brand system, then darkened enough that the type stays legible.
+    let photoLayer = '';
+    if (book.photo && fs.existsSync(book.photo)) {
+        const b64 = fs.readFileSync(book.photo).toString('base64');
+        const mime = book.photo.endsWith('.jpg') || book.photo.endsWith('.jpeg') ? 'jpeg' : 'png';
+        photoLayer = `
+  <g>
+    <image x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="xMidYMid slice"
+           href="data:image/${mime};base64,${b64}" filter="url(#duo)"/>
+    <rect width="${W}" height="${H}" fill="${accent}" opacity="0.20"/>
+    <rect width="${W}" height="${H}" fill="url(#scrim)"/>
+  </g>`;
+    }
+
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
     <radialGradient id="glow" cx="76%" cy="16%" r="82%">
@@ -118,9 +134,16 @@ export function coverSvg(book) {
       <stop offset="0%" stop-color="${bg}" stop-opacity="0"/>
       <stop offset="100%" stop-color="${bg}" stop-opacity="0.85"/>
     </linearGradient>
+    <filter id="duo"><feColorMatrix type="saturate" values="0.15"/></filter>
+    <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${bg}" stop-opacity="0.86"/>
+      <stop offset="45%" stop-color="${bg}" stop-opacity="0.62"/>
+      <stop offset="100%" stop-color="${bg}" stop-opacity="0.95"/>
+    </linearGradient>
   </defs>
 
   <rect width="${W}" height="${H}" fill="${bg}"/>
+  ${photoLayer}
   <rect width="${W}" height="${H}" fill="url(#glow)"/>
   <rect y="${H * 0.55}" width="${W}" height="${H * 0.45}" fill="url(#fade)"/>
 
@@ -257,6 +280,21 @@ export const BOOKS = [
         badge: 'Train With Your Brain',
     },
 ];
+
+// Art direction for the athlete photography layer. Feed these to an image
+// generator at 2:3, save to assets/cover-photos/<id>.png, then set `photo` on
+// the book above and re-run. Deliberately no text, no faces of real people, and
+// dark/high-contrast so the scrim and type sit on top cleanly.
+export const PHOTO_PROMPTS = {
+    'the-competition-protocol': 'Lone athlete alone in a dark stadium tunnel before competition, backlit, deep shadows, dramatic rim light, cinematic, high contrast, no text',
+    'mental-blocks': 'Athlete sitting alone on an empty bench in a dark gym, head down, single hard light from above, heavy shadow, cinematic, high contrast, no text',
+    'unbreakable': 'Two young children in sports kit climbing a hill at sunrise, bright optimistic light, wide shot, warm, storybook feel, no text',
+    'confidence-building': 'Athlete standing tall alone in an empty arena, low camera angle looking up, powerful posture, dramatic side light, cinematic, high contrast, no text',
+    'resilient-confidence': 'Runner mid-stride on a wet track at night under floodlights, water spray, motion energy, dramatic backlight, cinematic, high contrast, no text',
+    'nurturing-self-worth': 'Parent kneeling to talk with a young athlete on the sideline at golden hour, warm backlight, tender, shallow depth of field, no text',
+    'physiological-performance': 'Close detail of a powerful athlete mid-effort, sweat and muscle definition, hard directional light, anatomical and scientific mood, cinematic, no text',
+    'adhd-athletes-edge': 'Athlete in explosive motion with light-trail streaks around them, energetic, kinetic blur, dark background, vivid rim light, cinematic, no text',
+};
 
 if (import.meta.url === `file://${process.argv[1]}`) {
     const outDir = process.argv[2] || OUT_DIR;
