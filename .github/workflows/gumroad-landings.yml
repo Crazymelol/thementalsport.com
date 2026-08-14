@@ -73,6 +73,20 @@ jobs:
           set -u
           MODE="${{ github.event.inputs.mode }}"
           ONLY="${{ github.event.inputs.only }}"
+
+          # Capability probe: what can the CLI actually do (e.g. set a product
+          # cover image)? Printed so we build against the real surface, not a guess.
+          if [ "$MODE" = "help" ]; then
+            echo "::group::gumroad --help"; gumroad --help 2>&1 | head -60; echo "::endgroup::"
+            echo "::group::gumroad products --help"; gumroad products --help 2>&1 | head -60; echo "::endgroup::"
+            for sub in update edit set cover image upload; do
+              echo "::group::gumroad products $sub --help"
+              gumroad products "$sub" --help 2>&1 | head -40
+              echo "::endgroup::"
+            done
+            exit 0
+          fi
+
           FILES=$(ls gumroad-landings/*.html)
           [ -n "$ONLY" ] && FILES="gumroad-landings/${ONLY}.html"
           FAIL=0
