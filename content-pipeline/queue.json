@@ -818,7 +818,8 @@
         "/course"
       ],
       "protocol": "the season standard, non-negotiables list",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "how-to-handle-tryout-nerves",
@@ -839,7 +840,8 @@
         "/course"
       ],
       "protocol": "tryout-day plan, play-aggressive rule",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "what-to-say-to-your-child-before-tryouts",
@@ -860,7 +862,8 @@
         "/course"
       ],
       "protocol": "the pre-tryout script",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "what-if-my-child-doesnt-make-the-team",
@@ -881,7 +884,8 @@
         "/course"
       ],
       "protocol": "first-24-hours script, the comeback plan",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "how-to-get-mentally-ready-for-preseason",
@@ -965,7 +969,8 @@
         "/course"
       ],
       "protocol": "the weekly load plan",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-14"
     },
     {
       "slug": "how-to-stay-focused-in-soccer",
