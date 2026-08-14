@@ -94,12 +94,13 @@ jobs:
             for pair in $PAIRS; do
               slug="${pair%%:*}"
               img="public/covers/${pair##*:}.png"
+              thumb="public/covers/thumbs/${pair##*:}.png"   # Gumroad requires 1:1
               if [ -n "$ONLY" ] && [ "$ONLY" != "$slug" ]; then continue; fi
               echo "::group::$slug <- $img"
               if [ ! -f "$img" ]; then echo "missing $img"; FAILC=1; echo "::endgroup::"; continue; fi
               gumroad products covers add "$slug" --image "$img" --json --no-input --non-interactive \
                 || { echo "covers add failed"; FAILC=1; }
-              gumroad products thumbnail set "$slug" --image "$img" --json --no-input --non-interactive \
+              gumroad products thumbnail set "$slug" --image "$thumb" --json --no-input --non-interactive \
                 || { echo "thumbnail set failed"; FAILC=1; }
               echo "::endgroup::"
             done

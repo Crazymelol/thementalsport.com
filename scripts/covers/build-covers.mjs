@@ -143,6 +143,58 @@ export function coverSvg(book) {
 </svg>`;
 }
 
+// Gumroad requires a SQUARE thumbnail, so the 2:3 cover can't be reused. Same
+// brand system, recomposed for 1:1.
+export function thumbSvg(book) {
+    const S = 1200;
+    const accent = book.accent;
+    const light = book.theme === 'light';
+    const bg = light ? '#f7f5f1' : '#0a0a0b';
+    const fg = light ? '#14141a' : '#ffffff';
+
+    const PAD = 90;
+    const boxW = S - PAD * 2;
+    const { lines, size } = layoutTitle(book.displayTitle, boxW, 3);
+    const lh = size * 1.0;
+    const blockH = lines.length * lh;
+    let y = (S - blockH) / 2 + size * 0.82;
+    const titleSvg = lines
+        .map((l) => {
+            const t = `<text x="${PAD}" y="${Math.round(y)}" font-family="Anton" font-size="${size}" fill="${fg}">${esc(l)}</text>`;
+            y += lh;
+            return t;
+        })
+        .join('\n  ');
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}" viewBox="0 0 ${S} ${S}">
+  <defs>
+    <radialGradient id="g" cx="78%" cy="16%" r="80%">
+      <stop offset="0%" stop-color="${accent}" stop-opacity="0.55"/>
+      <stop offset="62%" stop-color="${bg}" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="${S}" height="${S}" fill="${bg}"/>
+  <rect width="${S}" height="${S}" fill="url(#g)"/>
+  <rect x="0" y="0" width="20" height="${S}" fill="${accent}"/>
+  <text x="${PAD}" y="150" font-family="Archivo" font-size="30" fill="${fg}" letter-spacing="10">THE MENTAL SPORT</text>
+  <rect x="${PAD}" y="188" width="120" height="8" fill="${accent}"/>
+  ${titleSvg}
+  <rect x="${PAD}" y="${S - 190}" width="100" height="8" fill="${accent}"/>
+  <text x="${PAD}" y="${S - 110}" font-family="Anton" font-size="60" fill="${fg}">GIANNIS NOTARAS</text>
+</svg>`;
+}
+
+export function renderThumb(book, outPath) {
+    const png = new Resvg(thumbSvg(book), {
+        fitTo: { mode: 'width', value: 1200 },
+        font: { fontDirs: [FONT_DIR], loadSystemFonts: true, defaultFontFamily: 'Archivo' },
+    })
+        .render()
+        .asPng();
+    fs.writeFileSync(outPath, png);
+    return outPath;
+}
+
 export function renderCover(book, outPath) {
     const svg = coverSvg(book);
     const png = new Resvg(svg, {
@@ -209,9 +261,12 @@ export const BOOKS = [
 if (import.meta.url === `file://${process.argv[1]}`) {
     const outDir = process.argv[2] || OUT_DIR;
     fs.mkdirSync(outDir, { recursive: true });
+    const thumbDir = path.join(outDir, 'thumbs');
+    fs.mkdirSync(thumbDir, { recursive: true });
     for (const b of BOOKS) {
         renderCover(b, path.join(outDir, b.file));
-        console.log(`  wrote ${path.join(outDir, b.file)}`);
+        renderThumb(b, path.join(thumbDir, b.file));
+        console.log(`  wrote ${b.file} (+ thumbs/${b.file})`);
     }
-    console.log(`Done. ${BOOKS.length} covers.`);
+    console.log(`Done. ${BOOKS.length} covers + ${BOOKS.length} square thumbnails.`);
 }
