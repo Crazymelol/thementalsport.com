@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, BookOpen, Users, Award, Target } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -50,14 +51,55 @@ export default function AboutPage() {
 
             {/* HERO */}
             <section className="bg-zinc-950 text-white pt-32 pb-24">
-                <div className="container mx-auto px-6 max-w-4xl">
-                    <p className="text-xs font-black uppercase tracking-[0.3em] text-zinc-500 mb-6">The Mental Sport</p>
-                    <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
-                        Giannis<br />Notaras
-                    </h1>
-                    <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed">
-                        Mental performance expert, researcher, and author of 8 books on sports psychology, peak performance, and the science of elite athletic mindset.
-                    </p>
+                <div className="container mx-auto px-6 max-w-5xl grid md:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+                    <div>
+                        <p className="text-xs font-black uppercase tracking-[0.3em] text-zinc-500 mb-6">The Mental Sport</p>
+                        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+                            Giannis<br />Notaras
+                        </h1>
+                        <p className="text-xl text-zinc-400 leading-relaxed">
+                            Fencing coach and mental performance author. I write about the
+                            part of sport that decides results and almost nobody trains:
+                            what happens between your ears when it counts.
+                        </p>
+                    </div>
+                    <div className="relative aspect-[4/5] w-full">
+                        <Image
+                            src="/about/giannis-portrait.png"
+                            alt="Giannis Notaras coaching in Greek national team kit"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 40vw"
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+                </div>
+            </section>
+
+            {/* ON THE PISTE — credibility, shown not claimed */}
+            <section className="bg-zinc-900 text-white py-20 border-b border-zinc-800">
+                <div className="container mx-auto px-6 max-w-5xl grid md:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
+                    <div className="relative aspect-[4/5] w-full">
+                        <Image
+                            src="/about/giannis-fencing.png"
+                            alt="Giannis Notaras in fencing kit with sabre and mask"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 35vw"
+                            className="object-cover"
+                        />
+                    </div>
+                    <div className="space-y-5">
+                        <p className="text-xs font-black uppercase tracking-[0.3em] text-red-500">Still Competing</p>
+                        <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none">
+                            I Coach It Because<br />I Live It
+                        </h2>
+                        <p className="text-zinc-400 text-lg leading-relaxed">
+                            Everything I write comes from the piste, not a textbook. I know
+                            what it feels like to have a plan fall apart in the last three
+                            touches, because it has happened to me. The protocols in these
+                            books are the ones I actually use.
+                        </p>
+                    </div>
                 </div>
             </section>
 
