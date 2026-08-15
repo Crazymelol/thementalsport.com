@@ -994,7 +994,8 @@
         "/course"
       ],
       "protocol": "refocus cue, off-the-ball switch-on",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-15"
     },
     {
       "slug": "how-to-overcome-a-slump-in-tennis",
@@ -1015,7 +1016,8 @@
         "/course"
       ],
       "protocol": "process reset, small-win rebuild",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-15"
     },
     {
       "slug": "how-to-improve-concentration-in-golf",
