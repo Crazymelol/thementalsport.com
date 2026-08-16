@@ -70,12 +70,47 @@ a comment. People will visit your profile. That is the click you want.
 
 ---
 
-## Who to skip
+## Never message minors
 
+This is the one hard rule. Do not DM anyone who looks like a child or teenager,
+ever. It is wrong, it will get the account reported, and they cannot buy anything
+anyway. The buyer is always the parent or the coach.
+
+**Kid-facing accounts attract kids.** A big academy posting "TRYOUTS ARE OPEN"
+gets a comment section full of 13-year-olds. Do not source names from there.
+
+**How to tell them apart in two seconds:**
+
+| Signal | Kid account | Parent account |
+|---|---|---|
+| Profile photo | Young face, action shot in kit | Adult, or family, or their kid |
+| Username | Nickname, jersey number, birth year (`_07`, `x`, `24`) | Real first + last name |
+| Bio | School, team, position, "D1 hopeful" | "Mum of 2", job, city, family |
+| Posts | Highlights of themselves | Their child playing, family, life |
+
+If you are unsure, skip. There are plenty of clearly-adult accounts.
+
+## Also skip
+
+- Big brand and influencer accounts (they get 100 DMs a day and ignore all).
 - Accounts with no posts or no profile photo.
-- Big accounts and influencers (they get 100 DMs a day, you get ignored).
-- Anyone whose kid is clearly under about 6.
-- Private accounts you cannot see anything about. No context, no message.
+- Private accounts with no visible context. No context, no message.
+
+## Where the PARENTS actually are
+
+Instagram youth-sports content skews to the players. Parents cluster elsewhere:
+
+1. **Facebook groups.** This is the single best parent channel and there are
+   almost no minors in them. Search `youth soccer parents`, `[sport] parents`,
+   `travel team parents`, `[city] sports parents`.
+2. **Local club accounts**, where parents follow for schedules and logistics.
+3. **Parent-signal hashtags:** `#soccermom` `#hockeymom` `#sportsmom`
+   `#sportsdad` `#sportsparents`. These are written by parents, about parents.
+4. **Comments on parent-facing content** (car ride home, sideline behaviour,
+   burnout) rather than player-facing content (tryouts, highlights, drills).
+
+For your athlete-facing content, adults and coaches are still fair game. Just
+never a child.
 
 ---
 
