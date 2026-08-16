@@ -1038,7 +1038,8 @@
         "/course"
       ],
       "protocol": "switch-on/switch-off focus, pre-shot routine",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-16"
     }
   ]
 }
