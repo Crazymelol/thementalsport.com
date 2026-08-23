@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-08-22 19:29 UTC_
+_Updated 2026-08-23 07:42 UTC_
 
 ## Progress
 
@@ -22,14 +22,14 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 | When Your Kid Cries After Losing | 14 | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
-_no created pins found on profile_
+| Post | Saves |
+|---|---|
+| Get Your Opponent Out Of Your Head | — |
+| Stuck On The Bench? Read This. | — |
+| The Mental Side Of Coming Back Fr… | — |
 
 ## 🎵 TikTok performance
-| Post | Views | Likes | Comments |
-|---|---|---|---|
-| Rebuilding A Team After A Losing … | — | 1 | 0 |
-| The Halftime Talk That Actually W… | — | 1 | 0 |
-| When Your Kid Cries After Losing | — | 2 | 0 |
+_TikTok blocks automated stat reads on this account (anti-bot) — check the app for view/like counts_
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
