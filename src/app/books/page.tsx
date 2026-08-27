@@ -38,12 +38,17 @@ function BookCard({ book }: { book: Book }) {
                 />
             </div>
             <div className="p-6 flex flex-col gap-4">
-                {quote && (
-                    <p className="text-zinc-500 text-sm italic line-clamp-2">&ldquo;{quote}&rdquo;</p>
-                )}
                 <h3 className="text-xl font-black text-zinc-900 uppercase tracking-tight group-hover:underline decoration-2 underline-offset-4">
                     {book.title}
                 </h3>
+                {/* The hook. Browsers of this page previously saw only a title
+                    and a price, so nothing here spoke to the problem they came with. */}
+                <p className="text-zinc-700 text-sm leading-snug -mt-1">
+                    {book.subtitle}
+                </p>
+                {quote && (
+                    <p className="text-zinc-400 text-xs italic line-clamp-2">&ldquo;{quote}&rdquo;</p>
+                )}
                 <div className="flex items-center justify-between pt-4 border-t border-zinc-100 mt-auto">
                     <span className="text-lg font-black text-zinc-900">{book.price}</span>
                     <span style={{ color: book.palette.primary }} className="text-xs font-black uppercase tracking-widest flex items-center gap-1 group-hover:gap-2 transition-all">
