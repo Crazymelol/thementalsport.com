@@ -1039,6 +1039,342 @@
       ],
       "protocol": "switch-on/switch-off focus, pre-shot routine",
       "status": "pending"
+    },
+    {
+      "slug": "first-competition-of-the-season",
+      "title": "First Competition of the Season: How to Handle the Rust",
+      "primaryKeyword": "first competition of the season",
+      "cluster": "Season & Competition",
+      "audience": "athletes competing for the first time after a long break",
+      "angle": "Your first event back always feels worse than it is: timing is off, nerves are higher, expectations are stale. Cover resetting expectations to match your training age, treating it as a data day, and the routine that stops rust becoming panic.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Pre-Game",
+        "Anxiety",
+        "Preseason"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the rust-day reset",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-set-goals-for-the-season",
+      "title": "How to Set Goals for the Season (That You Will Actually Keep)",
+      "primaryKeyword": "how to set goals for the season",
+      "cluster": "Season & Competition",
+      "audience": "athletes setting targets for a new season",
+      "angle": "Most season goals are wishes with a number attached. Cover splitting outcome goals from process goals, choosing two or three weekly non-negotiables, and building a review loop so goals survive October.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Goals",
+        "Routine",
+        "Mental Toughness"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "outcome-to-process split, weekly review",
+      "status": "pending"
+    },
+    {
+      "slug": "joining-a-new-team",
+      "title": "Joining a New Team: How to Fit In Without Disappearing",
+      "primaryKeyword": "joining a new team",
+      "cluster": "Season & Competition",
+      "audience": "athletes who moved club or moved up an age group",
+      "angle": "Being the new one makes people shrink, and shrinking is what gets you overlooked. Cover earning trust through effort not talk, handling the social side, and playing your own game while you learn the system.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Confidence",
+        "Teamwork",
+        "Preseason"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the new-player first month",
+      "status": "pending"
+    },
+    {
+      "slug": "early-season-losing-streak",
+      "title": "How to Handle an Early-Season Losing Streak",
+      "primaryKeyword": "early season losing streak",
+      "cluster": "Season & Competition",
+      "audience": "athletes and teams who start the season badly",
+      "angle": "Early losses feel like a verdict on the whole season. They are not. Cover separating a bad start from a bad team, what to fix and what to ignore, and keeping standards when results are not coming yet.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Resilience",
+        "Mental Toughness",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/how-to-bounce-back-after-a-bad-game",
+        "/blog/how-to-build-mental-toughness",
+        "/course"
+      ],
+      "protocol": "the reset-the-standard method",
+      "status": "pending"
+    },
+    {
+      "slug": "staying-motivated-long-season",
+      "title": "How to Stay Motivated Through a Long Season",
+      "primaryKeyword": "how to stay motivated in sport",
+      "cluster": "Season & Competition",
+      "audience": "athletes who start strong then fade by midseason",
+      "angle": "Motivation is not the engine, routine is. Cover building a training identity, shrinking the horizon to this week, planning deliberate down weeks, and what to do on days you do not want to go.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Motivation",
+        "Routine",
+        "Burnout"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the show-up rule, planned down weeks",
+      "status": "pending"
+    },
+    {
+      "slug": "managing-the-family-sports-schedule",
+      "title": "Managing the Family Sports Schedule Without Losing Your Mind",
+      "primaryKeyword": "family sports schedule",
+      "cluster": "Season & Competition",
+      "audience": "parents running multiple kids to multiple sessions a week",
+      "angle": "September turns the family calendar into a logistics problem, and the stress lands on the kids. Cover deciding what to cut, protecting one free day, and sharing the driving load.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Burnout",
+        "Routine"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the weekly family load plan",
+      "status": "pending"
+    },
+    {
+      "slug": "first-tournament-as-a-parent",
+      "title": "Your Kid’s First Tournament: What to Do (and Not Do)",
+      "primaryKeyword": "first tournament parent",
+      "cluster": "Season & Competition",
+      "audience": "parents at their child’s first big competition",
+      "angle": "Tournaments are long, hot and emotional, and parents make them harder without meaning to. Cover food and rest between rounds, what to say between games, and staying off the coaching.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Youth Athletes",
+        "Pre-Game"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the between-rounds routine",
+      "status": "pending"
+    },
+    {
+      "slug": "when-your-kid-is-not-the-best-player",
+      "title": "When Your Kid Is Not the Best Player on the Team",
+      "primaryKeyword": "my child is not the best player",
+      "cluster": "Season & Competition",
+      "audience": "parents whose child is mid-table and knows it",
+      "angle": "Most kids are not the star, and how you handle that decides whether they keep playing. Cover measuring against their own progress, valuing the role they do have, and never comparing out loud.",
+      "book": "Nurturing Self-Worth",
+      "tags": [
+        "Sports Parents",
+        "Self-Worth",
+        "Youth Athletes"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the personal-progress scoreboard",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-take-criticism-from-a-coach",
+      "title": "How to Take Criticism From a Coach",
+      "primaryKeyword": "how to take criticism from a coach",
+      "cluster": "Season & Competition",
+      "audience": "athletes who shut down or get defensive when corrected",
+      "angle": "Coaches keep coaching the players who take it well. Cover separating the correction from your worth, the two-second response that keeps you coachable, and asking the follow-up question.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Confidence",
+        "Coaching",
+        "Mindset"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the coachable response",
+      "status": "pending"
+    },
+    {
+      "slug": "mental-warm-up-routine",
+      "title": "The 5-Minute Mental Warm-Up",
+      "primaryKeyword": "mental warm up",
+      "cluster": "Season & Competition",
+      "audience": "athletes who warm up their body and neglect their head",
+      "angle": "You would never compete without a physical warm-up, yet most athletes start cold mentally. Cover a five-minute sequence: breath, cue word, one visualisation rep, and a single focus for the first minutes.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Routine",
+        "Pre-Game",
+        "Focus"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the 5-minute mental warm-up",
+      "status": "pending"
+    },
+    {
+      "slug": "playing-time-frustration",
+      "title": "What to Do When You Are Not Getting Playing Time",
+      "primaryKeyword": "not getting playing time",
+      "cluster": "Season & Competition",
+      "audience": "athletes stuck on the bench and losing motivation",
+      "angle": "Bench time is either the end of your season or the making of it. Cover controlling what you control, being the best trainer in the group, the conversation to have with the coach, and staying ready.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Confidence",
+        "Resilience",
+        "Teamwork"
+      ],
+      "internalLinks": [
+        "/blog/how-to-bounce-back-after-a-bad-game",
+        "/blog/how-to-build-mental-toughness",
+        "/course"
+      ],
+      "protocol": "the bench protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-be-a-good-teammate",
+      "title": "How to Be the Teammate Everyone Wants",
+      "primaryKeyword": "how to be a good teammate",
+      "cluster": "Season & Competition",
+      "audience": "athletes who want to matter beyond their stat line",
+      "angle": "Coaches pick character when talent is equal. Cover energy in training, how you react when a teammate errs, and doing the unglamorous work.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Teamwork",
+        "Leadership",
+        "Mindset"
+      ],
+      "internalLinks": [
+        "/blog/how-to-bounce-back-after-a-bad-game",
+        "/blog/how-to-build-mental-toughness",
+        "/course"
+      ],
+      "protocol": "the teammate standard",
+      "status": "pending"
+    },
+    {
+      "slug": "sports-anxiety-in-teenagers",
+      "title": "Sports Anxiety in Teenagers: What Parents Should Know",
+      "primaryKeyword": "sports anxiety in teenagers",
+      "cluster": "Season & Competition",
+      "audience": "parents of teens whose nerves are getting worse not better",
+      "angle": "Teenage sport anxiety often looks like laziness or attitude. Cover what it actually looks like, why adolescence intensifies it, how to talk about it, and when to seek help.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Sports Parents",
+        "Anxiety",
+        "Youth Athletes"
+      ],
+      "internalLinks": [
+        "/blog/sports-parents-playbook",
+        "/blog/what-to-say-after-a-game",
+        "/course"
+      ],
+      "protocol": "the parent conversation guide",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-focus-in-training",
+      "title": "How to Actually Focus in Training (Not Just Show Up)",
+      "primaryKeyword": "how to focus in training",
+      "cluster": "Season & Competition",
+      "audience": "athletes who go through the motions in sessions",
+      "angle": "Turning up is not training. Cover setting one intention per session, working in short focused blocks, and the two-minute review that makes the next session better.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Focus",
+        "Routine",
+        "Training"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "one-intention training",
+      "status": "pending"
+    },
+    {
+      "slug": "visualization-for-athletes",
+      "title": "Visualization for Athletes: How to Do It Properly",
+      "primaryKeyword": "visualization for athletes",
+      "cluster": "Season & Competition",
+      "audience": "athletes who have heard of visualisation but do it vaguely",
+      "angle": "Most visualisation is daydreaming about winning. Cover rehearsing process not outcome, using all senses, including things going wrong and recovering, and when in the week to do it.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Visualization",
+        "Routine",
+        "Pre-Game"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the process-rehearsal protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "what-to-eat-before-competition",
+      "title": "What to Eat Before Competition (and Why Your Nerves Change It)",
+      "primaryKeyword": "what to eat before competition",
+      "cluster": "Season & Competition",
+      "audience": "athletes whose stomach turns before they compete",
+      "angle": "Nerves change digestion, so the pre-event meal that works in training can fail on the day. Cover timing, what settles a nervous stomach, hydration, and practising your competition meal beforehand.",
+      "book": "Physiological Peak Performance Blueprint",
+      "tags": [
+        "Nutrition",
+        "Pre-Game",
+        "Recovery"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "the pre-event fuelling plan",
+      "status": "pending"
     }
   ]
 }
