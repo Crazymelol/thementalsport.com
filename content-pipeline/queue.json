@@ -1082,7 +1082,8 @@
         "/course"
       ],
       "protocol": "outcome-to-process split, weekly review",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-28"
     },
     {
       "slug": "joining-a-new-team",
