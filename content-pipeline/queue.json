@@ -1104,7 +1104,8 @@
         "/course"
       ],
       "protocol": "the new-player first month",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-29"
     },
     {
       "slug": "early-season-losing-streak",
