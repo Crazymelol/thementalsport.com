@@ -1126,7 +1126,8 @@
         "/course"
       ],
       "protocol": "the reset-the-standard method",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-30"
     },
     {
       "slug": "staying-motivated-long-season",
