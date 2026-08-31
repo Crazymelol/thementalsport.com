@@ -40,7 +40,7 @@ export default function LeadMagnet() {
                     Get the First Chapter Free
                 </h2>
                 <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-                    Download the opening chapter of <strong className="text-white">The Competition Protocol</strong> — the 7-day pre-event mental framework used by elite athletes.
+                    Download the opening chapter of <strong className="text-white">The Competition Protocol</strong> — the 7-day plan for the week before you compete.
                 </p>
 
                 {status === 'success' ? (

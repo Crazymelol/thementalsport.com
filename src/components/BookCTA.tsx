@@ -22,7 +22,7 @@ export default function BookCTA({ book }: { book: Book }) {
                     </h3>
 
                     <p className="text-zinc-400 text-lg leading-relaxed">
-                        You are reading just one piece of the puzzle. Get the complete <strong>{book.title}</strong> and learn the exact step-by-step system used by elite athletes to dominate under pressure.
+                        You are reading one piece of it. <strong>{book.title}</strong> is the whole protocol: what to do, in what order, when it actually counts.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">

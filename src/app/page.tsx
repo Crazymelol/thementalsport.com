@@ -29,10 +29,11 @@ export default function AuthorHome() {
                         <Star className="w-3 h-3 fill-current" /> 8 Books · Mental Performance Masterclass
                     </div>
                     <h1 className="text-6xl lg:text-8xl font-black mb-6 uppercase tracking-tighter leading-none">
-                        Win The<br/><span className="text-red-500">Inner Game</span>
+                        Great In Practice.<br/><span className="text-red-500">Gone In Games.</span>
                     </h1>
                     <p className="text-xl lg:text-2xl text-zinc-400 font-medium max-w-2xl mx-auto leading-relaxed">
-                        The mental performance system used by elite athletes — built by Giannis Notaras.
+                        That gap is not talent and it is not effort. It is a skill almost
+                        nobody trains. Start with the free 7-day protocol.
                     </p>
                     <div className="pt-8 mb-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <NewsletterWrapper className="px-10 py-4 bg-white text-zinc-950 font-black rounded-none hover:bg-zinc-200 transition-colors uppercase tracking-widest text-sm">
