@@ -15,19 +15,19 @@ export const metadata: Metadata = {
 };
 
 const books = [
-    { title: 'The Competition Protocol', desc: 'The 7-day mental system for elite athletes' },
-    { title: 'Overcoming Mental Blocks', desc: 'A guide to peak performance under pressure' },
-    { title: 'Unbreakable', desc: 'Building mental toughness that lasts' },
-    { title: 'Confidence Building', desc: 'The athlete\'s complete guide to self-belief' },
-    { title: 'Resilient Confidence', desc: 'Confidence that survives adversity' },
-    { title: 'Nurturing Self-Worth', desc: 'Identity and performance in elite sport' },
-    { title: 'Physiological Performance', desc: 'The body\'s role in mental excellence' },
-    { title: 'ADHD Athletes Edge', desc: 'Turning neurodiversity into competitive advantage' },
+    { title: 'The Competition Protocol', desc: 'For athletes who train well and tighten up on the day' },
+    { title: 'Overcoming Mental Blocks', desc: 'Great in practice, terrible in games' },
+    { title: 'Unbreakable', desc: 'For the child who falls apart after one mistake' },
+    { title: 'Confidence Building', desc: 'For the athlete whose confidence disappears when it counts' },
+    { title: 'Resilient Confidence', desc: 'Confidence that does not vanish after a loss' },
+    { title: 'Nurturing Self-Worth', desc: 'For the parent whose kid is far too hard on himself' },
+    { title: 'Physiological Performance', desc: 'Why you fade when it matters, and how to stop it' },
+    { title: 'ADHD Athletes Edge', desc: 'For the athlete whose brain will not switch off' },
 ];
 
 const stats = [
     { label: 'Books Published', value: '8' },
-    { label: 'Articles Written', value: '60+' },
+    { label: 'Articles Written', value: '130+' },
     { label: 'Sports Covered', value: '10+' },
     { label: 'Years Researching', value: '7+' },
 ];
