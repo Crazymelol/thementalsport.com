@@ -1148,7 +1148,8 @@
         "/course"
       ],
       "protocol": "the show-up rule, planned down weeks",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-31"
     },
     {
       "slug": "managing-the-family-sports-schedule",
