@@ -1060,7 +1060,8 @@
         "/course"
       ],
       "protocol": "the rust-day reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-27"
     },
     {
       "slug": "how-to-set-goals-for-the-season",
@@ -1081,7 +1082,8 @@
         "/course"
       ],
       "protocol": "outcome-to-process split, weekly review",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-28"
     },
     {
       "slug": "joining-a-new-team",
@@ -1102,7 +1104,8 @@
         "/course"
       ],
       "protocol": "the new-player first month",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-29"
     },
     {
       "slug": "early-season-losing-streak",
@@ -1123,7 +1126,8 @@
         "/course"
       ],
       "protocol": "the reset-the-standard method",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-30"
     },
     {
       "slug": "staying-motivated-long-season",
