@@ -1170,7 +1170,8 @@
         "/course"
       ],
       "protocol": "the weekly family load plan",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-01"
     },
     {
       "slug": "first-tournament-as-a-parent",
