@@ -1192,7 +1192,8 @@
         "/course"
       ],
       "protocol": "the between-rounds routine",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-02"
     },
     {
       "slug": "when-your-kid-is-not-the-best-player",
