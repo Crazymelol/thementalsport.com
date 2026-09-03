@@ -1214,7 +1214,8 @@
         "/course"
       ],
       "protocol": "the personal-progress scoreboard",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-03"
     },
     {
       "slug": "how-to-take-criticism-from-a-coach",
@@ -1235,7 +1236,8 @@
         "/course"
       ],
       "protocol": "the coachable response",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-03"
     },
     {
       "slug": "mental-warm-up-routine",
