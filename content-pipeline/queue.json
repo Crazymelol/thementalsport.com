@@ -1258,7 +1258,8 @@
         "/course"
       ],
       "protocol": "the 5-minute mental warm-up",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-04"
     },
     {
       "slug": "playing-time-frustration",
@@ -1279,7 +1280,8 @@
         "/course"
       ],
       "protocol": "the bench protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-04"
     },
     {
       "slug": "how-to-be-a-good-teammate",
