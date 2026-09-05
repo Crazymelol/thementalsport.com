@@ -1148,7 +1148,8 @@
         "/course"
       ],
       "protocol": "the show-up rule, planned down weeks",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-08-31"
     },
     {
       "slug": "managing-the-family-sports-schedule",
@@ -1169,7 +1170,8 @@
         "/course"
       ],
       "protocol": "the weekly family load plan",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-01"
     },
     {
       "slug": "first-tournament-as-a-parent",
@@ -1190,7 +1192,8 @@
         "/course"
       ],
       "protocol": "the between-rounds routine",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-02"
     },
     {
       "slug": "when-your-kid-is-not-the-best-player",
@@ -1211,7 +1214,8 @@
         "/course"
       ],
       "protocol": "the personal-progress scoreboard",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-03"
     },
     {
       "slug": "how-to-take-criticism-from-a-coach",
@@ -1232,7 +1236,8 @@
         "/course"
       ],
       "protocol": "the coachable response",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-03"
     },
     {
       "slug": "mental-warm-up-routine",
@@ -1253,7 +1258,8 @@
         "/course"
       ],
       "protocol": "the 5-minute mental warm-up",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-04"
     },
     {
       "slug": "playing-time-frustration",
@@ -1274,7 +1280,8 @@
         "/course"
       ],
       "protocol": "the bench protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-04"
     },
     {
       "slug": "how-to-be-a-good-teammate",
