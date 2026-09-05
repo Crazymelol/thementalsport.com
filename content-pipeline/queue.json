@@ -1302,7 +1302,8 @@
         "/course"
       ],
       "protocol": "the teammate standard",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-05"
     },
     {
       "slug": "sports-anxiety-in-teenagers",
@@ -1323,7 +1324,8 @@
         "/course"
       ],
       "protocol": "the parent conversation guide",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-05"
     },
     {
       "slug": "how-to-focus-in-training",
