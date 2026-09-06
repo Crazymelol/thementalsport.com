@@ -1346,7 +1346,8 @@
         "/course"
       ],
       "protocol": "one-intention training",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-06"
     },
     {
       "slug": "visualization-for-athletes",
@@ -1367,7 +1368,8 @@
         "/course"
       ],
       "protocol": "the process-rehearsal protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-09-06"
     },
     {
       "slug": "what-to-eat-before-competition",
