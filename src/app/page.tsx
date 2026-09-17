@@ -6,6 +6,7 @@ import { ArrowRight, Star } from 'lucide-react';
 import Image from 'next/image';
 import NewsletterWrapper from '@/components/NewsletterWrapper';
 import LeadMagnet from '@/components/LeadMagnet';
+import { offers } from '@/data/offers';
 
 
 const HOMEPAGE_BOOK_IDS = ['the-competition-protocol', 'mental-blocks', 'confidence-building'];
@@ -49,6 +50,39 @@ export default function AuthorHome() {
                 {/* Scroll Indicator */}
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-400 animate-bounce">
                     <ArrowRight className="w-6 h-6 rotate-90" />
+                </div>
+            </section>
+
+            {/* DIRECT SUPPORT OFFERS */}
+            <section id="offers" className="py-24 bg-zinc-950 text-white border-y border-zinc-800">
+                <div className="container mx-auto px-6 max-w-6xl">
+                    <div className="max-w-3xl mb-14">
+                        <p className="text-xs font-black uppercase tracking-[0.3em] text-red-400 mb-4">Ready to work on it?</p>
+                        <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter leading-none">Choose your next move.</h2>
+                        <p className="text-zinc-400 text-lg mt-6 max-w-2xl leading-relaxed">
+                            Start with a clear plan or bring one specific performance problem to a focused one-to-one session.
+                        </p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {offers.map((offer) => (
+                            <div key={offer.id} className="border border-zinc-700 p-8 lg:p-10 flex flex-col" style={{ borderTopColor: offer.accent, borderTopWidth: '4px' }}>
+                                <p className="text-xs font-black uppercase tracking-[0.25em] text-zinc-500 mb-5">{offer.label}</p>
+                                <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tighter leading-tight">{offer.title}</h3>
+                                <p className="text-zinc-400 leading-relaxed mt-5 flex-1">{offer.description}</p>
+                                <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-zinc-800">
+                                    <span className="text-3xl font-black">{offer.price}</span>
+                                    <a href={offer.checkoutUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-zinc-950 font-black uppercase tracking-widest text-xs hover:bg-zinc-200 transition-colors">
+                                        Get started <ArrowRight className="w-4 h-4" />
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest mt-8">Secure checkout powered by Gumroad</p>
+                    <div className="flex flex-wrap gap-6 mt-6 text-xs font-black uppercase tracking-widest">
+                        <Link href="/course" className="text-red-400 hover:text-red-300 transition-colors">See the full course <ArrowRight className="inline w-3 h-3" /></Link>
+                        <Link href="/for-parents" className="text-zinc-400 hover:text-white transition-colors">For parents of young athletes <ArrowRight className="inline w-3 h-3" /></Link>
+                    </div>
                 </div>
             </section>
 

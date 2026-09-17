@@ -60,6 +60,24 @@ export default function Navbar() {
                         Course
                     </Link>
                     <Link
+                        href="/start-here"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'}`}
+                    >
+                        Start Here
+                    </Link>
+                    <Link
+                        href="/for-parents"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'}`}
+                    >
+                        For Parents
+                    </Link>
+                    <Link
+                        href="/#offers"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-red-500 transition-colors ${!scrolled && 'hover:text-red-400'}`}
+                    >
+                        Work With Me
+                    </Link>
+                    <Link
                         href="/about"
                         className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
                             }`}
@@ -121,6 +139,27 @@ export default function Navbar() {
                             className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
                         >
                             Books
+                        </Link>
+                        <Link
+                            href="/#offers"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-red-500 hover:text-red-400"
+                        >
+                            Work With Me
+                        </Link>
+                        <Link
+                            href="/start-here"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
+                        >
+                            Start Here
+                        </Link>
+                        <Link
+                            href="/for-parents"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
+                        >
+                            For Parents
                         </Link>
                         <a
                             href="#about"
