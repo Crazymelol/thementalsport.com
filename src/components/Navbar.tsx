@@ -54,10 +54,28 @@ export default function Navbar() {
                         Books
                     </Link>
                     <Link
+                        href="/protocol"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-red-500 transition-colors ${!scrolled && 'hover:text-red-400'}`}
+                    >
+                        Protocol
+                    </Link>
+                    <Link
                         href="/course"
                         className={`text-xs font-black uppercase tracking-[0.2em] hover:text-red-500 transition-colors ${!scrolled && 'hover:text-red-400'}`}
                     >
                         Course
+                    </Link>
+                    <Link
+                        href="/for-parents"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'}`}
+                    >
+                        For Parents
+                    </Link>
+                    <Link
+                        href="/start-here"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'}`}
+                    >
+                        Start Here
                     </Link>
                     <a
                         href="#about"
@@ -68,11 +86,24 @@ export default function Navbar() {
                         About
                     </a>
                     <Link
+                        href="/mental-performance"
+                        className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
+                            }`}
+                    >
+                        By Sport
+                    </Link>
+                    <Link
                         href="/blog"
                         className={`text-xs font-black uppercase tracking-[0.2em] hover:text-zinc-500 transition-colors ${!scrolled && 'hover:text-zinc-300'
                             }`}
                     >
                         Articles
+                    </Link>
+                    <Link
+                        href="/quiz"
+                        className="text-xs font-black uppercase tracking-[0.2em] text-red-500 hover:text-red-600 transition-colors"
+                    >
+                        Free Quiz
                     </Link>
                     <button
                         onClick={() => {
@@ -110,6 +141,34 @@ export default function Navbar() {
                         >
                             Books
                         </Link>
+                        <Link
+                            href="/protocol"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-red-500 hover:text-red-400"
+                        >
+                            Protocol
+                        </Link>
+                        <Link
+                            href="/course"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-red-500 hover:text-red-400"
+                        >
+                            Course
+                        </Link>
+                        <Link
+                            href="/for-parents"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
+                        >
+                            For Parents
+                        </Link>
+                        <Link
+                            href="/start-here"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
+                        >
+                            Start Here
+                        </Link>
                         <a
                             href="#about"
                             onClick={(e) => scrollToSection(e, 'about')}
@@ -118,10 +177,25 @@ export default function Navbar() {
                             About
                         </a>
                         <Link
+                            href="/mental-performance"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
+                        >
+                            By Sport
+                        </Link>
+                        <Link
                             href="/blog"
+                            onClick={() => setIsOpen(false)}
                             className="text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
                         >
                             Articles
+                        </Link>
+                        <Link
+                            href="/quiz"
+                            onClick={() => setIsOpen(false)}
+                            className="text-2xl font-black uppercase tracking-tighter text-red-500 hover:text-red-400"
+                        >
+                            Free Quiz
                         </Link>
                         <button
                             className="text-left text-2xl font-black uppercase tracking-tighter text-white hover:text-zinc-400"
