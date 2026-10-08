@@ -1175,10 +1175,10 @@
     },
     {
       "slug": "first-tournament-as-a-parent",
-      "title": "Your Kid’s First Tournament: What to Do (and Not Do)",
+      "title": "Your Kid\u2019s First Tournament: What to Do (and Not Do)",
       "primaryKeyword": "first tournament parent",
       "cluster": "Season & Competition",
-      "audience": "parents at their child’s first big competition",
+      "audience": "parents at their child\u2019s first big competition",
       "angle": "Tournaments are long, hot and emotional, and parents make them harder without meaning to. Cover food and rest between rounds, what to say between games, and staying off the coaching.",
       "book": "Nurturing Self-Worth",
       "tags": [
@@ -1392,6 +1392,636 @@
       "protocol": "the pre-event fuelling plan",
       "status": "published",
       "publishedDate": "2026-09-07"
+    },
+    {
+      "slug": "parent-sideline-pressure-athlete-anxiety",
+      "title": "Sideline Pressure: How Young Athletes Can Block Out Parental Stress",
+      "primaryKeyword": "sideline pressure youth sports",
+      "cluster": "Coach & Parent Relations",
+      "audience": "young competitive athletes and their parents struggling with car ride home tension",
+      "angle": "Parental expectations often create performance anxiety disguised as love. How to separate parent validation from sports performance, establishing healthy boundaries, and post-game debrief protocols that preserve emotional safety.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Parenting",
+        "Youth Sports",
+        "Pressure",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/how-to-deal-with-screaming-coach",
+        "/for-parents"
+      ],
+      "protocol": "Post-game decompression and boundary boundary protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-mentally-prepare-for-penalty-shootout",
+      "title": "The Penalty Shootout Mindset: Winning the 12-Yard Psychological Battle",
+      "primaryKeyword": "penalty shootout sports psychology",
+      "cluster": "Clutch Execution",
+      "audience": "soccer players, hockey players, and penalty takers facing sudden-death high stakes",
+      "angle": "Penalty kicks are 90% psychological. Analysis of gaze fixation, goalkeeper mind games, and why waiting 2.5 seconds before running up drops anxiety and increases conversion by 18%.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Penalty Kicks",
+        "Clutch",
+        "Soccer",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "The 2.5-second pre-shot tempo lock",
+      "status": "pending"
+    },
+    {
+      "slug": "dopamine-reset-for-student-athletes",
+      "title": "The Athlete Dopamine Reset: Eliminating Screen Fatigue Before Game Day",
+      "primaryKeyword": "dopamine detox for athletes",
+      "cluster": "Sleep & Recovery",
+      "audience": "athletes whose reaction times and mental drive are dulled by social media and gaming",
+      "angle": "How excessive high-stimulation screen time down-regulates D2 dopamine receptors, blunts reaction time, and degrades clutch focus. The 24-hour pre-game digital tapering protocol.",
+      "book": "Physiological Peak Performance Blueprint",
+      "tags": [
+        "Dopamine",
+        "Focus",
+        "Reaction Time",
+        "Recovery"
+      ],
+      "internalLinks": [
+        "/blog/elite-athlete-sleep-night-before-game",
+        "/course"
+      ],
+      "protocol": "24-hour digital taper protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "anchoring-technique-for-athletes",
+      "title": "Physical Anchoring: How Elite Athletes Trigger Instant Flow State On Command",
+      "primaryKeyword": "anchoring technique in sports",
+      "cluster": "Neuro-Linguistic Programming & Mindset",
+      "audience": "athletes seeking a repeatable physical trigger to snap into optimal competition focus",
+      "angle": "Classic Pavlovian conditioning adapted for elite sports. Linking a physical tactile gesture (e.g., wrist squeeze, cleat tap) to an intensely remembered peak state. How to calibrate and fire the anchor in under 2 seconds.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Anchoring",
+        "NLP",
+        "Flow State",
+        "Routines"
+      ],
+      "internalLinks": [
+        "/blog/swish-pattern-performance-anxiety",
+        "/course"
+      ],
+      "protocol": "Kinesthetic flow state anchoring protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "mental-toughness-drills-swimming-track",
+      "title": "Mental Toughness When the Lungs Burn: The Pain Cave Protocol for Endurance Athletes",
+      "primaryKeyword": "mental toughness endurance athletes",
+      "cluster": "Adversity & Resilience",
+      "audience": "swimmers, runners, cyclists, and rowers who hit the mental wall during lactate threshold efforts",
+      "angle": "The central governor theory states the brain limits physical capacity long before muscles fail. How to redefine pain signals, use micro-segmentation chunking, and push through lactate fatigue safely.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Endurance",
+        "Pain Tolerance",
+        "Swimming",
+        "Running"
+      ],
+      "internalLinks": [
+        "/blog/vagus-nerve-activation-for-athletes",
+        "/course"
+      ],
+      "protocol": "Lactate threshold cognitive chunking protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-deal-with-toxic-teammates",
+      "title": "How to Stay Locked In When You Have Toxic or Negative Teammates",
+      "primaryKeyword": "toxic teammates sports psychology",
+      "cluster": "Team Dynamics",
+      "audience": "team sport athletes dealing with finger-pointing, gossip, or negative energy in the locker room",
+      "angle": "Emotional contagion in team environments can drag down individual performance. Building an internal psychological firewall, leading by body language, and protecting your energetic bandwidth.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Teammates",
+        "Locker Room",
+        "Culture",
+        "Leadership"
+      ],
+      "internalLinks": [
+        "/blog/how-to-deal-with-screaming-coach",
+        "/course"
+      ],
+      "protocol": "Psychological boundary firewall protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "clutch-decision-making-under-fatigue",
+      "title": "Clutch Decision Making: How to Avoid Fourth-Quarter Mental Fog",
+      "primaryKeyword": "decision making under fatigue athletes",
+      "cluster": "Clutch Execution",
+      "audience": "basketball, soccer, and football players who make costly mental errors in the final minutes",
+      "angle": "Hypoglycemia and physical exhaustion induce cognitive tunnel vision. How elite point guards and quarterbacks maintain peripheral awareness, simplify choice architecture, and execute under heavy oxygen debt.",
+      "book": "Physiological Peak Performance Blueprint",
+      "tags": [
+        "Decision Making",
+        "Fatigue",
+        "Clutch",
+        "Endgame"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "Oxygen-debt choice simplification drill",
+      "status": "pending"
+    },
+    {
+      "slug": "overcoming-perfectionism-paralysis-in-sports",
+      "title": "The Perfectionism Trap: Why Demanding Flawless Play Guarantees Failure",
+      "primaryKeyword": "perfectionism in sports",
+      "cluster": "Mindset Shifts",
+      "audience": "athletes who beat themselves up over single missed shots or micro-errors and spiral",
+      "angle": "Contrast maladaptive perfectionism with excellence striving. Perfectionists play not to lose, which creates muscle stiffness. Learn the 80/20 rule of ugly winning and embracing messy execution.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Perfectionism",
+        "Anxiety",
+        "Self-Forgiveness",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/how-to-bounce-back-from-bad-performance",
+        "/course"
+      ],
+      "protocol": "Ugly winning tolerance conditioning",
+      "status": "pending"
+    },
+    {
+      "slug": "body-language-psychology-in-athletic-duels",
+      "title": "Body Language Power: Dominating 1-on-1 Psychological Matchups",
+      "primaryKeyword": "body language in sports psychology",
+      "cluster": "Confidence & Dominance",
+      "audience": "combat athletes, tennis players, and defensive stoppers looking for psychological edges",
+      "angle": "Opponents read head drops, heavy sighs, and slumping shoulders immediately. How upright posture and slow rhythmic movements trigger testosterone release and signal unshakeable composure to intimidate rivals.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Body Language",
+        "Dominance",
+        "Composure",
+        "Tennis"
+      ],
+      "internalLinks": [
+        "/blog/conquering-fear-of-re-injury",
+        "/course"
+      ],
+      "protocol": "Non-verbal dominance posture reset",
+      "status": "pending"
+    },
+    {
+      "slug": "adhd-athlete-hyperfocus-in-competition",
+      "title": "The ADHD Athlete's Guide to Unlocking Channelled Hyperfocus",
+      "primaryKeyword": "adhd in sports athletes",
+      "cluster": "Neurodiversity in Sports",
+      "audience": "athletes diagnosed with ADHD or executive dysfunction who struggle with inconsistent energy",
+      "angle": "Why ADHD brains thrive in high-speed, chaotic sports environments. Harnessing interest-based nervous systems, managing dopamine crashes during timeouts, and transitioning from distraction to tunnel vision.",
+      "book": "The ADHD Athlete's Edge",
+      "tags": [
+        "ADHD",
+        "Hyperfocus",
+        "Executive Function",
+        "Focus"
+      ],
+      "internalLinks": [
+        "/blog/instructional-vs-motivational-self-talk",
+        "/course"
+      ],
+      "protocol": "Timeout dopamine modulation routine",
+      "status": "pending"
+    },
+    {
+      "slug": "heart-rate-variability-hrv-mental-recovery",
+      "title": "Heart Rate Variability (HRV) for Athletes: Tracking Nervous System Readiness",
+      "primaryKeyword": "hrv for athlete mental recovery",
+      "cluster": "Physiology & Breathwork",
+      "audience": "serious athletes utilizing wearable tech (Whoop, Oura, Garmin) who want to decode nervous system readiness",
+      "angle": "HRV as an objective indicator of autonomic nervous system balance. When high sympathetic tone signals mental burnout versus physical fatigue, and how targeted resonant breathing restores HRV baseline overnight.",
+      "book": "Physiological Peak Performance Blueprint",
+      "tags": [
+        "HRV",
+        "Wearables",
+        "Recovery",
+        "Physiology"
+      ],
+      "internalLinks": [
+        "/blog/vagus-nerve-activation-for-athletes",
+        "/course"
+      ],
+      "protocol": "Resonant frequency breathing for HRV optimization",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-handle-scouts-college-recruiters-pressure",
+      "title": "Performing Under the Radar: How to Play Free When College Scouts Are Watching",
+      "primaryKeyword": "playing under college scout pressure",
+      "cluster": "Competition Anxiety",
+      "audience": "high school and academy prospects feeling paralyzed by college coaches and scouts on the sidelines",
+      "angle": "Scout anxiety causes outcome-dependent paralysis. Shift from audition mindset to execution mastery. How to treat scouts as invisible observers and focus on non-negotiable process metrics.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Recruiting",
+        "Scouts",
+        "Youth Sports",
+        "Pressure"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-being-nervous-before-a-game",
+        "/course"
+      ],
+      "protocol": "Process metric anchoring under recruiter observation",
+      "status": "pending"
+    },
+    {
+      "slug": "resetting-after-bad-officiating-referee-mistakes",
+      "title": "Robbed by the Ref? How to Stop Bad Calls from Derailing Your Game",
+      "primaryKeyword": "how to deal with bad referee calls",
+      "cluster": "Emotional Control",
+      "audience": "competitive athletes whose focus gets wrecked by missed referee calls or biased officiating",
+      "angle": "Losing your temper at an official guarantees a double loss: the call doesn't change and your next 3 plays suffer. The 3-second neutralizer to redirect adrenaline into heightened motor aggressiveness.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Officiating",
+        "Emotional Regulation",
+        "Adversity",
+        "Focus"
+      ],
+      "internalLinks": [
+        "/blog/instructional-vs-motivational-self-talk",
+        "/course"
+      ],
+      "protocol": "3-second referee neutralize and refocus trigger",
+      "status": "pending"
+    },
+    {
+      "slug": "the-first-minute-protocol-opening-game-dominance",
+      "title": "The First-Minute Protocol: Why How You Start Sets the Entire Game's Trajectory",
+      "primaryKeyword": "how to start a game strong sports psychology",
+      "cluster": "Pre-Game & Opening Execution",
+      "audience": "athletes and teams who start flat, fall behind early, and spend the whole game playing catch-up",
+      "angle": "The psychological momentum effect of the opening 60 seconds. Designing a scripted first-possession high-intensity action that breaks through pre-game jitters and asserts physical presence immediately.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Pre-Game",
+        "Momentum",
+        "Game Start",
+        "Intensity"
+      ],
+      "internalLinks": [
+        "/blog/three-minute-visualization-protocol",
+        "/course"
+      ],
+      "protocol": "Scripted 60-second opening engagement drill",
+      "status": "pending"
+    },
+    {
+      "slug": "post-championship-hangover-motivation",
+      "title": "The Post-Championship Hangover: How to Rekindle Hunger After Winning It All",
+      "primaryKeyword": "motivation after winning championship",
+      "cluster": "Long-Term Athletic Motivation",
+      "audience": "athletes and title-winning teams struggling with complacency, low drive, or identity crisis after a championship",
+      "angle": "The arrival fallacy: why winning a title often leads to an unexpected emotional slump. How to transition from extrinsic goal chasing to craft mastery and resetting the baseline for back-to-back dominance.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Motivation",
+        "Championship",
+        "Identity",
+        "Goal Setting"
+      ],
+      "internalLinks": [
+        "/blog/dealing-with-slumps-confidence-reboot",
+        "/course"
+      ],
+      "protocol": "Championship baseline reset and identity re-anchoring",
+      "status": "pending"
+    },
+    {
+      "slug": "three-minute-visualization-protocol",
+      "title": "The 3-Minute Mental Rehearsal Protocol Elite Athletes Use Before Competition",
+      "primaryKeyword": "visualization for athletes",
+      "cluster": "Pre-Game Preparation",
+      "audience": "competitive athletes looking for a fast, structured mental warm-up before matches",
+      "angle": "Why vague day-dreaming fails and how sensory-rich mental rehearsal (PETTLEP model) activates motor neurons identically to physical movement. Step-by-step 3-minute breakdown.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Visualization",
+        "Mental Rehearsal",
+        "Pre-Game",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/how-to-build-a-pre-game-routine",
+        "/course"
+      ],
+      "protocol": "3-minute multi-sensory mental rehearsal",
+      "status": "pending"
+    },
+    {
+      "slug": "instructional-vs-motivational-self-talk",
+      "title": "Instructional vs Motivational Self-Talk: What Actually Works Under Fire",
+      "primaryKeyword": "self talk for athletes",
+      "cluster": "Internal Dialogue",
+      "audience": "athletes who talk to themselves during competition and want higher motor execution",
+      "angle": "Why motivational talk (hype, come on!) breaks down under fine motor precision, while instructional self-talk (short 2-word verb cues) accelerates motor cortex processing by 5x. Teach 2nd-person self-distancing.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Self-Talk",
+        "Cognition",
+        "Motor Skills",
+        "Focus"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "2-word instructional cue framework",
+      "status": "pending"
+    },
+    {
+      "slug": "vagus-nerve-activation-for-athletes",
+      "title": "Vagus Nerve Hacks: How Athletes Lower Acute Heart Rate Spikes in 3 Seconds",
+      "primaryKeyword": "vagus nerve for athletes",
+      "cluster": "Physiology & Breathwork",
+      "audience": "athletes whose racing heart rate ruins fine motor accuracy in clutch moments",
+      "angle": "Explain the vagus nerve brake on cardiac tempo. Contrast sympathetic adrenaline spikes with parasympathetic braking. Teach the physiological sigh, cold water facial immersion, and panoramic vision activation.",
+      "book": "Physiological Peak Performance Blueprint",
+      "tags": [
+        "Vagus Nerve",
+        "Heart Rate",
+        "Down-Regulation",
+        "Physiology"
+      ],
+      "internalLinks": [
+        "/blog/physiological-sigh-for-athletes",
+        "/course"
+      ],
+      "protocol": "Vagal brake down-regulation drill",
+      "status": "pending"
+    },
+    {
+      "slug": "conquering-fear-of-re-injury",
+      "title": "Returning from Injury: How to Conquer Hesitation and Fear of Re-Injury",
+      "primaryKeyword": "fear of reinjury athletes",
+      "cluster": "Injury Rehabilitation",
+      "audience": "athletes cleared physically from ACL tears, concussions, or fractures who still hesitate on the field",
+      "angle": "Physical clearance is not psychological clearance. Address kinesiophobia (fear of movement). How subconscious motor bracing increases injury risk. Progressive graded exposure and trust rebuild protocols.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Injury",
+        "Rehabilitation",
+        "Hesitation",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-being-nervous-before-a-game",
+        "/course"
+      ],
+      "protocol": "Graded psychological return-to-play protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-deal-with-screaming-coach",
+      "title": "How to Handle a Screaming Coach Without Losing Your Confidence",
+      "primaryKeyword": "how to deal with a screaming coach",
+      "cluster": "Coach & Parent Relations",
+      "audience": "youth and collegiate athletes whose confidence gets crushed by aggressive or reactive coaching",
+      "angle": "Separate the message from the volume. Teach the cognitive translation filter: stripping out emotional tone to extract tactical data. How to maintain neutral physiological posture so anger does not trigger fight-or-flight.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Coaching",
+        "Communication",
+        "Resilience",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/for-parents"
+      ],
+      "protocol": "Tactical extraction communication filter",
+      "status": "pending"
+    },
+    {
+      "slug": "how-to-handle-being-benched",
+      "title": "Stuck on the Bench? The Mental Playbook to Win Back Your Starting Spot",
+      "primaryKeyword": "how to handle being benched",
+      "cluster": "Adversity & Role Play",
+      "audience": "athletes demoted to second string or dealing with reduced playing time",
+      "angle": "Being benched either breeds victim mentality or surgical preparation. How to practice as an offensive coordinator from the sideline, dominate scout team reps, and force coaches to play you through undeniable metrics.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Bench Role",
+        "Adversity",
+        "Playing Time",
+        "Leadership"
+      ],
+      "internalLinks": [
+        "/blog/conquering-fear-of-re-injury",
+        "/course"
+      ],
+      "protocol": "The 30-day starting spot reclamation blueprint",
+      "status": "pending"
+    },
+    {
+      "slug": "swish-pattern-performance-anxiety",
+      "title": "The Swish Pattern: Rewiring Performance Anxiety into Aggressive Focus",
+      "primaryKeyword": "swish pattern for athletes",
+      "cluster": "Neuro-Linguistic Programming & Mindset",
+      "audience": "athletes who mentally visualize worst-case mistakes before stepping into the arena",
+      "angle": "Explain neuro-associative conditioning. How the brain triggers anxiety when an internal cue image arises. Teach the rapid Swish Pattern: replacing the trigger frame with the dominant execution frame in 0.5 seconds.",
+      "book": "Overcoming Mental Blocks",
+      "tags": [
+        "Conditioning",
+        "Anxiety",
+        "Visualization",
+        "Mindset"
+      ],
+      "internalLinks": [
+        "/blog/three-minute-visualization-protocol",
+        "/course"
+      ],
+      "protocol": "Subconscious Swish visual replacement",
+      "status": "pending"
+    },
+    {
+      "slug": "elite-athlete-sleep-night-before-game",
+      "title": "Can't Sleep the Night Before a Game? The 5-Step Athlete Protocol",
+      "primaryKeyword": "how to sleep before a competition",
+      "cluster": "Sleep & Recovery",
+      "audience": "athletes who toss and turn all night before big tournaments and show up fatigued",
+      "angle": "Science proves one night of fragmented sleep does NOT decrease physical strength or endurance - the catastrophic worry about sleep does. Provide pre-sleep NSDR (Non-Sleep Deep Rest) and cognitive deceleration steps.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Sleep",
+        "Recovery",
+        "Pre-Game",
+        "Rest"
+      ],
+      "internalLinks": [
+        "/blog/what-to-do-night-before-competition",
+        "/course"
+      ],
+      "protocol": "NSDR cognitive wind-down protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "dealing-with-slumps-confidence-reboot",
+      "title": "How to Break Out of a Shooting or Hitting Slump in 72 Hours",
+      "primaryKeyword": "how to break out of a slump",
+      "cluster": "Slumps & Performance Dips",
+      "audience": "shooters, hitters, and golfers mired in a multi-week scoring slump",
+      "angle": "Slumps are almost never mechanical - they are hyper-monitoring feedback loops. When you try harder, tension multiplies. Provide the 3-step reboot: strip mechanics, increase volume at sub-maximal speed, and restore external focus.",
+      "book": "Confidence-Building Workbook",
+      "tags": [
+        "Slumps",
+        "Shooting",
+        "Hitting",
+        "Confidence"
+      ],
+      "internalLinks": [
+        "/blog/overcoming-the-yips-in-sports",
+        "/course"
+      ],
+      "protocol": "72-hour cognitive slump reboot",
+      "status": "pending"
+    },
+    {
+      "slug": "clutch-free-throw-routine-basketball",
+      "title": "The Unbreakable Free Throw Routine: Shooting 90% in Hostile Gyms",
+      "primaryKeyword": "free throw routine sports psychology",
+      "cluster": "Routines & Mechanics",
+      "audience": "basketball players whose free throw percentage drops dramatically in road games or late fourth quarter",
+      "angle": "Why motor tempo consistency matters down to the millisecond. The 3-dribble sensory lock, visual quiet eye targeting, and rhythmic exhalation that isolates the shooter from crowd noise.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Basketball",
+        "Free Throws",
+        "Quiet Eye",
+        "Routines"
+      ],
+      "internalLinks": [
+        "/blog/how-to-stop-choking-under-pressure",
+        "/course"
+      ],
+      "protocol": "Quiet Eye free throw motor rhythm protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "mental-preparation-for-tournament-weekends",
+      "title": "Surviving Multi-Day Tournaments: The Athlete's Cognitive Energy Playbook",
+      "primaryKeyword": "tournament preparation sports psychology",
+      "cluster": "Tournament & Event Management",
+      "audience": "athletes competing in 3-4 games over a single weekend who experience Sunday burnout",
+      "angle": "Managing cognitive glycogen and nervous system fatigue across back-to-back competition days. Between-match decompression zones and avoiding emotional spikes that drain physical reserves.",
+      "book": "Physiological Peak Performance Blueprint",
+      "tags": [
+        "Tournaments",
+        "Energy Management",
+        "Weekend Tournaments",
+        "Recovery"
+      ],
+      "internalLinks": [
+        "/blog/elite-athlete-sleep-night-before-game",
+        "/course"
+      ],
+      "protocol": "Between-match cognitive decompression zone",
+      "status": "pending"
+    },
+    {
+      "slug": "dealing-with-injury-depression-athletes",
+      "title": "When Sports Are Taken Away: Navigating Injury Depression and Identity Loss",
+      "primaryKeyword": "athlete depression after injury",
+      "cluster": "Injury Rehabilitation",
+      "audience": "athletes sidelined with season-ending injuries facing loss of identity and depressive symptoms",
+      "angle": "Athletic identity foreclosure creates intense emotional crisis when physical ability is temporarily lost. How to redirect competitive drive into mental film study, rehab milestones, and personal development.",
+      "book": "Unlocking Resilient Confidence",
+      "tags": [
+        "Injury",
+        "Identity",
+        "Mental Health",
+        "Rehab"
+      ],
+      "internalLinks": [
+        "/blog/conquering-fear-of-re-injury",
+        "/course"
+      ],
+      "protocol": "Rehab milestone gamification protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "game-day-stomach-butterflies-nausea",
+      "title": "Pre-Competition Nausea: Why Your Stomach Flips and How to Calm It",
+      "primaryKeyword": "pre game anxiety stomach nausea",
+      "cluster": "Physiology & Breathwork",
+      "audience": "athletes who throw up or experience severe stomach cramps before games due to anxiety",
+      "angle": "The enteric nervous system (gut-brain axis) during sympathetic activation shuts down digestion. How to reframe butterflies as digestive energy reallocation and nutritional timing protocols to prevent pre-game nausea.",
+      "book": "Physiological Peak Performance Blueprint",
+      "tags": [
+        "Nausea",
+        "Anxiety",
+        "Gut Brain Axis",
+        "Physiology"
+      ],
+      "internalLinks": [
+        "/blog/vagus-nerve-activation-for-athletes",
+        "/course"
+      ],
+      "protocol": "Gut-brain sympathetic dampening protocol",
+      "status": "pending"
+    },
+    {
+      "slug": "quiet-eye-training-putting-shooting",
+      "title": "Quiet Eye Training: The Vision Secret of the World's Best Aimers",
+      "primaryKeyword": "quiet eye training sports",
+      "cluster": "Vision & Neural Focus",
+      "audience": "golfers, archers, shooters, and basketball players who want scientific precision under pressure",
+      "angle": "Joan Vickers' Quiet Eye research: elite performers fixate their gaze on a single target coordinate for 200-400ms longer than novices before initiating movement. How to train quiet eye in daily drills.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Quiet Eye",
+        "Vision",
+        "Aiming",
+        "Putting"
+      ],
+      "internalLinks": [
+        "/blog/three-minute-visualization-protocol",
+        "/course"
+      ],
+      "protocol": "300ms Quiet Eye fixation drill",
+      "status": "pending"
+    },
+    {
+      "slug": "mental-warmup-vs-physical-warmup",
+      "title": "Why Your Physical Warmup is Useless Without a Mental Primer",
+      "primaryKeyword": "mental warm up for athletes",
+      "cluster": "Pre-Game Preparation",
+      "audience": "athletes who stretch and run lines but still feel mentally detached when the whistle blows",
+      "angle": "Athletes spend 45 minutes warming up hamstrings and zero minutes activating cognitive readiness. Why motor speed, peripheral visual processing, and emotional calibration require dedicated pre-game primers.",
+      "book": "The Competition Protocol",
+      "tags": [
+        "Warmup",
+        "Routines",
+        "Cognitive Readiness",
+        "Pre-Game"
+      ],
+      "internalLinks": [
+        "/blog/the-first-minute-protocol-opening-game-dominance",
+        "/course"
+      ],
+      "protocol": "5-minute cognitive priming sequence",
+      "status": "pending"
     }
   ]
 }
