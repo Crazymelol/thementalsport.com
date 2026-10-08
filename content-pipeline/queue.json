@@ -1175,10 +1175,10 @@
     },
     {
       "slug": "first-tournament-as-a-parent",
-      "title": "Your Kid\u2019s First Tournament: What to Do (and Not Do)",
+      "title": "Your Kid’s First Tournament: What to Do (and Not Do)",
       "primaryKeyword": "first tournament parent",
       "cluster": "Season & Competition",
-      "audience": "parents at their child\u2019s first big competition",
+      "audience": "parents at their child’s first big competition",
       "angle": "Tournaments are long, hot and emotional, and parents make them harder without meaning to. Cover food and rest between rounds, what to say between games, and staying off the coaching.",
       "book": "Nurturing Self-Worth",
       "tags": [
@@ -1433,7 +1433,8 @@
         "/course"
       ],
       "protocol": "The 2.5-second pre-shot tempo lock",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-08"
     },
     {
       "slug": "dopamine-reset-for-student-athletes",
@@ -1580,7 +1581,8 @@
         "/course"
       ],
       "protocol": "Non-verbal dominance posture reset",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-08"
     },
     {
       "slug": "adhd-athlete-hyperfocus-in-competition",
