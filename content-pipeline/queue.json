@@ -1412,7 +1412,8 @@
         "/for-parents"
       ],
       "protocol": "Post-game decompression and boundary boundary protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-08"
     },
     {
       "slug": "how-to-mentally-prepare-for-penalty-shootout",
@@ -1455,7 +1456,8 @@
         "/course"
       ],
       "protocol": "24-hour digital taper protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-08"
     },
     {
       "slug": "anchoring-technique-for-athletes",
