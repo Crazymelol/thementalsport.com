@@ -1478,7 +1478,8 @@
         "/course"
       ],
       "protocol": "Kinesthetic flow state anchoring protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-09"
     },
     {
       "slug": "mental-toughness-drills-swimming-track",
@@ -1499,7 +1500,8 @@
         "/course"
       ],
       "protocol": "Lactate threshold cognitive chunking protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-09"
     },
     {
       "slug": "how-to-deal-with-toxic-teammates",
