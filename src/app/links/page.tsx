@@ -37,6 +37,27 @@ export default function LinksPage() {
                 {/* Links Stack */}
                 <div className="space-y-4 w-full animate-in slide-in-from-bottom-4 duration-1000 delay-200">
 
+                    {/* 0. OFFICIAL GIVEAWAY */}
+                    <Link
+                        href="/giveaway"
+                        className="group relative block w-full p-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 shadow-[0_0_40px_rgba(251,191,36,0.35)] hover:shadow-[0_0_60px_rgba(251,191,36,0.6)] transition-all transform hover:-translate-y-1"
+                    >
+                        <div className="bg-zinc-950 h-full w-full p-4 flex items-center justify-between relative z-10 hover:bg-zinc-900 transition-colors">
+                            <div className="flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 flex items-center justify-center shrink-0">
+                                    <span className="text-lg">🏆</span>
+                                </div>
+                                <div className="text-left">
+                                    <div className="font-black text-white uppercase tracking-wider text-sm flex items-center gap-2">
+                                        <span>Official 2026 Giveaway</span>
+                                        <span className="text-[10px] bg-amber-400 text-black px-1.5 py-0.5 rounded font-black tracking-normal">$80+ VAULT</span>
+                                    </div>
+                                    <div className="text-zinc-400 text-xs font-medium">Win 6 Books + Free 7-Day Protocol</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+
                     {/* 1. FREE GUIDE (New Lead Magnet) */}
                     <Link
                         href="/resources/competition-protocol"
