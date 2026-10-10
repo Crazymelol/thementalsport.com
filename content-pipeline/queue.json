@@ -1522,7 +1522,8 @@
         "/course"
       ],
       "protocol": "Psychological boundary firewall protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-10"
     },
     {
       "slug": "clutch-decision-making-under-fatigue",
@@ -1543,7 +1544,8 @@
         "/course"
       ],
       "protocol": "Oxygen-debt choice simplification drill",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-10"
     },
     {
       "slug": "overcoming-perfectionism-paralysis-in-sports",
