@@ -1566,7 +1566,8 @@
         "/course"
       ],
       "protocol": "Ugly winning tolerance conditioning",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-11"
     },
     {
       "slug": "body-language-psychology-in-athletic-duels",
@@ -1609,7 +1610,8 @@
         "/course"
       ],
       "protocol": "Timeout dopamine modulation routine",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-11"
     },
     {
       "slug": "heart-rate-variability-hrv-mental-recovery",
