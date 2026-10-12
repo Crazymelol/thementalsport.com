@@ -1632,7 +1632,8 @@
         "/course"
       ],
       "protocol": "Resonant frequency breathing for HRV optimization",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-12"
     },
     {
       "slug": "how-to-handle-scouts-college-recruiters-pressure",
@@ -1737,7 +1738,8 @@
         "/course"
       ],
       "protocol": "3-minute multi-sensory mental rehearsal",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-12"
     },
     {
       "slug": "instructional-vs-motivational-self-talk",
