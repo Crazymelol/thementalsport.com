@@ -1654,7 +1654,8 @@
         "/course"
       ],
       "protocol": "Process metric anchoring under recruiter observation",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-13"
     },
     {
       "slug": "resetting-after-bad-officiating-referee-mistakes",
@@ -1675,7 +1676,8 @@
         "/course"
       ],
       "protocol": "3-second referee neutralize and refocus trigger",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-13"
     },
     {
       "slug": "the-first-minute-protocol-opening-game-dominance",
