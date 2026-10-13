@@ -15,6 +15,7 @@ import {
     BookOpen,
     Users
 } from 'lucide-react';
+import { subscribeEmail } from '@/lib/subscribe';
 
 const BOOKS = [
     { title: 'The Competition Protocol', cover: '/covers/the-competition-protocol.png', tag: 'Flagship' },
@@ -51,6 +52,13 @@ export default function GiveawayPage() {
         setStatus('loading');
 
         try {
+            // Send email to ConvertKit (Kit)
+            try {
+                await subscribeEmail(email, sport);
+            } catch (subErr) {
+                console.warn('Kit subscription notice:', subErr);
+            }
+
             // Save lead entry to localStorage
             const entry = {
                 name,
