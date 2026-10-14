@@ -1698,7 +1698,8 @@
         "/course"
       ],
       "protocol": "Scripted 60-second opening engagement drill",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-14"
     },
     {
       "slug": "post-championship-hangover-motivation",
@@ -1719,7 +1720,8 @@
         "/course"
       ],
       "protocol": "Championship baseline reset and identity re-anchoring",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-14"
     },
     {
       "slug": "three-minute-visualization-protocol",
