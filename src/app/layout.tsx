@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Script from "next/script";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import StickyBar from "@/components/StickyBar";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,6 +89,7 @@ export default function RootLayout({
         {children}
         <ExitIntentPopup />
         <StickyBar />
+        <Analytics />
       </body>
     </html>
   );
