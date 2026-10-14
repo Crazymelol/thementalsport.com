@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Script from "next/script";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import StickyBar from "@/components/StickyBar";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -72,25 +72,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-LNWFH2JVKV"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-LNWFH2JVKV');
-          `}
-        </Script>
         <Navbar />
         {children}
         <ExitIntentPopup />
         <StickyBar />
         <Analytics />
       </body>
+      <GoogleAnalytics gaId="G-LNWFH2JVKV" />
     </html>
   );
 }
