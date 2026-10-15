@@ -78,7 +78,7 @@ export default function RootLayout({
         <StickyBar />
         <Analytics />
       </body>
-      <GoogleAnalytics gaId="G-LNWFH2JVKV" />
+      <GoogleAnalytics gaId="G-1BMW0D4K52" />
     </html>
   );
 }
