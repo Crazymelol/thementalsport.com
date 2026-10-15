@@ -1764,7 +1764,8 @@
         "/course"
       ],
       "protocol": "2-word instructional cue framework",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-15"
     },
     {
       "slug": "vagus-nerve-activation-for-athletes",
@@ -1785,7 +1786,8 @@
         "/course"
       ],
       "protocol": "Vagal brake down-regulation drill",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-15"
     },
     {
       "slug": "conquering-fear-of-re-injury",
