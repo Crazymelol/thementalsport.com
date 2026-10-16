@@ -1808,7 +1808,8 @@
         "/course"
       ],
       "protocol": "Graded psychological return-to-play protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-16"
     },
     {
       "slug": "how-to-deal-with-screaming-coach",
@@ -1829,7 +1830,8 @@
         "/for-parents"
       ],
       "protocol": "Tactical extraction communication filter",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-16"
     },
     {
       "slug": "how-to-handle-being-benched",
