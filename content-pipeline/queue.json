@@ -1852,7 +1852,8 @@
         "/course"
       ],
       "protocol": "The 30-day starting spot reclamation blueprint",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-17"
     },
     {
       "slug": "swish-pattern-performance-anxiety",
@@ -1873,7 +1874,8 @@
         "/course"
       ],
       "protocol": "Subconscious Swish visual replacement",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-17"
     },
     {
       "slug": "elite-athlete-sleep-night-before-game",
