@@ -1896,7 +1896,8 @@
         "/course"
       ],
       "protocol": "NSDR cognitive wind-down protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-18"
     },
     {
       "slug": "dealing-with-slumps-confidence-reboot",
@@ -1917,7 +1918,8 @@
         "/course"
       ],
       "protocol": "72-hour cognitive slump reboot",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-18"
     },
     {
       "slug": "clutch-free-throw-routine-basketball",
