@@ -1940,7 +1940,8 @@
         "/course"
       ],
       "protocol": "Quiet Eye free throw motor rhythm protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-19"
     },
     {
       "slug": "mental-preparation-for-tournament-weekends",
@@ -1961,7 +1962,8 @@
         "/course"
       ],
       "protocol": "Between-match cognitive decompression zone",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-19"
     },
     {
       "slug": "dealing-with-injury-depression-athletes",
