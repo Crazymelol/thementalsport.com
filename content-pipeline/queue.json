@@ -1984,7 +1984,8 @@
         "/course"
       ],
       "protocol": "Rehab milestone gamification protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-20"
     },
     {
       "slug": "game-day-stomach-butterflies-nausea",
@@ -2005,7 +2006,8 @@
         "/course"
       ],
       "protocol": "Gut-brain sympathetic dampening protocol",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-20"
     },
     {
       "slug": "quiet-eye-training-putting-shooting",
