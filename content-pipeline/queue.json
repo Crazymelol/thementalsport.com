@@ -2028,7 +2028,8 @@
         "/course"
       ],
       "protocol": "300ms Quiet Eye fixation drill",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-21"
     },
     {
       "slug": "mental-warmup-vs-physical-warmup",
@@ -2049,7 +2050,8 @@
         "/course"
       ],
       "protocol": "5-minute cognitive priming sequence",
-      "status": "pending"
+      "status": "published",
+      "publishedDate": "2026-10-21"
     }
   ]
 }
