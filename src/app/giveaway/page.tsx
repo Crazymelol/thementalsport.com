@@ -185,10 +185,64 @@ export default function GiveawayPage() {
                                     <a
                                         href="/free-chapter.pdf"
                                         download="The-Competition-Protocol-Free.pdf"
-                                        className="inline-flex items-center justify-center gap-3 w-full py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-black uppercase tracking-widest text-sm hover:from-amber-300 hover:to-yellow-400 transition-all shadow-[0_0_30px_rgba(251,191,36,0.4)]"
+                                        className="inline-flex items-center justify-center gap-3 w-full py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-black uppercase tracking-widest text-sm hover:from-amber-300 hover:to-yellow-400 transition-all shadow-[0_0_30px_rgba(251,191,36,0.4)] rounded-xl"
                                     >
                                         <Download className="w-5 h-5" /> Download Free Protocol (PDF)
                                     </a>
+                                </div>
+
+                                {/* ONE-TIME TRIPWIRE WELCOME UPGRADE */}
+                                <div className="p-6 bg-gradient-to-b from-amber-500/15 via-zinc-950 to-zinc-950 border-2 border-amber-400/80 rounded-2xl text-left space-y-4 shadow-[0_0_40px_rgba(251,191,36,0.15)] relative overflow-hidden">
+                                    <div className="flex items-center justify-between">
+                                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-400 text-zinc-950 text-[10px] font-black uppercase tracking-widest rounded-full">
+                                            <Sparkles className="w-3 h-3" /> Exclusive Welcome Offer
+                                        </span>
+                                        <span className="text-xs font-bold text-amber-400 line-through opacity-70">
+                                            Regular $47
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-lg font-black uppercase text-white tracking-tight">
+                                            Upgrade To The Full 140-Page Master System
+                                        </h3>
+                                        <p className="text-xs text-zinc-300 mt-1 leading-relaxed">
+                                            Your 7-day checklist is unlocked above. Upgrade right now to the complete master edition of <b>The Competition Protocol</b> + audio crisis resets for just <span className="text-amber-400 font-bold">$17</span>.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2 text-xs text-zinc-300 border-t border-b border-zinc-800/80 py-3">
+                                        <div className="flex items-center gap-2">
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                                            <span>Full hour-by-hour countdown & choke-proofing routines</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                                            <span>The 3-minute nervous system vagal reset audio drill</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                                            <span>Instant digital access (PDF + ePub + Mobile formats)</span>
+                                        </div>
+                                    </div>
+
+                                    <a
+                                        href="https://notarasio.gumroad.com/l/yfkgwv?wanted=true"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center gap-2 w-full py-4 bg-amber-400 text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-amber-300 transition-all rounded-xl shadow-[0_0_25px_rgba(251,191,36,0.5)] cursor-pointer"
+                                    >
+                                        <Sparkles className="w-4 h-4" /> Get Complete Protocol — $17 <ArrowRight className="w-4 h-4" />
+                                    </a>
+
+                                    <div className="text-center pt-1">
+                                        <Link
+                                            href="/books"
+                                            className="text-[11px] font-bold text-zinc-400 hover:text-white transition-colors uppercase tracking-wider"
+                                        >
+                                            Or explore the complete 6-book performance library →
+                                        </Link>
+                                    </div>
                                 </div>
 
                                 <div className="pt-2">

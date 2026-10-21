@@ -7,7 +7,7 @@
 // subscribing throws a clear message instead of silently failing.
 
 export async function subscribeEmail(email: string, tag?: string): Promise<void> {
-  const formId = process.env.NEXT_PUBLIC_KIT_FORM_ID;
+  const formId = process.env.NEXT_PUBLIC_KIT_FORM_ID || "9008498";
   if (!formId) {
     throw new Error("Signup isn't connected yet — email hello@thementalsport.com and we'll send it over.");
   }
