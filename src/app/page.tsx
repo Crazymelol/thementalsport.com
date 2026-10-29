@@ -6,6 +6,7 @@ import { ArrowRight, Star } from 'lucide-react';
 import Image from 'next/image';
 import NewsletterWrapper from '@/components/NewsletterWrapper';
 import LeadMagnet from '@/components/LeadMagnet';
+import Hero3DBook from '@/components/Hero3DBook';
 import { offers } from '@/data/offers';
 
 
@@ -22,34 +23,67 @@ export default function AuthorHome() {
         <main className="min-h-screen bg-white selection:bg-zinc-900 selection:text-white">
 
             {/* 1. AUTHOR HERO */}
-            <section className="bg-zinc-950 text-white py-24 lg:py-32 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_rgba(220,38,38,0.15),_transparent_50%)] pointer-events-none"></div>
-                <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-zinc-950/40 to-zinc-950 pointer-events-none"></div>
-                <div className="container mx-auto px-6 max-w-5xl text-center space-y-8 relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-600/20 border border-red-600/40 text-red-400 text-xs font-black uppercase tracking-[0.2em] mb-4">
-                        <Star className="w-3 h-3 fill-current" /> 8 Books · Mental Performance Masterclass
+            <section className="bg-zinc-950 text-white pt-20 pb-24 lg:pt-28 lg:pb-36 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,_rgba(220,38,38,0.22),_transparent_45%)] pointer-events-none"></div>
+                <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,_rgba(245,158,11,0.12),_transparent_70%)] pointer-events-none"></div>
+                <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/10 via-zinc-950/40 to-zinc-950 pointer-events-none"></div>
+
+                <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                    <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                        
+                        {/* LEFT COLUMN: THE HARD-HITTING COPY & CTAS */}
+                        <div className="lg:col-span-7 text-center lg:text-left space-y-7">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600/25 via-red-600/15 to-transparent border border-red-500/40 text-red-300 text-xs font-black uppercase tracking-[0.2em] rounded-full shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+                                <Star className="w-3.5 h-3.5 fill-red-400 text-red-400" />
+                                <span>8 Flagship Books · Athletic Neuroscience Masterclass</span>
+                            </div>
+
+                            <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.92]">
+                                Great In Practice.<br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-400 drop-shadow-[0_4px_30px_rgba(239,68,68,0.35)]">
+                                    Gone In Games.
+                                </span>
+                            </h1>
+
+                            <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                                That gap is not talent and it is not effort. It is nervous system regulation—a skill almost nobody trains. Start with the free 7-day protocol used by champions.
+                            </p>
+
+                            <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                                <NewsletterWrapper className="w-full sm:w-auto px-9 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-white font-black hover:brightness-110 transition-all uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(239,68,68,0.4)] rounded-xl">
+                                    Get The Free 7-Day Protocol →
+                                </NewsletterWrapper>
+                                <Link href="/books" className="w-full sm:w-auto px-8 py-4 border border-zinc-700 bg-zinc-900/60 backdrop-blur-md text-white font-black hover:border-zinc-400 hover:bg-zinc-800 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 rounded-xl">
+                                    Browse All 8 Books <ArrowRight className="w-4 h-4" />
+                                </Link>
+                            </div>
+
+                            {/* TRUST INDICATORS */}
+                            <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-zinc-400 font-semibold uppercase tracking-wider">
+                                <div className="flex items-center gap-1.5 text-amber-400">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                                    ))}
+                                    <span className="text-zinc-300 font-bold ml-1">4.9/5 Rating</span>
+                                </div>
+                                <span className="text-zinc-600 hidden sm:inline">•</span>
+                                <span>Free Instant PDF Access</span>
+                                <span className="text-zinc-600 hidden sm:inline">•</span>
+                                <span>No Credit Card Required</span>
+                            </div>
+                        </div>
+
+                        {/* RIGHT COLUMN: 3D FLOATING BOOK & VISUAL EFFECT */}
+                        <div className="lg:col-span-5 flex justify-center items-center">
+                            <Hero3DBook />
+                        </div>
+
                     </div>
-                    <h1 className="text-6xl lg:text-8xl font-black mb-6 uppercase tracking-tighter leading-none">
-                        Great In Practice.<br/><span className="text-red-500">Gone In Games.</span>
-                    </h1>
-                    <p className="text-xl lg:text-2xl text-zinc-400 font-medium max-w-2xl mx-auto leading-relaxed">
-                        That gap is not talent and it is not effort. It is a skill almost
-                        nobody trains. Start with the free 7-day protocol.
-                    </p>
-                    <div className="pt-8 mb-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <NewsletterWrapper className="px-10 py-4 bg-white text-zinc-950 font-black rounded-none hover:bg-zinc-200 transition-colors uppercase tracking-widest text-sm">
-                            Get The Free Protocol
-                        </NewsletterWrapper>
-                        <Link href="/books" className="px-10 py-4 border border-zinc-700 text-white font-black rounded-none hover:border-white transition-colors uppercase tracking-widest text-sm flex items-center gap-2">
-                            Browse Books <ArrowRight className="w-4 h-4" />
-                        </Link>
-                    </div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Free 7-day system • No credit card</p>
                 </div>
 
                 {/* Scroll Indicator */}
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-400 animate-bounce">
-                    <ArrowRight className="w-6 h-6 rotate-90" />
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-zinc-600 animate-bounce hidden md:block">
+                    <ArrowRight className="w-5 h-5 rotate-90" />
                 </div>
             </section>
 
