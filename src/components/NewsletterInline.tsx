@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Mail, CheckCircle2, AlertCircle, ArrowRight, Download } from 'lucide-react';
 import { subscribeEmail } from '../lib/subscribe';
+import { unlockProtocol } from '@/lib/protocolAccess';
 
 export default function NewsletterInline({ formLocation = 'newsletter_inline' }: { formLocation?: string }) {
     const [email, setEmail] = useState('');
@@ -26,6 +27,7 @@ export default function NewsletterInline({ formLocation = 'newsletter_inline' }:
 
         try {
             await subscribeEmail(email, undefined, formLocation);
+            unlockProtocol();
 
             // Track conversion
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

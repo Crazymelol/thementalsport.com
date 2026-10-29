@@ -1,15 +1,45 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useSyncExternalStore } from 'react';
 import { ArrowLeft, Printer } from 'lucide-react';
 import Link from 'next/link';
+import ProtocolSignupForm from '@/components/ProtocolSignupForm';
+import { isProtocolUnlocked, subscribeProtocolUnlock } from '@/lib/protocolAccess';
 
 export default function CompetitionProtocolGuide() {
     const contentRef = useRef<HTMLDivElement>(null);
+    const unlocked = useSyncExternalStore(subscribeProtocolUnlock, isProtocolUnlocked, () => false);
 
     const handlePrint = () => {
         window.print();
     };
+
+    if (!unlocked) {
+        return (
+            <main className="min-h-screen bg-stone-50 text-zinc-900">
+                <nav className="fixed top-0 inset-x-0 bg-white/80 backdrop-blur-md border-b border-zinc-200 p-4 z-50">
+                    <div className="container mx-auto max-w-4xl">
+                        <Link href="/start-here" className="flex items-center gap-2 text-zinc-500 font-bold uppercase tracking-widest text-xs hover:text-zinc-900 transition-colors">
+                            <ArrowLeft className="w-4 h-4" /> Back
+                        </Link>
+                    </div>
+                </nav>
+                <section className="container mx-auto px-6 pt-32 pb-24 max-w-xl">
+                    <p className="text-xs font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Free download</p>
+                    <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
+                        The Competition Protocol
+                    </h1>
+                    <p className="text-zinc-600 leading-relaxed mb-8">
+                        The 7-day mental preparation system: taper, the day before, the warmup, and what to do when panic hits. Enter your email to unlock it on this page.
+                    </p>
+                    <ProtocolSignupForm
+                        idPrefix="protocol-page"
+                        submitLabel="Unlock the protocol"
+                    />
+                </section>
+            </main>
+        );
+    }
 
     return (
         <main className="min-h-screen bg-stone-50 print:bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white print:text-black">

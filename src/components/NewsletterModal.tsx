@@ -1,16 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Mail, CheckCircle2, AlertCircle, Download } from 'lucide-react';
+import { X, CheckCircle2, AlertCircle, Download } from 'lucide-react';
 import { subscribeEmail } from '../lib/subscribe';
+import { unlockProtocol } from '@/lib/protocolAccess';
+import ProtocolSignupForm from '@/components/ProtocolSignupForm';
 
 interface NewsletterModalProps {
     isOpen: boolean;
     onClose: () => void;
     formLocation?: string;
+    variant?: 'newsletter' | 'protocol';
 }
 
-export default function NewsletterModal({ isOpen, onClose, formLocation = 'newsletter_modal' }: NewsletterModalProps) {
+export default function NewsletterModal({ isOpen, onClose, formLocation = 'newsletter_modal', variant = 'newsletter' }: NewsletterModalProps) {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -32,6 +35,7 @@ export default function NewsletterModal({ isOpen, onClose, formLocation = 'newsl
 
         try {
             await subscribeEmail(email, undefined, formLocation);
+            unlockProtocol();
 
             // Track conversion
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -71,7 +75,20 @@ export default function NewsletterModal({ isOpen, onClose, formLocation = 'newsl
                     <X className="w-6 h-6" />
                 </button>
 
-                {status === 'success' ? (
+                {variant === 'protocol' ? (
+                    <>
+                        <div className="text-center mb-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 text-white text-xs font-black uppercase tracking-widest mb-4">
+                                <Download className="w-3 h-3" /> Free Download
+                            </div>
+                            <h2 id="modal-title" className="text-3xl font-black text-zinc-900 mb-2 uppercase tracking-tighter">Get The Free 7-Day Protocol</h2>
+                            <p className="text-zinc-600">
+                                The exact 7-day mental system elite athletes use before every competition. Enter your email to unlock it.
+                            </p>
+                        </div>
+                        <ProtocolSignupForm showReadLink submitLabel="Unlock the protocol" idPrefix="protocol-modal" />
+                    </>
+                ) : status === 'success' ? (
                     <div className="text-center py-8">
                         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <CheckCircle2 className="w-8 h-8 text-green-600" />
