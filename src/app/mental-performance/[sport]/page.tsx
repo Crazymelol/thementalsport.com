@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, ArrowLeft, CheckCircle2, Star } from 'lucide-react';
 import Image from 'next/image';
+import CheckoutLink from '@/components/CheckoutLink';
 
 interface PageProps {
     params: Promise<{ sport: string }>;
@@ -151,10 +152,10 @@ export default async function SportPage({ params }: PageProps) {
                                 </p>
                                 <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">
                                     {book.checkoutUrl && (
-                                        <a href={book.checkoutUrl} target="_blank" rel="noopener noreferrer"
+                                        <CheckoutLink href={book.checkoutUrl} productName={book.title} price={book.price}
                                             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-zinc-200 transition-colors">
                                             Buy Now — {book.price} <ArrowRight className="w-4 h-4" />
-                                        </a>
+                                        </CheckoutLink>
                                     )}
                                     <Link href={`/book/${book.id}`}
                                         className="inline-flex items-center gap-2 px-8 py-4 border border-zinc-700 text-white font-black uppercase tracking-widest text-sm hover:border-white transition-colors">

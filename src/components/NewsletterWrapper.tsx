@@ -5,10 +5,12 @@ import NewsletterModal from '@/components/NewsletterModal';
 
 export default function NewsletterWrapper({
     children,
-    className = ""
+    className = "",
+    formLocation = "newsletter_modal",
 }: {
     children: React.ReactNode,
-    className?: string
+    className?: string,
+    formLocation?: string,
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -22,6 +24,7 @@ export default function NewsletterWrapper({
             <NewsletterModal
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
+                formLocation={formLocation}
             />
         </>
     );

@@ -36,6 +36,7 @@ export default function ExitIntentPopup() {
         <NewsletterModal
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
+            formLocation="exit_intent"
         />
     );
 }

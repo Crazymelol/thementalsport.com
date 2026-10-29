@@ -8,6 +8,7 @@ import NewsletterWrapper from '@/components/NewsletterWrapper';
 import LeadMagnet from '@/components/LeadMagnet';
 import Hero3DBook from '@/components/Hero3DBook';
 import { offers } from '@/data/offers';
+import CheckoutLink from '@/components/CheckoutLink';
 
 
 const HOMEPAGE_BOOK_IDS = ['the-competition-protocol', 'mental-blocks', 'confidence-building'];
@@ -50,7 +51,7 @@ export default function AuthorHome() {
                             </p>
 
                             <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-                                <NewsletterWrapper className="w-full sm:w-auto px-9 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-white font-black hover:brightness-110 transition-all uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(239,68,68,0.4)] rounded-xl">
+                                <NewsletterWrapper formLocation="homepage" className="w-full sm:w-auto px-9 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-white font-black hover:brightness-110 transition-all uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(239,68,68,0.4)] rounded-xl">
                                     Get The Free 7-Day Protocol →
                                 </NewsletterWrapper>
                                 <Link href="/books" className="w-full sm:w-auto px-8 py-4 border border-zinc-700 bg-zinc-900/60 backdrop-blur-md text-white font-black hover:border-zinc-400 hover:bg-zinc-800 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 rounded-xl">
@@ -105,9 +106,9 @@ export default function AuthorHome() {
                                 <p className="text-zinc-400 leading-relaxed mt-5 flex-1">{offer.description}</p>
                                 <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-zinc-800">
                                     <span className="text-3xl font-black">{offer.price}</span>
-                                    <a href={offer.checkoutUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-zinc-950 font-black uppercase tracking-widest text-xs hover:bg-zinc-200 transition-colors">
+                                    <CheckoutLink href={offer.checkoutUrl} productName={offer.title} price={offer.price} className="inline-flex items-center gap-2 px-6 py-3 bg-white text-zinc-950 font-black uppercase tracking-widest text-xs hover:bg-zinc-200 transition-colors">
                                         Get started <ArrowRight className="w-4 h-4" />
-                                    </a>
+                                    </CheckoutLink>
                                 </div>
                             </div>
                         ))}
@@ -256,7 +257,7 @@ export default function AuthorHome() {
                     <Link href="/books" className="hover:text-white transition-colors">Books</Link>
                     <Link href="/course" className="hover:text-white transition-colors">Course</Link>
                     <Link href="/blog" className="hover:text-white transition-colors">Articles</Link>
-                    <NewsletterWrapper className="hover:text-white transition-colors">Newsletter</NewsletterWrapper>
+                    <NewsletterWrapper formLocation="homepage_footer" className="hover:text-white transition-colors">Newsletter</NewsletterWrapper>
                     <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                     <Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link>
                 </div>

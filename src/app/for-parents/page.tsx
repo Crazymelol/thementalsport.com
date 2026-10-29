@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, ClipboardCheck, MessageCircle } from 'lucide-react';
+import CheckoutLink from '@/components/CheckoutLink';
+import { offers } from '@/data/offers';
 
 export const metadata: Metadata = {
     title: 'Mental Performance for Parents | The Mental Sport',
@@ -15,6 +17,7 @@ const parentArticles = [
 ];
 
 export default function ForParentsPage() {
+    const plan = offers.find((offer) => offer.id === 'personalised-plan');
     return (
         <main className="min-h-screen bg-white text-zinc-900">
             <section className="bg-zinc-950 text-white py-24 px-6">
@@ -73,10 +76,12 @@ export default function ForParentsPage() {
                             <span><strong className="block font-black uppercase">Unbreakable</strong><span className="text-sm text-zinc-500">A story for young athletes learning to recover from mistakes.</span></span>
                             <ArrowRight className="w-4 h-4 shrink-0" />
                         </Link>
-                        <a href="https://notarasio.gumroad.com/l/mzcxp" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between border border-red-600 bg-red-50 p-5 hover:bg-red-100 transition-colors">
-                            <span><strong className="block font-black uppercase">Personalised Performance Plan</strong><span className="text-sm text-zinc-600">A focused $97 plan for your athlete&apos;s current challenge.</span></span>
-                            <ArrowRight className="w-4 h-4 shrink-0" />
-                        </a>
+                        {plan && (
+                            <CheckoutLink href={plan.checkoutUrl} productName={plan.title} price={plan.price} className="flex items-center justify-between border border-red-600 bg-red-50 p-5 hover:bg-red-100 transition-colors">
+                                <span><strong className="block font-black uppercase">Personalised Performance Plan</strong><span className="text-sm text-zinc-600">A focused {plan.price} plan for your athlete&apos;s current challenge.</span></span>
+                                <ArrowRight className="w-4 h-4 shrink-0" />
+                            </CheckoutLink>
+                        )}
                     </div>
                 </div>
             </section>

@@ -6,7 +6,9 @@
 // (find it in Kit -> your form -> the number in the embed/URL). Until it's set,
 // subscribing throws a clear message instead of silently failing.
 
-export async function subscribeEmail(email: string, tag?: string): Promise<void> {
+import { trackSignUp } from './analytics';
+
+export async function subscribeEmail(email: string, tag?: string, formLocation = 'convertkit'): Promise<void> {
   const formId = process.env.NEXT_PUBLIC_KIT_FORM_ID || "9008498";
   if (!formId) {
     throw new Error("Signup isn't connected yet — email hello@thementalsport.com and we'll send it over.");
@@ -21,4 +23,6 @@ export async function subscribeEmail(email: string, tag?: string): Promise<void>
   if (!res.ok) {
     throw new Error("Subscription failed. Please try again.");
   }
+
+  trackSignUp(formLocation);
 }

@@ -7,9 +7,10 @@ import { subscribeEmail } from '../lib/subscribe';
 interface NewsletterModalProps {
     isOpen: boolean;
     onClose: () => void;
+    formLocation?: string;
 }
 
-export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
+export default function NewsletterModal({ isOpen, onClose, formLocation = 'newsletter_modal' }: NewsletterModalProps) {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -30,7 +31,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
         setStatus('loading');
 
         try {
-            await subscribeEmail(email);
+            await subscribeEmail(email, undefined, formLocation);
 
             // Track conversion
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

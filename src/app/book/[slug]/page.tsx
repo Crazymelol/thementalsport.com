@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import { Star, ArrowRight, ShoppingCart, CheckCircle2, Quote } from 'lucide-react';
 import Image from 'next/image';
 import NewsletterInline from '@/components/NewsletterInline';
+import CheckoutLink from '@/components/CheckoutLink';
 
 /* 
  * This is a Server Component. 
@@ -123,9 +124,9 @@ export default async function BookPage({ params }: PageProps) {
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
                             {book.checkoutUrl && (
-                                <a href={book.checkoutUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-red-600 text-white font-black uppercase tracking-widest hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                                <CheckoutLink href={book.checkoutUrl} productName={book.title} price={book.price} className="px-8 py-4 bg-red-600 text-white font-black uppercase tracking-widest hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
                                     <ShoppingCart className="w-5 h-5" /> Buy Now — {book.price}
-                                </a>
+                                </CheckoutLink>
                             )}
                             <a href={AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="btn-amazon justify-center">
                                 Also on Amazon <ArrowRight className="w-4 h-4" />
@@ -231,15 +232,21 @@ export default async function BookPage({ params }: PageProps) {
 
             {/* EMAIL OPT-IN */}
             <section className="py-16 container mx-auto px-6 max-w-3xl">
-                <NewsletterInline />
+                <NewsletterInline formLocation="book" />
             </section>
 
             {/* STICKY BOTTOM BAR (Mobile) */}
             <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-zinc-200 md:hidden z-50 flex items-center justify-between">
                 <div className="font-black text-zinc-900 text-xs uppercase tracking-widest max-w-[200px] truncate">{book.title}</div>
-                <a href={book.checkoutUrl || AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="bg-red-600 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
-                    Buy {book.price}
-                </a>
+                {book.checkoutUrl ? (
+                    <CheckoutLink href={book.checkoutUrl} productName={book.title} price={book.price} className="bg-red-600 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
+                        Buy {book.price}
+                    </CheckoutLink>
+                ) : (
+                    <a href={AMAZON_LINK} target="_blank" rel="noopener noreferrer" className="bg-red-600 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-none">
+                        Buy {book.price}
+                    </a>
+                )}
             </div>
 
         </main>

@@ -153,7 +153,7 @@ export default function BooksPage() {
             })}
 
             <section className="pb-24 pt-8 container mx-auto px-6 max-w-3xl">
-                <NewsletterInline />
+                <NewsletterInline formLocation="books" />
             </section>
         </main>
     );

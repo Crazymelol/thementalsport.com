@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { CheckCircle2, Star, ArrowRight, Lock, Clock, BookOpen, Award } from 'lucide-react';
 import { Metadata } from 'next';
+import CheckoutLink from '@/components/CheckoutLink';
+import { COURSE } from '@/data/course';
 
 export const metadata: Metadata = {
     title: 'The Mental Performance Protocol | 8-Week Course',
@@ -13,8 +15,6 @@ export const metadata: Metadata = {
         type: 'website',
     },
 };
-
-const CHECKOUT_STANDARD = 'https://notarasio.gumroad.com/l/qjsfty';
 
 const modules = [
     { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
@@ -40,7 +40,6 @@ const bonuses = [
     { title: '6 months of live Q&A calls', value: 199 },
 ];
 const TOTAL_VALUE = core.value + bonuses.reduce((sum, b) => sum + b.value, 0); // 1737
-const PRICE = 297;
 
 export default function CoursePage() {
     return (
@@ -59,9 +58,9 @@ export default function CoursePage() {
                         The 8-week system elite athletes use to <strong className="text-white">build unshakable confidence, eliminate competition anxiety, and dominate their sport.</strong>
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                        <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2">
-                            Enroll Now — $297 <ArrowRight className="w-4 h-4" />
-                        </a>
+                        <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2">
+                            Enroll Now — ${COURSE.price} <ArrowRight className="w-4 h-4" />
+                        </CheckoutLink>
                         <a href="#curriculum" className="px-10 py-5 border-2 border-zinc-700 hover:border-white text-white font-black uppercase tracking-widest text-sm transition-all">
                             See What&apos;s Inside
                         </a>
@@ -152,11 +151,11 @@ export default function CoursePage() {
                 </div>
                 <div className="mt-8 text-center">
                     <p className="text-zinc-500 text-lg">Total value: <span className="line-through">${TOTAL_VALUE.toLocaleString()}</span></p>
-                    <p className="text-zinc-900 text-2xl font-black uppercase tracking-tight mt-2">Today: <span className="text-red-600">${PRICE}</span></p>
-                    <p className="text-zinc-500 text-sm mt-1">You save ${(TOTAL_VALUE - PRICE).toLocaleString()} ({Math.round((1 - PRICE / TOTAL_VALUE) * 100)}% off)</p>
-                    <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
-                        Enroll Now — ${PRICE} <ArrowRight className="w-4 h-4" />
-                    </a>
+                    <p className="text-zinc-900 text-2xl font-black uppercase tracking-tight mt-2">Today: <span className="text-red-600">${COURSE.price}</span></p>
+                    <p className="text-zinc-500 text-sm mt-1">You save ${(TOTAL_VALUE - COURSE.price).toLocaleString()} ({Math.round((1 - COURSE.price / TOTAL_VALUE) * 100)}% off)</p>
+                    <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="mt-8 inline-flex items-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
+                        Enroll Now — ${COURSE.price} <ArrowRight className="w-4 h-4" />
+                    </CheckoutLink>
                     <p className="text-zinc-400 text-xs mt-4">Lifetime access • 30-day money-back guarantee</p>
                 </div>
             </section>
@@ -169,7 +168,7 @@ export default function CoursePage() {
                     <div className="p-8 border-2 border-red-600 bg-red-950/20 flex flex-col">
                         <h3 className="text-2xl font-black uppercase tracking-tighter">Everything, One Price</h3>
                         <p className="text-zinc-500 line-through mt-4">${TOTAL_VALUE.toLocaleString()} value</p>
-                        <div className="text-5xl font-black mb-6 mt-1">${PRICE}</div>
+                        <div className="text-5xl font-black mb-6 mt-1">${COURSE.price}</div>
                         <ul className="space-y-3 mb-8 flex-1">
                             {['All 8 modules (36 video lessons)', 'All 7 bonuses (incl. AI Coach app + 8 books)', 'Lifetime access', '30-day money-back guarantee'].map((f, i) => (
                                 <li key={i} className="flex gap-2 text-zinc-300 text-sm">
@@ -177,9 +176,9 @@ export default function CoursePage() {
                                 </li>
                             ))}
                         </ul>
-                        <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="w-full py-4 text-center font-black uppercase tracking-widest text-sm transition-all bg-red-600 hover:bg-red-700">
+                        <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="w-full py-4 text-center font-black uppercase tracking-widest text-sm transition-all bg-red-600 hover:bg-red-700">
                             Get Standard
-                        </a>
+                        </CheckoutLink>
                     </div>
                 </div>
             </section>
@@ -204,9 +203,9 @@ export default function CoursePage() {
                     <p className="text-xl text-zinc-400 mb-10">
                         Build the mental system that holds when everything else falls apart.
                     </p>
-                    <a href={CHECKOUT_STANDARD} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-12 py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-base transition-all">
-                        Enroll Now — $297 <ArrowRight className="w-5 h-5" />
-                    </a>
+                    <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="inline-flex items-center gap-2 px-12 py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-base transition-all">
+                        Enroll Now — ${COURSE.price} <ArrowRight className="w-5 h-5" />
+                    </CheckoutLink>
                     <p className="text-zinc-500 text-sm mt-6">Lifetime access • 30-day guarantee • Start today</p>
                 </div>
             </section>

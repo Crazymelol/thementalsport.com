@@ -15,7 +15,7 @@ export default function LeadMagnet() {
         e.preventDefault();
         setStatus('loading');
         try {
-            await subscribeEmail(email, 'lead-magnet-free-chapter');
+            await subscribeEmail(email, 'lead-magnet-free-chapter', 'lead_magnet');
             setStatus('success');
         } catch {
             setStatus('error');
