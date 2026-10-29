@@ -7,7 +7,9 @@ import type { NextConfig } from "next";
 const isStaticExport = process.env.STATIC_EXPORT === "1";
 const coverImagePattern = {
   pathname: "/covers/**",
-  search: "?v=3",
+};
+const aboutImagePattern = {
+  pathname: "/about/**",
 };
 
 const nextConfig: NextConfig = {
@@ -15,10 +17,10 @@ const nextConfig: NextConfig = {
     ? {
         output: "export",
         trailingSlash: true,
-        images: { unoptimized: true, localPatterns: [coverImagePattern] },
+        images: { unoptimized: true, localPatterns: [coverImagePattern, aboutImagePattern] },
       }
     : {
-        images: { localPatterns: [coverImagePattern] },
+        images: { localPatterns: [coverImagePattern, aboutImagePattern] },
         async redirects() {
           return [
             {
