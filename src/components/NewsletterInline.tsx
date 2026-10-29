@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Mail, CheckCircle2, AlertCircle, ArrowRight, Download } from 'lucide-react';
 import { subscribeEmail } from '../lib/subscribe';
 
-export default function NewsletterInline() {
+export default function NewsletterInline({ formLocation = 'newsletter_inline' }: { formLocation?: string }) {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -25,7 +25,7 @@ export default function NewsletterInline() {
         setStatus('loading');
 
         try {
-            await subscribeEmail(email);
+            await subscribeEmail(email, undefined, formLocation);
 
             // Track conversion
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

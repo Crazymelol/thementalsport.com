@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram, Linkedin, Mail, BookOpen, Download } from 'lucide-react';
+import { Instagram, Mail, BookOpen, Download, ArrowRight } from 'lucide-react';
 import { books } from '@/data/books';
+import { COURSE } from '@/data/course';
 import NewsletterWrapper from '@/components/NewsletterWrapper';
 
 export const metadata = {
@@ -48,7 +49,29 @@ export default function LinksPage() {
                 {/* Links Stack */}
                 <div className="space-y-4 w-full animate-in slide-in-from-bottom-4 duration-1000 delay-200">
 
-                    {/* 1. OFFICIAL GIVEAWAY + FREE PROTOCOL */}
+                    {/* 1. COURSE — first and largest, this is the offer Instagram traffic should see */}
+                    <Link
+                        href="/course"
+                        className="group relative block w-full p-[2px] bg-gradient-to-r from-red-600 via-amber-400 to-red-600 shadow-[0_0_55px_rgba(220,38,38,0.55)] hover:shadow-[0_0_70px_rgba(220,38,38,0.75)] transition-all transform hover:-translate-y-1"
+                    >
+                        <div className="bg-zinc-950 h-full w-full p-5 text-left group-hover:bg-zinc-900 transition-colors">
+                            <div className="flex items-center justify-between gap-3 mb-2">
+                                <span className="text-[10px] font-black uppercase tracking-[0.22em] text-red-400">The course</span>
+                                <span className="text-[10px] bg-red-600 text-white px-2 py-0.5 font-black tracking-normal">${COURSE.price}</span>
+                            </div>
+                            <div className="font-black text-white uppercase tracking-tight text-lg leading-tight">
+                                {COURSE.name}
+                            </div>
+                            <p className="text-zinc-300 text-sm leading-snug mt-2">
+                                {COURSE.pitch}
+                            </p>
+                            <div className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white">
+                                Start the protocol <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                        </div>
+                    </Link>
+
+                    {/* 2. OFFICIAL GIVEAWAY + FREE PROTOCOL */}
                     <Link
                         href="/giveaway"
                         className="group relative block w-full p-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 shadow-[0_0_40px_rgba(251,191,36,0.35)] hover:shadow-[0_0_60px_rgba(251,191,36,0.6)] transition-all transform hover:-translate-y-1"
@@ -91,7 +114,7 @@ export default function LinksPage() {
                     </Link>
 
                     {/* 3. NEWSLETTER / INNER CIRCLE (Opens Functional Modal) */}
-                    <NewsletterWrapper className="w-full text-left">
+                    <NewsletterWrapper className="w-full text-left" formLocation="links">
                         <div className="block w-full border border-zinc-800 hover:border-zinc-700 transition-all bg-zinc-900 p-4 hover:bg-zinc-800 cursor-pointer">
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0">

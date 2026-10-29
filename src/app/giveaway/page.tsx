@@ -16,6 +16,12 @@ import {
     Users
 } from 'lucide-react';
 import { subscribeEmail } from '@/lib/subscribe';
+import { books } from '@/data/books';
+import CheckoutLink from '@/components/CheckoutLink';
+
+const protocolBook = books.find((book) => book.id === 'the-competition-protocol');
+const protocolCheckout = `${protocolBook?.checkoutUrl ?? 'https://notarasio.gumroad.com/l/yfkgwv'}?wanted=true`;
+const protocolPrice = protocolBook?.price ?? '$17';
 
 const BOOKS = [
     { title: 'The Competition Protocol', cover: '/covers/the-competition-protocol.png', tag: 'Flagship' },
@@ -54,7 +60,7 @@ export default function GiveawayPage() {
         try {
             // Send email to ConvertKit (Kit)
             try {
-                await subscribeEmail(email, sport);
+                await subscribeEmail(email, sport, 'giveaway');
             } catch (subErr) {
                 console.warn('Kit subscription notice:', subErr);
             }
@@ -226,14 +232,14 @@ export default function GiveawayPage() {
                                         </div>
                                     </div>
 
-                                    <a
-                                        href="https://notarasio.gumroad.com/l/yfkgwv?wanted=true"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                    <CheckoutLink
+                                        href={protocolCheckout}
+                                        productName={protocolBook?.title ?? 'The Competition Protocol'}
+                                        price={protocolPrice}
                                         className="inline-flex items-center justify-center gap-2 w-full py-4 bg-amber-400 text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-amber-300 transition-all rounded-xl shadow-[0_0_25px_rgba(251,191,36,0.5)] cursor-pointer"
                                     >
-                                        <Sparkles className="w-4 h-4" /> Get Complete Protocol — $17 <ArrowRight className="w-4 h-4" />
-                                    </a>
+                                        <Sparkles className="w-4 h-4" /> Get Complete Protocol — {protocolPrice} <ArrowRight className="w-4 h-4" />
+                                    </CheckoutLink>
 
                                     <div className="text-center pt-1">
                                         <Link

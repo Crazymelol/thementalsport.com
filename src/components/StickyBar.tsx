@@ -51,7 +51,7 @@ export default function StickyBar() {
                     </div>
                 </div>
             </div>
-            <NewsletterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+            <NewsletterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} formLocation="sticky_bar" />
         </>
     );
 }

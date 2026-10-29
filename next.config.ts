@@ -22,12 +22,24 @@ const nextConfig: NextConfig = {
     : {
         images: { localPatterns: [coverImagePattern, aboutImagePattern] },
         async redirects() {
+          // Old URLs that 404 in Web Analytics. None of these are app routes.
+          // /blueprint was never a page in this repo (checked full git history),
+          // so it goes to the course — the current equivalent of a "full system"
+          // offer — along with the other dead product URLs.
+          const toCourse = ["/blueprint", "/courses", "/pricing", "/checkout", "/programs"].map(
+            (source) => ({
+              source,
+              destination: "/course",
+              permanent: true,
+            }),
+          );
           return [
             {
               source: "/free",
               destination: "/start-here",
               permanent: false,
             },
+            ...toCourse,
           ];
         },
       }),

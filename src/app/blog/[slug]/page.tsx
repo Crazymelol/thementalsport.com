@@ -7,6 +7,7 @@ import { ArrowLeft, Layers } from 'lucide-react';
 import NewsletterInline from '@/components/NewsletterInline';
 import BookCTA from '@/components/BookCTA';
 import CourseCTA from '@/components/CourseCTA';
+import { COURSE_CTA_SLUGS } from '@/data/course';
 import ArticleSchema from '@/components/ArticleSchema';
 import ArticleFaq from '@/components/ArticleFaq';
 
@@ -15,6 +16,20 @@ import ArticleFaq from '@/components/ArticleFaq';
  */
 interface PageProps {
     params: Promise<{ slug: string }>;
+}
+
+const proseClassName = 'prose prose-zinc prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-a:text-zinc-900 prose-a:font-bold prose-a:no-underline hover:prose-a:underline prose-img:rounded-none';
+
+// Drop the course CTA in after the first section so readers see it before
+// they bounce, without editing each article's markdown.
+function splitAfterFirstSection(content: string): { before: string; after: string } | null {
+    const headings = [...content.matchAll(/^## /gm)];
+    const cut = headings[1]?.index;
+    if (cut == null) return null;
+    return {
+        before: content.slice(0, cut).trimEnd(),
+        after: content.slice(cut),
+    };
 }
 
 export async function generateStaticParams() {
@@ -68,6 +83,8 @@ export default async function BlogPost({ params }: PageProps) {
     const book = pickBook(article.tags);
     const accent = book.palette.primary;
     const seriesDay = isSeriesArticle(article) ? getSeriesDayNumber(article) : null;
+    const leadWithCourse = COURSE_CTA_SLUGS.has(article.slug);
+    const courseSplit = leadWithCourse ? splitAfterFirstSection(article.content) : null;
 
     return (
         <main className="min-h-screen pt-32 pb-24 bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
@@ -114,18 +131,31 @@ export default async function BlogPost({ params }: PageProps) {
                 </header>
 
                 {/* Content */}
-                <div className="prose prose-zinc prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-a:text-zinc-900 prose-a:font-bold prose-a:no-underline hover:prose-a:underline prose-img:rounded-none">
-                    <ReactMarkdown>{article.content}</ReactMarkdown>
-                </div>
+                {courseSplit ? (
+                    <>
+                        <div className={proseClassName}>
+                            <ReactMarkdown>{courseSplit.before}</ReactMarkdown>
+                        </div>
+                        <CourseCTA prominent />
+                        <div className={proseClassName}>
+                            <ReactMarkdown>{courseSplit.after}</ReactMarkdown>
+                        </div>
+                    </>
+                ) : (
+                    <div className={proseClassName}>
+                        <ReactMarkdown>{article.content}</ReactMarkdown>
+                    </div>
+                )}
 
                 {/* FAQ — visible Q&A that mirrors the FAQPage JSON-LD */}
                 <ArticleFaq items={article.faq} accent={accent} />
 
                 {/* Footer / CTA */}
                 <div className="mt-20 pt-12 border-t border-zinc-200">
+                    {leadWithCourse && (courseSplit ? <CourseCTA /> : <CourseCTA prominent />)}
                     <BookCTA book={book} />
-                    <CourseCTA />
-                    <NewsletterInline />
+                    {!leadWithCourse && <CourseCTA />}
+                    <NewsletterInline formLocation="blog" />
                 </div>
 
             </article>

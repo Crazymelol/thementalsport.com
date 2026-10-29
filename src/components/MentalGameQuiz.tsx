@@ -91,7 +91,7 @@ export default function MentalGameQuiz() {
         }
         setStatus('loading');
         try {
-            await subscribeEmail(email, `quiz-${weak}`);
+            await subscribeEmail(email, `quiz-${weak}`, 'quiz');
             if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
                 (window as unknown as { gtag: (...a: unknown[]) => void }).gtag('event', 'generate_lead', { event_category: 'quiz', event_label: weak });
             }

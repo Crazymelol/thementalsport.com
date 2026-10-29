@@ -143,7 +143,7 @@ export default function BlogIndex() {
             )}
 
             <section className="pb-24 pt-8 container mx-auto px-6 max-w-3xl">
-                <NewsletterInline />
+                <NewsletterInline formLocation="blog_index" />
             </section>
         </main>
     );
