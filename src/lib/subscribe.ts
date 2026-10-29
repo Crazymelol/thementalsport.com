@@ -7,21 +7,42 @@
 // subscribing throws a clear message instead of silently failing.
 
 import { trackSignUp } from './analytics';
+import { KIT_DEFAULT_FORM_ID } from './kit';
 
-export async function subscribeEmail(email: string, tag?: string, formLocation = 'convertkit'): Promise<void> {
-  const formId = process.env.NEXT_PUBLIC_KIT_FORM_ID || "9008498";
+export type SubscribeExtras = {
+  firstName?: string;
+  /** Extra tag names, in addition to `tag`. Names only — no numeric ids in this repo. */
+  tags?: string[];
+  /** Override the form. Empty or omitted uses the existing default form. */
+  formId?: string;
+};
+
+export async function subscribeEmail(
+  email: string,
+  tag?: string,
+  formLocation = 'convertkit',
+  extras?: SubscribeExtras,
+): Promise<void> {
+  const formId = extras?.formId || KIT_DEFAULT_FORM_ID;
   if (!formId) {
     throw new Error("Signup isn't connected yet — email hello@thementalsport.com and we'll send it over.");
   }
 
+  const tags = [...(tag ? [tag] : []), ...(extras?.tags ?? [])].filter(Boolean);
+  const firstName = extras?.firstName?.trim();
+  const body: Record<string, unknown> = { email_address: email };
+  if (firstName) body.first_name = firstName;
+  if (tags.length) body.tags = tags;
+
   const res = await fetch(`https://app.convertkit.com/forms/${formId}/subscriptions`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({ email_address: email, ...(tag ? { tags: [tag] } : {}) }),
+    body: JSON.stringify(body),
   });
 
-  if (!res.ok) {
-    throw new Error("Subscription failed. Please try again.");
+  const data = await res.json().catch(() => null) as { status?: string; errors?: { messages?: string[] } } | null;
+  if (!res.ok || data?.status === 'failed') {
+    throw new Error(data?.errors?.messages?.[0] || "Subscription failed. Please try again.");
   }
 
   trackSignUp(formLocation);

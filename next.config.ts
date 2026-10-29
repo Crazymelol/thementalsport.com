@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
           return [
             {
               source: "/free",
-              destination: "/start-here",
+              destination: "/start-here#protocol",
               permanent: false,
             },
             ...toCourse,

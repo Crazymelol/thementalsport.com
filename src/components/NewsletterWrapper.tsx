@@ -7,10 +7,12 @@ export default function NewsletterWrapper({
     children,
     className = "",
     formLocation = "newsletter_modal",
+    variant = "newsletter",
 }: {
     children: React.ReactNode,
     className?: string,
     formLocation?: string,
+    variant?: "newsletter" | "protocol",
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -24,7 +26,8 @@ export default function NewsletterWrapper({
             <NewsletterModal
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
-                formLocation={formLocation}
+                formLocation={variant === "protocol" ? "protocol" : formLocation}
+                variant={variant}
             />
         </>
     );

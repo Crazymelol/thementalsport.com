@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, BookOpen, Video, FileText, Zap } from 'lucide-react';
+import { ArrowRight, Video } from 'lucide-react';
+import ProtocolSignupForm from '@/components/ProtocolSignupForm';
 
 export const metadata: Metadata = {
     title: 'Start Here | The Mental Sport — Mental Performance for Athletes',
@@ -42,7 +43,7 @@ export default function StartHerePage() {
             </section>
 
             {/* STEP 1: FREE PROTOCOL */}
-            <section className="py-16 bg-zinc-50 border-b border-zinc-200">
+            <section id="protocol" className="py-16 bg-zinc-50 border-b border-zinc-200">
                 <div className="container mx-auto px-6 max-w-3xl">
                     <div className="flex items-start gap-6">
                         <div className="w-12 h-12 bg-zinc-900 text-white flex items-center justify-center font-black text-lg flex-shrink-0">1</div>
@@ -50,15 +51,9 @@ export default function StartHerePage() {
                             <p className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-2">Start Free</p>
                             <h2 className="text-2xl font-black uppercase tracking-tighter mb-4">Get The Free Competition Protocol</h2>
                             <p className="text-zinc-600 leading-relaxed mb-6">
-                                The 7-day mental preparation system. Covers the taper phase, the 24-hour window, the 60-minute warmup, and crisis management during competition. One page. Used by athletes across every sport. Free.
+                                The 7-day mental preparation system. Covers the taper phase, the 24-hour window, the 60-minute warmup, and crisis management during competition. Enter your email to unlock it on this page.
                             </p>
-                            <div className="flex items-center gap-4">
-                                <Link href="/resources/competition-protocol"
-                                    className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-900 text-white font-black uppercase tracking-widest text-sm hover:bg-black transition-colors">
-                                    <FileText className="w-4 h-4" /> Access Free Protocol
-                                </Link>
-                                <span className="text-xs text-zinc-400 uppercase tracking-widest">No email required</span>
-                            </div>
+                            <ProtocolSignupForm showReadLink submitLabel="Unlock the protocol" idPrefix="start-here" />
                         </div>
                     </div>
                 </div>

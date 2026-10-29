@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, RotateCcw, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowRight, RotateCcw, AlertCircle } from 'lucide-react';
 import { subscribeEmail } from '@/lib/subscribe';
+import { KIT_FORM_QUIZ_ID, KIT_TAGS, quizResultTag } from '@/lib/kit';
 
 // "What's Your Mental Game Score?" — a 10-question quiz that scores an athlete
 // across four dimensions, names their weakest area, and recommends the matching
@@ -91,7 +92,10 @@ export default function MentalGameQuiz() {
         }
         setStatus('loading');
         try {
-            await subscribeEmail(email, `quiz-${weak}`, 'quiz');
+            await subscribeEmail(email, KIT_TAGS.quiz, 'quiz', {
+                tags: [quizResultTag(weak)],
+                formId: KIT_FORM_QUIZ_ID || undefined,
+            });
             if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
                 (window as unknown as { gtag: (...a: unknown[]) => void }).gtag('event', 'generate_lead', { event_category: 'quiz', event_label: weak });
             }
@@ -121,7 +125,7 @@ export default function MentalGameQuiz() {
                 >
                     Start the Quiz <ArrowRight className="w-4 h-4" />
                 </button>
-                <p className="text-zinc-600 text-xs">Free. No signup to see your score.</p>
+                <p className="text-zinc-600 text-xs">10 questions. About 2 minutes.</p>
             </div>
         );
     }
@@ -172,47 +176,50 @@ export default function MentalGameQuiz() {
                 <p className="text-zinc-400 text-lg max-w-xl mx-auto">{t.blurb}</p>
             </div>
 
-            <div className="bg-zinc-900 border border-zinc-800 p-8">
-                <p className="text-xs font-black uppercase tracking-widest text-red-500 mb-2">Your Weak Spot</p>
-                <h3 className="text-2xl font-black uppercase tracking-tight mb-4">{rec.label}</h3>
-                <p className="text-zinc-300 leading-relaxed mb-6">{rec.line}</p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                    <Link href={`/book/${rec.slug}`} className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-xs transition-all">
-                        Get {rec.title} <ArrowRight className="w-4 h-4" />
-                    </Link>
-                    <Link href="/course" className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-zinc-700 hover:border-white text-white font-black uppercase tracking-widest text-xs transition-all">
-                        Or fix it all with the Course
-                    </Link>
-                </div>
-            </div>
-
-            {/* Email capture: personalized plan */}
             {status === 'success' ? (
-                <div className="bg-green-950/30 border border-green-800 p-8 text-center">
-                    <CheckCircle2 className="w-10 h-10 text-green-500 mx-auto mb-3" />
-                    <h3 className="text-xl font-black uppercase tracking-tight mb-2">Check your inbox</h3>
-                    <p className="text-zinc-400">Your personalized {rec.label.toLowerCase()} plan is on its way.</p>
+                <div className="bg-zinc-900 border border-zinc-800 p-8">
+                    <p className="text-xs font-black uppercase tracking-widest text-red-500 mb-2">Your Weak Spot</p>
+                    <h3 className="text-2xl font-black uppercase tracking-tight mb-4">{rec.label}</h3>
+                    <p className="text-zinc-300 leading-relaxed mb-6">{rec.line}</p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                        <Link href={`/book/${rec.slug}`} className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-xs transition-all">
+                            Get {rec.title} <ArrowRight className="w-4 h-4" />
+                        </Link>
+                        <Link href="/course" className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-zinc-700 hover:border-white text-white font-black uppercase tracking-widest text-xs transition-all">
+                            Or fix it all with the Course
+                        </Link>
+                    </div>
                 </div>
             ) : (
                 <div className="bg-zinc-900 border border-zinc-800 p-8">
-                    <h3 className="text-xl font-black uppercase tracking-tight mb-2">Get your free 7-day {rec.label} plan</h3>
-                    <p className="text-zinc-400 text-sm mb-5">A daily protocol built around your weak spot. Straight to your inbox.</p>
-                    <form onSubmit={handleEmail} className="flex flex-col sm:flex-row gap-3">
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => { setEmail(e.target.value); setStatus('idle'); }}
-                            placeholder="Your email"
-                            className="flex-1 px-4 py-3 bg-zinc-950 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-red-600"
-                            disabled={status === 'loading'}
-                        />
-                        <button type="submit" disabled={status === 'loading'} className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-xs transition-all disabled:opacity-50">
-                            {status === 'loading' ? 'Sending...' : 'Send My Plan'}
-                        </button>
+                    <h3 className="text-xl font-black uppercase tracking-tight mb-2">See the full breakdown</h3>
+                    <p className="text-zinc-400 text-sm mb-5">Your score is above. Enter your email to see the weak spot and what to train next.</p>
+                    <form onSubmit={handleEmail} className="space-y-3">
+                        <div className="flex flex-col sm:flex-row gap-3">
+                            <label htmlFor="quiz-email" className="sr-only">Email</label>
+                            <input
+                                id="quiz-email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => { setEmail(e.target.value); setStatus('idle'); }}
+                                placeholder="Your email"
+                                autoComplete="email"
+                                required
+                                className="flex-1 px-4 py-3 bg-zinc-950 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:border-red-600"
+                                disabled={status === 'loading'}
+                            />
+                            <button type="submit" disabled={status === 'loading'} className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-xs transition-all disabled:opacity-50">
+                                {status === 'loading' ? 'Unlocking...' : 'Show my breakdown'}
+                            </button>
+                        </div>
+                        {status === 'error' && (
+                            <p className="flex items-center gap-2 text-red-400 text-sm"><AlertCircle className="w-4 h-4" /> {errorMsg}</p>
+                        )}
+                        <p className="text-xs text-zinc-500">
+                            No spam. Unsubscribe anytime.{' '}
+                            <Link href="/privacy" className="underline hover:text-white">Privacy</Link>
+                        </p>
                     </form>
-                    {status === 'error' && (
-                        <p className="flex items-center gap-2 text-red-400 text-sm mt-3"><AlertCircle className="w-4 h-4" /> {errorMsg}</p>
-                    )}
                 </div>
             )}
 

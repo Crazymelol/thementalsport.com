@@ -8,14 +8,14 @@ import Link from "next/link";
 
 export default function FreeRedirect() {
   useEffect(() => {
-    window.location.replace("/start-here");
+    window.location.replace("/start-here#protocol");
   }, []);
 
   return (
     <main style={{ padding: "4rem 1.5rem", textAlign: "center" }}>
       <p>
         Taking you to the free guide… If nothing happens,{" "}
-        <Link href="/start-here">tap here</Link>.
+        <Link href="/start-here#protocol">tap here</Link>.
       </p>
     </main>
   );

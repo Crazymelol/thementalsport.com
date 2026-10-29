@@ -51,7 +51,7 @@ export default function AuthorHome() {
                             </p>
 
                             <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-                                <NewsletterWrapper formLocation="homepage" className="w-full sm:w-auto px-9 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-white font-black hover:brightness-110 transition-all uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(239,68,68,0.4)] rounded-xl">
+                                <NewsletterWrapper variant="protocol" className="w-full sm:w-auto px-9 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-white font-black hover:brightness-110 transition-all uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(239,68,68,0.4)] rounded-xl">
                                     Get The Free 7-Day Protocol →
                                 </NewsletterWrapper>
                                 <Link href="/books" className="w-full sm:w-auto px-8 py-4 border border-zinc-700 bg-zinc-900/60 backdrop-blur-md text-white font-black hover:border-zinc-400 hover:bg-zinc-800 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 rounded-xl">
