@@ -207,6 +207,25 @@ export default function AuthorHome() {
                 </div>
             </section>
 
+            {/* FREE GUIDE: The Reset Between Points */}
+            <section className="py-20 bg-zinc-50 border-t border-zinc-200">
+                <div className="container mx-auto px-6 max-w-4xl md:flex md:items-center md:justify-between gap-12">
+                    <div className="mb-8 md:mb-0">
+                        <p className="text-xs font-black uppercase tracking-[0.3em] text-zinc-400 mb-3">Free guide for coaches, parents and athletes</p>
+                        <h2 className="text-3xl md:text-4xl font-black text-zinc-900 uppercase tracking-tighter mb-4">The Reset Between Points</h2>
+                        <p className="text-zinc-600 leading-relaxed max-w-xl">
+                            A free 11-page guide to the 15-second mental reset that stops one mistake from becoming three. With pages for coaches and parents, and a printable tracker.
+                        </p>
+                    </div>
+                    <Link
+                        href="/free-guide"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-900 text-white font-black uppercase tracking-widest text-sm hover:bg-black transition-colors whitespace-nowrap"
+                    >
+                        Get the free guide <ArrowRight className="w-4 h-4" />
+                    </Link>
+                </div>
+            </section>
+
             {/* LEAD MAGNET */}
             <LeadMagnet />
 
@@ -257,6 +276,7 @@ export default function AuthorHome() {
                     <Link href="/books" className="hover:text-white transition-colors">Books</Link>
                     <Link href="/course" className="hover:text-white transition-colors">Course</Link>
                     <Link href="/blog" className="hover:text-white transition-colors">Articles</Link>
+                    <Link href="/free-guide" className="hover:text-white transition-colors">Free Guide</Link>
                     <NewsletterWrapper formLocation="homepage_footer" className="hover:text-white transition-colors">Newsletter</NewsletterWrapper>
                     <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                     <Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link>
