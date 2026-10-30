@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${baseUrl}/affiliates`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
         { url: `${baseUrl}/for-clubs`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.85 },
         { url: `${baseUrl}/for-parents`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.85 },
+        { url: `${baseUrl}/free-guide`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.85 },
     ];
 
     const bookPages: MetadataRoute.Sitemap = books.map((book) => ({
