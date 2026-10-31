@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Sparkles, Trophy, Brain, Flame } from 'lucide-react';
+import { Sparkles, Brain, Flame } from 'lucide-react';
 
 export default function Hero3DBook() {
     return (
@@ -126,19 +126,6 @@ export default function Hero3DBook() {
                             7-Day Competition Protocol
                         </div>
                     </div>
-                </div>
-
-                {/* 3D FLOATING ORBITAL GLASS BADGE 3: RATING (TOP LEFT) */}
-                <div 
-                    className="absolute top-12 -left-4 sm:-left-10 z-20 bg-zinc-950/90 backdrop-blur-xl border border-white/15 px-3 py-2 rounded-xl shadow-lg flex items-center gap-2 hidden md:flex"
-                    style={{
-                        transform: 'translateZ(40px)',
-                    }}
-                >
-                    <Trophy className="w-4 h-4 text-amber-400" />
-                    <span className="text-[11px] font-bold text-zinc-200">
-                        Rated 4.9/5 by 2,400+ Athletes
-                    </span>
                 </div>
 
             </div>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Lock, ArrowRight, Play, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+import { COURSE_LESSON_COUNT } from '@/data/course';
 
 const PLAYLIST_ID = 'PL4B1unWiRnWAEY7O83SLhYUbG9IN9jDc5';
 const STORAGE_KEY = 'mpp_access';
@@ -110,7 +111,7 @@ export default function AccessClient() {
                     <h1 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-4">
                         The Mental<br />Performance Protocol
                     </h1>
-                    <p className="text-zinc-400 text-lg">Lifetime access</p>
+                    <p className="text-zinc-400 text-lg">{COURSE_LESSON_COUNT.short} · Lifetime access</p>
                 </div>
             </section>
 

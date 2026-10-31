@@ -59,15 +59,7 @@ export default function AuthorHome() {
                                 </Link>
                             </div>
 
-                            {/* TRUST INDICATORS */}
                             <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-zinc-400 font-semibold uppercase tracking-wider">
-                                <div className="flex items-center gap-1.5 text-amber-400">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                                    ))}
-                                    <span className="text-zinc-300 font-bold ml-1">4.9/5 Rating</span>
-                                </div>
-                                <span className="text-zinc-600 hidden sm:inline">•</span>
                                 <span>Free Instant PDF Access</span>
                                 <span className="text-zinc-600 hidden sm:inline">•</span>
                                 <span>No Credit Card Required</span>

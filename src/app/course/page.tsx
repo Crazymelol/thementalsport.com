@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { CheckCircle2, Star, ArrowRight, Lock, Award } from 'lucide-react';
 import { Metadata } from 'next';
 import CheckoutLink from '@/components/CheckoutLink';
-import { COURSE, COURSE_PAGE_DRAFT } from '@/data/course';
+import { COURSE, COURSE_LESSON_COUNT, COURSE_PAGE_DRAFT } from '@/data/course';
 
 export const metadata: Metadata = {
     title: 'The Mental Performance Protocol | 8-Week Course',
@@ -103,8 +103,9 @@ export default function CoursePage() {
                 <div className="container mx-auto px-6 max-w-5xl">
                     <div className="text-center mb-12 sm:mb-16">
                         <p className="text-xs font-black uppercase tracking-[0.3em] text-zinc-500 mb-4">The Curriculum</p>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter">8 Modules.</h2>
-                        <p className="text-red-600 text-sm font-bold mt-4">{COURSE_PAGE_DRAFT.lessonCountPlaceholder}</p>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 tracking-tighter">
+                            {COURSE_LESSON_COUNT.full}
+                        </h2>
                         <p className="text-zinc-600 text-base sm:text-lg mt-4">Self-paced. Lifetime access. Progress at your own speed.</p>
                     </div>
                     <div className="space-y-4">

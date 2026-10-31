@@ -8,8 +8,18 @@ export const COURSE = {
         'The 8-week system elite athletes use to build unshakable confidence, eliminate competition anxiety, and dominate their sport.',
 } as const;
 
-// TODO: Replace lessonCountPlaceholder when Giannis confirms the lesson count.
-// Coach wording and the bonus are confirmed. Do not add ratings, review counts,
+// One-line swap if the course bonus is renamed. Not the blog series title.
+export const COURSE_BONUS_NAME = 'The 48-Day Mental Performance Protocol' as const;
+const COURSE_BONUS_DESCRIPTION = 'A day-by-day mental performance system, built one habit at a time.' as const;
+
+// Confirmed: 8 video modules, about 2 hours 49 minutes. Display rounds to 2 hours 50 minutes.
+// `full` is the /course line. `short` is the same count for tighter spots.
+export const COURSE_LESSON_COUNT = {
+    full: '8 in-depth video modules (about 2 hours 50 minutes)',
+    short: '8 in-depth video modules',
+} as const;
+
+// Coach wording and the bonus name are confirmed. Do not add ratings, review counts,
 // client logos, or credentials he has not confirmed.
 export const COURSE_PAGE_DRAFT = {
     coach: {
@@ -18,12 +28,7 @@ export const COURSE_PAGE_DRAFT = {
         support:
             'He founded The Mental Sport and has written a series of books on the mental side of competition.',
     },
-    // Name from the course offer list (price omitted). Description is the Titans
-    // Protocol series page line, copied as written.
-    bonuses: [
-        'The 48-Day Titans Protocol. A day-by-day mental performance system, built one habit at a time.',
-    ],
-    lessonCountPlaceholder: '[LESSON COUNT — to be confirmed by Giannis]',
+    bonuses: [`${COURSE_BONUS_NAME}. ${COURSE_BONUS_DESCRIPTION}`],
 } as const;
 
 // Highest-read posts from the Web Analytics review. Both flow-state URLs are
