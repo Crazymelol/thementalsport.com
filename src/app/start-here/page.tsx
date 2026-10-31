@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Video } from 'lucide-react';
 import ProtocolSignupForm from '@/components/ProtocolSignupForm';
+import { COURSE_LESSON_COUNT } from '@/data/course';
 
 export const metadata: Metadata = {
     title: 'Start Here | The Mental Sport — Mental Performance for Athletes',
@@ -159,7 +160,7 @@ export default function StartHerePage() {
                             <p className="text-xs font-black uppercase tracking-widest text-zinc-500 mb-2">Go Deep</p>
                             <h2 className="text-2xl font-black uppercase tracking-tighter text-white mb-4">The Full System: Mental Performance Masterclass</h2>
                             <p className="text-zinc-400 leading-relaxed mb-6">
-                                8 modules. 36 video lessons. Everything you need — pre-competition prep, performing under pressure, recovering from slumps, building an identity that holds under adversity. The complete mental performance framework for serious athletes.
+                                {COURSE_LESSON_COUNT.short} on pre-competition prep, performing under pressure, recovering from slumps, and building an identity that holds under adversity.
                             </p>
                             <Link href="/course"
                                 className="inline-flex items-center gap-3 px-8 py-4 bg-white text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-zinc-200 transition-colors">

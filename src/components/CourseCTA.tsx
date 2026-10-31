@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, Zap } from 'lucide-react';
-import { COURSE } from '@/data/course';
+import { COURSE, COURSE_LESSON_COUNT } from '@/data/course';
 
 export default function CourseCTA({ prominent = false }: { prominent?: boolean }) {
     if (prominent) {
@@ -23,7 +23,7 @@ export default function CourseCTA({ prominent = false }: { prominent?: boolean }
                         See the course — ${COURSE.price} <ArrowRight className="w-4 h-4" />
                     </Link>
                     <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">
-                        36 video lessons · Lifetime access · 30-day guarantee
+                        {COURSE_LESSON_COUNT.short} · Lifetime access · 30-day guarantee
                     </p>
                 </div>
             </aside>
@@ -37,7 +37,7 @@ export default function CourseCTA({ prominent = false }: { prominent?: boolean }
                 Want the full system?
             </p>
             <p className="text-zinc-700 text-base leading-snug mb-4">
-                <strong>{COURSE.name}</strong>. {COURSE.pitch} Lifetime access, 36 video lessons — <strong>${COURSE.price}</strong>.
+                <strong>{COURSE.name}</strong>. {COURSE.pitch} {COURSE_LESSON_COUNT.short}, lifetime access — <strong>${COURSE.price}</strong>.
             </p>
             <Link
                 href="/course"

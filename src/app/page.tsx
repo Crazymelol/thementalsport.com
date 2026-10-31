@@ -47,7 +47,7 @@ export default function AuthorHome() {
                             </h1>
 
                             <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                That gap is not talent and it is not effort. It is nervous system regulation—a skill almost nobody trains. Start with the free 7-day protocol used by champions.
+                                That gap is not talent and it is not effort. It is nervous system regulation—a skill almost nobody trains. Start with the free 7-day protocol.
                             </p>
 
                             <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
@@ -59,15 +59,7 @@ export default function AuthorHome() {
                                 </Link>
                             </div>
 
-                            {/* TRUST INDICATORS */}
                             <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-zinc-400 font-semibold uppercase tracking-wider">
-                                <div className="flex items-center gap-1.5 text-amber-400">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                                    ))}
-                                    <span className="text-zinc-300 font-bold ml-1">4.9/5 Rating</span>
-                                </div>
-                                <span className="text-zinc-600 hidden sm:inline">•</span>
                                 <span>Free Instant PDF Access</span>
                                 <span className="text-zinc-600 hidden sm:inline">•</span>
                                 <span>No Credit Card Required</span>

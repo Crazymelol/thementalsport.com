@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ArrowRight, ArrowLeft, CheckCircle2, Star } from 'lucide-react';
 import Image from 'next/image';
 import CheckoutLink from '@/components/CheckoutLink';
+import { COURSE_LESSON_COUNT } from '@/data/course';
 
 interface PageProps {
     params: Promise<{ sport: string }>;
@@ -179,7 +180,7 @@ export default async function SportPage({ params }: PageProps) {
                     <p className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-4">Ready for the complete system?</p>
                     <h3 className="text-3xl font-black uppercase tracking-tighter mb-4">Mental Performance Masterclass</h3>
                     <p className="text-zinc-600 mb-8 max-w-xl mx-auto">
-                        8 modules. 36 video lessons. Everything you need to perform at your peak — built specifically for competitive athletes.
+                        {COURSE_LESSON_COUNT.short} for competitive athletes.
                     </p>
                     <Link href="/course" className="inline-flex items-center gap-3 px-10 py-4 bg-zinc-900 text-white font-black uppercase tracking-widest text-sm hover:bg-black transition-colors">
                         Explore The Course <ArrowRight className="w-4 h-4" />

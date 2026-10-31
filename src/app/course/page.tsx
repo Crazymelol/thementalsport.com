@@ -1,63 +1,56 @@
 import React from 'react';
 import Link from 'next/link';
-import { CheckCircle2, Star, ArrowRight, Lock, Clock, BookOpen, Award } from 'lucide-react';
+import { CheckCircle2, Star, ArrowRight, Lock, Award } from 'lucide-react';
 import { Metadata } from 'next';
 import CheckoutLink from '@/components/CheckoutLink';
-import { COURSE } from '@/data/course';
+import { COURSE, COURSE_LESSON_COUNT, COURSE_PAGE_DRAFT } from '@/data/course';
 
 export const metadata: Metadata = {
-    title: 'The Mental Performance Protocol | 8-Week Course',
-    description: 'The complete 8-week mental performance system for athletes. Build unshakable confidence, eliminate competition anxiety, and dominate your sport.',
+    title: 'The Mental Performance Protocol | 8-Module Course',
+    description: 'The complete 8-module mental performance system for athletes. Build unshakable confidence, eliminate competition anxiety, and dominate your sport.',
     keywords: ['mental performance course', 'sports psychology course', 'mental toughness training', 'athlete mindset course'],
     openGraph: {
-        title: 'The Mental Performance Protocol — 8-Week Online Course',
-        description: 'Build the mental edge elite athletes use. 8 modules, 36 video lessons, lifetime access.',
+        title: 'The Mental Performance Protocol — 8-Module Online Course',
+        description: 'An 8-module mental performance course from Giannis Notaras. Lifetime access.',
         type: 'website',
     },
 };
 
 const modules = [
-    { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
-    { num: 2, title: 'The Competition Protocol (T-Minus 7)', lessons: 7, time: '42 min' },
-    { num: 3, title: 'Resilient Confidence', lessons: 4, time: '40 min' },
-    { num: 4, title: 'Visualizing Disaster (and recovering)', lessons: 3, time: '36 min' },
-    { num: 5, title: 'Breath, Rituals, and Flow Triggers', lessons: 5, time: '40 min' },
-    { num: 6, title: 'The Physiology Layer', lessons: 4, time: '40 min' },
-    { num: 7, title: 'Mental Toughness in Real Time', lessons: 5, time: '40 min' },
-    { num: 8, title: 'Mastery & Mentorship', lessons: 4, time: '40 min' },
+    { num: 1, title: 'Foundation: The Inner Game' },
+    { num: 2, title: 'The Competition Protocol (T-Minus 7)' },
+    { num: 3, title: 'Resilient Confidence' },
+    { num: 4, title: 'Visualizing Disaster (and recovering)' },
+    { num: 5, title: 'Breath, Rituals, and Flow Triggers' },
+    { num: 6, title: 'The Physiology Layer' },
+    { num: 7, title: 'Mental Toughness in Real Time' },
+    { num: 8, title: 'Mastery & Mentorship' },
 ];
 
-// Grand Slam value stack. `core` is the course itself; `bonuses` are stacked on
-// top. The page sums them to an anchored total shown struck-through above $297.
-const core = { title: 'The Mental Performance Protocol — 8 modules, 36 video lessons', value: 997 };
-const bonuses = [
-    { title: 'All 8 books (complete PDF library)', value: 136 },
-    { title: 'AI Coach app — mental training in your pocket', value: 149 },
-    { title: 'The 48-Day Titans Protocol', value: 99 },
-    { title: '30-Day Mental Performance Journal', value: 29 },
-    { title: 'Full audio version of every lesson', value: 49 },
-    { title: 'Private athlete community', value: 79 },
-    { title: '6 months of live Q&A calls', value: 199 },
+const included = [
+    'The Mental Performance Protocol',
+    ...COURSE_PAGE_DRAFT.bonuses,
+    'Lifetime access',
+    '30-day money-back guarantee',
 ];
-const TOTAL_VALUE = core.value + bonuses.reduce((sum, b) => sum + b.value, 0); // 1737
 
 export default function CoursePage() {
     return (
         <main className="min-h-screen bg-white">
-            <section className="bg-zinc-950 text-white py-20 lg:py-32 relative overflow-hidden">
+            <section className="bg-zinc-950 text-white py-16 lg:py-28 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(220,38,38,0.15),_transparent_50%)]"></div>
                 <div className="container mx-auto px-6 max-w-5xl text-center space-y-6 relative z-10">
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 border border-red-600/40 text-red-400 text-xs font-black uppercase tracking-[0.2em]">
                         <Star className="w-3 h-3 fill-current" /> New Release 2026
                     </div>
-                    <h1 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
+                    <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
                         The Mental Performance<br />
                         <span className="text-red-500">Protocol</span>
                     </h1>
-                    <p className="text-xl lg:text-2xl text-zinc-400 max-w-2xl mx-auto">
-                        The 8-week system elite athletes use to <strong className="text-white">build unshakable confidence, eliminate competition anxiety, and dominate their sport.</strong>
+                    <p className="text-lg sm:text-xl lg:text-2xl text-zinc-400 max-w-2xl mx-auto">
+                        The 8-module system elite athletes use to <strong className="text-white">build unshakable confidence, eliminate competition anxiety, and dominate their sport.</strong>
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                         <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2">
                             Enroll Now — ${COURSE.price} <ArrowRight className="w-4 h-4" />
                         </CheckoutLink>
@@ -65,26 +58,31 @@ export default function CoursePage() {
                             See What&apos;s Inside
                         </a>
                     </div>
-                    <p className="text-zinc-500 text-sm pt-2">⚡ Lifetime access • 30-day money-back guarantee</p>
+                    <p className="text-zinc-500 text-sm pt-2">Lifetime access • 30-day money-back guarantee</p>
                 </div>
             </section>
 
-            <section className="py-12 bg-zinc-50 border-b border-zinc-200">
-                <div className="container mx-auto px-6 text-center">
-                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-[0.2em] mb-8">Methodologies trusted by athletes in</p>
-                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-20">
-                        {['NBA', 'NFL', 'MLB', 'NCAA', 'OLYMPICS'].map(l => (
-                            <span key={l} className="text-3xl font-black text-zinc-900 tracking-tighter">{l}</span>
-                        ))}
+            <section className="py-12 sm:py-16 bg-zinc-50 border-b border-zinc-200">
+                <div className="container mx-auto px-6 max-w-3xl">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter mb-6">
+                        {COURSE_PAGE_DRAFT.coach.heading}
+                    </h2>
+                    <div className="space-y-4">
+                        <p className="text-lg sm:text-xl text-zinc-900 font-medium leading-relaxed">
+                            {COURSE_PAGE_DRAFT.coach.lead}
+                        </p>
+                        <p className="text-base sm:text-lg text-zinc-700 leading-relaxed">
+                            {COURSE_PAGE_DRAFT.coach.support}
+                        </p>
                     </div>
                 </div>
             </section>
 
-            <section className="py-24 container mx-auto px-6 max-w-5xl">
-                <h2 className="text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter text-center mb-16">
+            <section className="py-16 sm:py-24 container mx-auto px-6 max-w-5xl">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter text-center mb-12 sm:mb-16">
                     This Course Is For You If...
                 </h2>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                     {[
                         'You freeze, choke, or tighten up at the moment that matters most',
                         'You train hard physically but performance doesn\'t match effort',
@@ -95,64 +93,52 @@ export default function CoursePage() {
                     ].map((item, i) => (
                         <div key={i} className="flex gap-4 items-start">
                             <CheckCircle2 className="w-6 h-6 text-red-600 shrink-0 mt-1" />
-                            <p className="text-lg text-zinc-700 font-medium">{item}</p>
+                            <p className="text-base sm:text-lg text-zinc-700 font-medium">{item}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
-            <section id="curriculum" className="py-24 bg-zinc-50 border-y border-zinc-200">
+            <section id="curriculum" className="py-16 sm:py-24 bg-zinc-50 border-y border-zinc-200">
                 <div className="container mx-auto px-6 max-w-5xl">
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-12 sm:mb-16">
                         <p className="text-xs font-black uppercase tracking-[0.3em] text-zinc-500 mb-4">The Curriculum</p>
-                        <h2 className="text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter">8 Modules. 36 Video Lessons.</h2>
-                        <p className="text-zinc-600 text-lg mt-4">Self-paced. Lifetime access. Progress at your own speed.</p>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 tracking-tighter">
+                            {COURSE_LESSON_COUNT.full}
+                        </h2>
+                        <p className="text-zinc-600 text-base sm:text-lg mt-4">Self-paced. Lifetime access. Progress at your own speed.</p>
                     </div>
                     <div className="space-y-4">
                         {modules.map((m) => (
-                            <div key={m.num} className="bg-white p-6 border border-zinc-200 hover:border-zinc-900 transition-all flex items-center gap-6">
-                                <div className="text-4xl font-black text-zinc-200">{String(m.num).padStart(2, '0')}</div>
-                                <div className="flex-1">
-                                    <h3 className="text-xl font-black text-zinc-900 uppercase tracking-tight">{m.title}</h3>
-                                    <p className="text-zinc-500 text-sm mt-1 flex items-center gap-4">
-                                        <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" /> {m.lessons} lessons</span>
-                                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {m.time}</span>
-                                    </p>
-                                </div>
-                                <Lock className="w-5 h-5 text-zinc-300" />
+                            <div key={m.num} className="bg-white p-5 sm:p-6 border border-zinc-200 hover:border-zinc-900 transition-all flex items-center gap-4 sm:gap-6">
+                                <div className="text-3xl sm:text-4xl font-black text-zinc-200">{String(m.num).padStart(2, '0')}</div>
+                                <h3 className="flex-1 text-lg sm:text-xl font-black text-zinc-900 uppercase tracking-tight">{m.title}</h3>
+                                <Lock className="w-5 h-5 text-zinc-300 shrink-0" />
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="py-24 container mx-auto px-6 max-w-3xl">
-                <div className="text-center mb-16">
+            <section className="py-16 sm:py-24 container mx-auto px-6 max-w-3xl">
+                <div className="text-center mb-12 sm:mb-16">
                     <p className="text-xs font-black uppercase tracking-[0.3em] text-red-600 mb-4">Here&apos;s Everything You Get</p>
-                    <h2 className="text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter">The Complete System</h2>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter">The Complete System</h2>
                 </div>
                 <div className="space-y-3">
-                    <div className="bg-zinc-950 text-white p-6 flex items-center justify-between gap-4 border-l-4 border-red-600">
-                        <div className="flex items-center gap-3">
-                            <Award className="w-5 h-5 text-red-500 shrink-0" />
-                            <p className="font-bold text-sm md:text-base">{core.title}</p>
-                        </div>
-                        <span className="text-zinc-400 font-mono text-sm whitespace-nowrap">${core.value}</span>
+                    <div className="bg-zinc-950 text-white p-5 sm:p-6 flex items-center gap-3 border-l-4 border-red-600">
+                        <Award className="w-5 h-5 text-red-500 shrink-0" />
+                        <p className="font-bold text-sm md:text-base">{COURSE.name}</p>
                     </div>
-                    {bonuses.map((b, i) => (
-                        <div key={i} className="bg-zinc-900 text-white p-5 flex items-center justify-between gap-4">
-                            <div className="flex items-center gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0" />
-                                <p className="font-bold text-sm md:text-base">{b.title}</p>
-                            </div>
-                            <span className="text-zinc-400 font-mono text-sm whitespace-nowrap">${b.value}</span>
+                    {COURSE_PAGE_DRAFT.bonuses.map((title) => (
+                        <div key={title} className="bg-zinc-900 text-white p-5 flex items-center gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0" />
+                            <p className="font-bold text-sm md:text-base">{title}</p>
                         </div>
                     ))}
                 </div>
                 <div className="mt-8 text-center">
-                    <p className="text-zinc-500 text-lg">Total value: <span className="line-through">${TOTAL_VALUE.toLocaleString()}</span></p>
-                    <p className="text-zinc-900 text-2xl font-black uppercase tracking-tight mt-2">Today: <span className="text-red-600">${COURSE.price}</span></p>
-                    <p className="text-zinc-500 text-sm mt-1">You save ${(TOTAL_VALUE - COURSE.price).toLocaleString()} ({Math.round((1 - COURSE.price / TOTAL_VALUE) * 100)}% off)</p>
+                    <p className="text-zinc-900 text-2xl font-black uppercase tracking-tight">The course: <span className="text-red-600">${COURSE.price}</span></p>
                     <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="mt-8 inline-flex items-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
                         Enroll Now — ${COURSE.price} <ArrowRight className="w-4 h-4" />
                     </CheckoutLink>
@@ -160,18 +146,17 @@ export default function CoursePage() {
                 </div>
             </section>
 
-            <section className="py-24 bg-zinc-950 text-white">
+            <section className="py-16 sm:py-24 bg-zinc-950 text-white">
                 <div className="container mx-auto px-6 max-w-xl">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter">Enroll Today</h2>
+                    <div className="text-center mb-12 sm:mb-16">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter">Enroll Today</h2>
                     </div>
-                    <div className="p-8 border-2 border-red-600 bg-red-950/20 flex flex-col">
+                    <div className="p-6 sm:p-8 border-2 border-red-600 bg-red-950/20 flex flex-col">
                         <h3 className="text-2xl font-black uppercase tracking-tighter">Everything, One Price</h3>
-                        <p className="text-zinc-500 line-through mt-4">${TOTAL_VALUE.toLocaleString()} value</p>
-                        <div className="text-5xl font-black mb-6 mt-1">${COURSE.price}</div>
+                        <div className="text-5xl font-black mb-6 mt-4">${COURSE.price}</div>
                         <ul className="space-y-3 mb-8 flex-1">
-                            {['All 8 modules (36 video lessons)', 'All 7 bonuses (incl. AI Coach app + 8 books)', 'Lifetime access', '30-day money-back guarantee'].map((f, i) => (
-                                <li key={i} className="flex gap-2 text-zinc-300 text-sm">
+                            {included.map((f) => (
+                                <li key={f} className="flex gap-2 text-zinc-300 text-sm">
                                     <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" /> {f}
                                 </li>
                             ))}
@@ -183,30 +168,30 @@ export default function CoursePage() {
                 </div>
             </section>
 
-            <section className="py-24 container mx-auto px-6 max-w-3xl text-center">
+            <section className="py-16 sm:py-24 container mx-auto px-6 max-w-3xl text-center">
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-zinc-100 mb-6 rounded-full">
                     <Award className="w-10 h-10 text-zinc-900" />
                 </div>
                 <h2 className="text-3xl lg:text-4xl font-black text-zinc-900 uppercase tracking-tighter mb-4">
                     30-Day Money-Back Guarantee
                 </h2>
-                <p className="text-lg text-zinc-700 leading-relaxed">
+                <p className="text-base sm:text-lg text-zinc-700 leading-relaxed">
                     If after 30 days the protocol hasn&apos;t given you a measurable mental edge, email me directly. I&apos;ll refund every dollar. No questions, no friction.
                 </p>
             </section>
 
-            <section className="py-24 bg-zinc-950 text-white text-center">
+            <section className="py-16 sm:py-24 bg-zinc-950 text-white text-center">
                 <div className="container mx-auto px-6 max-w-3xl">
-                    <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6">
+                    <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6">
                         Stop Losing Games in Your Head.
                     </h2>
-                    <p className="text-xl text-zinc-400 mb-10">
+                    <p className="text-lg sm:text-xl text-zinc-400 mb-10">
                         Build the mental system that holds when everything else falls apart.
                     </p>
-                    <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="inline-flex items-center gap-2 px-12 py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-base transition-all">
+                    <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="inline-flex items-center justify-center gap-2 px-10 sm:px-12 py-5 sm:py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm sm:text-base transition-all">
                         Enroll Now — ${COURSE.price} <ArrowRight className="w-5 h-5" />
                     </CheckoutLink>
-                    <p className="text-zinc-500 text-sm mt-6">Lifetime access • 30-day guarantee • Start today</p>
+                    <p className="text-zinc-500 text-sm mt-6">Lifetime access • 30-day guarantee</p>
                 </div>
             </section>
 

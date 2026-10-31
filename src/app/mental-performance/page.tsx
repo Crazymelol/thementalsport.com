@@ -2,6 +2,7 @@ import { sports } from '@/data/sports';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { COURSE_LESSON_COUNT } from '@/data/course';
 
 export const metadata: Metadata = {
     title: 'Mental Performance by Sport | Sports Psychology Hub',
@@ -68,7 +69,7 @@ export default function MentalPerformanceHub() {
                         Mental Performance Masterclass
                     </h2>
                     <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
-                        36 video lessons covering every aspect of athletic mental performance — from pre-competition prep to recovering from failure. Built for serious competitors.
+                        {COURSE_LESSON_COUNT.short}, from pre-competition prep to recovering from failure.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/course" className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-zinc-200 transition-colors">

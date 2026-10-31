@@ -80,7 +80,7 @@ export default function NewsletterInline({ formLocation = 'newsletter_inline' }:
                     Get The Competition Protocol
                 </h3>
                 <p className="text-zinc-600 text-lg">
-                    Join 2,000+ athletes and coaches. Get exclusive strategies on pre-game routines, mental toughness, and performance optimization delivered to your inbox.
+                    Get strategies on pre-game routines, mental toughness, and performance optimization delivered to your inbox.
                 </p>
             </div>
 
