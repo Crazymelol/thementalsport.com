@@ -9,14 +9,14 @@ const STORAGE_KEY = 'mpp_access';
 const COURSE_PASSWORD = 'MINDSET';
 
 const modules = [
-    { num: 1, title: 'Foundation: The Inner Game', lessons: 4, time: '32 min' },
-    { num: 2, title: 'The Competition Protocol (T-Minus 7)', lessons: 7, time: '42 min' },
-    { num: 3, title: 'Resilient Confidence', lessons: 4, time: '40 min' },
-    { num: 4, title: 'Visualizing Disaster (and recovering)', lessons: 3, time: '36 min' },
-    { num: 5, title: 'Breath, Rituals, and Flow Triggers', lessons: 5, time: '40 min' },
-    { num: 6, title: 'The Physiology Layer', lessons: 4, time: '40 min' },
-    { num: 7, title: 'Mental Toughness in Real Time', lessons: 5, time: '40 min' },
-    { num: 8, title: 'Mastery & Mentorship', lessons: 4, time: '40 min' },
+    { num: 1, title: 'Foundation: The Inner Game' },
+    { num: 2, title: 'The Competition Protocol (T-Minus 7)' },
+    { num: 3, title: 'Resilient Confidence' },
+    { num: 4, title: 'Visualizing Disaster (and recovering)' },
+    { num: 5, title: 'Breath, Rituals, and Flow Triggers' },
+    { num: 6, title: 'The Physiology Layer' },
+    { num: 7, title: 'Mental Toughness in Real Time' },
+    { num: 8, title: 'Mastery & Mentorship' },
 ];
 
 export default function AccessClient() {
@@ -110,7 +110,7 @@ export default function AccessClient() {
                     <h1 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-4">
                         The Mental<br />Performance Protocol
                     </h1>
-                    <p className="text-zinc-400 text-lg">8 modules · 36 lessons · Lifetime access</p>
+                    <p className="text-zinc-400 text-lg">Lifetime access</p>
                 </div>
             </section>
 
@@ -146,7 +146,6 @@ export default function AccessClient() {
                                 <div className="text-3xl font-black text-zinc-700">{String(m.num).padStart(2, '0')}</div>
                                 <div className="flex-1">
                                     <h3 className="font-black text-white uppercase tracking-tight">{m.title}</h3>
-                                    <p className="text-zinc-500 text-sm mt-1">{m.lessons} lessons · {m.time}</p>
                                 </div>
                                 <Play className="w-5 h-5 text-red-500 shrink-0" />
                             </div>
