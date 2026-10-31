@@ -23,7 +23,7 @@ export default function CourseCTA({ prominent = false }: { prominent?: boolean }
                         See the course — ${COURSE.price} <ArrowRight className="w-4 h-4" />
                     </Link>
                     <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">
-                        {COURSE_LESSON_COUNT.short} · Lifetime access · 30-day guarantee
+                        {COURSE_LESSON_COUNT.short} · Lifetime access
                     </p>
                 </div>
             </aside>
