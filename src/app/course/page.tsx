@@ -6,12 +6,12 @@ import CheckoutLink from '@/components/CheckoutLink';
 import { COURSE, COURSE_LESSON_COUNT, COURSE_PAGE_DRAFT } from '@/data/course';
 
 export const metadata: Metadata = {
-    title: 'The Mental Performance Protocol | 8-Week Course',
-    description: 'The complete 8-week mental performance system for athletes. Build unshakable confidence, eliminate competition anxiety, and dominate your sport.',
+    title: 'The Mental Performance Protocol | 8-Module Course',
+    description: 'The complete 8-module mental performance system for athletes. Build unshakable confidence, eliminate competition anxiety, and dominate your sport.',
     keywords: ['mental performance course', 'sports psychology course', 'mental toughness training', 'athlete mindset course'],
     openGraph: {
-        title: 'The Mental Performance Protocol — 8-Week Online Course',
-        description: 'An 8-week mental performance course from Giannis Notaras. Lifetime access.',
+        title: 'The Mental Performance Protocol — 8-Module Online Course',
+        description: 'An 8-module mental performance course from Giannis Notaras. Lifetime access.',
         type: 'website',
     },
 };
@@ -48,7 +48,7 @@ export default function CoursePage() {
                         <span className="text-red-500">Protocol</span>
                     </h1>
                     <p className="text-lg sm:text-xl lg:text-2xl text-zinc-400 max-w-2xl mx-auto">
-                        The 8-week system elite athletes use to <strong className="text-white">build unshakable confidence, eliminate competition anxiety, and dominate their sport.</strong>
+                        The 8-module system elite athletes use to <strong className="text-white">build unshakable confidence, eliminate competition anxiety, and dominate their sport.</strong>
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                         <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2">

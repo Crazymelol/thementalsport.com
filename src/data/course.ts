@@ -5,7 +5,7 @@ export const COURSE = {
     price: 297,
     checkoutUrl: 'https://notarasio.gumroad.com/l/qjsfty',
     pitch:
-        'The 8-week system elite athletes use to build unshakable confidence, eliminate competition anxiety, and dominate their sport.',
+        'The 8-module system elite athletes use to build unshakable confidence, eliminate competition anxiety, and dominate their sport.',
 } as const;
 
 // One-line swap if the course bonus is renamed. Not the blog series title.

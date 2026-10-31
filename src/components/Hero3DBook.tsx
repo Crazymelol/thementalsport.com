@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Sparkles, Brain, Flame } from 'lucide-react';
+import { Sparkles, Brain } from 'lucide-react';
 
 export default function Hero3DBook() {
     return (
@@ -104,26 +104,6 @@ export default function Hero3DBook() {
                         </div>
                         <div className="text-xs font-black text-white">
                             Autonomic Vagal Reset
-                        </div>
-                    </div>
-                </div>
-
-                {/* 3D FLOATING ORBITAL GLASS BADGE 2: 7-DAY SYSTEM (BOTTOM LEFT) */}
-                <div 
-                    className="absolute -bottom-6 -left-2 sm:-left-6 z-20 bg-zinc-900/85 backdrop-blur-xl border border-red-500/40 px-4 py-3 rounded-2xl shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex items-center gap-3 transition-transform duration-500 hover:scale-105"
-                    style={{
-                        transform: 'translateZ(70px)',
-                    }}
-                >
-                    <div className="w-9 h-9 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 shadow-inner">
-                        <Flame className="w-5 h-5" />
-                    </div>
-                    <div>
-                        <div className="text-[10px] font-black uppercase tracking-[0.15em] text-red-400">
-                            Zero Choking
-                        </div>
-                        <div className="text-xs font-black text-white">
-                            7-Day Competition Protocol
                         </div>
                     </div>
                 </div>

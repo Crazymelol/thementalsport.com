@@ -47,7 +47,7 @@ export default function AuthorHome() {
                             </h1>
 
                             <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                That gap is not talent and it is not effort. It is nervous system regulation—a skill almost nobody trains. Start with the free 7-day protocol used by champions.
+                                That gap is not talent and it is not effort. It is nervous system regulation—a skill almost nobody trains. Start with the free 7-day protocol.
                             </p>
 
                             <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
