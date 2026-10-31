@@ -64,18 +64,16 @@ export default function CoursePage() {
 
             <section className="py-12 sm:py-16 bg-zinc-50 border-b border-zinc-200">
                 <div className="container mx-auto px-6 max-w-3xl">
-                    <p className="text-red-600 text-xs font-black uppercase tracking-[0.2em] mb-4">
-                        {COURSE_PAGE_DRAFT.coach.draftLabel}
-                    </p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter mb-6">
                         {COURSE_PAGE_DRAFT.coach.heading}
                     </h2>
                     <div className="space-y-4">
-                        {COURSE_PAGE_DRAFT.coach.paragraphs.map((paragraph) => (
-                            <p key={paragraph} className="text-base sm:text-lg text-zinc-700 leading-relaxed">
-                                {paragraph}
-                            </p>
-                        ))}
+                        <p className="text-lg sm:text-xl text-zinc-900 font-medium leading-relaxed">
+                            {COURSE_PAGE_DRAFT.coach.lead}
+                        </p>
+                        <p className="text-base sm:text-lg text-zinc-700 leading-relaxed">
+                            {COURSE_PAGE_DRAFT.coach.support}
+                        </p>
                     </div>
                 </div>
             </section>
@@ -125,7 +123,6 @@ export default function CoursePage() {
                 <div className="text-center mb-12 sm:mb-16">
                     <p className="text-xs font-black uppercase tracking-[0.3em] text-red-600 mb-4">Here&apos;s Everything You Get</p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter">The Complete System</h2>
-                    <p className="text-red-600 text-sm font-bold mt-4">{COURSE_PAGE_DRAFT.bonusesLabel}</p>
                 </div>
                 <div className="space-y-3">
                     <div className="bg-zinc-950 text-white p-5 sm:p-6 flex items-center gap-3 border-l-4 border-red-600">
