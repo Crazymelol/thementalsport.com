@@ -31,7 +31,6 @@ const included = [
     'The Mental Performance Protocol',
     ...COURSE_PAGE_DRAFT.bonuses,
     'Lifetime access',
-    '30-day money-back guarantee',
 ];
 
 export default function CoursePage() {
@@ -58,7 +57,7 @@ export default function CoursePage() {
                             See What&apos;s Inside
                         </a>
                     </div>
-                    <p className="text-zinc-500 text-sm pt-2">Lifetime access • 30-day money-back guarantee</p>
+                    <p className="text-zinc-500 text-sm pt-2">Lifetime access</p>
                 </div>
             </section>
 
@@ -142,7 +141,7 @@ export default function CoursePage() {
                     <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="mt-8 inline-flex items-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
                         Enroll Now — ${COURSE.price} <ArrowRight className="w-4 h-4" />
                     </CheckoutLink>
-                    <p className="text-zinc-400 text-xs mt-4">Lifetime access • 30-day money-back guarantee</p>
+                    <p className="text-zinc-400 text-xs mt-4">Lifetime access</p>
                 </div>
             </section>
 
@@ -168,18 +167,6 @@ export default function CoursePage() {
                 </div>
             </section>
 
-            <section className="py-16 sm:py-24 container mx-auto px-6 max-w-3xl text-center">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-zinc-100 mb-6 rounded-full">
-                    <Award className="w-10 h-10 text-zinc-900" />
-                </div>
-                <h2 className="text-3xl lg:text-4xl font-black text-zinc-900 uppercase tracking-tighter mb-4">
-                    30-Day Money-Back Guarantee
-                </h2>
-                <p className="text-base sm:text-lg text-zinc-700 leading-relaxed">
-                    If after 30 days the protocol hasn&apos;t given you a measurable mental edge, email me directly. I&apos;ll refund every dollar. No questions, no friction.
-                </p>
-            </section>
-
             <section className="py-16 sm:py-24 bg-zinc-950 text-white text-center">
                 <div className="container mx-auto px-6 max-w-3xl">
                     <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6">
@@ -191,7 +178,7 @@ export default function CoursePage() {
                     <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="inline-flex items-center justify-center gap-2 px-10 sm:px-12 py-5 sm:py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm sm:text-base transition-all">
                         Enroll Now — ${COURSE.price} <ArrowRight className="w-5 h-5" />
                     </CheckoutLink>
-                    <p className="text-zinc-500 text-sm mt-6">Lifetime access • 30-day guarantee</p>
+                    <p className="text-zinc-500 text-sm mt-6">Lifetime access</p>
                 </div>
             </section>
 
