@@ -4,6 +4,8 @@ import { ArrowRight, Layers } from 'lucide-react';
 import { getStandaloneArticles, getSeriesArticles, pickBook, Article } from '@/lib/blog';
 import NewsletterInline from '@/components/NewsletterInline';
 
+export const revalidate = 60;
+
 export const metadata = {
     title: 'The Insight',
     description: 'Articles on mental performance, fencing psychology, and high-performance neuroscience.',

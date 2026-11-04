@@ -71,6 +71,10 @@ export function getArticleBySlug(slug: string): Article | null {
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const { data, content } = matter(fileContents);
 
+        if (new Date(data.date) > new Date()) {
+            return null;
+        }
+
         return {
             slug,
             content,

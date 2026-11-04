@@ -14,6 +14,9 @@ import ArticleFaq from '@/components/ArticleFaq';
 /*
  * Server Component
  */
+export const revalidate = 60;
+export const dynamicParams = true;
+
 interface PageProps {
     params: Promise<{ slug: string }>;
 }
