@@ -15,7 +15,9 @@ import ArticleFaq from '@/components/ArticleFaq';
  * Server Component
  */
 export const revalidate = 60;
-export const dynamicParams = true;
+// Static export rejects dynamicParams: true. Every published post is still
+// emitted by generateStaticParams; a slug with no article file 404s.
+export const dynamicParams = false;
 
 interface PageProps {
     params: Promise<{ slug: string }>;
