@@ -39,6 +39,12 @@ const nextConfig: NextConfig = {
               destination: "/start-here#protocol",
               permanent: false,
             },
+            // Old blog URL that still gets visits. The live post is the Day 7 article.
+            {
+              source: "/blogs/mental-performance/day-7-hacking-the-crowd-the-djokovic-reframe",
+              destination: "/blog/titans-protocol-day-07-hacking-the-crowd",
+              permanent: true,
+            },
             ...toCourse,
           ];
         },
