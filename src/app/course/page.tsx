@@ -1,17 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-import { CheckCircle2, Star, ArrowRight, Lock, Award } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Lock, Award } from 'lucide-react';
 import { Metadata } from 'next';
 import CheckoutLink from '@/components/CheckoutLink';
 import { COURSE, COURSE_LESSON_COUNT, COURSE_PAGE_DRAFT } from '@/data/course';
 
 export const metadata: Metadata = {
     title: 'The Mental Performance Protocol | 8-Module Course',
-    description: 'The complete 8-module mental performance system for athletes. Build unshakable confidence, eliminate competition anxiety, and dominate your sport.',
+    description: 'A self-paced course for competitive athletes, including fencers. 8 modules, about 2 hours 50 minutes. Lifetime access. $297, paid once.',
     keywords: ['mental performance course', 'sports psychology course', 'mental toughness training', 'athlete mindset course'],
     openGraph: {
         title: 'The Mental Performance Protocol — 8-Module Online Course',
-        description: 'An 8-module mental performance course from Giannis Notaras. Lifetime access.',
+        description: 'Train the mental side of competition. Self-paced, 8 modules, about 2 hours 50 minutes. Lifetime access. $297, paid once.',
         type: 'website',
     },
 };
@@ -27,10 +27,15 @@ const modules = [
     { num: 8, title: 'Mastery & Mentorship' },
 ];
 
+const purchaseLabel = `Get the Course — $${COURSE.price}`;
+
 const included = [
     'The Mental Performance Protocol',
     ...COURSE_PAGE_DRAFT.bonuses,
+    COURSE_LESSON_COUNT.full,
+    'Self-paced',
     'Lifetime access',
+    `$${COURSE.price}, paid once`,
 ];
 
 export default function CoursePage() {
@@ -39,19 +44,17 @@ export default function CoursePage() {
             <section className="bg-zinc-950 text-white py-16 lg:py-28 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(220,38,38,0.15),_transparent_50%)]"></div>
                 <div className="container mx-auto px-6 max-w-5xl text-center space-y-6 relative z-10">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 border border-red-600/40 text-red-400 text-xs font-black uppercase tracking-[0.2em]">
-                        <Star className="w-3 h-3 fill-current" /> New Release 2026
-                    </div>
-                    <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
-                        The Mental Performance<br />
-                        <span className="text-red-500">Protocol</span>
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-red-400">{COURSE.name}</p>
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none">
+                        Train the mental side<br />
+                        <span className="text-red-500">of competition</span>
                     </h1>
-                    <p className="text-lg sm:text-xl lg:text-2xl text-zinc-400 max-w-2xl mx-auto">
-                        The 8-module system elite athletes use to <strong className="text-white">build unshakable confidence, eliminate competition anxiety, and dominate their sport.</strong>
+                    <p className="text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+                        A self-paced course for competitive athletes, including fencers. {COURSE_LESSON_COUNT.full}. Lifetime access. ${COURSE.price}, paid once.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                         <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2">
-                            Enroll Now — ${COURSE.price} <ArrowRight className="w-4 h-4" />
+                            {purchaseLabel} <ArrowRight className="w-4 h-4" />
                         </CheckoutLink>
                         <a href="#curriculum" className="px-10 py-5 border-2 border-zinc-700 hover:border-white text-white font-black uppercase tracking-widest text-sm transition-all">
                             See What&apos;s Inside
@@ -78,17 +81,18 @@ export default function CoursePage() {
             </section>
 
             <section className="py-16 sm:py-24 container mx-auto px-6 max-w-5xl">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter text-center mb-12 sm:mb-16">
-                    This Course Is For You If...
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-900 uppercase tracking-tighter text-center mb-6">
+                    For competitive athletes
                 </h2>
+                <p className="text-center text-zinc-600 text-base sm:text-lg max-w-2xl mx-auto mb-12 sm:mb-16">
+                    Including fencing. The course is the eight modules below, taken at your own pace.
+                </p>
                 <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                     {[
-                        'You freeze, choke, or tighten up at the moment that matters most',
-                        'You train hard physically but performance doesn\'t match effort',
-                        'You can\'t shut off the inner critic mid-competition',
-                        'You\'re a coach or parent who wants to give your athlete a real edge',
-                        'You want a step-by-step protocol — not vague motivational advice',
-                        'You\'re ready to do the work to become unbreakable',
+                        'You compete and want to practice the mental side as well as the physical side',
+                        'You fence, or you compete in another sport',
+                        'You want the eight modules listed on this page',
+                        'You will go through them on your own schedule',
                     ].map((item, i) => (
                         <div key={i} className="flex gap-4 items-start">
                             <CheckCircle2 className="w-6 h-6 text-red-600 shrink-0 mt-1" />
@@ -139,7 +143,7 @@ export default function CoursePage() {
                 <div className="mt-8 text-center">
                     <p className="text-zinc-900 text-2xl font-black uppercase tracking-tight">The course: <span className="text-red-600">${COURSE.price}</span></p>
                     <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="mt-8 inline-flex items-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm transition-all">
-                        Enroll Now — ${COURSE.price} <ArrowRight className="w-4 h-4" />
+                        {purchaseLabel} <ArrowRight className="w-4 h-4" />
                     </CheckoutLink>
                     <p className="text-zinc-400 text-xs mt-4">Lifetime access</p>
                 </div>
@@ -151,7 +155,7 @@ export default function CoursePage() {
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter">Enroll Today</h2>
                     </div>
                     <div className="p-6 sm:p-8 border-2 border-red-600 bg-red-950/20 flex flex-col">
-                        <h3 className="text-2xl font-black uppercase tracking-tighter">Everything, One Price</h3>
+                        <h3 className="text-2xl font-black uppercase tracking-tighter">One-time payment</h3>
                         <div className="text-5xl font-black mb-6 mt-4">${COURSE.price}</div>
                         <ul className="space-y-3 mb-8 flex-1">
                             {included.map((f) => (
@@ -161,7 +165,7 @@ export default function CoursePage() {
                             ))}
                         </ul>
                         <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="w-full py-4 text-center font-black uppercase tracking-widest text-sm transition-all bg-red-600 hover:bg-red-700">
-                            Get Standard
+                            {purchaseLabel}
                         </CheckoutLink>
                     </div>
                 </div>
@@ -170,13 +174,13 @@ export default function CoursePage() {
             <section className="py-16 sm:py-24 bg-zinc-950 text-white text-center">
                 <div className="container mx-auto px-6 max-w-3xl">
                     <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6">
-                        Stop Losing Games in Your Head.
+                        {COURSE.name}
                     </h2>
                     <p className="text-lg sm:text-xl text-zinc-400 mb-10">
-                        Build the mental system that holds when everything else falls apart.
+                        Self-paced. {COURSE_LESSON_COUNT.full}. Lifetime access. ${COURSE.price}, paid once.
                     </p>
                     <CheckoutLink href={COURSE.checkoutUrl} productName={COURSE.name} price={COURSE.price} className="inline-flex items-center justify-center gap-2 px-10 sm:px-12 py-5 sm:py-6 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-sm sm:text-base transition-all">
-                        Enroll Now — ${COURSE.price} <ArrowRight className="w-5 h-5" />
+                        {purchaseLabel} <ArrowRight className="w-5 h-5" />
                     </CheckoutLink>
                     <p className="text-zinc-500 text-sm mt-6">Lifetime access</p>
                 </div>
