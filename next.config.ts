@@ -45,6 +45,12 @@ const nextConfig: NextConfig = {
               destination: "/blog/titans-protocol-day-07-hacking-the-crowd",
               permanent: true,
             },
+            // Old product URL. The live page is the book route for this title.
+            {
+              source: "/products/nurturing-self-worth",
+              destination: "/book/nurturing-self-worth",
+              permanent: true,
+            },
             ...toCourse,
           ];
         },
