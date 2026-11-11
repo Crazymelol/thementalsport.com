@@ -56,19 +56,19 @@ export default function GiveawayPage() {
         }
 
         setStatus('loading');
+        setErrorMessage('');
 
         try {
-            // Send email to ConvertKit (Kit)
-            try {
-                await subscribeEmail(email, sport, 'giveaway');
-            } catch (subErr) {
-                console.warn('Kit subscription notice:', subErr);
-            }
+            const cleanEmail = email.trim();
+            const cleanName = name.trim();
+            await subscribeEmail(cleanEmail, sport, 'giveaway', {
+                firstName: cleanName,
+            });
 
             // Save lead entry to localStorage
             const entry = {
-                name,
-                email,
+                name: cleanName,
+                email: cleanEmail,
                 sport,
                 level,
                 timestamp: new Date().toISOString(),
@@ -95,8 +95,12 @@ export default function GiveawayPage() {
             setStatus('success');
         } catch (err) {
             console.error('Giveaway entry error:', err);
-            // Even on error, let the athlete access the download
-            setStatus('success');
+            setStatus('error');
+            setErrorMessage(
+                err instanceof Error
+                    ? err.message
+                    : 'Could not submit your entry. Please try again.'
+            );
         }
     };
 
