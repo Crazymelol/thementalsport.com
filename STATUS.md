@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-11-10 15:42 UTC_
+_Updated 2026-11-11 00:05 UTC_
 
 ## Progress
 
@@ -17,8 +17,8 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 ## 🐦 X performance
 | Post | Views | Likes | Replies | Reposts |
 |---|---|---|---|---|
-| Rebuilding A Team After A Losing … | — | 0 | 0 | 0 |
-| The Halftime Talk That Actually W… | — | 0 | 0 | 0 |
+| Rebuilding A Team After A Losing … | 1 | 0 | 0 | 0 |
+| The Halftime Talk That Actually W… | 1 | 0 | 0 | 0 |
 | When Your Kid Cries After Losing | — | 0 | 0 | 0 |
 
 ## 📌 Pinterest performance
