@@ -1,6 +1,6 @@
 # 📊 thementalsport.com — Social Report
 
-_Updated 2026-11-12 01:34 UTC_
+_Updated 2026-11-12 15:57 UTC_
 
 ## Progress
 
@@ -33,7 +33,7 @@ _Set the `YT_API_KEY` secret (a YouTube Data API key) to show channel + video st
 |---|---|---|---|
 | Rebuilding A Team After A Losing … | — | 1 | 0 |
 | The Halftime Talk That Actually W… | — | 1 | 0 |
-| When Your Kid Cries After Losing | — | 2 | 0 |
+| When Your Kid Cries After Losing | — | 1 | 0 |
 
 ## 🔊 Voiceover
 40/40 shorts narrated in cloned voice ✅
