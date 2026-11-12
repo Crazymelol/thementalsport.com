@@ -33,6 +33,24 @@ const nextConfig: NextConfig = {
               permanent: true,
             }),
           );
+          // Old product URLs, each listed explicitly. No /products/:slug catch-all,
+          // so an unknown product path still 404s instead of landing on a missing book.
+          // physiological-peak-performance is not a book id; the live slug is
+          // physiological-performance (title: Physiological Peak Performance Blueprint).
+          const toBook = [
+            ["/products/adhd-athletes-edge", "/book/adhd-athletes-edge"],
+            ["/products/physiological-peak-performance", "/book/physiological-performance"],
+            ["/products/physiological-performance", "/book/physiological-performance"],
+            ["/products/confidence-building", "/book/confidence-building"],
+            ["/products/mental-blocks", "/book/mental-blocks"],
+            ["/products/resilient-confidence", "/book/resilient-confidence"],
+            ["/products/the-competition-protocol", "/book/the-competition-protocol"],
+            ["/products/unbreakable", "/book/unbreakable"],
+          ].map(([source, destination]) => ({
+            source,
+            destination,
+            permanent: true,
+          }));
           return [
             {
               source: "/free",
@@ -51,6 +69,7 @@ const nextConfig: NextConfig = {
               destination: "/book/nurturing-self-worth",
               permanent: true,
             },
+            ...toBook,
             ...toCourse,
           ];
         },
