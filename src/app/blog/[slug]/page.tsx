@@ -10,6 +10,7 @@ import CourseCTA from '@/components/CourseCTA';
 import { COURSE_CTA_SLUGS } from '@/data/course';
 import ArticleSchema from '@/components/ArticleSchema';
 import ArticleFaq from '@/components/ArticleFaq';
+import SkoolCommunityCTA from '@/components/SkoolCommunityCTA';
 
 /*
  * Server Component
@@ -161,6 +162,9 @@ export default async function BlogPost({ params }: PageProps) {
                     <BookCTA book={book} />
                     {!leadWithCourse && <CourseCTA />}
                     <NewsletterInline formLocation="blog" />
+                    <div className="mt-12">
+                        <SkoolCommunityCTA location="blog" />
+                    </div>
                 </div>
 
             </article>
