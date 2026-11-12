@@ -9,6 +9,7 @@ import LeadMagnet from '@/components/LeadMagnet';
 import Hero3DBook from '@/components/Hero3DBook';
 import { offers } from '@/data/offers';
 import CheckoutLink from '@/components/CheckoutLink';
+import SkoolCommunityCTA from '@/components/SkoolCommunityCTA';
 
 
 const HOMEPAGE_BOOK_IDS = ['the-competition-protocol', 'mental-blocks', 'confidence-building'];
@@ -215,6 +216,13 @@ export default function AuthorHome() {
                     >
                         Get the free guide <ArrowRight className="w-4 h-4" />
                     </Link>
+                </div>
+            </section>
+
+            {/* Free community. Kept below the hero and the course offer. */}
+            <section className="py-16 bg-white border-t border-zinc-200">
+                <div className="container mx-auto px-6 max-w-4xl">
+                    <SkoolCommunityCTA location="home" />
                 </div>
             </section>
 

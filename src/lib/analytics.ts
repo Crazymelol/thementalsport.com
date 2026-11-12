@@ -14,6 +14,18 @@ export function parsePrice(price: string | number): number {
     return Number.isFinite(value) ? value : 0;
 }
 
+export type SkoolCommunityLocation = 'home' | 'blog' | 'free_guide' | 'links';
+
+// Click on the free Skool fencing community. `location` is the surface
+// (home, blog, free_guide, links), not a promise about the community.
+export function trackSkoolJoin(location: SkoolCommunityLocation): void {
+    try {
+        getGtag()?.('event', 'skool_join_click', { location });
+    } catch {
+        // A failed analytics call must not block the community link.
+    }
+}
+
 // GA4 recommended event. `form_location` says which ConvertKit form converted.
 // Existing generate_lead / giveaway_entry calls stay where they are.
 export function trackSignUp(formLocation: string): void {

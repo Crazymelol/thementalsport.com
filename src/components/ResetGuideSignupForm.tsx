@@ -5,8 +5,14 @@ import Link from 'next/link';
 import { AlertCircle, CheckCircle2, Download } from 'lucide-react';
 import { subscribeEmail } from '@/lib/subscribe';
 import { KIT_FORM_RESET_GUIDE_ID, KIT_TAGS, RESET_GUIDE_PDF_PATH } from '@/lib/kit';
+import SkoolCommunityCTA from '@/components/SkoolCommunityCTA';
+import type { SkoolCommunityLocation } from '@/lib/analytics';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function skoolLocation(formLocation: string): SkoolCommunityLocation {
+    return formLocation === 'links_reset_guide' ? 'links' : 'free_guide';
+}
 
 type ResetGuideSignupFormProps = {
     idPrefix?: string;
@@ -66,6 +72,7 @@ export default function ResetGuideSignupForm({
                 <p className="text-xs text-zinc-500">
                     If you also get a confirmation email, that is from my email provider. Your download is already here.
                 </p>
+                <SkoolCommunityCTA location={skoolLocation(formLocation)} />
             </div>
         );
     }
