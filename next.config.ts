@@ -33,6 +33,28 @@ const nextConfig: NextConfig = {
               permanent: true,
             }),
           );
+          // Old product URLs, each listed explicitly. No /products/:slug catch-all,
+          // so an unknown product path still 404s instead of landing on a missing book.
+          // physiological-peak-performance is not a book id; the live slug is
+          // physiological-performance (title: Physiological Peak Performance Blueprint).
+          // overcoming-mental-blocks is the book title, not the id. The live slug
+          // is mental-blocks (title: Overcoming Mental Blocks).
+          const toBook = [
+            ["/products/adhd-athletes-edge", "/book/adhd-athletes-edge"],
+            ["/products/physiological-peak-performance", "/book/physiological-performance"],
+            ["/products/physiological-performance", "/book/physiological-performance"],
+            ["/products/confidence-building", "/book/confidence-building"],
+            ["/products/mental-blocks", "/book/mental-blocks"],
+            ["/products/resilient-confidence", "/book/resilient-confidence"],
+            ["/products/the-competition-protocol", "/book/the-competition-protocol"],
+            ["/products/unbreakable", "/book/unbreakable"],
+            ["/overcoming-mental-blocks", "/book/mental-blocks"],
+            ["/products/overcoming-mental-blocks", "/book/mental-blocks"],
+          ].map(([source, destination]) => ({
+            source,
+            destination,
+            permanent: true,
+          }));
           return [
             {
               source: "/free",
@@ -51,6 +73,14 @@ const nextConfig: NextConfig = {
               destination: "/book/nurturing-self-worth",
               permanent: true,
             },
+            // Exact path only. Next.js anchors the source, so this does not
+            // match /book/mental-blocks or any other /book/:slug page.
+            {
+              source: "/book",
+              destination: "/books",
+              permanent: true,
+            },
+            ...toBook,
             ...toCourse,
           ];
         },
