@@ -1,11 +1,12 @@
 name: Social Report
 
 # Compiles each agent's progress + the latest posts' stats into STATUS.md.
-# Runs twice a day and on demand. Staggered from the poster crons.
+# Automatic schedule paused: run it by hand with workflow_dispatch.
+# Restore the schedule block below to turn the twice-daily cron back on.
 
 on:
-  schedule:
-    - cron: '0 7,19 * * *'
+  # schedule:
+  #   - cron: '0 7,19 * * *'
   workflow_dispatch: {}
 
 permissions:

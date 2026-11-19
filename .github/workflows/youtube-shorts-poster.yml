@@ -1,9 +1,11 @@
 name: YouTube Shorts Auto-Poster
 
+# Automatic schedule paused: social posts are published by hand.
+# Restore the schedule block below to turn the cron back on.
 on:
-  schedule:
-    # 3x/day matches the cadence cap in social/youtube-queue/queue.json
-    - cron: '0 8,16,23 * * *'
+  # schedule:
+  #   # 3x/day matches the cadence cap in social/youtube-queue/queue.json
+  #   - cron: '0 8,16,23 * * *'
   workflow_dispatch: {}
 
 permissions:

@@ -1,10 +1,12 @@
 name: Pinterest Auto-Poster
 
+# Automatic schedule paused: social posts are published by hand.
+# Restore the schedule block below to turn the cron back on.
 on:
-  schedule:
-    # Staggered from the YouTube poster cron (8,16,23) to avoid concurrent
-    # pushes to social/youtube-queue/queue.json.
-    - cron: '0 4,11,19 * * *'
+  # schedule:
+  #   # Staggered from the YouTube poster cron (8,16,23) to avoid concurrent
+  #   # pushes to social/youtube-queue/queue.json.
+  #   - cron: '0 4,11,19 * * *'
   workflow_dispatch: {}
 
 permissions:
