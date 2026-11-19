@@ -1,11 +1,13 @@
 name: X Auto-Poster
 
+# Automatic schedule paused: social posts are published by hand.
+# Restore the schedule block below to turn the cron back on.
 on:
-  schedule:
-    # Once/day (matches the old post-x-daily.py's daily-lock intent).
-    # Staggered from YouTube (8,16,23) and Pinterest (4,11,19) to avoid
-    # concurrent pushes to social/youtube-queue/queue.json.
-    - cron: '0 1 * * *'
+  # schedule:
+  #   # Once/day (matches the old post-x-daily.py's daily-lock intent).
+  #   # Staggered from YouTube (8,16,23) and Pinterest (4,11,19) to avoid
+  #   # concurrent pushes to social/youtube-queue/queue.json.
+  #   - cron: '0 1 * * *'
   workflow_dispatch: {}
 
 permissions:

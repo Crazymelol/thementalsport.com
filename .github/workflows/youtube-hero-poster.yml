@@ -5,10 +5,12 @@ name: YouTube Hero / Long-form Poster
 # upload to YouTube -> mark it posted. Same proven pieces as the daily Shorts,
 # stitched into one run so a single dispatch produces and publishes the video.
 
+# Automatic schedule paused: social posts are published by hand.
+# Restore the schedule block below to turn the cron back on.
 on:
-  schedule:
-    # Sundays 17:00 UTC — matches the "1 long-form per week" relaunch plan.
-    - cron: '0 17 * * 0'
+  # schedule:
+  #   # Sundays 17:00 UTC — matches the "1 long-form per week" relaunch plan.
+  #   - cron: '0 17 * * 0'
   workflow_dispatch: {}
 
 permissions:
