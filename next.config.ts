@@ -55,6 +55,28 @@ const nextConfig: NextConfig = {
             destination,
             permanent: true,
           }));
+          // Bare legacy book paths. Exact sources only: none of these are app
+          // routes or article slugs. /resources/competition-protocol is a live
+          // page and is intentionally not listed.
+          const bareBook = [
+            ["/confidence-building", "/book/confidence-building"],
+            ["/the-competition-protocol", "/book/the-competition-protocol"],
+            ["/competition-protocol", "/book/the-competition-protocol"],
+            ["/resilient-confidence", "/book/resilient-confidence"],
+            ["/unlocking-resilient-confidence", "/book/resilient-confidence"],
+            ["/physiological-performance", "/book/physiological-performance"],
+            ["/physiological-peak-performance", "/book/physiological-performance"],
+            ["/adhd-athletes-edge", "/book/adhd-athletes-edge"],
+            ["/mental-blocks", "/book/mental-blocks"],
+            ["/unbreakable", "/book/unbreakable"],
+            ["/nurturing-self-worth", "/book/nurturing-self-worth"],
+            ["/products/unlocking-resilient-confidence", "/book/resilient-confidence"],
+            ["/products/competition-protocol", "/book/the-competition-protocol"],
+          ].map(([source, destination]) => ({
+            source,
+            destination,
+            permanent: true,
+          }));
           return [
             {
               source: "/free",
@@ -81,6 +103,7 @@ const nextConfig: NextConfig = {
               permanent: true,
             },
             ...toBook,
+            ...bareBook,
             ...toCourse,
           ];
         },
