@@ -80,8 +80,13 @@ const nextConfig: NextConfig = {
           return [
             {
               source: "/free",
-              destination: "/start-here#protocol",
-              permanent: false,
+              destination: "/free-guide",
+              permanent: true,
+            },
+            {
+              source: "/resources/competition-protocol",
+              destination: "/free-guide",
+              permanent: true,
             },
             // Old blog URL that still gets visits. The live post is the Day 7 article.
             {
