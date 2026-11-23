@@ -28,6 +28,24 @@ export function trackSkoolJoin(location: SkoolCommunityLocation): void {
 
 // GA4 recommended event. `form_location` says which ConvertKit form converted.
 // Existing generate_lead / giveaway_entry calls stay where they are.
+// Click on the Instagram links page. Gumroad buttons use the checkout event.
+// Other links on that page use links_click so a free-guide tap is not a purchase.
+export function trackLinksCheckout(product: string): void {
+    try {
+        getGtag()?.('event', 'links_checkout_click', { product });
+    } catch {
+        // A failed analytics call must not block the Gumroad tab.
+    }
+}
+
+export function trackLinksClick(product: string): void {
+    try {
+        getGtag()?.('event', 'links_click', { product });
+    } catch {
+        // A failed analytics call must not block the link.
+    }
+}
+
 export function trackSignUp(formLocation: string): void {
     try {
         getGtag()?.('event', 'sign_up', {

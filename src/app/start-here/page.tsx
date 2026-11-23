@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Video } from 'lucide-react';
-import ProtocolSignupForm from '@/components/ProtocolSignupForm';
+import ResetGuideSignupForm from '@/components/ResetGuideSignupForm';
 import { COURSE_LESSON_COUNT } from '@/data/course';
 
 export const metadata: Metadata = {
@@ -50,11 +50,11 @@ export default function StartHerePage() {
                         <div className="w-12 h-12 bg-zinc-900 text-white flex items-center justify-center font-black text-lg flex-shrink-0">1</div>
                         <div>
                             <p className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-2">Start Free</p>
-                            <h2 className="text-2xl font-black uppercase tracking-tighter mb-4">Get The Free Competition Protocol</h2>
+                            <h2 className="text-2xl font-black uppercase tracking-tighter mb-4">The Reset Between Points</h2>
                             <p className="text-zinc-600 leading-relaxed mb-6">
-                                The 7-day mental preparation system. Covers the taper phase, the 24-hour window, the 60-minute warmup, and crisis management during competition. Enter your email to unlock it on this page.
+                                A free 11-page guide for the moment after a point. Lost a point? Reset before the next one starts.
                             </p>
-                            <ProtocolSignupForm showReadLink submitLabel="Unlock the protocol" idPrefix="start-here" />
+                            <ResetGuideSignupForm idPrefix="start-here" formLocation="start_here_reset" />
                         </div>
                     </div>
                 </div>
