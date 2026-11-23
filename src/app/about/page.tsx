@@ -215,11 +215,11 @@ export default function AboutPage() {
                 <div className="container mx-auto px-6 max-w-3xl text-center">
                     <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-6">Start Here</h2>
                     <p className="text-zinc-400 mb-10 text-lg">
-                        New to The Mental Sport? Start with the free Competition Protocol — the 7-day pre-competition mental system.
+                        New to The Mental Sport? Start with the free guide, The Reset Between Points.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/start-here" className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-zinc-200 transition-colors">
-                            Start Here <ArrowRight className="w-4 h-4" />
+                        <Link href="/free-guide" className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-zinc-950 font-black uppercase tracking-widest text-sm hover:bg-zinc-200 transition-colors">
+                            Get the free guide <ArrowRight className="w-4 h-4" />
                         </Link>
                         <Link href="/books" className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-zinc-700 text-white font-black uppercase tracking-widest text-sm hover:border-white transition-colors">
                             Browse Books

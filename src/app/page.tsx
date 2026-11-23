@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ArrowRight, Star } from 'lucide-react';
 import Image from 'next/image';
 import NewsletterWrapper from '@/components/NewsletterWrapper';
-import LeadMagnet from '@/components/LeadMagnet';
 import Hero3DBook from '@/components/Hero3DBook';
 import { offers } from '@/data/offers';
 import CheckoutLink from '@/components/CheckoutLink';
@@ -48,13 +47,13 @@ export default function AuthorHome() {
                             </h1>
 
                             <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                That gap is not talent and it is not effort. It is nervous system regulation—a skill almost nobody trains. Start with the free 7-day protocol.
+                                That gap is not talent and it is not effort. It is nervous system regulation—a skill almost nobody trains. Start with the free guide, The Reset Between Points.
                             </p>
 
                             <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-                                <NewsletterWrapper variant="protocol" className="w-full sm:w-auto px-9 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-white font-black hover:brightness-110 transition-all uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(239,68,68,0.4)] rounded-xl">
-                                    Get The Free 7-Day Protocol →
-                                </NewsletterWrapper>
+                                <Link href="/free-guide" className="w-full sm:w-auto px-9 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-white font-black hover:brightness-110 transition-all uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(239,68,68,0.4)] rounded-xl text-center">
+                                    Get the free guide →
+                                </Link>
                                 <Link href="/books" className="w-full sm:w-auto px-8 py-4 border border-zinc-700 bg-zinc-900/60 backdrop-blur-md text-white font-black hover:border-zinc-400 hover:bg-zinc-800 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 rounded-xl">
                                     Browse All 8 Books <ArrowRight className="w-4 h-4" />
                                 </Link>
@@ -226,9 +225,6 @@ export default function AuthorHome() {
                 </div>
             </section>
 
-            {/* LEAD MAGNET */}
-            <LeadMagnet />
-
             {/* 3. ABOUT AUTHOR */}
             <section id="about" className="py-24 bg-zinc-50 border-t border-zinc-200">
                 <div className="container mx-auto px-6">
@@ -277,7 +273,7 @@ export default function AuthorHome() {
                     <Link href="/course" className="hover:text-white transition-colors">Course</Link>
                     <Link href="/blog" className="hover:text-white transition-colors">Articles</Link>
                     <Link href="/free-guide" className="hover:text-white transition-colors">Free Guide</Link>
-                    <NewsletterWrapper formLocation="homepage_footer" className="hover:text-white transition-colors">Newsletter</NewsletterWrapper>
+                    <NewsletterWrapper formLocation="homepage_footer" className="hover:text-white transition-colors">Free guide</NewsletterWrapper>
                     <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                     <Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link>
                 </div>

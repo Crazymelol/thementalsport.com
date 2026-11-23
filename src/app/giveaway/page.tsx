@@ -127,7 +127,7 @@ export default function GiveawayPage() {
                     </h1>
 
                     <p className="text-lg md:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto mb-10">
-                        Enter free to win the complete 6-book performance library + 1-on-1 strategy session with Coach Giannis Notaras. Every entrant immediately unlocks the <strong className="text-white">7-Day Competition Protocol PDF</strong>.
+                        Enter free to win the complete 6-book performance library + 1-on-1 strategy session with Coach Giannis Notaras. Every entrant can get the free guide, <strong className="text-white">The Reset Between Points</strong>.
                     </p>
 
                     {/* PRIZE BREAKDOWN CARDS */}
@@ -153,12 +153,12 @@ export default function GiveawayPage() {
                                     <Gift className="w-6 h-6 text-blue-400" />
                                 </div>
                                 <div>
-                                    <span className="text-xs font-bold uppercase tracking-wider text-blue-400">Guaranteed For Everyone</span>
-                                    <h3 className="text-lg font-black uppercase text-white">Instant 7-Day Protocol PDF</h3>
+                                    <span className="text-xs font-bold uppercase tracking-wider text-blue-400">For everyone who enters</span>
+                                    <h3 className="text-lg font-black uppercase text-white">The Reset Between Points</h3>
                                 </div>
                             </div>
                             <p className="text-sm text-zinc-400 leading-relaxed">
-                                You don&apos;t leave empty-handed. As soon as you enter, the 7-day pre-competition preparation guide is immediately unlocked for download.
+                                You don&apos;t leave empty-handed. After you enter, the free guide is there for you: The Reset Between Points.
                             </p>
                         </div>
                     </div>
@@ -183,21 +183,20 @@ export default function GiveawayPage() {
 
                                 <div className="p-6 bg-zinc-950 border border-zinc-800 rounded-2xl text-center space-y-4">
                                     <div className="text-xs font-black uppercase tracking-widest text-zinc-400">
-                                        🎁 Your Guaranteed Entry Gift:
+                                        Your free guide
                                     </div>
                                     <div className="text-xl font-black uppercase text-white">
-                                        The 7-Day Competition Protocol
+                                        The Reset Between Points
                                     </div>
                                     <p className="text-xs text-zinc-400">
-                                        Printable pre-game algorithm & crisis reset routine.
+                                        Lost a point? Reset before the next one starts.
                                     </p>
 
                                     <a
-                                        href="/free-chapter.pdf"
-                                        download="The-Competition-Protocol-Free.pdf"
+                                        href="/free-guide"
                                         className="inline-flex items-center justify-center gap-3 w-full py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-black uppercase tracking-widest text-sm hover:from-amber-300 hover:to-yellow-400 transition-all shadow-[0_0_30px_rgba(251,191,36,0.4)] rounded-xl"
                                     >
-                                        <Download className="w-5 h-5" /> Download Free Protocol (PDF)
+                                        <Download className="w-5 h-5" /> Get the free guide
                                     </a>
                                 </div>
 
@@ -217,7 +216,7 @@ export default function GiveawayPage() {
                                             Upgrade To The Full 140-Page Master System
                                         </h3>
                                         <p className="text-xs text-zinc-300 mt-1 leading-relaxed">
-                                            Your 7-day checklist is unlocked above. Upgrade right now to the complete master edition of <b>The Competition Protocol</b> + audio crisis resets for just <span className="text-amber-400 font-bold">$17</span>.
+                                            The free guide is linked above. The complete edition of <b>The Competition Protocol</b>, plus audio crisis resets, is <span className="text-amber-400 font-bold">$17</span>.
                                         </p>
                                     </div>
 

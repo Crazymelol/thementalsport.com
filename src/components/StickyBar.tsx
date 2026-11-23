@@ -1,13 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Download, X } from 'lucide-react';
-import NewsletterModal from './NewsletterModal';
 
 export default function StickyBar() {
     const [visible, setVisible] = useState(false);
     const [dismissed, setDismissed] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('stickyBarDismissed')) {
@@ -34,15 +33,15 @@ export default function StickyBar() {
                             <Download className="w-4 h-4" />
                         </div>
                         <p className="text-sm font-bold truncate">
-                            <span className="text-red-400">FREE:</span> Chapter 1 of The Competition Protocol — The Biology of Choking
+                            <span className="text-red-400">Free guide:</span> The Reset Between Points
                         </p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
-                        <button
-                            onClick={() => setModalOpen(true)}
+                        <Link
+                            href="/free-guide"
                             className="bg-red-600 hover:bg-red-700 text-white text-xs font-black uppercase tracking-widest px-4 py-2 transition-colors whitespace-nowrap">
-                            Get It Free
-                        </button>
+                            Get the guide
+                        </Link>
                         <button
                             onClick={dismiss}
                             className="text-zinc-500 hover:text-white transition-colors p-1">
@@ -51,7 +50,6 @@ export default function StickyBar() {
                     </div>
                 </div>
             </div>
-            <NewsletterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} formLocation="sticky_bar" />
         </>
     );
 }

@@ -1,10 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { X, CheckCircle2, AlertCircle, Download } from 'lucide-react';
-import { subscribeEmail } from '../lib/subscribe';
-import { unlockProtocol } from '@/lib/protocolAccess';
-import ProtocolSignupForm from '@/components/ProtocolSignupForm';
+import React from 'react';
+import { X } from 'lucide-react';
+import ResetGuideSignupForm from '@/components/ResetGuideSignupForm';
 
 interface NewsletterModalProps {
     isOpen: boolean;
@@ -13,145 +11,33 @@ interface NewsletterModalProps {
     variant?: 'newsletter' | 'protocol';
 }
 
-export default function NewsletterModal({ isOpen, onClose, formLocation = 'newsletter_modal', variant = 'newsletter' }: NewsletterModalProps) {
-    const [email, setEmail] = useState('');
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const validateEmail = (email: string) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (!validateEmail(email)) {
-            setStatus('error');
-            setErrorMessage('Please enter a valid email address');
-            return;
-        }
-
-        setStatus('loading');
-
-        try {
-            await subscribeEmail(email, undefined, formLocation);
-            unlockProtocol();
-
-            // Track conversion
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            if (typeof window !== 'undefined' && (window as any).gtag) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (window as any).gtag('event', 'generate_lead', {
-                    event_category: 'newsletter',
-                    event_label: 'modal_signup',
-                    value: 1
-                });
-            }
-
-            setStatus('success');
-            setEmail('');
-
-            // Auto-close after success
-            setTimeout(() => {
-                onClose();
-                setStatus('idle');
-            }, 2000);
-        } catch (error) {
-            console.error('Newsletter subscription error:', error);
-            setStatus('error');
-            setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
-        }
-    };
-
+export default function NewsletterModal({
+    isOpen,
+    onClose,
+    formLocation = 'newsletter_modal',
+    variant = 'newsletter',
+}: NewsletterModalProps) {
     if (!isOpen) return null;
+
+    const location = variant === 'protocol' ? 'protocol_reset' : formLocation;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200" role="dialog" aria-modal="true" aria-labelledby="modal-title">
             <div className="bg-white rounded-none shadow-2xl max-w-md w-full p-8 relative animate-in zoom-in-95 duration-200 border border-zinc-200">
-                {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-900 transition-colors">
+                    className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-900 transition-colors"
+                    aria-label="Close"
+                >
                     <X className="w-6 h-6" />
                 </button>
 
-                {variant === 'protocol' ? (
-                    <>
-                        <div className="text-center mb-6">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 text-white text-xs font-black uppercase tracking-widest mb-4">
-                                <Download className="w-3 h-3" /> Free Download
-                            </div>
-                            <h2 id="modal-title" className="text-3xl font-black text-zinc-900 mb-2 uppercase tracking-tighter">Get The Free 7-Day Protocol</h2>
-                            <p className="text-zinc-600">
-                                The exact 7-day mental system elite athletes use before every competition. Enter your email to unlock it.
-                            </p>
-                        </div>
-                        <ProtocolSignupForm showReadLink submitLabel="Unlock the protocol" idPrefix="protocol-modal" />
-                    </>
-                ) : status === 'success' ? (
-                    <div className="text-center py-8">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <CheckCircle2 className="w-8 h-8 text-green-600" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-stone-900 mb-2">You&apos;re In!</h3>
-                        <p className="text-stone-600 mb-6">
-                            Check your inbox for confirmation.
-                        </p>
-                        <a
-                            href="/resources/competition-protocol"
-                            target="_blank"
-                            className="inline-flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 font-black uppercase tracking-widest text-sm hover:bg-black transition-colors rounded-none">
-                            <Download className="w-4 h-4" /> Download The Protocol
-                        </a>
-                    </div>
-                ) : (
-                    <>
-                        <div className="text-center mb-6">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 text-white text-xs font-black uppercase tracking-widest mb-4">
-                                <Download className="w-3 h-3" /> Free Download
-                            </div>
-                            <h2 id="modal-title" className="text-3xl font-black text-zinc-900 mb-2 uppercase tracking-tighter">Get The Competition Protocol</h2>
-                            <p className="text-zinc-600">
-                                The exact 7-day mental system elite athletes use before every competition — free, instant access.
-                            </p>
-                        </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => {
-                                        setEmail(e.target.value);
-                                        setStatus('idle');
-                                        setErrorMessage('');
-                                    }}
-                                    placeholder="Your best email address"
-                                    className="w-full px-4 py-3 rounded-none border border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 outline-none transition-all"
-                                    disabled={status === 'loading'}
-                                />
-                            </div>
-
-                            {status === 'error' && (
-                                <div className="flex items-center gap-2 text-red-600 text-sm">
-                                    <AlertCircle className="w-4 h-4" />
-                                    <span>{errorMessage}</span>
-                                </div>
-                            )}
-
-                            <button
-                                type="submit"
-                                disabled={status === 'loading'}
-                                className="w-full px-8 py-4 bg-zinc-900 text-white font-black rounded-none hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest border border-transparent hover:border-zinc-500">
-                                {status === 'loading' ? 'Sending...' : 'Send Me The Protocol →'}
-                            </button>
-
-                            <p className="text-xs text-zinc-400 text-center">
-                                No spam. One email a week. Unsubscribe anytime.
-                            </p>
-                        </form>
-                    </>
-                )}
+                <div className="mb-6">
+                    <p className="text-xs font-black uppercase tracking-widest text-zinc-500 mb-3">Free guide</p>
+                    <h2 id="modal-title" className="text-3xl font-black text-zinc-900 mb-2 uppercase tracking-tighter">The Reset Between Points</h2>
+                    <p className="text-zinc-600">Lost a point? Reset before the next one starts.</p>
+                </div>
+                <ResetGuideSignupForm idPrefix="modal-reset" formLocation={location} />
             </div>
         </div>
     );

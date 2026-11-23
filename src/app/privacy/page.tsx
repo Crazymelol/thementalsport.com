@@ -28,7 +28,7 @@ export default function PrivacyPage() {
                     <div>
                         <h2 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-4">Information We Collect</h2>
                         <ul className="list-disc pl-6 space-y-2">
-                            <li><strong>Email address</strong> — when you subscribe to our newsletter or download free chapters via our opt-in forms.</li>
+                            <li><strong>Email address</strong> — when you subscribe to our newsletter or request the free guide via our opt-in forms.</li>
                             <li><strong>Name (optional)</strong> — when provided through our contact or signup forms.</li>
                             <li><strong>Usage data</strong> — anonymous analytics about how visitors interact with our site.</li>
                         </ul>
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
                     <div>
                         <h2 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-4">How We Use Your Information</h2>
                         <ul className="list-disc pl-6 space-y-2">
-                            <li>To send you the requested content (free chapters, newsletter)</li>
+                            <li>To send you the requested content (the free guide, newsletter)</li>
                             <li>To send educational emails about mental performance, our books, and our courses</li>
                             <li>To improve our website and content</li>
                             <li>To respond to your inquiries</li>
