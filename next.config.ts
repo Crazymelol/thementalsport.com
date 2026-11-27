@@ -78,6 +78,26 @@ const nextConfig: NextConfig = {
             permanent: true,
           }));
           return [
+            // Facebook appends a newline and a pointing-hand emoji, or newlines
+            // plus "TAGS:", onto a real path. Next matches the raw request path,
+            // where those bytes stay percent-encoded. The colon is escaped so
+            // path-to-regexp does not treat it as a parameter. %3A is a separate
+            // path because it is not decoded before matching.
+            {
+              source: "/free-guide%0A%F0%9F%91%89",
+              destination: "/free-guide",
+              permanent: true,
+            },
+            {
+              source: "/books%0A%0ATAGS\\:/nsport",
+              destination: "/books",
+              permanent: true,
+            },
+            {
+              source: "/books%0A%0ATAGS%3A/nsport",
+              destination: "/books",
+              permanent: true,
+            },
             {
               source: "/free",
               destination: "/free-guide",
